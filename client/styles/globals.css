@@ -3,3 +3,16 @@
 @tailwind utilities;
 
 
+
+@layer components {
+  .nav__item {
+    @apply font-bold text-[18px] text-muted-color;
+  }
+  .nav__item .active {
+    @apply text-[black]  border-b-common-color border-b-4;
+  }
+
+  .nav__icon {
+    @apply bg-body-bg rounded-full w-[33px] h-[33px] flex items-center justify-center cursor-pointer text-common-gray capitalize;
+  }
+}
