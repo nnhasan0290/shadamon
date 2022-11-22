@@ -7,12 +7,7 @@ const Heading = () => {
     <div className="sticky top-0 z-10 lg:bg-common-bg bg-body-bg">
       <div className="flex justify-center items-center lg:border-b lg:border-b-[#dee2e6] border-0 ">
         <div className="w-[250px]">
-          <img
-            src="https://sadamon-pszqszegs-saifulislamsojib.vercel.app/_next/static/media/shadamon-small-logo.1067817a.png"
-            width="132px"
-            height="100%"
-            alt="logo"
-          />
+          <img src="/head-logo.png" width="132px" height="100%" alt="logo" />
         </div>
         <div className="w-[515px] nav__item  lg:flex hidden">
           <div className="p-2 active">

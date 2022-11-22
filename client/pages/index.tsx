@@ -15,13 +15,13 @@ export default function Home() {
       <Heading />
       <main className="h-[100vh] bg-body-bg">
         <div className="flex items-center justify-center">
-          <div className="border w-[250px]">Category Area</div>
+          <div className="border w-[250px] hidden lg:block">Category Area</div>
           <div className="border w-[515px]">
             <CategoryLocation />
             <BiggestPost />
             <Modal />
           </div>
-          <div className="border w-[210px]">Advertisement</div>
+          <div className="border w-[210px] hidden lg:block">Advertisement</div>
         </div>
       </main>
     </>
