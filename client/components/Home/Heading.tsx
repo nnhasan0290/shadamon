@@ -4,8 +4,8 @@ import { FaEnvelope } from "react-icons/fa";
 
 const Heading = () => {
   return (
-    <div className="bg-common-bg"> 
-      <div className="flex justify-center items-center border-b border-b-[#dee2e6] ">
+    <div className="sticky top-0 z-10 lg:bg-common-bg bg-body-bg">
+      <div className="flex justify-center items-center lg:border-b lg:border-b-[#dee2e6] border-0 ">
         <div className="w-[250px]">
           <img
             src="https://sadamon-pszqszegs-saifulislamsojib.vercel.app/_next/static/media/shadamon-small-logo.1067817a.png"
@@ -14,7 +14,7 @@ const Heading = () => {
             alt="logo"
           />
         </div>
-        <div className="w-[515px] nav__item flex">
+        <div className="w-[515px] nav__item  lg:flex hidden">
           <div className="p-2 active">
             <Link href="#"> All Adds</Link>
           </div>
@@ -33,26 +33,28 @@ const Heading = () => {
           <div className="nav__icon">
             <FaEnvelope />
           </div>
-          <button className="px-2 py-1 font-medium text-white uppercase rounded-full text-[13px] cursor-pointer bg-common-color">post add</button>
+          <button className="px-2 py-1 font-medium text-white uppercase rounded-full text-[13px] cursor-pointer bg-common-color">
+            post add
+          </button>
           <div className="nav__icon">
             <GoChevronDown />
           </div>
         </div>
       </div>
-      <div className="w-[515px] nav__item flex font-normal text-common-gray mx-auto items-center gap-2 pl-5">
-          <div className="p-2 my-1 w-auto rounded-md nav__icon">
-            <Link href="#"> All Adds</Link>
-          </div>
-          <div className="p-2 my-1 w-auto rounded-md nav__icon">
-            <Link href="#"> Loan</Link>
-          </div>
-          <div className="p-2 my-1 w-auto rounded-md nav__icon">
-            <Link href="#"> Offer</Link>
-          </div>
-          <div className="p-2 my-1 w-auto rounded-md nav__icon">
-            <Link href="#"> Bid</Link>
-          </div>
+      <div className="w-[515px] nav__item lg:flex hidden font-normal text-common-gray mx-auto items-center gap-2 pl-5 text-[1rem]">
+        <div className="w-auto p-2 my-1 rounded-md nav__icon">
+          <Link href="#"> All Products</Link>
         </div>
+        <div className="w-auto p-2 my-1 rounded-md nav__icon">
+          <Link href="#"> All Orders</Link>
+        </div>
+        <div className="w-auto p-2 my-1 rounded-md nav__icon">
+          <Link href="#"> My Page</Link>
+        </div>
+        <div className="w-auto p-2 my-1 rounded-md nav__icon">
+          <Link href="#"> Promote</Link>
+        </div>
+      </div>
     </div>
   );
 };
