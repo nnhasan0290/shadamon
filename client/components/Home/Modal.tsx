@@ -8,7 +8,7 @@ const Modal = () => {
       onClick={handleClick}
     >
       <div className="h-[100px] bg-white modal w-[515px] mx-auto">
-        This is modal content
+        This is modal conten
       </div>
     </div>
   );
