@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer components {
   .nav__item {
     @apply font-bold text-[18px] text-muted-color;
@@ -15,4 +13,20 @@
   .nav__icon {
     @apply bg-body-bg rounded-full w-[33px] h-[33px] flex items-center justify-center cursor-pointer text-common-gray capitalize;
   }
+}
+
+input {
+  outline: none;
+}
+select {
+  outline: none;
+  border: 1px solid lightgray;
+}
+select:hover {
+  background-color: lightgray;
+  transition: all 0.3s;
+}
+label {
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out,
+    -webkit-transform 0.1s ease-in-out;
 }

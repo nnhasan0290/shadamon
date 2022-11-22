@@ -1,5 +1,6 @@
 import { ImCross } from "react-icons/im";
-import { FcGoogle } from "react-icons/fc";
+import ManualSignUp from "./ManualSignup";
+import SignUp from "./Signup";
 
 const Modal = () => {
   const handleClick = (e: any) => {
@@ -11,27 +12,17 @@ const Modal = () => {
       onClick={handleClick}
     >
       <div className="w-[250px] hidden lg:block"></div>
-      <div className="h-screen w-[515px] relative">
-        <div className="bg-white modal  mx-auto rounded-md flex items-center  flex-col overflow-auto absolute bottom-0 w-full h-[70%]">
+      <div className="h-screen w-[515px] relative ">
+        <div className="bg-white modal  mx-auto rounded-md flex items-center  flex-col overflow-auto absolute bottom-0 w-full h-[70%] py-5">
           <div className="nav__icon ml-auto text-sm p-[9px]">
             <ImCross />
           </div>
-          <div>
-            <img src="/signup-logo.png" alt="" width={100} height={100} />
-          </div>
-          <p>Post an Ad</p>
-          <p>Please Sign Up to post your ad</p>
-          <p>OR</p>
-          <button className="border flex items-center gap-3">
-            <div>
-              <FcGoogle />
-            </div>
-            <p>Continue with Google</p>
-          </button>
+          {/* <SignUp /> */}
+          <ManualSignUp />
         </div>
       </div>
 
-      <div className="w-[210px] hidden lg:block"></div>
+      <div className="w-[210px] hidden lg:block "></div>
     </div>
   );
 };
