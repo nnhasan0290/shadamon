@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { GoChevronDown } from "react-icons/go";
 import { FaEnvelope } from "react-icons/fa";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const Heading = () => {
+  //states
+  const { showModal, setShowModal } = GlobalStates();
   return (
     <div className="sticky top-0 z-10 lg:bg-common-bg bg-body-bg">
       <div className="flex justify-center items-center lg:border-b lg:border-b-[#dee2e6] border-0 ">
@@ -28,10 +31,13 @@ const Heading = () => {
           <div className="nav__icon">
             <FaEnvelope />
           </div>
-          <button className="px-2 py-1 font-medium text-white uppercase rounded-full text-[13px] cursor-pointer bg-common-color">
+          <button
+            className="px-2 py-1 font-medium text-white uppercase rounded-full text-[13px] cursor-pointer bg-common-color"
+            onClick={() => setShowModal(!showModal)}
+          >
             post add
           </button>
-          <div className="nav__icon">
+          <div className="nav__icon" onClick={() => setShowModal(!showModal)}>
             <GoChevronDown />
           </div>
         </div>
