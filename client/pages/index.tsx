@@ -2,6 +2,7 @@ import Head from "next/head";
 import BiggestPost from "../components/Home/BiggestAd";
 import CategoryLocation from "../components/Home/CategoryLocation";
 import Heading from "../components/Home/Heading";
+import Modal from "../components/Home/Modal";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
           <div className="border w-[515px]">
             <CategoryLocation />
             <BiggestPost />
+            <Modal />
           </div>
           <div className="border w-[210px]">Advertisement</div>
         </div>
