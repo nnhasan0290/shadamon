@@ -1,12 +1,13 @@
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 import Link from "next/link";
 import { GlobalStates } from "../../context/ContextProvider";
 
 const ManualSignUp = () => {
   const { signState, setSignState } = GlobalStates();
-  const {
-    data: { user },
-  }: any = useSession();
+  const { data, status }: any = useSession();
+  const [user, setUser] = useState(data?.user);
+  console.log(user);
   return (
     <>
       <div>
@@ -21,8 +22,9 @@ const ManualSignUp = () => {
             type="tel"
             name=""
             id=""
-            value={user?.name}
             placeholder="Name"
+            value={user?.name}
+            onChange={(e) => setUser({ ...user, name: e.target.value })}
           />
           <label
             htmlFor=""
@@ -38,8 +40,9 @@ const ManualSignUp = () => {
           type="email"
           name=""
           id=""
-          value={user?.email}
           placeholder="Email or Phone number"
+          value={user?.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
         <label
           htmlFor=""
