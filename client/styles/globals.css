@@ -17,6 +17,7 @@
 
 input {
   outline: none;
+  width: 100%;
 }
 select {
   outline: none;
@@ -45,8 +46,12 @@ label {
   background-color: #e4e4e4;
   height: 40px;
   width: 40px;
-  top: 33vh;
+  top: 30vh;
   bottom: auto;
+}
+
+img {
+  object-fit: contain;
 }
 @media screen and (max-width: 1024px) {
   .modal__cross {

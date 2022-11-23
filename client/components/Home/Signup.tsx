@@ -1,12 +1,14 @@
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookBoxLine } from "react-icons/ri";
 import { BiEnvelope } from "react-icons/bi";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { GlobalStates } from "../../context/ContextProvider";
+import { signIn } from "next-auth/react";
 
-const SignUp = () => {
+const SignUp = ({ emailState }: any) => {
   const { signState, setSignState } = GlobalStates();
-  console.log(signState);
+
   return (
     <>
       <div className="pt-5 pb-3">
@@ -27,37 +29,50 @@ const SignUp = () => {
               <option value="bd">+880</option>
             </select>
             <input
-              className="py-2"
+              className="py-2 pl-2 w-auto"
               type="tel"
               name=""
               id=""
               placeholder="Enter mobile number"
             />
           </div>
-          <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-common-color">
+          <button
+            className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-common-color disabled:opacity-70"
+            disabled
+          >
             <p className="mx-auto">Continue</p>
           </button>
           <p>OR</p>
         </>
       )}
 
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2">
+      <button
+        type="submit"
+        className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2"
+        onClick={() => signIn("google")}
+      >
         <div>
           <FcGoogle />
         </div>
         <p>Continue with Google</p>
       </button>
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-blue-900">
+      <button
+        className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-blue-900"
+        onClick={() => signIn("facebook")}
+      >
         <div>
           <RiFacebookBoxLine />
         </div>
         <p>Continue with Facebook</p>
       </button>
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 bg-common-color text-white">
+      <button
+        className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 bg-common-color text-white"
+        onClick={() => emailState(true)}
+      >
         <div>
           <BiEnvelope />
         </div>
-        <p>Continue with Email</p>
+        <p>Continue with Email or Phone Number</p>
       </button>
       <hr className="w-[78%] border my-3" />
       <div className="text-center">
@@ -76,10 +91,7 @@ const SignUp = () => {
         >
           {signState === "LOGIN" ? "Sign Up" : "Login"}
         </button>
-        {/* // <div className="font-semibold text-center text-blue-600">
-        //   <Link href="#"> Forgot Password?</Link>
-        // </div> */}
-        <ul className="flex gap-5 my-2 text-xs list-disc text-common-gray">
+        <ul className="flex gap-5 my-4 text-xs list-disc text-common-gray">
           <li>Posting Rules</li>
           <li>Posting Allowance</li>
           <li>Helpline</li>

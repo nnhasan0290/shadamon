@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ImCross } from "react-icons/im";
 import { GlobalStates } from "../../context/ContextProvider";
 import ManualSignUp from "./ManualSignup";
 import SignUp from "./Signup";
@@ -24,7 +23,7 @@ const Modal = () => {
     >
       <div className="w-[250px] hidden lg:block"></div>
       <div className="h-screen w-[515px] relative">
-        <div className="bg-white modal  rounded-md flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75%] pb-5 w-full">
+        <div className="bg-white modal  rounded-md flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75vh] pb-5 w-full">
           <div
             className="fixed w-auto h-auto p-2 ml-auto text-xl nav__icon modal__cross"
             onClick={() => setShowModal(!showModal)}
@@ -38,7 +37,7 @@ const Modal = () => {
               <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
             </svg>
           </div>
-          {withEmail ? <ManualSignUp /> : <SignUp />}
+          {withEmail ? <ManualSignUp /> : <SignUp emailState={setWithEmail} />}
         </div>
       </div>
 
