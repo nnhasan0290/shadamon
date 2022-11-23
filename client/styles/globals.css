@@ -30,3 +30,31 @@ label {
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out,
     -webkit-transform 0.1s ease-in-out;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
+.modal__cross {
+  transform: translate(-50%, -50%);
+  right: calc(50% - 285px) !important;
+  background-color: #e4e4e4;
+  height: 40px;
+  width: 40px;
+  top: 33vh;
+  bottom: auto;
+}
+@media screen and (max-width: 1024px) {
+  .modal__cross {
+    right: calc(50% - 265px) !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .modal__cross {
+    right: -10px !important;
+  }
+}

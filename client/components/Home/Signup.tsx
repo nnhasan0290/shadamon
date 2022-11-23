@@ -2,58 +2,89 @@ import { FcGoogle } from "react-icons/fc";
 import { RiFacebookBoxLine } from "react-icons/ri";
 import { BiEnvelope } from "react-icons/bi";
 import Link from "next/link";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const SignUp = () => {
+  const { signState, setSignState } = GlobalStates();
+  console.log(signState);
   return (
     <>
+      <div className="pt-5 pb-3">
+        <span className="px-2 py-1 bg-[#e4e4e4] rounded-l-md">বাংলা</span>
+        <span className="px-2 py-1 text-white bg-blue-600 rounded-r-md">
+          ENG
+        </span>
+      </div>
       <div>
         <img src="/signup-logo.png" alt="" width={100} height={100} />
       </div>
       <p className="font-semibold">Post an Ad</p>
-      <p className="text-sm mb-2">Please Sign Up to post your ad</p>
-      <div className="border w-[300px] rounded-md ">
-        <select name="" id="" className="p-2">
-          <option value="bd">+880</option>
-        </select>
-        <input
-          className="p-2"
-          type="tel"
-          name=""
-          id=""
-          placeholder="Enter mobile number"
-        />
-      </div>
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[300px] rounded-md p-2 text-white bg-common-color">
-        <p className="mx-auto">Continue</p>
-      </button>
-      <p>OR</p>
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[300px] rounded-md p-2">
+      <p className="mb-2 text-sm">Please Sign Up to post your ad</p>
+      {!(signState === "LOGIN") && (
+        <>
+          <div className="border w-[78%] rounded-md ">
+            <select name="" id="" className="py-2">
+              <option value="bd">+880</option>
+            </select>
+            <input
+              className="py-2"
+              type="tel"
+              name=""
+              id=""
+              placeholder="Enter mobile number"
+            />
+          </div>
+          <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-common-color">
+            <p className="mx-auto">Continue</p>
+          </button>
+          <p>OR</p>
+        </>
+      )}
+
+      <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2">
         <div>
           <FcGoogle />
         </div>
         <p>Continue with Google</p>
       </button>
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[300px] rounded-md p-2 text-white bg-blue-900">
+      <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-blue-900">
         <div>
           <RiFacebookBoxLine />
         </div>
         <p>Continue with Facebook</p>
       </button>
-      <button className="pl-5 my-1 border flex items-center gap-3 w-[300px] rounded-md p-2 bg-common-color text-white">
+      <button className="pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 bg-common-color text-white">
         <div>
           <BiEnvelope />
         </div>
         <p>Continue with Email</p>
       </button>
-      <hr className="w-[300px] border my-3" />
-      <div>
-        <p className="text-sm">Already Have a Account?</p>
-        <button className="w-[150px] bg-muted-color p-2 rounded-md">
-          Login
+      <hr className="w-[78%] border my-3" />
+      <div className="text-center">
+        <p className="text-sm italic">
+          {signState === "LOGIN" ? "Don't" : "Already"} Have an Account?
+        </p>
+        <button
+          className="w-[150px] bg-[#e4e4e4] p-2 rounded-md"
+          onClick={() => {
+            if (signState === "LOGIN") {
+              setSignState("SIGNUP");
+            } else {
+              setSignState("LOGIN");
+            }
+          }}
+        >
+          {signState === "LOGIN" ? "Sign Up" : "Login"}
         </button>
-        <div className="font-semibold text-blue-600 text-center">
-          <Link href="#"> Forgot Password?</Link>
-        </div>
+        {/* // <div className="font-semibold text-center text-blue-600">
+        //   <Link href="#"> Forgot Password?</Link>
+        // </div> */}
+        <ul className="flex gap-5 my-2 text-xs list-disc text-common-gray">
+          <li>Posting Rules</li>
+          <li>Posting Allowance</li>
+          <li>Helpline</li>
+          <li>Help Chat</li>
+        </ul>
       </div>
     </>
   );

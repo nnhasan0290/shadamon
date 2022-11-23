@@ -15,10 +15,11 @@ const reducer = (state: any, action: any) => {
 const ContextProvider = ({ children }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [signState, setSignState] = useState("SIGNUP");
 
   return (
     <GlobalContext.Provider
-      value={{ state, dispatch, showModal, setShowModal }}
+      value={{ showModal, setShowModal, signState, setSignState }}
     >
       {children}
     </GlobalContext.Provider>
