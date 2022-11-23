@@ -38,7 +38,7 @@ const ManualSignUp = () => {
           type="email"
           name=""
           id=""
-          value={user.email}
+          value={user?.email}
           placeholder="Email or Phone number"
         />
         <label
