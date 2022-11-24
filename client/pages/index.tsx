@@ -5,6 +5,7 @@ import BiggestPost from "../components/Home/BiggestAd";
 import CategoryLocation from "../components/Home/CategoryLocation";
 import Heading from "../components/Home/Heading";
 import Modal from "../components/Home/Modal";
+import SmallestAd from "../components/Home/SmallestAd";
 import { GlobalStates } from "../context/ContextProvider";
 
 export default function Home() {
@@ -17,11 +18,12 @@ export default function Home() {
       </Head>
       <Heading />
       <main className="h-[100vh] bg-body-bg">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center gap-[50px] justify-center">
           <div className="border w-[250px] hidden lg:block">Category Area</div>
-          <div className="border w-[515px]">
+          <div className=" w-[500px]">
             <CategoryLocation />
             <BiggestPost />
+            <SmallestAd />
             <Modal />
           </div>
           <div className="border w-[210px] hidden lg:block">Advertisement</div>

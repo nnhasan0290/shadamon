@@ -31,10 +31,10 @@ const Modal = () => {
       onClick={handleClick}
     >
       <div className="w-[250px] hidden lg:block"></div>
-      <div className="h-screen w-[515px] relative">
+      <div className="h-screen w-[500px] relative">
         <div className="bg-white modal  rounded-[15px] flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75vh] pb-5 w-full">
           <div
-            className="fixed w-auto h-auto p-2 ml-auto text-xl nav__icon modal__cross"
+            className="absolute top-2 right-2 p-2 ml-auto text-xl nav__icon"
             onClick={() => setShowModal(!showModal)}
           >
             <svg
