@@ -2,10 +2,14 @@ import Link from "next/link";
 import { GoChevronDown } from "react-icons/go";
 import { FaEnvelope } from "react-icons/fa";
 import { GlobalStates } from "../../context/ContextProvider";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const Heading = () => {
   //states
   const { showModal, setShowModal } = GlobalStates();
+  const { data, status } = useSession();
+
   return (
     <div className="sticky top-0 z-10 lg:bg-common-bg bg-body-bg">
       <div className="flex justify-center items-center lg:border-b lg:border-b-[#dee2e6] border-0 ">

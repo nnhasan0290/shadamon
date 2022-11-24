@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GlobalStates } from "../../context/ContextProvider";
 import ManualSignUp from "./ManualSignup";
 import SignUp from "./Signup";
+import PostAdd from "./PostAdd";
 
 const Modal = () => {
   //states
-  const { showModal, setShowModal } = GlobalStates();
+  const { signState, setSignState, showModal, setShowModal, status } =
+    GlobalStates();
   const [withEmail, setWithEmail] = useState(false);
 
   const handleClick = (e: any) => {
-    console.log(e.target.closest(".modal"));
     if (!e.target.closest(".modal")) {
       setShowModal(!showModal);
     }
   };
+
+  useEffect(() => {
+    console.log(status);
+    if (status === "authenticated") {
+      setShowModal(true);
+      setWithEmail(true);
+    }
+  }, [status]);
   return (
     <div
       className={`fixed top-0 left-0 z-20 flex items-end justify-center w-full h-screen bg-black/25 ${
@@ -23,7 +32,7 @@ const Modal = () => {
     >
       <div className="w-[250px] hidden lg:block"></div>
       <div className="h-screen w-[515px] relative">
-        <div className="bg-white modal  rounded-md flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75vh] pb-5 w-full">
+        <div className="bg-white modal  rounded-[15px] flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75vh] pb-5 w-full">
           <div
             className="fixed w-auto h-auto p-2 ml-auto text-xl nav__icon modal__cross"
             onClick={() => setShowModal(!showModal)}
@@ -38,6 +47,7 @@ const Modal = () => {
             </svg>
           </div>
           {withEmail ? <ManualSignUp /> : <SignUp emailState={setWithEmail} />}
+          {/* <PostAdd /> */}
         </div>
       </div>
 

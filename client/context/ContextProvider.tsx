@@ -1,4 +1,5 @@
-import React, { useReducer, useContext, useState } from "react";
+import { useSession } from "next-auth/react";
+import React, { useReducer, useContext, useState, useEffect } from "react";
 
 const GlobalContext: any = React.createContext({});
 
@@ -13,13 +14,14 @@ const reducer = (state: any, action: any) => {
 };
 
 const ContextProvider = ({ children }: any) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [signState, setSignState] = useState("SIGNUP");
+  const { status } = useSession();
 
   return (
     <GlobalContext.Provider
-      value={{ showModal, setShowModal, signState, setSignState }}
+      value={{ showModal, setShowModal, signState, setSignState, status }}
     >
       {children}
     </GlobalContext.Provider>

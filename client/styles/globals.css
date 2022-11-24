@@ -53,6 +53,24 @@ label {
 img {
   object-fit: contain;
 }
+
+.tree__view > ul {
+  max-width: 100% !important;
+}
+
+.tree__view > ul > li {
+  border-bottom: 1px solid #e4e4e4;
+}
+.MuiTreeItem-content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  padding: 5px 0;
+}
+.MuiTreeItem-label {
+  width: 75% !important;
+}
+
 @media screen and (max-width: 1024px) {
   .modal__cross {
     right: calc(50% - 265px) !important;

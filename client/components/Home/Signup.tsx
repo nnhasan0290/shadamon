@@ -4,7 +4,7 @@ import { BiEnvelope } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { GlobalStates } from "../../context/ContextProvider";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const SignUp = ({ emailState }: any) => {
   const { signState, setSignState } = GlobalStates();
@@ -24,7 +24,7 @@ const SignUp = ({ emailState }: any) => {
       <p className="mb-2 text-sm">Please Sign Up to post your ad</p>
       {!(signState === "LOGIN") && (
         <>
-          <div className="border w-[78%] rounded-md ">
+          <div className="border w-[78%] rounded-md " id="recaptcha-container">
             <select name="" id="" className="py-2">
               <option value="bd">+880</option>
             </select>
