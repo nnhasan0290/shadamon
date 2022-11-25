@@ -50,6 +50,10 @@ label {
   bottom: auto;
 }
 
+.carousel.carousel-slider {
+  overflow: visible !important;
+}
+
 img {
   object-fit: contain;
 }

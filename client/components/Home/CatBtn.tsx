@@ -3,34 +3,29 @@ import { Carousel } from "react-responsive-carousel";
 import { GoLocation } from "react-icons/go";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
+import { FaHands } from "react-icons/fa";
+import { BiCar, BiCategory } from "react-icons/bi";
+import { FcElectronics } from "react-icons/fc";
 
-const CatBtn = () => {
-  const [hidePrev, setHidePrev] = useState(true);
-  const [hideNext, setHideNext] = useState(false);
+const CatButton = () => {
+  const [selected, setSelected] = useState(0);
   const handleChange = (a: number, b: any) => {
-    if (a > 1) {
-      setHidePrev(false);
-    } else {
-      setHidePrev(true);
-    }
-    if (a == b._owner.index - 2) {
-      setHideNext(true);
-    } else {
-      setHideNext(false);
-    }
+    console.log(b);
+    setSelected(a);
   };
   const options = {
     showThumbs: false,
+    showStatus: false,
     centerMode: true,
     showIndicators: false,
     selectedItem: 1,
-    centerSlidePercentage: 33,
+    centerSlidePercentage: 30,
     onChange: handleChange,
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
         <span
-          className={`arrow-left absolute top-[65px] bg-common-color p-2 rounded-full left-0 z-10 translate-y-[-50%] cursor-pointer text-white ${
-            hidePrev && "hidden"
+          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
+            selected === 1 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -41,8 +36,8 @@ const CatBtn = () => {
     renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
       return (
         <span
-          className={`arrow-right absolute top-[65px] bg-common-color p-2 rounded-full right-0 z-100 translate-y-[-50%] cursor-pointer text-white ${
-            hideNext && "hidden"
+          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white translate-x-[50%] ${
+            selected === 2 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -52,105 +47,34 @@ const CatBtn = () => {
     },
   };
   return (
-    <Carousel {...options} className="bg-white  rounded-md relative p-1">
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
-          </div>
-        </div>
+    <div className=" bg-white rounded-md">
+      <div className="flex items-center gap-2 text-common-gray font-semibold p-2 px-5">
+        <FaHands />
+        <span>See Product from your suitable category</span>
       </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
-          </div>
+      <Carousel
+        {...options}
+        className="  rounded-md relative mr-2 pb-3  font-bold overflow-visible"
+      >
+        <div className="flex items-center justify-center border border-gray-300 p-2 rounded-md mr-2  gap-3 shadow-lg">
+          <BiCategory />
+          <h2>All</h2>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
-          </div>
+        <div className="flex items-center justify-center border border-gray-300 p-2 rounded-md mx-2 gap-3 shadow-lg">
+          <BiCar />
+          <h2>Motors</h2>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
-          </div>
+        <div className="flex items-center justify-center border border-gray-300 p-2 rounded-md mx-2 gap-3 shadow-lg">
+          <FcElectronics />
+          <h2>Electronics</h2>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
-          </div>
+        <div className="flex items-center justify-center border border-gray-300 p-2 rounded-md mx-2 gap-3 shadow-lg">
+          <FcElectronics />
+          <h2>Electronics</h2>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
-          </div>
-        </div>
-      </div>
-    </Carousel>
+      </Carousel>
+    </div>
   );
 };
 
-export default CatBtn;
+export default CatButton;
