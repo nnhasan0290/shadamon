@@ -6,6 +6,7 @@ import CategoryLocation from "../components/Home/CategoryLocation";
 import Heading from "../components/Home/Heading";
 import Modal from "../components/Home/Modal";
 import SmallestAd from "../components/Home/SmallestAd";
+import WannaBid from "../components/Home/WannaBid";
 import { GlobalStates } from "../context/ContextProvider";
 
 export default function Home() {
@@ -17,12 +18,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading />
-      <main className="h-[100vh] bg-body-bg">
+      <main className="min-h-[100vh] bg-body-bg">
         <div className="flex items-center gap-[50px] justify-center">
           <div className="border w-[250px] hidden lg:block">Category Area</div>
           <div className=" w-[500px]">
             <CategoryLocation />
             <BiggestPost />
+            <WannaBid />
+            <WannaBid />
+            <SmallestAd />
             <SmallestAd />
             <Modal />
           </div>
