@@ -2,9 +2,11 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import BiggestPost from "../components/Home/BiggestAd";
+import CatBtn from "../components/Home/CatBtn";
 import CategoryLocation from "../components/Home/CategoryLocation";
 import Heading from "../components/Home/Heading";
 import Modal from "../components/Home/Modal";
+import NvtStop from "../components/Home/NvtStop";
 import SmallestAd from "../components/Home/SmallestAd";
 import WannaBid from "../components/Home/WannaBid";
 import { GlobalStates } from "../context/ContextProvider";
@@ -25,9 +27,10 @@ export default function Home() {
             <CategoryLocation />
             <BiggestPost />
             <WannaBid />
-            <WannaBid />
+            <NvtStop />
             <SmallestAd />
             <SmallestAd />
+            <CatBtn />
             <Modal />
           </div>
           <div className="border w-[210px] hidden lg:block">Advertisement</div>
