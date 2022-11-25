@@ -22,7 +22,7 @@ const CatProduct = () => {
       return (
         <span
           className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
-            selected === 1 && "hidden"
+            selected <= 1 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -44,107 +44,114 @@ const CatProduct = () => {
     },
   };
   return (
-    <Carousel
-      {...options}
-      className="  rounded-md relative mr-2 overflow-visible"
-    >
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
+    <div className="bg-white rounded-md">
+      <div className="font-semibold p-2 flex items-center justify-between text-sm">
+        <h2 className="font-bold text-lg rounded-">Electric & Electronics</h2>
+        <h2>All Categories</h2>
+        <h2>Another category</h2>
+      </div>
+      <Carousel
+        {...options}
+        className="  rounded-md relative mr-2 overflow-visible"
+      >
+        <div className="p-2">
+          <img
+            src="/cover.jpg"
+            className="rounded-md w-[120] h-[120px] object-cover"
+          />
+          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
+            Pant with Black color thei en ieeo fo ie
+          </p>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
+            <h2 className="font-bold">$ 256</h2>
+            <div className="flex gap-2 items-center justify-center">
+              <GoLocation />
+              <span>Dhaka</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
+        <div className="p-2">
+          <img
+            src="/cover.jpg"
+            className="rounded-md w-[120] h-[120px] object-cover"
+          />
+          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
+            Pant with Black color thei en ieeo fo ie
+          </p>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
+            <h2 className="font-bold">$ 256</h2>
+            <div className="flex gap-2 items-center justify-center">
+              <GoLocation />
+              <span>Dhaka</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
+        <div className="p-2">
+          <img
+            src="/cover.jpg"
+            className="rounded-md w-[120] h-[120px] object-cover"
+          />
+          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
+            Pant with Black color thei en ieeo fo ie
+          </p>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
+            <h2 className="font-bold">$ 256</h2>
+            <div className="flex gap-2 items-center justify-center">
+              <GoLocation />
+              <span>Dhaka</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
+        <div className="p-2">
+          <img
+            src="/cover.jpg"
+            className="rounded-md w-[120] h-[120px] object-cover"
+          />
+          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
+            Pant with Black color thei en ieeo fo ie
+          </p>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
+            <h2 className="font-bold">$ 256</h2>
+            <div className="flex gap-2 items-center justify-center">
+              <GoLocation />
+              <span>Dhaka</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
+        <div className="p-2">
+          <img
+            src="/cover.jpg"
+            className="rounded-md w-[120] h-[120px] object-cover"
+          />
+          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
+            Pant with Black color thei en ieeo fo ie
+          </p>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
+            <h2 className="font-bold">$ 256</h2>
+            <div className="flex gap-2 items-center justify-center">
+              <GoLocation />
+              <span>Dhaka</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="p-2">
-        <img
-          src="/cover.jpg"
-          className="rounded-md w-[120] h-[120px] object-cover"
-        />
-        <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-          Pant with Black color thei en ieeo fo ie
-        </p>
-        <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-          <h2 className="font-bold">$ 256</h2>
-          <div className="flex gap-2 items-center justify-center">
-            <GoLocation />
-            <span>Dhaka</span>
+        <div className="p-2">
+          <img
+            src="/cover.jpg"
+            className="rounded-md w-[120] h-[120px] object-cover"
+          />
+          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
+            Pant with Black color thei en ieeo fo ie
+          </p>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
+            <h2 className="font-bold">$ 256</h2>
+            <div className="flex gap-2 items-center justify-center">
+              <GoLocation />
+              <span>Dhaka</span>
+            </div>
           </div>
         </div>
-      </div>
-    </Carousel>
+      </Carousel>
+    </div>
   );
 };
 

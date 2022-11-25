@@ -14,6 +14,10 @@ import CatProduct from "../components/Home/CatProduct";
 import CatButton from "../components/Home/CatBtn";
 import Promote from "../components/Home/Promote";
 import PostEarn from "../components/Home/PostEarn";
+import ConnectSlider from "../components/Home/ConnectSlider";
+import RandomOptions from "../components/Home/RandomOptions";
+import AddPost from "../components/Home/AddPost";
+import SearchSome from "../components/Home/SearchSome";
 
 export default function Home() {
   return (
@@ -30,6 +34,8 @@ export default function Home() {
           <div className=" w-[500px]">
             <CategoryLocation />
             <BiggestPost />
+            <SearchSome />
+            <AddPost />
             <Promote />
             <PostEarn />
             <WannaBid />
@@ -37,6 +43,8 @@ export default function Home() {
             <SmallestAd />
             <SmallestAd />
             <CatButton />
+            <RandomOptions />
+            <ConnectSlider />
             <CatProduct />
 
             <Modal />
