@@ -18,6 +18,7 @@ import ConnectSlider from "../components/Home/ConnectSlider";
 import RandomOptions from "../components/Home/RandomOptions";
 import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
+import Advertisement from "../components/Home/Advertisement";
 
 export default function Home() {
   return (
@@ -29,7 +30,7 @@ export default function Home() {
       </Head>
       <Heading />
       <main className="min-h-[100vh] bg-body-bg">
-        <div className="flex items-center gap-[50px] justify-center">
+        <div className="flex  gap-[50px] justify-center">
           <div className="border w-[250px] hidden lg:block">Category Area</div>
           <div className=" w-[500px]">
             <CategoryLocation />
@@ -49,7 +50,9 @@ export default function Home() {
 
             <Modal />
           </div>
-          <div className="border w-[210px] hidden lg:block">Advertisement</div>
+          <div className=" w-[160px] hidden lg:block">
+            <Advertisement />
+          </div>
         </div>
       </main>
     </>

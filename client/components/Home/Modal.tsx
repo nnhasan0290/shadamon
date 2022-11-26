@@ -51,7 +51,7 @@ const Modal = () => {
         </div>
       </div>
 
-      <div className="w-[210px] hidden lg:block "></div>
+      <div className="w-[160px] hidden lg:block "></div>
     </div>
   );
 };
