@@ -3,7 +3,7 @@ import { ImLocation2 } from "react-icons/im";
 
 const CategoryLocation = () => {
   return (
-    <div className="flex items-center justify-around gap-10 py-2 text-lg text-common-gray font-semibold bg-white rounded-b-lg mb-2">
+    <div className="flex items-center justify-around gap-5 sm:gap-10 py-2 text-lg text-common-gray font-semibold bg-white rounded-b-lg mb-2">
       <div className="flex items-center gap-1">
         <div>
           <BiCategoryAlt />
@@ -17,7 +17,7 @@ const CategoryLocation = () => {
         <h3>Location</h3>
       </div>
       <div className="flex items-center gap-2">
-        <h3>Search</h3>
+        <h3 className="hidden sm:block">Search</h3>
         <div>
           <BiSearchAlt2 />
         </div>

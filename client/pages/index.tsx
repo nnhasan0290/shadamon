@@ -30,12 +30,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading />
-      <main className="min-h-[100vh] bg-body-bg">
-        <div className="flex  gap-[50px] justify-center">
+      <main className="min-h-[100vh] bg-body-bg overflow-hidden">
+        <div className="flex gap-[50px] justify-center">
           <div className="border w-[250px] hidden lg:block">
             <CategoryArea />
           </div>
-          <div className=" w-[500px]">
+          <div className="  middle-body">
             <CategoryLocation />
             <BiggestPost />
             <SearchSome />

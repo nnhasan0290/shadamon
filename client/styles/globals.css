@@ -11,7 +11,7 @@
   }
 
   .nav__icon {
-    @apply bg-body-bg rounded-full w-[33px] h-[33px] flex items-center justify-center cursor-pointer text-common-gray capitalize;
+    @apply lg:bg-body-bg rounded-full w-[33px] h-[33px] flex items-center justify-center cursor-pointer text-common-gray capitalize bg-gray-300;
   }
 }
 
@@ -74,6 +74,9 @@ img {
 .MuiTreeItem-label {
   width: 75% !important;
 }
+.middle-body {
+  width: 500px;
+}
 
 @media screen and (max-width: 1024px) {
   .modal__cross {
@@ -83,5 +86,11 @@ img {
 @media screen and (max-width: 500px) {
   .modal__cross {
     right: -10px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .middle-body {
+    width: 100% !important;
   }
 }

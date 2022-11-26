@@ -6,11 +6,11 @@ const BiggestPost = () => {
   const [showDetails, setShowDetails] = useState(false);
   return (
     <div className="relative w-full overflow-hidden rounded-md">
-      <div className="bg-[url('https://sadamon-pszqszegs-saifulislamsojib.vercel.app/_next/static/media/cover.1846aa62.jpg')] rounded-md blur-[4px]  h-[253px] "></div>
-      <div className="absolute top-0 left-[50%] w-[450px] translate-x-[-50%]">
+      <div className="bg-[url('/cover.jpg')] rounded-md blur-[4px]  h-[265px] overflow-hidden"></div>
+      <div className="absolute top-0 left-[50%] w-[90%] h-[265px] translate-x-[-50%] ">
         <img
-          className="h-[253px] mx-auto rounded-md w-[99%]"
-          src="https://sadamon-pszqszegs-saifulislamsojib.vercel.app/_next/static/media/cover.1846aa62.jpg"
+          className="h-full object-contain sm:object-cover mx-auto rounded-md "
+          src="/cover.jpg"
           alt="post img"
         />
       </div>

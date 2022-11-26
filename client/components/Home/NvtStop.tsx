@@ -46,7 +46,7 @@ const NvtStop = () => {
   return (
     <Carousel
       {...options}
-      className="  rounded-md relative mr-2 overflow-visible"
+      className="  rounded-md relative mr-2 overflow-visible hidden sm:block"
     >
       <div className="relative mr-2 h-[320px]">
         <img src="/cover.jpg" className="rounded-md h-[250px] object-cover" />
@@ -59,7 +59,7 @@ const NvtStop = () => {
           viewBox="0 0 309 102"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className=" absolute top-[160px] left-[50%] translate-x-[-50%] rounded-md h-[105px] "
+          className=" absolute top-[160px] left-[50%] translate-x-[-50%] rounded-md sm:h-[105px] h-[70px]"
         >
           <path
             fill-rule="evenodd"
