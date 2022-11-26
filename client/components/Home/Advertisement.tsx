@@ -43,13 +43,19 @@ const Advertisement = () => {
     },
   };
   return (
-    <div>
+    <div className="">
       <img src="/ad.jpg" alt="" />
-      <div>
-        <h2>Chat or Send message</h2>
-        <div>
-          <BiSearch />
-          <input type="search" />
+      <div className="bg-white my-4 p-2 rounded-lg">
+        <h2 className="font-bold py-2 text-sm tracking-tight">
+          Chat or Send message
+        </h2>
+        <div className="flex border border-common-gray rounded-sm items-center justify-center gap-2 px-2">
+          <BiSearch size={13} />
+          <input
+            className="place placeholder:text-[12px]"
+            type="search"
+            placeholder="search by name.."
+          />
         </div>
         <div>
           <Carousel
@@ -117,6 +123,62 @@ const Advertisement = () => {
               </span>
             </div>
           </Carousel>
+        </div>
+        <div className="my-3 ">
+          <div className="flex items-center gap-1 mb-4 cursor-pointer">
+            <img
+              className="w-[40px] h-[40px] rounded-full object-cover"
+              src="/cover.jpg"
+              alt=""
+            />
+            <div>
+              <h2 className="leading-3 font-semibold text-sm">
+                Farhana Yesmin
+              </h2>
+              <span className="leading-4 text-xs block font-semibold">
+                4 days ago
+              </span>
+              <p className=" relative overflow-hidden text-ellipsis w-[100px] text-sm text-common-gray whitespace-nowrap">
+                Hi I am Farhana. I like to be talking{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-1 mb-4 cursor-pointer">
+            <img
+              className="w-[40px] h-[40px] rounded-full object-cover"
+              src="/cover.jpg"
+              alt=""
+            />
+            <div>
+              <h2 className="leading-3 font-semibold text-sm">
+                Farhana Yesmin
+              </h2>
+              <span className="leading-4 text-xs block font-semibold">
+                4 days ago
+              </span>
+              <p className=" relative overflow-hidden text-ellipsis w-[100px] text-sm text-common-gray whitespace-nowrap">
+                Hi I am Farhana. I like to be talking{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-1 mb-4 cursor-pointer">
+            <img
+              className="w-[40px] h-[40px] rounded-full object-cover"
+              src="/cover.jpg"
+              alt=""
+            />
+            <div>
+              <h2 className="leading-3 font-semibold text-sm">
+                Farhana Yesmin
+              </h2>
+              <span className="leading-4 text-xs block font-semibold">
+                4 days ago
+              </span>
+              <p className=" relative overflow-hidden text-ellipsis w-[100px] text-sm text-common-gray whitespace-nowrap">
+                Hi I am Farhana. I like to be talking{" "}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

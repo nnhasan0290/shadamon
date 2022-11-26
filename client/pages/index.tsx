@@ -19,6 +19,7 @@ import RandomOptions from "../components/Home/RandomOptions";
 import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
 import Advertisement from "../components/Home/Advertisement";
+import CategoryArea from "../components/Home/CategoryArea";
 
 export default function Home() {
   return (
@@ -31,7 +32,9 @@ export default function Home() {
       <Heading />
       <main className="min-h-[100vh] bg-body-bg">
         <div className="flex  gap-[50px] justify-center">
-          <div className="border w-[250px] hidden lg:block">Category Area</div>
+          <div className="border w-[250px] hidden lg:block">
+            <CategoryArea />
+          </div>
           <div className=" w-[500px]">
             <CategoryLocation />
             <BiggestPost />
