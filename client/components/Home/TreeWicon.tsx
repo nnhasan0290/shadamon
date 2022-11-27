@@ -131,7 +131,7 @@ export default function GmailTreeView() {
         <TreeItem nodeId="5" label="Sell">
           <TreeItem nodeId="6" label="option-one">
             <TreeItem nodeId="9" label="option-two"></TreeItem>
-             <TreeItem nodeId="10" label="option-two"></TreeItem>
+            <TreeItem nodeId="10" label="option-two"></TreeItem>
           </TreeItem>
           <TreeItem nodeId="7" label="option-one"></TreeItem>
           <TreeItem nodeId="8" label="option-one"></TreeItem>

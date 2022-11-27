@@ -70,7 +70,7 @@ const CatProduct = () => {
             </div>
           </div>
         </div>
-         <div className="p-2">
+        <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -86,7 +86,7 @@ const CatProduct = () => {
             </div>
           </div>
         </div>
- <div className="p-2">
+        <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -102,7 +102,7 @@ const CatProduct = () => {
             </div>
           </div>
         </div>
- <div className="p-2">
+        <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -118,7 +118,7 @@ const CatProduct = () => {
             </div>
           </div>
         </div>
- <div className="p-2">
+        <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"

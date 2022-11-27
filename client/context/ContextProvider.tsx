@@ -14,7 +14,7 @@ const reducer = (state: any, action: any) => {
 };
 
 const ContextProvider = ({ children }: any) => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [signState, setSignState] = useState("SIGNUP");
   const { status } = useSession();

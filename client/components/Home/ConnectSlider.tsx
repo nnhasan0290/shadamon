@@ -75,7 +75,7 @@ const ConnectSlider = () => {
             </button>
           </div>
         </div>
-   <div className="rounded-md flex items-center justify-center flex-col mr-2">
+        <div className="rounded-md flex items-center justify-center flex-col mr-2">
           <div className="flex items-center justify-center flex-col ">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
@@ -119,7 +119,7 @@ const ConnectSlider = () => {
             </button>
           </div>
         </div>
-       <div className="rounded-md flex items-center justify-center flex-col mr-2">
+        <div className="rounded-md flex items-center justify-center flex-col mr-2">
           <div className="flex items-center justify-center flex-col ">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img

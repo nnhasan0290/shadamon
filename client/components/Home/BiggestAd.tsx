@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { GoClock, GoLocation } from "react-icons/go";
-import Link from "next/link"
-import {useRouter} from "next/router";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const BiggestPost = () => {
   const router = useRouter();
   const [showDetails, setShowDetails] = useState(false);
   return (
-    
     <div className="relative w-full overflow-hidden rounded-md">
       <div className="bg-[url('/cover.jpg')] rounded-md blur-[4px]  h-[265px] overflow-hidden"></div>
       <div className="absolute top-0 left-[50%] w-[90%] h-[265px] translate-x-[-50%] ">
@@ -72,59 +71,60 @@ const BiggestPost = () => {
             </div>
           </div>
         </div>
-            <div className=" border-y-2 border-y-common-gray">
-              <div className="flex text-xs font-semibold leading-5">
-                <h4 className="w-[150px] ">Current Price</h4>
-                <h4>Tk 154</h4>
-              </div>
-              <div className="flex text-xs font-semibold leading-3">
-                <h4 className="w-[150px]">Bid standing price</h4>
-                <h4>Tk 50</h4>
-              </div>
-              <div className="flex items-center text-xs font-semibold leading-5 mt-2 mb-1">
-                <h4 className="w-[150px]">Your Price</h4>
-                <button className="p-2 mr-2 border border-gray-300 rounded-md whitespace-nowrap bg-white">
-                  {" "}
-                  Tk. 155
-                </button>
-                <button className="p-2 text-white border rounded-md bg-common-color whitespace-nowrap">
-                  {" "}
-                  Buy Now
-                </button>
-              </div>
+        <div className=" border-y-2 border-y-common-gray">
+          <div className="flex text-xs font-semibold leading-5">
+            <h4 className="w-[150px] ">Current Price</h4>
+            <h4>Tk 154</h4>
+          </div>
+          <div className="flex text-xs font-semibold leading-3">
+            <h4 className="w-[150px]">Bid standing price</h4>
+            <h4>Tk 50</h4>
+          </div>
+          <div className="flex items-center text-xs font-semibold leading-5 mt-2 mb-1">
+            <h4 className="w-[150px]">Your Price</h4>
+            <button className="p-2 mr-2 border border-gray-300 rounded-md whitespace-nowrap bg-white">
+              {" "}
+              Tk. 155
+            </button>
+            <button className="p-2 text-white border rounded-md bg-common-color whitespace-nowrap">
+              {" "}
+              Buy Now
+            </button>
+          </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className=" text-red-600 flex rounded-full p-[1px] ">
+              <GoClock size={25} />
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className=" text-red-600 flex rounded-full p-[1px] ">
-                  <GoClock size={25} />
+            <div className="flex flex-col py-2 font-semibold">
+              <h4 className="text-sm leading-4">Want to BID? Harry Up!</h4>
+              <div className="flex gap-3 pt-1 text-red-600">
+                <div className="flex flex-col">
+                  <h2 className="p-0 text-xl font-bold leading-3">00</h2>
+                  <span className="text-xs text-common-gray">Day</span>
                 </div>
-                <div className="flex flex-col py-2 font-semibold">
-                  <h4 className="text-sm leading-4">Want to BID? Harry Up!</h4>
-                  <div className="flex gap-3 pt-1 text-red-600">
-                    <div className="flex flex-col">
-                      <h2 className="p-0 text-xl font-bold leading-3">00</h2>
-                      <span className="text-xs text-common-gray">Day</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <h2 className="p-0 text-xl font-bold leading-3">07</h2>
-                      <span className="text-xs text-common-gray">Hours</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <h2 className="p-0 text-xl font-bold leading-3">56</h2>
-                      <span className="text-xs text-common-gray">Minutes</span>
-                    </div>
-                  </div>
-                  <p className="text-xs leading-3">
-                    Fri Feb 8, 2022 at 07:54pm
-                  </p>
+                <div className="flex flex-col">
+                  <h2 className="p-0 text-xl font-bold leading-3">07</h2>
+                  <span className="text-xs text-common-gray">Hours</span>
+                </div>
+                <div className="flex flex-col">
+                  <h2 className="p-0 text-xl font-bold leading-3">56</h2>
+                  <span className="text-xs text-common-gray">Minutes</span>
                 </div>
               </div>
-              <div className="items-center flex">
-                <button className="border border-common-gray py-1 px-3 rounded-md "  onClick={() => router.push("/123")}>
-                  Detail
-                </button>
-              </div>
+              <p className="text-xs leading-3">Fri Feb 8, 2022 at 07:54pm</p>
             </div>
+          </div>
+          <div className="items-center flex">
+            <button
+              className="border border-common-gray py-1 px-3 rounded-md "
+              onClick={() => router.push("/123")}
+            >
+              Detail
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

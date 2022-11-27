@@ -57,15 +57,15 @@ const CatButton = () => {
         className="  rounded-md relative mr-2 pb-3  font-bold overflow-visible"
       >
         <div className="flex items-center flex-col justify-center border border-gray-300 p-1 rounded-md mr-1  gap-1 shadow-lg">
-          <BiCategory size={32}/>
+          <BiCategory size={32} />
           <h2>All</h2>
         </div>
         <div className="flex items-center flex-col justify-center border border-gray-300 p-1 rounded-md mr-1 gap-1 shadow-lg">
-          <BiCar size={32}/>
+          <BiCar size={32} />
           <h2>Motors</h2>
         </div>
         <div className="flex items-center flex-col justify-center border border-gray-300 p-1 rounded-md mr-1 gap-1 shadow-lg">
-          <FcElectronics size={32}/>
+          <FcElectronics size={32} />
           <h2>Electronics</h2>
         </div>
         <div className="flex items-center flex-col justify-center border border-gray-300 p-1 rounded-md mr-1 gap-1 shadow-lg">
