@@ -21,7 +21,7 @@ const CatProduct = () => {
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
         <span
-          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
+          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white ${
             selected <= 1 && "hidden"
           }`}
           onClick={clickHandler}
@@ -33,8 +33,8 @@ const CatProduct = () => {
     renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
       return (
         <span
-          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white translate-x-[50%] ${
-            selected === 4 && "hidden"
+          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white ${
+            selected >= 3 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -46,7 +46,7 @@ const CatProduct = () => {
   return (
     <div className="bg-white rounded-md">
       <div className="font-semibold p-2 flex items-center justify-between text-sm">
-        <h2 className="font-bold text-lg rounded-">Electric & Electronics</h2>
+        <h2 className="font-bold sm:text-lg text-sm">Electric & Electronics</h2>
         <h2>All Categories</h2>
         <h2>Another category</h2>
       </div>
@@ -63,14 +63,14 @@ const CatProduct = () => {
             Pant with Black color thei en ieeo fo ie
           </p>
           <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold">$ 256</h2>
-            <div className="flex gap-2 items-center justify-center">
+            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+            <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
             </div>
           </div>
         </div>
-        <div className="p-2">
+         <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -79,14 +79,14 @@ const CatProduct = () => {
             Pant with Black color thei en ieeo fo ie
           </p>
           <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold">$ 256</h2>
-            <div className="flex gap-2 items-center justify-center">
+            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+            <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
             </div>
           </div>
         </div>
-        <div className="p-2">
+ <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -95,14 +95,14 @@ const CatProduct = () => {
             Pant with Black color thei en ieeo fo ie
           </p>
           <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold">$ 256</h2>
-            <div className="flex gap-2 items-center justify-center">
+            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+            <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
             </div>
           </div>
         </div>
-        <div className="p-2">
+ <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -111,14 +111,14 @@ const CatProduct = () => {
             Pant with Black color thei en ieeo fo ie
           </p>
           <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold">$ 256</h2>
-            <div className="flex gap-2 items-center justify-center">
+            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+            <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
             </div>
           </div>
         </div>
-        <div className="p-2">
+ <div className="p-2">
           <img
             src="/cover.jpg"
             className="rounded-md w-[120] h-[120px] object-cover"
@@ -127,24 +127,8 @@ const CatProduct = () => {
             Pant with Black color thei en ieeo fo ie
           </p>
           <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold">$ 256</h2>
-            <div className="flex gap-2 items-center justify-center">
-              <GoLocation />
-              <span>Dhaka</span>
-            </div>
-          </div>
-        </div>
-        <div className="p-2">
-          <img
-            src="/cover.jpg"
-            className="rounded-md w-[120] h-[120px] object-cover"
-          />
-          <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
-            Pant with Black color thei en ieeo fo ie
-          </p>
-          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold">$ 256</h2>
-            <div className="flex gap-2 items-center justify-center">
+            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+            <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
             </div>

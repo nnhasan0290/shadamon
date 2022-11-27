@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { GoLocation } from "react-icons/go";
+import {useRouter} from "next/router";
 
 const SmallestAd = () => {
+const router = useRouter();
   return (
-    <Link href="#">
-      <div className="flex items-center gap-2 my-2 bg-white rounded-md h-[100px] overflow-hidden">
+      <div onClick={() => router.push("/123")} className="flex items-center my-4 gap-2 my-2 bg-white rounded-md h-[100px] overflow-hidden">
         <img
           src="/cover.jpg"
           alt=""
@@ -15,8 +16,8 @@ const SmallestAd = () => {
             <h5 className="font-semibold ">user name</h5>
             <span className="text-common-gray">seller</span>
           </div>
-          <h2 className="capitalize font-semibold w-[85%] leading-4">
-            oxygen taipai NTU Oxygen Goggoon Taipei NTU Oxygen
+          <h2 className="capitalize font-semibold w-[85%] leading-4  text-sm">
+            oxygen taipai NTU Oxygen Goggoon Taipei 
           </h2>
           <div className="flex gap-3 text-xs font-semibold text-common-gray">
             <div className="flex items-center gap-1 ">
@@ -36,7 +37,6 @@ const SmallestAd = () => {
           </div>
         </div>
       </div>
-    </Link>
   );
 };
 

@@ -30,7 +30,7 @@ const PostEarn = () => {
           </div>
         </div>
         <div>
-          <button className="  border border-common-gray p-1 px-3 font-semibold shadow-lg rounded-md">
+          <button className=" whitespace-nowrap border border-common-gray p-1 px-3 font-semibold shadow-lg rounded-md">
             Start Sell
           </button>
         </div>

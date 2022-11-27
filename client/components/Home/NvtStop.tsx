@@ -3,8 +3,10 @@ import { Carousel } from "react-responsive-carousel";
 import { GoLocation } from "react-icons/go";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
+import {useRouter} from "next/router";
 
 const NvtStop = () => {
+  const router = useRouter();
   const [selected, setSelected] = useState(0);
   const handleChange = (a: number, b: any) => {
     console.log(b);
@@ -45,7 +47,7 @@ const NvtStop = () => {
   };
   return (
     <Carousel {...options} className="  rounded-md  mr-2  sm:mx-0 mx-5">
-      <div className="relative mr-2 h-[320px] overflow-hidden">
+      <div className="relative mr-2 h-[320px] overflow-hidden cursor-pointer" onClick={() => router.push("/123")}>
         <img src="/cover.jpg" className="rounded-md h-[253px]  object-cover" />
         <div className="absolute top-[60%] left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img

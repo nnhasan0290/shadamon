@@ -1,8 +1,10 @@
 import { GoClock, GoLocation } from "react-icons/go";
+import {useRouter} from "next/router"
 
 const WannaBid = () => {
+ const router = useRouter();
   return (
-    <div className="relative flex gap-4 my-2 rounded-md mb-[130px]">
+    <div className="relative flex gap-4 my-2 rounded-md mb-[150px]">
       <div className="relative">
         <img
           src="/cover.jpg"
@@ -31,8 +33,8 @@ const WannaBid = () => {
         </div>
         <p className="text-xs leading-3">Fri Feb 8, 2022 at 07:54pm</p>
       </div>
-      <div className="h-[135px] py-2 pl-4 pr-2 rounded-md  bg-white absolute w-[98%] right-0 top-[80%]">
-        <h2 className="capitalize font-semibold w-[70%] leading-3 ">
+      <div className="h-[158px] py-2 pl-4 pr-2 rounded-md  bg-white absolute w-[98%] right-0 top-[80%]">
+        <h2 className="capitalize font-semibold w-[70%] leading-4 ">
           new Super fit it for sale in mailbug dhaka for super cor edition
         </h2>
         <div className="flex gap-3 pb-[1px] text-[11px] font-semibold border-b-2 text-common-gray border-b-gray-300">
@@ -55,7 +57,7 @@ const WannaBid = () => {
             <h4>Tk 50</h4>
           </div>
           <div className="flex items-center text-xs font-semibold leading-5 mt-2 mb-1">
-            <h4 className="w-[150px]">Your Price</h4>
+            <h4 className="w-[150px] whitespace-nowrap">Your Price</h4>
             <button className="p-2 mr-2 border border-gray-300 rounded-md whitespace-nowrap bg-white">
               {" "}
               Tk. 155
@@ -64,8 +66,8 @@ const WannaBid = () => {
               {" "}
               Buy Now
             </button>
-            <div className="ml-[30%]">
-              <button className="p-2 mr-2 border border-gray-300 rounded-md ">
+            <div className="sm:ml-[30%] ml-[10px]">
+              <button className="p-2 mr-2 border border-gray-300 rounded-md " onClick={() => {router.push("/123")}}>
                 {" "}
                 Details
               </button>

@@ -1,7 +1,9 @@
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { FaHands } from "react-icons/fa";
+import {useRouter} from "next/router"
 
 const Promote = () => {
+const router = useRouter();
   return (
     <div className="my-4">
       <div className="flex items-center gap-2 text-common-gray font-semibold p-2 px-5 bg-white rounded-t-lg">
@@ -32,7 +34,7 @@ const Promote = () => {
             </p>
           </div>
         </div>
-        <button className="w-full bg-common-color text-white p-2 rounded-md">
+        <button className="w-full bg-common-color text-white p-2 rounded-md" onClick = {() => router.push("/123")}>
           Promote
         </button>
       </div>

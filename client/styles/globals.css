@@ -94,6 +94,17 @@ img {
   border: 1px solid gray !important;
 }
 
+.MuiTreeItem-label svg{
+ padding: 1px !important;
+ height: 12px !important;
+}
+
+.MuiTreeItem-content{
+ padding: 0 !important;
+}
+.MuiBox-root{
+  padding: 0 !important;
+}
 @media screen and (max-width: 1024px) {
   .modal__cross {
     right: calc(50% - 265px) !important;

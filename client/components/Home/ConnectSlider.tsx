@@ -53,111 +53,91 @@ const ConnectSlider = () => {
         {...options}
         className="  rounded-md relative mr-2 overflow-visible"
       >
-        <div className="rounded-md border flex items-center justify-center flex-col mr-2">
-          <div className="flex items-center justify-center flex-col relative">
-            <div className="w-[128px] rounded-full border-2 border-blue-600 flex items-center justify-center">
+        <div className="rounded-md flex items-center justify-center flex-col mr-2">
+          <div className="flex items-center justify-center flex-col ">
+            <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
-                className=" rounded-full w-[120px] h-[120px] object-cover overflow-hidden m-[2px]"
+                className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
                 src="/cover.jpg"
                 alt=""
               />
             </div>
-            <div className="leading-4 bg-blue-500 text-white p-1 rounded-md absolute bottom-0 translate-y-[50%]">
-              <h2 className="font-bold">12998</h2>
-              <p className="font-semibold whitespace-nowrap">
-                People Connected
-              </p>
-            </div>
           </div>
-          <div className=" my-5 font-semibold">
-            <h2 className="font-bold text-lg">Atik Traders</h2>
-            <p className="w-[70%] leading-3 whitespace-nowrap text-sm mx-auto relative overflow-hidden text-ellipsis">
+          <div className=" font-semibold">
+            <p className="text-[10px] leading-3"> 123 people are connected</p>
+            <h2 className="font-bold">Atik Traders</h2>
+            <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
-            <p className="text-sm leading-4">Dhaka</p>
+            <p className="text-xs leading-4">Dhaka</p>
             <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
-              Connect & See
+              Connect
             </button>
           </div>
         </div>
-        <div className="rounded-md border mr-2 flex items-center justify-center flex-col">
-          <div className="flex items-center justify-center flex-col relative">
-            <div className="w-[128px] rounded-full border-2 border-blue-600 flex items-center justify-center">
+   <div className="rounded-md flex items-center justify-center flex-col mr-2">
+          <div className="flex items-center justify-center flex-col ">
+            <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
-                className=" rounded-full w-[120px] h-[120px] object-cover overflow-hidden m-[2px]"
+                className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
                 src="/cover.jpg"
                 alt=""
               />
             </div>
-            <div className="leading-4 bg-blue-500 text-white p-1 rounded-md absolute bottom-0 translate-y-[50%]">
-              <h2 className="font-bold">12998</h2>
-              <p className="font-semibold whitespace-nowrap">
-                People Connected
-              </p>
-            </div>
           </div>
-          <div className=" my-5 font-semibold">
-            <h2 className="font-bold text-lg">Atik Traders</h2>
-            <p className="w-[70%] leading-3 whitespace-nowrap text-sm mx-auto relative overflow-hidden text-ellipsis">
+          <div className=" font-semibold">
+            <p className="text-[10px] leading-3"> 123 people are connected</p>
+            <h2 className="font-bold">Atik Traders</h2>
+            <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
-            <p className="text-sm leading-4">Dhaka</p>
-            <button className="border border-blue-400 rounded-full px-2 py-1">
-              Connect & See
+            <p className="text-xs leading-4">Dhaka</p>
+            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+              Connect
             </button>
           </div>
         </div>
-        <div className="rounded-md border flex items-center justify-center flex-col mr-2">
-          <div className="flex items-center justify-center flex-col relative">
-            <div className="w-[128px] rounded-full border-2 border-blue-600 flex items-center justify-center">
+        <div className="rounded-md flex items-center justify-center flex-col mr-2">
+          <div className="flex items-center justify-center flex-col ">
+            <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
-                className=" rounded-full w-[120px] h-[120px] object-cover overflow-hidden m-[2px]"
+                className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
                 src="/cover.jpg"
                 alt=""
               />
             </div>
-            <div className="leading-4 bg-blue-500 text-white p-1 rounded-md absolute bottom-0 translate-y-[50%]">
-              <h2 className="font-bold">12998</h2>
-              <p className="font-semibold whitespace-nowrap">
-                People Connected
-              </p>
-            </div>
           </div>
-          <div className=" my-5 font-semibold">
-            <h2 className="font-bold text-lg">Atik Traders</h2>
-            <p className="w-[70%] leading-3 whitespace-nowrap text-sm mx-auto relative overflow-hidden text-ellipsis">
+          <div className=" font-semibold">
+            <p className="text-[10px] leading-3"> 123 people are connected</p>
+            <h2 className="font-bold">Atik Traders</h2>
+            <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
-            <p className="text-sm leading-4">Dhaka</p>
-            <button className="border border-blue-400 rounded-full px-2 py-1">
-              Connect & See
+            <p className="text-xs leading-4">Dhaka</p>
+            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+              Connect
             </button>
           </div>
         </div>
-        <div className="rounded-md border flex items-center justify-center flex-col mr-2">
-          <div className="flex items-center justify-center flex-col relative">
-            <div className="w-[128px] rounded-full border-2 border-blue-600 flex items-center justify-center">
+       <div className="rounded-md flex items-center justify-center flex-col mr-2">
+          <div className="flex items-center justify-center flex-col ">
+            <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
-                className=" rounded-full w-[120px] h-[120px] object-cover overflow-hidden m-[2px]"
+                className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
                 src="/cover.jpg"
                 alt=""
               />
             </div>
-            <div className="leading-4 bg-blue-500 text-white p-1 rounded-md absolute bottom-0 translate-y-[50%]">
-              <h2 className="font-bold">12998</h2>
-              <p className="font-semibold whitespace-nowrap">
-                People Connected
-              </p>
-            </div>
           </div>
-          <div className=" my-5 font-semibold">
-            <h2 className="font-bold text-lg">Atik Traders</h2>
-            <p className="w-[70%] leading-3 whitespace-nowrap text-sm mx-auto relative overflow-hidden text-ellipsis">
+          <div className=" font-semibold">
+            <p className="text-[10px] leading-3"> 123 people are connected</p>
+            <h2 className="font-bold">Atik Traders</h2>
+            <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
-            <p className="text-sm leading-4">Dhaka</p>
-            <button className="border border-blue-400 rounded-full px-2 py-1">
-              Connect & See
+            <p className="text-xs leading-4">Dhaka</p>
+            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+              Connect
             </button>
           </div>
         </div>

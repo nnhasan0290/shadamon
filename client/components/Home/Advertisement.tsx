@@ -20,7 +20,7 @@ const Advertisement = () => {
       return (
         <span
           className={`arrow-left absolute top-[50%] bg-common-color p-1 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
-            selected === 1 && "hidden"
+            selected <= 1 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -44,14 +44,14 @@ const Advertisement = () => {
   return (
     <div className="">
       <img src="/ad.jpg" alt="" />
-      <div className="bg-white my-4 p-2 rounded-lg">
+      <div className="my-4 p-2 rounded-lg">
         <h2 className="font-bold py-2 text-sm tracking-tight">
           Chat or Send message
         </h2>
         <div className="flex border border-common-gray rounded-sm items-center justify-center gap-2 px-2">
           <BiSearch size={13} />
           <input
-            className="place placeholder:text-[12px]"
+            className="place placeholder:text-[12px] bg-transparent"
             type="search"
             placeholder="search by name.."
           />

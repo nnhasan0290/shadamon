@@ -97,18 +97,18 @@ export default function GmailTreeView() {
       aria-label="gmail"
       defaultCollapseIcon={<ArrowDropDownIcon />}
       defaultExpandIcon={<ArrowRightIcon />}
-      defaultExpanded={["6", "11", "13"]}
+      defaultExpanded={["1", "4", "15"]}
       defaultEndIcon={<div style={{ width: 24 }} />}
       sx={{ height: 500, flexGrow: 1, maxWidth: 400, overflowY: "auto" }}
     >
-      <TreeItem nodeId="6" label="Sorting">
+      <TreeItem nodeId="1" label="Sorting">
         <div className="flex items-center gap-1 ml-4">
           <div>
             <input type="checkbox" />
           </div>
           <TreeItem
             className="whitespace-nowrap"
-            nodeId="7"
+            nodeId="2"
             label="label one"
           ></TreeItem>
         </div>
@@ -118,7 +118,7 @@ export default function GmailTreeView() {
           </div>
           <TreeItem
             className="whitespace-nowrap"
-            nodeId="7"
+            nodeId="3"
             label="label one"
           ></TreeItem>
         </div>
@@ -127,22 +127,21 @@ export default function GmailTreeView() {
         </div>
         <hr className="w-full h-[2px] bg-gray-300" />
       </TreeItem>
-      <TreeItem nodeId="11" label="All Categories">
-        <TreeItem nodeId="3" label="Sell">
-          <StyledTreeItem
-            nodeId="1"
-            labelText="All Mail"
-            labelIcon={MailIcon}
-          />
-          <StyledTreeItem nodeId="2" labelText="Trash" labelIcon={MailIcon} />
-          <StyledTreeItem nodeId="4" labelText="History" labelIcon={MailIcon} />
+      <TreeItem nodeId="4" label="All Categories">
+        <TreeItem nodeId="5" label="Sell">
+          <TreeItem nodeId="6" label="option-one">
+            <TreeItem nodeId="9" label="option-two"></TreeItem>
+             <TreeItem nodeId="10" label="option-two"></TreeItem>
+          </TreeItem>
+          <TreeItem nodeId="7" label="option-one"></TreeItem>
+          <TreeItem nodeId="8" label="option-one"></TreeItem>
         </TreeItem>
         <TreeItem nodeId="12" label="Rent" />
-        <TreeItem nodeId="12" label="Jobs" />
-        <TreeItem nodeId="12" label="Offer" />
+        <TreeItem nodeId="13" label="Jobs" />
+        <TreeItem nodeId="14" label="Offer" />
         <hr className="w-full h-[2px] bg-gray-300" />
       </TreeItem>
-      <TreeItem nodeId="13" label="Locations">
+      <TreeItem nodeId="15" label="Locations">
         <h2 className="ml-5">All of Bangladesh</h2>
         <TreeItem nodeId="20" label="Dhaka">
           <StyledTreeItem
@@ -151,19 +150,19 @@ export default function GmailTreeView() {
             labelIcon={CircleIcon}
           />
           <StyledTreeItem
-            nodeId="15"
+            nodeId="16"
             labelText="Trash"
             labelIcon={CircleIcon}
           />
           <StyledTreeItem
-            nodeId="16"
+            nodeId="17"
             labelText="History"
             labelIcon={CircleIcon}
           />
         </TreeItem>
-        <TreeItem nodeId="17" label="Rent" />
-        <TreeItem nodeId="17" label="Jobs" />
-        <TreeItem nodeId="17" label="Offer" />
+        <TreeItem nodeId="21" label="Rent" />
+        <TreeItem nodeId="18" label="Jobs" />
+        <TreeItem nodeId="19" label="Offer" />
         <hr className="w-full h-[2px] bg-gray-300" />
       </TreeItem>
     </TreeView>
