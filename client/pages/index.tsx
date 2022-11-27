@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import BiggestPost from "../components/Home/BiggestAd";
-import CatBtn from "../components/Home/CatProduct";
 import CategoryLocation from "../components/Home/CategoryLocation";
 import Heading from "../components/Home/Heading";
 import Modal from "../components/Home/Modal";

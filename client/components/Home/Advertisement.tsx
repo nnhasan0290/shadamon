@@ -6,7 +6,6 @@ import { Carousel } from "react-responsive-carousel";
 const Advertisement = () => {
   const [selected, setSelected] = useState(0);
   const handleChange = (a: number, b: any) => {
-    console.log(b);
     setSelected(a);
   };
   const options = {

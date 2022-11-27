@@ -77,6 +77,22 @@ img {
 .middle-body {
   width: 500px;
 }
+.nvt__carousel > img {
+  width: 65px !important;
+}
+
+.thumbs-wrapper {
+  margin: 1px !important;
+}
+.thumb {
+  margin: 1px !important;
+  padding: 1px !important;
+  border-radius: 3px;
+}
+.thumb.selected,
+.thumb:hover {
+  border: 1px solid gray !important;
+}
 
 @media screen and (max-width: 1024px) {
   .modal__cross {
