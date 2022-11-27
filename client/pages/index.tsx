@@ -19,9 +19,9 @@ import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
 import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
+import DetailModal from "../components/Detail/DetailModal";
 
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -30,7 +30,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading />
-      <main  className="min-h-[100vh] bg-body-bg overflow-hidden">
+      <main className="min-h-[100vh] bg-body-bg overflow-hidden">
         <div className="flex gap-[50px] justify-center">
           <div className="border w-[250px] hidden lg:block">
             <CategoryArea />
@@ -50,7 +50,7 @@ export default function Home() {
             <RandomOptions />
             <ConnectSlider />
             <CatProduct />
-
+            <DetailModal />
             <Modal />
           </div>
           <div className=" w-[160px] hidden lg:block">

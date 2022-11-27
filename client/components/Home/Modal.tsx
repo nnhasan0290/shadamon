@@ -10,19 +10,20 @@ const Modal = () => {
     GlobalStates();
   const [withEmail, setWithEmail] = useState(false);
 
+  console.log(showModal);
+
   const handleClick = (e: any) => {
     if (!e.target.closest(".modal")) {
       setShowModal(!showModal);
     }
   };
 
-  useEffect(() => {
-    console.log(status);
-    if (status === "authenticated") {
-      setShowModal(true);
-      setWithEmail(true);
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     setShowModal(true);
+  //     setWithEmail(true);
+  //   }
+  // }, [status]);
   return (
     <div
       className={`fixed top-0 left-0 z-20 flex items-end justify-center w-full h-screen bg-black/25 ${

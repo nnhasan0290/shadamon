@@ -13,7 +13,6 @@ const Heading = () => {
   const { showModal, setShowModal } = GlobalStates();
   const [y, setY] = useState(0);
   const [scrollTop, setScrollTop] = useState(false);
-  console.log(scrollTop);
 
   const handleNavigation = useCallback(
     (e: any) => {
@@ -38,7 +37,11 @@ const Heading = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 lg:bg-common-bg bg-body-bg">
+      <div
+        className={`sticky top-0 z-50 lg:bg-common-bg transition-full duration-300 bg-body-bg ${
+          !scrollTop && "translate-y-[-100%] lg:translate-y-0"
+        }`}
+      >
         <div className="flex gap-[50px] justify-center items-center lg:border-b lg:border-b-[#dee2e6] border-0 py-2 lg:py-0">
           <div className="w-[250px]">
             <img src="/head-logo.png" width="132px" height="100%" alt="logo" />
@@ -81,7 +84,7 @@ const Heading = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center lg:border-b lg:border-b-[#dee2e6]">
+        <div className="hidden justify-center lg:border-b lg:border-b-[#dee2e6]">
           <div className="w-[250px]"></div>
           <div className="w-[500px] nav__item lg:flex hidden text-common-gray  items-center gap-2 font-semibold text-[1rem]">
             <div className="w-auto p-2 my-1 rounded-md nav__icon text-common-color">

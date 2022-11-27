@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { GoLocation } from "react-icons/go";
 import { useRouter } from "next/router";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const SmallestAd = () => {
-  const router = useRouter();
+  const { dispatch } = GlobalStates();
   return (
     <div
-      onClick={() => router.push("/123")}
+      onClick={() => dispatch({ type: "BIG POST DETAIL" })}
       className="flex items-center my-4 gap-2 bg-white rounded-md h-[100px] overflow-hidden"
     >
       <img

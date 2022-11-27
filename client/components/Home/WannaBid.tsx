@@ -1,8 +1,9 @@
 import { GoClock, GoLocation } from "react-icons/go";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const WannaBid = () => {
- const router = useRouter();
+  const { dispatch } = GlobalStates();
   return (
     <div className="relative flex gap-4 my-2 rounded-md mb-[150px]">
       <div className="relative">
@@ -67,7 +68,10 @@ const WannaBid = () => {
               Buy Now
             </button>
             <div className="sm:ml-[30%] ml-[10px]">
-              <button className="p-2 mr-2 border border-gray-300 rounded-md " onClick={() => {router.push("/123")}}>
+              <button
+                className="p-2 mr-2 border border-gray-300 rounded-md "
+                onClick={() => dispatch({ type: "BIG POST DETAIL" })}
+              >
                 {" "}
                 Details
               </button>

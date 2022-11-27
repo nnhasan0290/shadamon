@@ -3,9 +3,11 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { GoClock, GoLocation } from "react-icons/go";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const BiggestPost = () => {
   const router = useRouter();
+  const { dispatch } = GlobalStates();
   const [showDetails, setShowDetails] = useState(false);
   return (
     <div className="relative w-full overflow-hidden rounded-md">
@@ -32,7 +34,7 @@ const BiggestPost = () => {
               <svg
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 24 24"
                 className="me-1 text-common-color"
                 height="1em"
@@ -119,7 +121,7 @@ const BiggestPost = () => {
           <div className="items-center flex">
             <button
               className="border border-common-gray py-1 px-3 rounded-md "
-              onClick={() => router.push("/123")}
+              onClick={() => dispatch({ type: "BIG POST DETAIL" })}
             >
               Detail
             </button>

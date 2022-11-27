@@ -1,9 +1,10 @@
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { FaHands } from "react-icons/fa";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const Promote = () => {
-const router = useRouter();
+  const { dispatch } = GlobalStates();
   return (
     <div className="my-4">
       <div className="flex items-center gap-2 text-common-gray font-semibold p-2 px-5 bg-white rounded-t-lg">
@@ -34,7 +35,10 @@ const router = useRouter();
             </p>
           </div>
         </div>
-        <button className="w-full bg-common-color text-white p-2 rounded-md" onClick = {() => router.push("/123")}>
+        <button
+          className="w-full bg-common-color text-white p-2 rounded-md"
+          onClick={() => dispatch({ type: "BIG POST DETAIL" })}
+        >
           Promote
         </button>
       </div>

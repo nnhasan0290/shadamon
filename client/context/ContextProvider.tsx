@@ -3,11 +3,12 @@ import React, { useReducer, useContext, useState, useEffect } from "react";
 
 const GlobalContext: any = React.createContext({});
 
-const initialState: object = {
-  modal: false,
-};
 const reducer = (state: any, action: any) => {
   switch (action.type) {
+    case "BIG POST DETAIL":
+      return true;
+    case "CLEAR DETAIL":
+      return false;
     default:
       return state;
   }
@@ -15,13 +16,21 @@ const reducer = (state: any, action: any) => {
 
 const ContextProvider = ({ children }: any) => {
   const [showModal, setShowModal] = useState(false);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [detailState, dispatch] = useReducer(reducer, false);
   const [signState, setSignState] = useState("SIGNUP");
   const { status } = useSession();
 
   return (
     <GlobalContext.Provider
-      value={{ showModal, setShowModal, signState, setSignState, status }}
+      value={{
+        showModal,
+        setShowModal,
+        signState,
+        setSignState,
+        status,
+        detailState,
+        dispatch,
+      }}
     >
       {children}
     </GlobalContext.Provider>

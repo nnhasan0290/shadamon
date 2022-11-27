@@ -3,10 +3,11 @@ import { Carousel } from "react-responsive-carousel";
 import { GoLocation } from "react-icons/go";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const NvtStop = () => {
-  const router = useRouter();
+  const { dispatch } = GlobalStates();
   const [selected, setSelected] = useState(0);
   const handleChange = (a: number, b: any) => {
     console.log(b);
@@ -47,7 +48,10 @@ const NvtStop = () => {
   };
   return (
     <Carousel {...options} className="  rounded-md  mr-2  sm:mx-0 mx-5">
-      <div className="relative mr-2 h-[320px] overflow-hidden cursor-pointer" onClick={() => router.push("/123")}>
+      <div
+        className="relative mr-2 h-[320px] overflow-hidden cursor-pointer"
+        onClick={() => dispatch({ type: "BIG POST DETAIL" })}
+      >
         <img src="/cover.jpg" className="rounded-md h-[253px]  object-cover" />
         <div className="absolute top-[60%] left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img
@@ -64,8 +68,8 @@ const NvtStop = () => {
               className=" rounded-md overflow-hidden"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M71.5 38C92.2107 38 109 21.2107 109 0.5C109 0.333076 108.999 0.166409 108.997 0H309V102H0V0H34.0033C34.0011 0.166409 34 0.333076 34 0.5C34 21.2107 50.7893 38 71.5 38Z"
                 fill="white"
               ></path>
@@ -99,8 +103,8 @@ const NvtStop = () => {
               className=" rounded-md overflow-hidden"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M71.5 38C92.2107 38 109 21.2107 109 0.5C109 0.333076 108.999 0.166409 108.997 0H309V102H0V0H34.0033C34.0011 0.166409 34 0.333076 34 0.5C34 21.2107 50.7893 38 71.5 38Z"
                 fill="white"
               ></path>
@@ -134,8 +138,8 @@ const NvtStop = () => {
               className=" rounded-md overflow-hidden"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M71.5 38C92.2107 38 109 21.2107 109 0.5C109 0.333076 108.999 0.166409 108.997 0H309V102H0V0H34.0033C34.0011 0.166409 34 0.333076 34 0.5C34 21.2107 50.7893 38 71.5 38Z"
                 fill="white"
               ></path>
