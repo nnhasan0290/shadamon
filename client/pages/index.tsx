@@ -19,7 +19,6 @@ import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
 import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
-import DetailModal from "../components/Detail/DetailModal";
 
 export default function Home() {
   return (
@@ -50,7 +49,6 @@ export default function Home() {
             <RandomOptions />
             <ConnectSlider />
             <CatProduct />
-            <DetailModal />
             <Modal />
           </div>
           <div className=" w-[160px] hidden lg:block">

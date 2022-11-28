@@ -5,55 +5,26 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { GlobalStates } from "../../context/ContextProvider";
 import Add from "../Detail/Add";
-import { BsExclamation } from "react-icons/bs";
-import { FaFacebook } from "react-icons/fa";
-import { BiHeartCircle, BiShare } from "react-icons/bi";
+
 import { useScrollDir } from "../../utils/ScrollDir";
+import CloseBtn from "../layout/CloseBtn";
 
 const BiggestPost = () => {
   const { dispatch } = GlobalStates();
   const [showDetails, setShowDetails] = useState(false);
   const isScrollTop = useScrollDir();
   return (
-    <div id="mainId">
+    <div id="premiumPost">
       {showDetails ? (
         <>
           <div className="mt-[50px] lg:mt-0">
             <Add />
           </div>
-          <div className="w-[50%]  flex items-center justify-end pr-[60px] gap-2 translate-y-[90%] ">
-            <div className="border rounded-full bg-muted-color inline-block">
-              <BsExclamation size={25} />
-            </div>
-            <div className="border rounded-full inline-block">
-              <FaFacebook size={25} />
-            </div>
-          </div>
-          <div
-            className={`text-center transition-all duration-300 sticky  z-10  lg:bottom-3 ${
-              isScrollTop ? "bottom-[68px]" : "bottom-3"
-            }  `}
-            onClick={() => {
-              setShowDetails(!showDetails);
-            }}
-          >
-            <Link href="/#mainId" scroll={false}>
-              <div className="border inline-block text-white px-3 py-1 my-[-6px] rounded-full bg-black cursor-pointer">
-                <span>Close Detail</span>
-              </div>
-            </Link>
-          </div>
-          <div className="w-[50%]  flex items-center pl-[60px] gap-2 translate-y-[-90%] relative z-[0] ml-auto">
-            <div className="border inline-block rounded-full bg-muted-color">
-              <BiHeartCircle size={25} />
-            </div>
-            <div className="border inline-block rounded-full bg-muted-color">
-              <BiShare size={25} />
-            </div>
-            <div className="px-2 my-2">
-              <hr className="w-full h-2px bg-common-gray" />
-            </div>
-          </div>
+          <CloseBtn
+            id="premiumPost"
+            setState={setShowDetails}
+            state={showDetails}
+          />
         </>
       ) : (
         <div className="relative w-full overflow-hidden rounded-md mt-[50px] lg:mt-0">
@@ -171,7 +142,7 @@ const BiggestPost = () => {
                 </div>
               </div>
               <div className="items-center flex">
-                <Link href="/#mainId" scroll={false}>
+                <Link href="/#premiumPost" scroll={false}>
                   <button
                     className="border border-common-gray py-1 px-3 rounded-md "
                     onClick={() => setShowDetails(!showDetails)}
