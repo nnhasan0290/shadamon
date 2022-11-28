@@ -42,7 +42,7 @@ const Advertisement = () => {
     },
   };
   return (
-    <div className="">
+    <div className="mt-[50px]">
       <img src="/ad.jpg" alt="" />
       <div className="my-4 p-2 rounded-lg">
         <h2 className="font-bold py-2 text-sm tracking-tight">

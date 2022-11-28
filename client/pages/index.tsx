@@ -31,7 +31,7 @@ export default function Home() {
       <Heading />
       <main className="min-h-[100vh] bg-body-bg scroll-smooth">
         <div className="flex gap-[50px] justify-center">
-          <div className="border w-[250px] hidden lg:block">
+          <div className=" w-[250px] hidden lg:block">
             <CategoryArea />
           </div>
           <div className="  middle-body mb-[150px]">

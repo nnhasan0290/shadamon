@@ -27,7 +27,7 @@ const BiggestPost = () => {
           />
         </>
       ) : (
-        <div className="relative w-full overflow-hidden rounded-md mt-[50px] lg:mt-0">
+        <div className={`relative w-full overflow-hidden rounded-md ${isScrollTop && "mt-[50px]"} lg:mt-0`}>
           <div className="relative">
             <div className="bg-[url('/cover.jpg')] absolute top-0 left-0 rounded-md  w-full h-[100%] blur-[4px]"></div>
             <div className="relative z-10">
