@@ -24,7 +24,7 @@ const NvtStop = () => {
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
         <span
-          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
+          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  z-10 translate-y-[-50%] cursor-pointer text-white ${
             selected === 0 && "hidden"
           }`}
           onClick={clickHandler}
@@ -36,7 +36,7 @@ const NvtStop = () => {
     renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
       return (
         <span
-          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white translate-x-[50%] ${
+          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white  ${
             selected === 2 && "hidden"
           }`}
           onClick={clickHandler}
@@ -49,23 +49,23 @@ const NvtStop = () => {
   return (
     <Carousel {...options} className="  rounded-md  mr-2  sm:mx-0 mx-5">
       <div
-        className="relative mr-2 h-[320px] overflow-hidden cursor-pointer"
+        className="relative mr-2 cursor-pointer mb-[50px]"
         onClick={() => dispatch({ type: "BIG POST DETAIL" })}
       >
-        <img src="/cover.jpg" className="rounded-md h-[253px]  object-cover" />
-        <div className="absolute top-[60%] left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
+        <img src="/cover.jpg" className="rounded-md  object-cover" />
+        <div className="absolute bottom-0 left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img
             src="/cover.jpg"
             className="rounded-full absolute h-[65px] bg-white translate-y-[-50%] left-[39px]  top-0 border border-white"
           />
-          <div className="absolute overflow-hidden w-full rounded-md">
+          <div className="absolute top-0 left-0 w-full overflow-hidden rounded-md">
             <svg
               width="309"
               height="102"
               viewBox="0 0 309 102"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className=" rounded-md overflow-hidden"
+              className=" rounded-md "
             >
               <path
                 fillRule="evenodd"
@@ -75,32 +75,32 @@ const NvtStop = () => {
               ></path>
             </svg>
           </div>
-          <div className=" absolute z-10 p-3 text-start my-10 bg-white">
-            <h2 className="font-bold text-lg leading-4">
-              NVT Stopping by The Woods
+          <div className="relative w-full text-start translate-y-[70%] px-2 font-semibold">
+            <h2 className="whitespace-nowrap relative overflow-hidden text-ellipsis">
+              2 RHK Resident Apartment in Chandivali
             </h2>
-            <p className="leading-4 font-semibold hidden sm:block text-common-gray text-sm">
-              4 BHK Independent House/Villa, Whitefield, Banglalore east
-            </p>
-            <h2 className="font-bold text-lg leading-4"> $ 2.02 - 2.92 Cr</h2>
+            <h2>$2.85</h2>
           </div>
         </div>
       </div>
-      <div className="relative mr-2 h-[320px] overflow-hidden">
-        <img src="/cover.jpg" className="rounded-md h-[253px]  object-cover" />
-        <div className="absolute top-[60%] left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
+      <div
+        className="relative mr-2 cursor-pointer mb-[50px]"
+        onClick={() => dispatch({ type: "BIG POST DETAIL" })}
+      >
+        <img src="/cover.jpg" className="rounded-md  object-cover" />
+        <div className="absolute bottom-0 left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img
             src="/cover.jpg"
             className="rounded-full absolute h-[65px] bg-white translate-y-[-50%] left-[39px]  top-0 border border-white"
           />
-          <div className="absolute overflow-hidden w-full rounded-md">
+          <div className="absolute top-0 left-0 w-full overflow-hidden rounded-md">
             <svg
               width="309"
               height="102"
               viewBox="0 0 309 102"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className=" rounded-md overflow-hidden"
+              className=" rounded-md "
             >
               <path
                 fillRule="evenodd"
@@ -110,32 +110,32 @@ const NvtStop = () => {
               ></path>
             </svg>
           </div>
-          <div className=" absolute z-10 p-3 text-start my-10 bg-white">
-            <h2 className="font-bold text-lg leading-4">
-              NVT Stopping by The Woods
+          <div className="relative w-full text-start translate-y-[70%] px-2 font-semibold">
+            <h2 className="whitespace-nowrap relative overflow-hidden text-ellipsis">
+              2 RHK Resident Apartment in Chandivali
             </h2>
-            <p className="leading-4 font-semibold hidden sm:block text-common-gray text-sm">
-              4 BHK Independent House/Villa, Whitefield, Banglalore east
-            </p>
-            <h2 className="font-bold text-lg leading-4"> $ 2.02 - 2.92 Cr</h2>
+            <h2>$2.85</h2>
           </div>
         </div>
       </div>
-      <div className="relative mr-2 h-[320px] overflow-hidden">
-        <img src="/cover.jpg" className="rounded-md h-[253px]  object-cover" />
-        <div className="absolute top-[60%] left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
+      <div
+        className="relative mr-2 cursor-pointer mb-[50px]"
+        onClick={() => dispatch({ type: "BIG POST DETAIL" })}
+      >
+        <img src="/cover.jpg" className="rounded-md  object-cover" />
+        <div className="absolute bottom-0 left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img
             src="/cover.jpg"
             className="rounded-full absolute h-[65px] bg-white translate-y-[-50%] left-[39px]  top-0 border border-white"
           />
-          <div className="absolute overflow-hidden w-full rounded-md">
+          <div className="absolute top-0 left-0 w-full overflow-hidden rounded-md">
             <svg
               width="309"
               height="102"
               viewBox="0 0 309 102"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className=" rounded-md overflow-hidden"
+              className=" rounded-md "
             >
               <path
                 fillRule="evenodd"
@@ -145,14 +145,11 @@ const NvtStop = () => {
               ></path>
             </svg>
           </div>
-          <div className=" absolute z-10 p-3 text-start my-10 bg-white">
-            <h2 className="font-bold text-lg leading-4">
-              NVT Stopping by The Woods
+          <div className="relative w-full text-start translate-y-[70%] px-2 font-semibold">
+            <h2 className="whitespace-nowrap relative overflow-hidden text-ellipsis">
+              2 RHK Resident Apartment in Chandivali
             </h2>
-            <p className="leading-4 font-semibold hidden sm:block text-common-gray text-sm">
-              4 BHK Independent House/Villa, Whitefield, Banglalore east
-            </p>
-            <h2 className="font-bold text-lg leading-4"> $ 2.02 - 2.92 Cr</h2>
+            <h2>$2.85</h2>
           </div>
         </div>
       </div>

@@ -33,7 +33,8 @@ label {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
+  height: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background: gray;
@@ -94,15 +95,15 @@ img {
   border: 1px solid gray !important;
 }
 
-.MuiTreeItem-label svg{
- padding: 1px !important;
- height: 12px !important;
+.MuiTreeItem-label svg {
+  padding: 1px !important;
+  height: 12px !important;
 }
 
-.MuiTreeItem-content{
- padding: 0 !important;
+.MuiTreeItem-content {
+  padding: 0 !important;
 }
-.MuiBox-root{
+.MuiBox-root {
   padding: 0 !important;
 }
 @media screen and (max-width: 1024px) {

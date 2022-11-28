@@ -104,10 +104,8 @@ const Heading = () => {
         </div>
       </div>
       <div
-        className={` bg-white items-center max-w-[500px] border lg:hidden  fixed bottom-0 z-50  w-full left-[50%] translate-x-[-50%] text-center rounded-t-xl 
-      border-t-2 border-t-common-gray transition-all duration-300 ${
-        !scrollTop && "translate-y-[100%]"
-      }`}
+        className={` bg-white items-center max-w-[500px] border lg:hidden rounded-t-[30px]  fixed bottom-0 z-50  w-full left-[50%] translate-x-[-50%] text-center
+       transition-all duration-300 ${!scrollTop && "translate-y-[100%]"}`}
       >
         <div className=" justify-center rounded-full hidden ">
           <div className="basis-[30%] flex px-2 pt-1 rounded-full justify-around   bg-white  ">
@@ -152,25 +150,25 @@ const Heading = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
-          <div className="basis-full flex p-4 rounded-full justify-around border-t-2 border-t-common-gray bg-white self-end">
-            <div>
+        <div className="flex justify-center text-[#747474]">
+          <div className="basis-full flex  rounded-l-full rounded-r-full sm:justify-around justify-center gap-2 sm:gap-0 border-t-2 border-t-common-gray bg-white self-end">
+            <div className="text-black bg-[#e6e6e6] sm:p-4 px-2 py-2 rounded-b-2xl">
               <BiHome size={25} />
             </div>
-            <div>
+            <div className=" sm:p-4 px-2 py-4 rounded-b-2xl  ">
               <BiSearch size={25} />
             </div>
           </div>
-          <div className="border-b-2 border-b-common-gray rounded-b-full p-2 pt-1 rounded-md">
+          <div className="border-b-2 border-b-common-gray rounded-b-full p-2 pt-0 rounded-md">
             <div className=" flex items-center justify-center px-3 rounded-full  w-[50px] h-[50px] bg-common-color text-white ">
               <BsPlusLg className="font-bold" size={30} />
             </div>
           </div>
-          <div className="basis-full flex p-4 rounded-full justify-around border-t-2 border-t-common-gray bg-white self-end">
-            <div>
+          <div className="basis-full flex rounded-full  sm:justify-around justify-center gap-2 sm:gap-0 border-t-2 border-t-common-gray bg-white self-end pr-2 ">
+            <div className="sm:p-4 px-2 py-4 rounded-b-2xl">
               <BiEnvelope size={25} />
             </div>
-            <div>
+            <div className="sm:p-4 px-2 py-4 rounded-b-2xl">
               <CgProfile size={25} />
             </div>
           </div>

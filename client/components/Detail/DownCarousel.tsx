@@ -21,7 +21,7 @@ const DownCarousel = () => {
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
         <span
-          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
+          className={`arrow-left absolute top-[30%] bg-common-color p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white ${
             selected === 0 && "hidden"
           }`}
           onClick={clickHandler}
@@ -33,7 +33,7 @@ const DownCarousel = () => {
     renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
       return (
         <span
-          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white translate-x-[50%] ${
+          className={`arrow-right absolute top-[30%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white ${
             selected === 2 && "hidden"
           }`}
           onClick={clickHandler}
@@ -57,22 +57,24 @@ const DownCarousel = () => {
         </div>
       </div>
       <Carousel {...options} className="  rounded-md  ">
-        <div className=" mr-2  overflow-hidden border rounded-md">
-          <img
-            src="/cover.jpg"
-            className="rounded-top-md h-[210px]  object-cover"
-          />
+        <div className="relative mr-2 cursor-pointer mb-[50px]">
+          <img src="/cover.jpg" className="rounded-md  object-cover" />
           <div className="  z-10 p-3 text-start bg-white">
             <h2 className="font-bold sm:text-lg  leading-4">
               NVT Stopping by The Woods written something
             </h2>
           </div>
         </div>
-        <div className=" mr-2  overflow-hidden border rounded-md">
-          <img
-            src="/cover.jpg"
-            className="rounded-top-md h-[210px]  object-cover"
-          />
+        <div className="relative mr-2 cursor-pointer mb-[50px]">
+          <img src="/cover.jpg" className="rounded-md  object-cover" />
+          <div className="  z-10 p-3 text-start bg-white">
+            <h2 className="font-bold sm:text-lg  leading-4">
+              NVT Stopping by The Woods written something
+            </h2>
+          </div>
+        </div>
+        <div className="relative mr-2 cursor-pointer mb-[50px]">
+          <img src="/cover.jpg" className="rounded-md  object-cover" />
           <div className="  z-10 p-3 text-start bg-white">
             <h2 className="font-bold sm:text-lg  leading-4">
               NVT Stopping by The Woods written something
