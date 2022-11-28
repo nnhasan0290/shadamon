@@ -7,7 +7,7 @@ import { BiChevronDown, BiEnvelope, BiHome, BiSearch } from "react-icons/bi";
 import { BsPlusLg } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { useEffect, useState, useCallback } from "react";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 const Heading = () => {
   //states
@@ -45,12 +45,17 @@ const Heading = () => {
         }`}
       >
         <div className="flex gap-[50px] sm:w-[500px] w-full p-1 lg:w-auto  lg:justify-center justify-between mx-auto items-center lg:border-b lg:border-b-[#dee2e6] border-0 py-2 lg:py-0">
-          <div className="w-[250px] lg:pl-5 flex items-center cursor-pointer" onClick ={() => router.push("/")}>
+          <div
+            className="w-[250px] lg:pl-5 flex items-center cursor-pointer"
+            onClick={() => router.push("/")}
+          >
             <img src="/head-logo.png" width="132px" height="100%" alt="logo" />
-            <div className="border-l-[2px] border-common-gray pl-1 ml-1 border-l flex flex-col mb-[-12px] lg:hidden">
-             <span className="leading-[8px] text-[12px] font-bold">546534</span>
-             <span className="leading-3 text-[9px]">Result</span>
-             </div>
+            <div className="border-l-[2px] border-common-gray pl-1 ml-1 flex flex-col mb-[-12px] lg:hidden">
+              <span className="leading-[8px] text-[12px] font-bold">
+                546534
+              </span>
+              <span className="leading-3 text-[9px]">Result</span>
+            </div>
           </div>
           <div className="w-[500px] nav__item  lg:flex hidden">
             <div className="p-2 active">
@@ -107,21 +112,21 @@ const Heading = () => {
         className={` bg-white items-center max-w-[500px] border lg:hidden rounded-t-[30px]  fixed bottom-0 z-50  w-full left-[50%] translate-x-[-50%] text-center
        transition-all duration-300 ${!scrollTop && "translate-y-[100%]"}`}
       >
-        <div className=" justify-center rounded-full hidden ">
+        <div className="justify-center hidden rounded-full ">
           <div className="basis-[30%] flex px-2 pt-1 rounded-full justify-around   bg-white  ">
-            <div className="flex items-center justify-center flex-col">
-              <div className="nav__icon text-black ">
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-black nav__icon ">
                 <BiHome size={22} />
               </div>
-              <span className="leading-3 tracking-tight text-sm font-semibold text-common-gray">
+              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
                 Post
               </span>
             </div>
-            <div className="flex items-center justify-center flex-col">
-              <div className="nav__icon text-black">
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-black nav__icon">
                 <BiHome size={22} />
               </div>
-              <span className="leading-3 tracking-tight text-sm font-semibold text-common-gray">
+              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
                 Post
               </span>
             </div>
@@ -132,49 +137,46 @@ const Heading = () => {
             </div>
           </div>
           <div className="basis-[30%] flex px-2 pt-1 rounded-full justify-around bg-white ">
-            <div className="flex items-center justify-center flex-col">
-              <div className="nav__icon text-black">
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-black nav__icon">
                 <BiEnvelope size={22} />
               </div>
-              <span className="leading-3 tracking-tight text-sm font-semibold text-common-gray">
+              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
                 Page
               </span>
             </div>
-            <div className="flex items-center justify-center flex-col">
-              <div className="nav__icon text-black">
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-black nav__icon">
                 <CgProfile size={22} />
               </div>
-              <span className="leading-3 tracking-tight text-sm font-semibold text-common-gray">
+              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
                 Promote
               </span>
             </div>
           </div>
         </div>
         <div className="flex justify-center text-[#747474]">
-         
-           <div className="basis-full flex rounded-full  sm:justify-around justify-center gap-2 sm:gap-0 border-t-2 border-t-common-gray bg-white self-end pr-2 ">
-           
-             <div className=" px-2 text-black bg-gray-300 flex flex-col items-center justify-center py-1 rounded-b-2xl">
+          <div className="flex self-end justify-center gap-2 pr-2 bg-white border-t-2 rounded-full basis-full sm:justify-around sm:gap-0 border-t-common-gray ">
+            <div className="flex flex-col items-center justify-center px-2 py-1 text-black bg-gray-300  rounded-b-2xl">
               <BiHome size={25} />
               <span className="text-xs leading-3">Home</span>
             </div>
-            <div className=" px-2 flex flex-col items-center justify-center py-1 rounded-b-2xl">
+            <div className="flex flex-col items-center justify-center px-2 py-1  rounded-b-2xl">
               <BiSearch size={25} />
               <span className="text-xs leading-3">Search</span>
             </div>
           </div>
-          <div className="border-b-2 border-b-common-gray rounded-b-full p-2 pt-0 rounded-md">
+          <div className="p-2 pt-0 border-b-2 rounded-md rounded-b-full border-b-common-gray">
             <div className=" flex items-center justify-center px-2 rounded-full  w-[37px] h-[37px] bg-common-color text-white ">
               <BsPlusLg className="font-bold" size={35} />
             </div>
           </div>
-          <div className="basis-full flex rounded-full  sm:justify-around justify-center gap-2 sm:gap-0 border-t-2 border-t-common-gray bg-white self-end pr-2 ">
-           
-             <div className=" px-2 flex flex-col items-center justify-center py-1 rounded-b-2xl">
+          <div className="flex self-end justify-center gap-2 pr-2 bg-white border-t-2 rounded-full basis-full sm:justify-around sm:gap-0 border-t-common-gray ">
+            <div className="flex flex-col items-center justify-center px-2 py-1  rounded-b-2xl">
               <BiEnvelope size={25} />
               <span className="text-xs leading-3">Message</span>
             </div>
-            <div className=" px-2 flex flex-col items-center justify-center py-1 rounded-b-2xl">
+            <div className="flex flex-col items-center justify-center px-2 py-1  rounded-b-2xl">
               <CgProfile size={25} />
               <span className="text-xs leading-3">Profile</span>
             </div>

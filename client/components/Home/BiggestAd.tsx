@@ -40,16 +40,16 @@ const BiggestPost = () => {
           </div>
           <div className="bg-gray-300 p-3">
             <div className="flex gap-3 items-center ">
-              <div>
-                <span className="bg-common-color text-white px-1 text-sm rounded-md">
+              <div className="text-[13.5px]">
+                <span className="bg-common-color text-white px-1 rounded-sm text-[11px]">
                   Ad
                 </span>
-                <span className="font-semibold text-sm text-common-gray ml-1">
+                <span className=" text-smallest-color ml-1 whitespace-nowrap">
                   Atif Mahmud
                 </span>
               </div>
               <div className="flex">
-                <div className=" rounded-full h-[20px] flex items-center justify-center text-white w-[20px]">
+                <div className=" rounded-full h-[20px] flex items-center justify-center text-white w-[20px] ">
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
@@ -64,17 +64,18 @@ const BiggestPost = () => {
                     <path d="M23 12l-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"></path>
                   </svg>
                 </div>
-                <span className="font-semibold text-sm text-common-gray ml-1">
+                <span className="text-sm  whitespace-nowrap text-smallest-color ml-1">
                   14 people are connected
                 </span>
               </div>
             </div>
             <div className="flex justify-between ">
               <div>
-                <h2 className="font-bold text-lg leading-5">
+                <h2 className="font-semibold text-lg text-heading-color leading-5">
                   {" "}
-                  2 RHK Resident Apartment in Chandivali $ 2.85
+                  2 RHK Resident Apartment in Chandivali 
                 </h2>
+                <p className="font-semibold text-[17px] text-heading-color">$2.85</p>
                 <div className="flex gap-3">
                   <h2 className="text-common-color font-bold text-lg">
                     Tk 2.31
@@ -82,19 +83,19 @@ const BiggestPost = () => {
                   <h2 className="line-through font-bold text-lg">Tk 2.31</h2>
                   <h2 className="text-green-700 font-bold text-lg">19% OFF</h2>
                 </div>
-                <div className="flex gap-3 items-center">
-                  <div className="flex items-center gap-1 text-common-gray">
+                <div className="flex gap-3 text-smallest-color items-center">
+                  <div className="flex items-center gap-1">
                     <GoLocation />
                     <span>Dhaka</span>
                   </div>
-                  <div className="flex items-center gap-1 text-common-gray">
+                  <div className="flex items-center gap-1">
                     <GoLocation />
                     <span>Dhaka</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" border-y-2 border-y-common-gray">
+            <div className=" border-y border-y-regular-border">
               <div className="flex text-xs font-semibold leading-5">
                 <h4 className="w-[150px] ">Current Price</h4>
                 <h4>Tk 154</h4>
