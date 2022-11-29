@@ -14,7 +14,7 @@
     @apply lg:bg-body-bg rounded-full text-[14px] w-[33px] h-[33px] flex items-center justify-center cursor-pointer bg-[#a3a3a3] capitalize text-black lg:text-[#5a5a5a];
   }
   .nav__icon.active{
-  @apply border border-common-color border-2
+  @apply  border-common-color border-2
   }
 }
 

@@ -8,16 +8,8 @@ export default function ({ id, setState, state }: any) {
   const isScrollTop = useScrollDir();
   return (
     <>
-      <div className="w-[50%]  flex items-center justify-end pr-[60px] gap-2 translate-y-[90%] ">
-        <div className="border rounded-full bg-muted-color inline-block">
-          <BsExclamation size={25} />
-        </div>
-        <div className="border rounded-full inline-block">
-          <FaFacebook size={25} />
-        </div>
-      </div>
       <div
-        className={`text-center transition-all duration-300 sticky  z-10  lg:bottom-3 ${
+        className={`text-center transition-all duration-300 sticky  pb-2 z-10  lg:bottom-3 ${
           isScrollTop ? "bottom-[68px]" : "bottom-3"
         }  `}
         onClick={() => {
@@ -30,15 +22,26 @@ export default function ({ id, setState, state }: any) {
           </div>
         </Link>
       </div>
-      <div className="w-[50%]  flex items-center pl-[60px] gap-2 translate-y-[-90%] relative z-[0] ml-auto">
-        <div className="border inline-block rounded-full bg-muted-color">
-          <BiHeartCircle size={25} />
+      <div className="flex justify-between translate-y-[-90%] bg-white pb-3">
+        <div className="w-[50%]  flex items-center justify-end pr-[60px] gap-2  bg-white">
+          <div className="inline-block border rounded-full bg-muted-color">
+            <BsExclamation size={25} />
+          </div>
+          <div className="inline-block border rounded-full">
+            <FaFacebook size={25} />
+          </div>
         </div>
-        <div className="border inline-block rounded-full bg-muted-color">
-          <BiShare size={25} />
-        </div>
-        <div className="px-2 my-2">
-          <hr className="w-full h-2px bg-common-gray" />
+
+        <div className="w-[50%] bg-white flex items-center pl-[60px] gap-2 relative z-[0] ml-auto">
+          <div className="inline-block border rounded-full bg-muted-color">
+            <BiHeartCircle size={25} />
+          </div>
+          <div className="inline-block border rounded-full bg-muted-color">
+            <BiShare size={25} />
+          </div>
+          <div className="px-2 my-2">
+            <hr className="w-full h-2px bg-common-gray" />
+          </div>
         </div>
       </div>
     </>

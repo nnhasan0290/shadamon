@@ -16,7 +16,7 @@ const DownCarousel = () => {
     centerMode: true,
     showIndicators: false,
     selectedItem: 0,
-    centerSlidePercentage: 80,
+    centerSlidePercentage: 70,
     onChange: handleChange,
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
@@ -45,40 +45,78 @@ const DownCarousel = () => {
   };
   return (
     <div className="">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 pb-1">
         <div>
-          <IoLogoWordpress size={30} />
+          <IoLogoWordpress size={25} />
         </div>
         <div>
-          <h2 className="font-bold leading-3 text-sm">WebCoder Institution</h2>
-          <span className="leading-3 text-xs bg-yellow-300 text-white px-1 rounded-md">
-            Ad
+          <span className=" rounded-md text-heading-color font-[500]">
+            Web coder Institute
           </span>
         </div>
       </div>
-      <Carousel {...options} className="  rounded-md  ">
-        <div className="relative mr-2 cursor-pointer mb-[50px]">
-          <img src="/cover.jpg" className="rounded-md  object-cover" />
-          <div className="  z-10 p-3 text-start bg-white">
-            <h2 className="font-bold sm:text-lg  leading-4">
-              NVT Stopping by The Woods written something
-            </h2>
+      <Carousel {...options} className="rounded-md ">
+        <div className="relative mr-2 mb-[80px] cursor-pointer">
+          <div
+            style={{
+              backgroundImage: `url(/cover.jpg)`,
+            }}
+            className={`absolute top-0 left-0 bg-no-repeat bg-cover bg-center rounded-md  w-full h-[100%] blur-[4px] `}
+          ></div>
+          <div className="relative z-10 ">
+            <img
+              className=" mx-auto rounded-md h-[200px] object-cover max-w-[100%]"
+              src="/cover.jpg"
+              alt="post img"
+            />
+            <div className="absolute top-[100%] border w-full p-3 bg-white rounded-b-md text-start">
+              <h2 className="overflow-hidden font-semibold leading-4 text-heading-color whitespace-nowrap text-ellipsis">
+                NVT Stopping by The Woods written something
+              </h2>
+              <span className="font-semibold text-heading-color">$837</span>
+            </div>
           </div>
         </div>
-        <div className="relative mr-2 cursor-pointer mb-[50px]">
-          <img src="/cover.jpg" className="rounded-md  object-cover" />
-          <div className="  z-10 p-3 text-start bg-white">
-            <h2 className="font-bold sm:text-lg  leading-4">
-              NVT Stopping by The Woods written something
-            </h2>
+        <div className="relative mr-2 mb-[80px] cursor-pointer">
+          <div
+            style={{
+              backgroundImage: `url(/cover.jpg)`,
+            }}
+            className={`absolute top-0 left-0 bg-no-repeat bg-cover bg-center rounded-md  w-full h-[100%] blur-[4px] `}
+          ></div>
+          <div className="relative z-10 ">
+            <img
+              className=" mx-auto rounded-md h-[200px] object-cover max-w-[100%]"
+              src="/cover.jpg"
+              alt="post img"
+            />
+            <div className="absolute top-[100%] border w-full p-3 bg-white rounded-b-md text-start">
+              <h2 className="overflow-hidden font-semibold leading-4 text-heading-color whitespace-nowrap text-ellipsis">
+                NVT Stopping by The Woods written something
+              </h2>
+              <span className="font-semibold text-heading-color">$837</span>
+            </div>
           </div>
         </div>
-        <div className="relative mr-2 cursor-pointer mb-[50px]">
-          <img src="/cover.jpg" className="rounded-md  object-cover" />
-          <div className="  z-10 p-3 text-start bg-white">
-            <h2 className="font-bold sm:text-lg  leading-4">
-              NVT Stopping by The Woods written something
-            </h2>
+        <div className="relative mr-2 mb-[80px] cursor-pointer">
+          <div
+            style={{
+              backgroundImage: `url(/cover.jpg)`,
+            }}
+            className={`absolute top-0 left-0 bg-no-repeat bg-cover bg-center rounded-md  w-full h-[100%] blur-[4px] `}
+          ></div>
+          <div className="relative z-10 ">
+            <img
+              className=" mx-auto rounded-md h-[200px] object-cover max-w-[100%]"
+              src="/cover.jpg"
+              alt="post img"
+            />
+            <div className="absolute top-[100%] border w-full p-3 bg-white rounded-b-md text-start">
+              <h2 className="overflow-hidden font-semibold leading-4 text-heading-color whitespace-nowrap text-ellipsis">
+                NVT Stopping by The Woods written something
+              </h2>
+              <span className="font-semibold text-heading-color">$837</span>
+            </div>
           </div>
         </div>
       </Carousel>
