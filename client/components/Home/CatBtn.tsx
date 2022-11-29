@@ -20,6 +20,8 @@ const CatButton = () => {
     showIndicators: false,
     selectedItem: 1,
     centerSlidePercentage: 30,
+    swipeScrollTolerance: 50,
+    preventMovementUntilSwipeScrollTolerance: true,
     onChange: handleChange,
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (

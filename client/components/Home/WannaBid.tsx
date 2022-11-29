@@ -7,6 +7,7 @@ import { useScrollDir } from "../../utils/ScrollDir";
 import Link from "next/link";
 import CloseBtn from "../layout/CloseBtn";
 import React from "react";
+import { BiCategoryAlt } from "react-icons/bi";
 
 const WannaBid = () => {
   const { dispatch } = GlobalStates();
@@ -66,20 +67,20 @@ const WannaBid = () => {
                 <span>Chittagong</span>
               </div>
               <div className="flex items-center gap-1 ">
-                <GoLocation />
-                <span>Chittagong</span>
+                <BiCategoryAlt />
+                <span>Category</span>
               </div>
             </div>
-            <div className=" ">
-              <div className="flex text-xs font-semibold leading-5">
+            <div className="sm:text-xs text-sm">
+              <div className="flex font-semibold leading-5">
                 <h4 className="w-[150px] ">Current Price</h4>
                 <h4>Tk 154</h4>
               </div>
-              <div className="flex text-xs font-semibold leading-3">
+              <div className="flex  font-semibold leading-3">
                 <h4 className="w-[150px]">Bid standing price</h4>
                 <h4>Tk 50</h4>
               </div>
-              <div className="flex items-center text-xs font-semibold leading-5 mt-2 mb-1">
+              <div className="flex items-center font-semibold leading-5 mt-2 mb-1">
                 <h4 className="w-[150px] whitespace-nowrap">Your Price</h4>
                 <button className="p-2 mr-2 border border-gray-300 rounded-md whitespace-nowrap bg-white">
                   {" "}

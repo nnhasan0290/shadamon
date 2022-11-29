@@ -36,7 +36,7 @@ const BiggestPost = () => {
             <div className="bg-[url('/cover.jpg')] absolute top-0 left-0 rounded-md  w-full h-[100%] blur-[4px]"></div>
             <div className="relative z-10">
               <img
-                className=" mx-auto rounded-md h-[263px] max-w-[100%] object-cover sm:object-contain"
+                className=" mx-auto rounded-md h-[253px] max-w-[100%] object-cover sm:object-contain"
                 src="/cover.jpg"
                 alt="post img"
               />

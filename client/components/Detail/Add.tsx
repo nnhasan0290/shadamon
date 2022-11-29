@@ -91,45 +91,45 @@ const Add = () => {
         <div className="flex items-center justify-around gap-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsTelephone size={22} />
+              <BsTelephone size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">Call Seller</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <FaPeopleCarry size={22} />
+              <FaPeopleCarry size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">Order now</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsPinterest size={22} />
+              <BsPinterest size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Offer</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsFillChatDotsFill size={22} />
+              <BsFillChatDotsFill size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">Chat/ Msg</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <RiMailSendFill size={22} />
+              <RiMailSendFill size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Biodata</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <FaEye size={22} />
+              <FaEye size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">See Code</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsFillTelephoneInboundFill size={22} />
+              <BsFillTelephoneInboundFill size={30} />
             </div>
             <span className="w-[40px] leading-3 text-center">
               Callback Request

@@ -17,6 +17,8 @@ const CatProduct = () => {
     showIndicators: false,
     selectedItem: 1,
     centerSlidePercentage: 33,
+    swipeScrollTolerance: 50,
+    preventMovementUntilSwipeScrollTolerance: true,
     onChange: handleChange,
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
@@ -45,10 +47,9 @@ const CatProduct = () => {
   };
   return (
     <div className="bg-white rounded-md">
-      <div className="font-semibold p-2 flex items-center justify-between text-sm">
-        <h2 className="font-bold sm:text-lg text-sm">Electric & Electronics</h2>
+      <div className="font-semibold p-2 flex items-center justify-between">
+        <h2 className="font-semibold text-sm">Electric & Electronics</h2>
         <h2>All Categories</h2>
-        <h2>Another category</h2>
       </div>
       <Carousel
         {...options}
@@ -62,8 +63,8 @@ const CatProduct = () => {
           <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
             Pant with Black color thei en ieeo fo ie
           </p>
-          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 ">
+            <h2 className="whitespace-nowrap text-sm">$256</h2>
             <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
@@ -78,8 +79,8 @@ const CatProduct = () => {
           <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
             Pant with Black color thei en ieeo fo ie
           </p>
-          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 ">
+            <h2 className="whitespace-nowrap text-sm">$256</h2>
             <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
@@ -94,8 +95,8 @@ const CatProduct = () => {
           <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
             Pant with Black color thei en ieeo fo ie
           </p>
-          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 ">
+            <h2 className="whitespace-nowrap text-sm">$256</h2>
             <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
@@ -110,8 +111,8 @@ const CatProduct = () => {
           <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
             Pant with Black color thei en ieeo fo ie
           </p>
-          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 ">
+            <h2 className="whitespace-nowrap text-sm">$256</h2>
             <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>
@@ -126,8 +127,8 @@ const CatProduct = () => {
           <p className="whitespace-nowrap text-ellipsis relative overflow-hidden fnt-semibold p-1 leading-3 pt-3">
             Pant with Black color thei en ieeo fo ie
           </p>
-          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 font-semibold">
-            <h2 className="font-bold whitespace-nowrap text-sm">$256</h2>
+          <div className="flex justify-between border-b leading-3 border-b-gray-300 p-1 ">
+            <h2 className="whitespace-nowrap text-sm">$256</h2>
             <div className="flex sm:gap-2 items-center justify-center">
               <GoLocation />
               <span>Dhaka</span>

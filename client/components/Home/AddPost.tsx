@@ -5,13 +5,13 @@ const AddPost = () => {
     <div className="flex my-4 gap-2">
       <div className="basis-1/3  relative">
         <img
-          className="h-[250px] object-cover rounded-lg"
+          className="sm:h-[250px] h-[190px] object-cover rounded-lg"
           src="/cover.jpg"
           alt=""
         />
         <div className="absolute bottom-0 text-white p-2 py-6">
           <h2 className="leading-5 text-gray-300 font-semibold text-xs">
-            Ahmed Rubel <span className="font-normal italic">Post</span>
+            Ahmed Rubel
           </h2>
           <h2 className="leading-3 font-bold text-[11px] tracking-tighter">
             Want To sell Samsung Mobile from Dhaka
@@ -20,13 +20,13 @@ const AddPost = () => {
       </div>
       <div className="basis-1/3 relative">
         <img
-          className="h-[250px] object-cover rounded-lg"
+          className="sm:h-[250px] h-[190px] object-cover rounded-lg"
           src="/cover.jpg"
           alt=""
         />
         <div className="absolute bottom-0 text-white p-2 py-6">
           <h2 className="leading-5 text-gray-300 font-semibold text-xs">
-            Ahmed Rubel <span className="font-normal italic">Post</span>
+            Ahmed Rubel
           </h2>
           <h2 className="leading-3 font-bold text-[11px] tracking-tighter">
             Want To sell Samsung Mobile from Dhaka
@@ -35,7 +35,7 @@ const AddPost = () => {
       </div>
       <div className="basis-1/3 relative">
         <img
-          className="h-[250px] object-cover rounded-lg"
+          className="sm:h-[250px] h-[190px] object-cover rounded-lg"
           src="/cover.jpg"
           alt=""
         />
