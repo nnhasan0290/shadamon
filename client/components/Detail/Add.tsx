@@ -13,8 +13,6 @@ import {
 import { RiMailSendFill } from "react-icons/ri";
 import Link from "next/link";
 import DownCarousel from "./DownCarousel";
-import { useRouter } from "next/router";
-import { GlobalStates } from "../../context/ContextProvider";
 import MyCarousel from "./MyCarousel";
 
 const Add = () => {
@@ -88,48 +86,48 @@ const Add = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-around gap-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
+        <div className="flex items-center gap-5 px-2 py-4 my-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsTelephone size={30} />
+              <BsTelephone size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Call Seller</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <FaPeopleCarry size={30} />
+              <FaPeopleCarry size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Order now</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsPinterest size={30} />
+              <BsPinterest size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Offer</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsFillChatDotsFill size={30} />
+              <BsFillChatDotsFill size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Chat/ Msg</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <RiMailSendFill size={30} />
+              <RiMailSendFill size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Biodata</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <FaEye size={30} />
+              <FaEye size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">See Code</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
-              <BsFillTelephoneInboundFill size={30} />
+              <BsFillTelephoneInboundFill size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">
               Callback Request

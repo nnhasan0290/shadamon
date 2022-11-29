@@ -16,7 +16,7 @@ const DownCarousel = () => {
     centerMode: true,
     showIndicators: false,
     selectedItem: 0,
-    centerSlidePercentage: 80,
+    centerSlidePercentage: 85,
     swipeScrollTolerance: 50,
     preventMovementUntilSwipeScrollTolerance: true,
     onChange: handleChange,
