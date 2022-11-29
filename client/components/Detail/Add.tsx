@@ -15,6 +15,7 @@ import Link from "next/link";
 import DownCarousel from "./DownCarousel";
 import { useRouter } from "next/router";
 import { GlobalStates } from "../../context/ContextProvider";
+import MyCarousel from "./MyCarousel";
 
 const Add = () => {
   const router = useRouter();
@@ -23,41 +24,24 @@ const Add = () => {
   const handleChange = (a: number, b: any) => {
     setSelected(a);
   };
-  const options = {
-    showStatus: false,
-    showIndicators: false,
-    selectedItem: 0,
-    onChange: handleChange,
-  };
   return (
-    <main className=" bg-white rounded-md sm:w-[500px] w-full overflow-scroll sm:p-2 ">
+    <main className=" bg-white rounded-md sm:w-[500px] w-full sm:p-2 ">
       <div className="border">
         <div className="relative ">
-          {/* <div
-            className="absolute top-2 right-2 p-2 ml-auto text-xl nav__icon z-10 "
-            onClick={() => {
-              dispatch({ type: "CLEAR DETAIL" });
-            }}
-          >
-            <svg
-              className="h-[25px] w-[25px] "
-              fill="#5a5a5a"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-            >
-              <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
-            </svg>
-          </div> */}
-          <div className="absolute top-2 left-2 p-2 ml-auto text-sm bg-white border-x-4 border-x-common-color  z-10">
+          {/* <div className="absolute z-10 p-2 ml-auto text-sm bg-white top-2 left-2 border-x-4 border-x-common-color">
             <h2 className="text-lg leading-3">URGENT</h2>
             <p className="text-common-gray">Sell Product</p>
-          </div>
-          <Carousel
-            {...options}
-            className="  rounded-md relative pb-3  font-bold overflow-visible"
-          >
+          </div> */}
+          <MyCarousel>
             <div className="rounded-md">
               <img src="/cover.jpg" alt="" className="rounded-md" />
+            </div>
+            <div className="rounded-md">
+              <img
+                src="https://images.unsplash.com/photo-1669672475334-d93fd9e151e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+                alt=""
+                className="rounded-md"
+              />
             </div>
             <div className="rounded-md">
               <img src="/cover.jpg" alt="" className="rounded-md" />
@@ -68,19 +52,16 @@ const Add = () => {
             <div className="rounded-md">
               <img src="/cover.jpg" alt="" className="rounded-md" />
             </div>
-            <div className="rounded-md">
-              <img src="/cover.jpg" alt="" className="rounded-md" />
-            </div>
-          </Carousel>
+          </MyCarousel>
         </div>
 
         <div className="px-3 ">
-          <div className="flex gap-2 items-center ">
-            <span className="leading-3 text-xs bg-yellow-300 text-white p-1 rounded-md">
+          <div className="flex items-center gap-2 ">
+            <span className="p-1 text-xs leading-3 text-white bg-yellow-300 rounded-md">
               Ad
             </span>
             <p className="leading-4">1 day ago Bashundhara, Dhaka</p>
-            <button className="border font-bold rounded-lg px-2 whitespace-nowrap">
+            <button className="px-2 font-bold border rounded-lg whitespace-nowrap">
               View More
             </button>
           </div>
@@ -95,61 +76,61 @@ const Add = () => {
           <hr className="w-full h-2px bg-common-gray" />
         </div>
 
-        <div className="shadow-md p-3 m-3 rounded-lg border">
-          <span className="font-semibold pl-3">Send seller a message </span>
+        <div className="p-3 m-3 border rounded-lg shadow-md">
+          <span className="pl-3 font-semibold">Send seller a message </span>
           <div className="flex">
             <input
-              className="border rounded-full placeholder:text-common-gray pl-3 bg-gray-300"
+              className="pl-3 bg-gray-300 border rounded-full placeholder:text-common-gray"
               placeholder="Is this still available?"
               type="text"
             />
-            <button className="border bg-common-color text-white px-2 rounded-md">
+            <button className="px-2 text-white border rounded-md bg-common-color">
               Send
             </button>
           </div>
         </div>
 
-        <div className="text-sm tracking-tight flex gap-3 items-center overflow-y-hidden overflow-x-scroll justify-around flex-nowrap text-common-gray">
+        <div className="flex items-center justify-around gap-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <BsTelephone size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">Call Seller</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <FaPeopleCarry size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">Order now</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <BsPinterest size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Offer</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <BsFillChatDotsFill size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">Chat/ Msg</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <RiMailSendFill size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Biodata</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <FaEye size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">See Code</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="bg-common-color text-white p-2 rounded-full">
+            <div className="p-2 text-white rounded-full bg-common-color">
               <BsFillTelephoneInboundFill size={22} />
             </div>
             <span className="w-[40px] leading-3 text-center">
@@ -162,28 +143,28 @@ const Add = () => {
           <hr className="w-full h-2px bg-common-gray" />
         </div>
 
-        <div className="mx-3 flex items-center justify-between">
-          <div className="flex gap-2 items-center">
+        <div className="flex items-center justify-between mx-3">
+          <div className="flex items-center gap-2">
             <img
               className="w-[50px] h-[50px] rounded-full object-cover"
               alt=""
               src="/cover.jpg"
             />
             <div>
-              <h2 className="leading-3 text-lg font-semibold flex">
+              <h2 className="flex text-lg font-semibold leading-3">
                 Karuna Real Estate{" "}
                 <span className="text-common-color">
                   <AiFillCheckCircle />
                 </span>
               </h2>
-              <p className="leading-5 font-semibold italic">5 Seller</p>
-              <p className="leading-3 text-common-gray italic">
+              <p className="italic font-semibold leading-5">5 Seller</p>
+              <p className="italic leading-3 text-common-gray">
                 11520 people are connected
               </p>
             </div>
           </div>
           <div>
-            <button className="border rounded-md text-blue-500 px-2 whitespace-nowrap">
+            <button className="px-2 text-blue-500 border rounded-md whitespace-nowrap">
               View Shop
             </button>
           </div>
@@ -195,15 +176,15 @@ const Add = () => {
 
         <div className="px-3">
           <div className="flex justify-between font-bold">
-            <div className="flex gap-2 items-center">
-              <button className="border px-2 rounded-md">Detail</button>
+            <div className="flex items-center gap-2">
+              <button className="px-2 border rounded-md">Detail</button>
               <h2>Shipping, Returns & Safety</h2>
             </div>
             <div>
               <BiChevronDown size={25} />
             </div>
           </div>
-          <div className="flex flex-wrap gap-3 py-3 text-sm leading-3 m-0">
+          <div className="flex flex-wrap gap-3 py-3 m-0 text-sm leading-3">
             <p className="">Condition: Used,</p>
             <p className="">Condition: Used,</p>
             <p className="">Condition: Used,</p>
@@ -220,7 +201,7 @@ const Add = () => {
               Clock Speed 3.50GHz (3MB Cache... <Link href="#">See More </Link>{" "}
             </p>
           </div>
-          <div className="my-2 px-2">
+          <div className="px-2 my-2">
             <hr className="w-full h-2px bg-common-gray" />
           </div>
           <div className="">
@@ -232,19 +213,19 @@ const Add = () => {
                 <BiChevronDown size={25} />
               </div>
             </div>
-            <div className="flex items-center gap-2  text-sm">
+            <div className="flex items-center gap-2 text-sm">
               <div>
                 <FaTruckMoving />
               </div>
               <p>This Merchant can ship to BD</p>
             </div>
-            <div className="flex items-center gap-2  text-sm">
+            <div className="flex items-center gap-2 text-sm">
               <div>
                 <FaTruckMoving />
               </div>
               <p>This Merchant can ship to BD</p>
             </div>
-            <div className="flex items-center gap-2  text-sm">
+            <div className="flex items-center gap-2 text-sm">
               <div>
                 <FaTruckMoving />
               </div>
@@ -252,7 +233,7 @@ const Add = () => {
             </div>
           </div>
 
-          <div className="my-2 px-2">
+          <div className="px-2 my-2">
             <hr className="w-full h-2px bg-common-gray" />
           </div>
 
@@ -261,7 +242,7 @@ const Add = () => {
               <h2>People Bidding </h2>
             </div>
 
-            <div className="flex items-center gap-2  text-sm mbs-1 font-bold border-b py-1">
+            <div className="flex items-center gap-2 py-1 text-sm font-bold border-b mbs-1">
               <div className="basis-1/5"></div>
 
               <p className="basis-2/5">Bidder</p>
@@ -270,7 +251,7 @@ const Add = () => {
               <p className="basis-1/5">Unit Price</p>
             </div>
 
-            <div className="flex items-center gap-2  text-sm mb-1 border-b py-1 font-semibold text-common-gray">
+            <div className="flex items-center gap-2 py-1 mb-1 text-sm font-semibold border-b text-common-gray">
               <div className="basis-1/5">
                 <img
                   src="/cover.jpg"
@@ -283,7 +264,7 @@ const Add = () => {
               <p className="basis-1/5">01/01/22</p>
               <p className="basis-1/5">3379</p>
             </div>
-            <div className="flex items-center gap-2  text-sm mb-1 border-b py-1 font-semibold text-common-gray">
+            <div className="flex items-center gap-2 py-1 mb-1 text-sm font-semibold border-b text-common-gray">
               <div className="basis-1/5">
                 <img
                   src="/cover.jpg"
@@ -299,7 +280,7 @@ const Add = () => {
           </div>
         </div>
 
-        <div className="my-2 px-2">
+        <div className="px-2 my-2">
           <hr className="w-full h-2px bg-common-gray" />
         </div>
 
