@@ -17,6 +17,7 @@ const ConnectSlider = () => {
     showIndicators: false,
     selectedItem: 0,
     centerSlidePercentage: 33.33,
+    emulateTouch: true,
     onChange: handleChange,
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
