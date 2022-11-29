@@ -21,7 +21,7 @@ const DownCarousel = () => {
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
         <span
-          className={`arrow-left absolute top-[30%] bg-common-color p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white ${
+          className={`arrow-left absolute top-[40%] bg-common-color p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white ${
             selected === 0 && "hidden"
           }`}
           onClick={clickHandler}
@@ -33,7 +33,7 @@ const DownCarousel = () => {
     renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
       return (
         <span
-          className={`arrow-right absolute top-[30%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white ${
+          className={`arrow-right absolute top-[40%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white ${
             selected === 2 && "hidden"
           }`}
           onClick={clickHandler}

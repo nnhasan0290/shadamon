@@ -44,7 +44,7 @@ const SmallestAd = () => {
                 <span className="text-common-gray">seller</span>
               </div>
               <h2 className="capitalize font-semibold w-[85%] leading-4  text-sm">
-                oxygen taipai NTU Oxygen Goggoon Taipei
+                oxygen taipai NTU Oxygen
               </h2>
               <div className="flex gap-3 text-xs font-semibold text-common-gray">
                 <div className="flex items-center gap-1 ">
@@ -58,7 +58,7 @@ const SmallestAd = () => {
               </div>
               <div className="flex justify-between">
                 <h2 className="font-bold ">$5353</h2>
-                <span className="pr-5 font-semibold capitalize text-common-gray">
+                <span className="pr-5 text-sm capitalize text-common-gray">
                   just now
                 </span>
               </div>

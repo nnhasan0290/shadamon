@@ -22,7 +22,7 @@ const Add = () => {
   const [showDes, setShowDes] = useState(true);
   const [showShipping, setShowShipping] = useState(true);
   return (
-    <main className=" bg-white rounded-md sm:w-[500px] w-full sm:p-2 ">
+    <main className=" bg-white rounded-md sm:w-[500px] w-full shadow-xl">
       <div className="">
         <div className="relative ">
           <MyCarousel>

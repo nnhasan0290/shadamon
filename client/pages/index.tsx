@@ -34,7 +34,7 @@ export default function Home() {
           <div className=" w-[250px] hidden lg:block">
             <CategoryArea />
           </div>
-          <div className="  middle-body mb-[150px]">
+          <div className="  middle-body mb-[50px]">
             <CategoryLocation />
             <BiggestPost />
             <SearchSome />

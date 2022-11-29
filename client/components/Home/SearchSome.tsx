@@ -8,7 +8,7 @@ const SearchSome = () => {
           <BiSearch />
         </div>
       </div>
-      <p className="text-lg font-semibold">
+      <p className="leading-5 font-semibold">
         What Are You looking for today? Find it near you.
       </p>
     </div>

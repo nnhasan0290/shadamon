@@ -22,7 +22,7 @@ export default function ({ id, setState, state }: any) {
           </div>
         </Link>
       </div>
-      <div className="flex justify-between translate-y-[-90%] bg-white pb-3">
+      <div className="flex justify-between translate-y-[-90%] mb-[-30px] bg-white pb-3">
         <div className="w-[50%]  flex items-center justify-end pr-[60px] gap-2  bg-white">
           <div className="inline-block border rounded-full bg-muted-color">
             <BsExclamation size={25} />

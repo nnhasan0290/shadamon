@@ -48,9 +48,10 @@ const CatButton = () => {
   };
   return (
     <div className=" bg-white rounded-md p-3">
-      <div className="flex items-center gap-2 text-common-gray font-semibold p-2 px-5">
-        <FaHands />
-        <span>See Product from your suitable category</span>
+      <div className="flex items-center gap-2 text-common-gray  p-2 px-5">
+        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+          See Product from your suitable category
+        </span>
       </div>
       <Carousel
         {...options}

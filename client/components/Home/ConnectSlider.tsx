@@ -16,13 +16,13 @@ const ConnectSlider = () => {
     centerMode: true,
     showIndicators: false,
     selectedItem: 0,
-    centerSlidePercentage: 43,
+    centerSlidePercentage: 33.33,
     onChange: handleChange,
     renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
       return (
         <span
-          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0  translate-x-[-50%] z-10 translate-y-[-50%] cursor-pointer text-white ${
-            selected === 0 && "hidden"
+          className={`arrow-left absolute top-[50%] bg-common-color p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white ${
+            selected <= 1 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -33,8 +33,8 @@ const ConnectSlider = () => {
     renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
       return (
         <span
-          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white translate-x-[50%] ${
-            selected === 3 && "hidden"
+          className={`arrow-right absolute top-[50%] bg-common-color p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white ${
+            selected >= 2 && "hidden"
           }`}
           onClick={clickHandler}
         >
@@ -45,15 +45,12 @@ const ConnectSlider = () => {
   };
   return (
     <div className="p-3 bg-white rounded-lg my-4">
-      <div className="font-bold flex justify-between items-center mb-2">
-        <h2>Connect With Best Sellers</h2>
+      <div className=" flex justify-between items-center mb-2">
+        <h2 className="text-smallest-color">Connect With Best Sellers</h2>
         <button>View All</button>
       </div>
-      <Carousel
-        {...options}
-        className="  rounded-md relative mr-2 overflow-visible"
-      >
-        <div className="rounded-md flex items-center justify-center flex-col mr-2">
+      <Carousel {...options} className=" rounded-md relative ">
+        <div className="rounded-md flex items-center justify-center flex-col mr-1">
           <div className="flex items-center justify-center flex-col ">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
@@ -63,19 +60,22 @@ const ConnectSlider = () => {
               />
             </div>
           </div>
-          <div className=" font-semibold">
-            <p className="text-[10px] leading-3"> 123 people are connected</p>
-            <h2 className="font-bold">Atik Traders</h2>
+          <div className=" ">
+            <p className="text-[10px] leading-3">
+              {" "}
+              123 <span className="max-sm:hidden">people</span> connected
+            </p>
+            <h2 className="">Atik Traders</h2>
             <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
             <p className="text-xs leading-4">Dhaka</p>
-            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+            <button className="text-blue-400 border-blue-400 rounded-full px-4 border-2">
               Connect
             </button>
           </div>
         </div>
-        <div className="rounded-md flex items-center justify-center flex-col mr-2">
+        <div className="rounded-md flex items-center justify-center flex-col mr-1">
           <div className="flex items-center justify-center flex-col ">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
@@ -85,19 +85,22 @@ const ConnectSlider = () => {
               />
             </div>
           </div>
-          <div className=" font-semibold">
-            <p className="text-[10px] leading-3"> 123 people are connected</p>
-            <h2 className="font-bold">Atik Traders</h2>
+          <div className=" ">
+            <p className="text-[10px] leading-3">
+              {" "}
+              123 <span className="max-sm:hidden">people</span> connected
+            </p>
+            <h2 className="">Atik Traders</h2>
             <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
             <p className="text-xs leading-4">Dhaka</p>
-            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+            <button className="text-blue-400 border-blue-400 rounded-full px-4 border-2">
               Connect
             </button>
           </div>
         </div>
-        <div className="rounded-md flex items-center justify-center flex-col mr-2">
+        <div className="rounded-md flex items-center justify-center flex-col mr-1">
           <div className="flex items-center justify-center flex-col ">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
@@ -107,19 +110,22 @@ const ConnectSlider = () => {
               />
             </div>
           </div>
-          <div className=" font-semibold">
-            <p className="text-[10px] leading-3"> 123 people are connected</p>
-            <h2 className="font-bold">Atik Traders</h2>
+          <div className=" ">
+            <p className="text-[10px] leading-3">
+              {" "}
+              123 <span className="max-sm:hidden">people</span> connected
+            </p>
+            <h2 className="">Atik Traders</h2>
             <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
             <p className="text-xs leading-4">Dhaka</p>
-            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+            <button className="text-blue-400 border-blue-400 rounded-full px-4 border-2">
               Connect
             </button>
           </div>
         </div>
-        <div className="rounded-md flex items-center justify-center flex-col mr-2">
+        <div className="rounded-md flex items-center justify-center flex-col mr-1">
           <div className="flex items-center justify-center flex-col ">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
@@ -129,14 +135,17 @@ const ConnectSlider = () => {
               />
             </div>
           </div>
-          <div className=" font-semibold">
-            <p className="text-[10px] leading-3"> 123 people are connected</p>
-            <h2 className="font-bold">Atik Traders</h2>
+          <div className=" ">
+            <p className="text-[10px] leading-3">
+              {" "}
+              123 <span className="max-sm:hidden">people</span> connected
+            </p>
+            <h2 className="">Atik Traders</h2>
             <p className="w-[70%] leading-3 whitespace-nowrap text-xs mx-auto relative overflow-hidden text-ellipsis">
               Electronics & servicing
             </p>
             <p className="text-xs leading-4">Dhaka</p>
-            <button className=" border-blue-400 rounded-full px-2 py-1 border-2">
+            <button className="text-blue-400 border-blue-400 rounded-full px-4 border-2">
               Connect
             </button>
           </div>

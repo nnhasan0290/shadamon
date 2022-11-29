@@ -74,7 +74,7 @@ export default function ({ children }: any) {
           </Carousel>
         </div>
       )}
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-lg">
         <div
           style={{
             backgroundImage: `url(${children[selected].props.children.props.src})`,
