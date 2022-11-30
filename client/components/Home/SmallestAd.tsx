@@ -14,10 +14,10 @@ const SmallestAd = () => {
   const isScrollTop = useScrollDir();
 
   return (
-    <div id="freePost">
+    <div id="freePost" className="">
       {showDetails ? (
         <>
-          <div className="mt-[50px] lg:mt-0">
+          <div className="mt-[50px] lg:mt-0 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
             <Add />
           </div>
           <CloseBtn
@@ -32,7 +32,7 @@ const SmallestAd = () => {
           scroll={false}
           onClick={() => setShowDetails(!showDetails)}
         >
-          <div className="flex items-center my-4 gap-2 bg-white rounded-md h-[100px] overflow-hidden">
+          <div className="flex items-center my-4 shadow-xl gap-2 bg-white rounded-md h-[100px] overflow-hidden">
             <img
               src="/cover.jpg"
               alt=""

@@ -2,7 +2,7 @@ import { BiSearch } from "react-icons/bi";
 
 const SearchSome = () => {
   return (
-    <div className="flex p-2 px-4 items-center gap-3 bg-white rounded-lg my-4">
+    <div className="flex shadow-xl p-2 px-4 items-center gap-3 bg-white rounded-lg my-4">
       <div className="flex bg-blue-500 p-2 rounded-lg">
         <div className="p-1 border rounded-full bg-white">
           <BiSearch />

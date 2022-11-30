@@ -20,7 +20,7 @@ const Add = () => {
   const [showDes, setShowDes] = useState(true);
   const [showShipping, setShowShipping] = useState(true);
   return (
-    <main className=" bg-white rounded-md sm:w-[500px] w-full shadow-xl">
+    <main className=" bg-white rounded-md sm:w-[500px] w-full ">
       <div className="">
         <div className="relative ">
           <MyCarousel>
@@ -86,7 +86,7 @@ const Add = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 px-2 py-4 my-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
+        <div className="flex items-center gap-5 pl-4 py-4  my-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="p-2 text-black rounded-full bg-smallest-color">
               <BsTelephone size={36} />

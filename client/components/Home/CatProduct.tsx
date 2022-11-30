@@ -46,7 +46,7 @@ const CatProduct = () => {
     },
   };
   return (
-    <div className="bg-white rounded-md">
+    <div className="bg-white rounded-md shadow-xl">
       <div className="font-semibold p-2 flex items-center justify-between">
         <h2 className="font-semibold text-sm">Electric & Electronics</h2>
         <h2>All Categories</h2>

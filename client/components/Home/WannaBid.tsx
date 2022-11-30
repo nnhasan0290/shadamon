@@ -15,10 +15,10 @@ const WannaBid = () => {
   const isScrollTop = useScrollDir();
 
   return (
-    <div id="wannaBid">
+    <div id="wannaBid" className="">
       {showDetails ? (
         <>
-          <div className="mt-[50px] lg:mt-0">
+          <div className="mt-[50px] lg:mt-0 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
             <Add />
           </div>
           <CloseBtn
@@ -28,7 +28,7 @@ const WannaBid = () => {
           />
         </>
       ) : (
-        <div className="relative flex gap-4 my-2 rounded-md mb-[150px]">
+        <div className="relative flex gap-4 my-2 rounded-md mb-[150px] shadow-xl">
           <div className="relative">
             <img
               src="/cover.jpg"
@@ -57,7 +57,7 @@ const WannaBid = () => {
             </div>
             <p className="text-xs leading-3">Fri Feb 8, 2022 at 07:54pm</p>
           </div>
-          <div className="h-[158px] py-2 pl-4 pr-2 rounded-md  bg-white absolute w-[98%] right-0 top-[80%]">
+          <div className="h-[158px] py-2 pl-4 shadow-xl pr-2 rounded-md  bg-white absolute w-[98%] right-0 top-[80%]">
             <h2 className="capitalize font-semibold w-[70%] leading-4 ">
               new Super fit it for sale in mailbug dhaka for super cor edition
             </h2>

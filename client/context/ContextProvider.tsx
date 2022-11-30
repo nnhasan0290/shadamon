@@ -1,35 +1,34 @@
 import { useSession } from "next-auth/react";
 import React, { useReducer, useContext, useState, useEffect } from "react";
+import PostAdd from "../components/Home/PostAdd";
+import SignUp from "../components/Home/Signup";
 
 const GlobalContext: any = React.createContext({});
 
-const reducer = (state: any, action: any) => {
+const initialState = {
+  modalOpen: true,
+  component: <SignUp />,
+};
+
+const reducer = (state: object, action: any) => {
   switch (action.type) {
-    case "BIG POST DETAIL":
-      return true;
-    case "CLEAR DETAIL":
-      return false;
+    case "CLEAR_MODAL":
+      return { modalOpen: false };
     default:
       return state;
   }
 };
 
 const ContextProvider = ({ children }: any) => {
-  const [showModal, setShowModal] = useState(false);
-  const [detailState, dispatch] = useReducer(reducer, false);
-  const [signState, setSignState] = useState("SIGNUP");
   const { status } = useSession();
+  const [modalState, modalDispatch] = useReducer(reducer, initialState);
 
   return (
     <GlobalContext.Provider
       value={{
-        showModal,
-        setShowModal,
-        signState,
-        setSignState,
+        modalState,
+        modalDispatch,
         status,
-        detailState,
-        dispatch,
       }}
     >
       {children}

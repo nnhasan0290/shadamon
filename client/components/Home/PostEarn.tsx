@@ -4,10 +4,12 @@ import { FaHands } from "react-icons/fa";
 
 const PostEarn = () => {
   return (
-    <div className="my-4 bg-gray-300 rounded-lg border">
+    <div className="my-4 bg-gray-300 rounded-lg border shadow-xl">
       <div className="flex items-center gap-2 text-common-gray p-2 px-5 bg-white rounded-t-lg">
         <FaHands />
-        <span className="whitespace-nowrap overflow-hidden text-ellipsis">This place is for you . Start selling & Get Bonus!</span>
+        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+          This place is for you . Start selling & Get Bonus!
+        </span>
       </div>
       <div className="relative">
         <img
@@ -19,7 +21,9 @@ const PostEarn = () => {
       <div className="px-5 py-3  rounded-b-md  flex items-center ">
         <div className="flex items-center justify-between w-[65%] mb-2">
           <div className="">
-            <h2 className="font-semibold leading-5 text-lg text-heading-color">Post & Earn</h2>
+            <h2 className="font-semibold leading-5 text-lg text-heading-color">
+              Post & Earn
+            </h2>
             <p className=" text-sm text-common-gray capitalize leading-4 tracking-tight">
               Sell Your used or new Product Easily. Beside{" "}
               <span className="font-bold">

@@ -49,13 +49,13 @@ const NvtStop = () => {
     },
   };
   return (
-    <Carousel {...options} className="  rounded-md  mr-2  sm:mx-0 mx-5">
-      <div
-        className="relative mr-2 cursor-pointer mb-[50px]"
-        onClick={() => dispatch({ type: "BIG POST DETAIL" })}
-      >
+    <Carousel
+      {...options}
+      className=" rounded-md  mr-2 shadow-md my-4  sm:mx-0 mx-5"
+    >
+      <div className="relative mr-2 cursor-pointer mb-[50px]">
         <img src="/cover.jpg" className="rounded-md  object-cover" />
-        <div className="absolute bottom-0 left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
+        <div className="absolute bottom-0  left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img
             src="/cover.jpg"
             className="rounded-full absolute h-[65px] bg-white translate-y-[-50%] left-[39px]  top-0 border border-white"

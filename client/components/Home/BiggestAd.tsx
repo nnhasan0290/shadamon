@@ -14,10 +14,10 @@ const BiggestPost = () => {
   const [showDetails, setShowDetails] = useState(false);
   const isScrollTop = useScrollDir();
   return (
-    <div id="premiumPost">
+    <div id="premiumPost" className="">
       {showDetails ? (
         <>
-          <div className="mt-[50px] lg:mt-0">
+          <div className="mt-[50px] lg:mt-0 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
             <Add />
           </div>
           <CloseBtn
@@ -28,7 +28,7 @@ const BiggestPost = () => {
         </>
       ) : (
         <div
-          className={`relative w-full overflow-hidden rounded-md ${
+          className={`relative w-full overflow-hidden shadow-xl rounded-md ${
             isScrollTop && "mt-[50px]"
           } lg:mt-0`}
         >

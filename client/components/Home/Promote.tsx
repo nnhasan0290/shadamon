@@ -14,10 +14,10 @@ const Promote = () => {
   const isScrollTop = useScrollDir();
 
   return (
-    <div id="promote">
+    <div id="promote" className="">
       {showDetails ? (
         <>
-          <div className="mt-[50px] lg:mt-0">
+          <div className="mt-[50px] lg:mt-0 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
             <Add />
           </div>
           <CloseBtn
@@ -27,10 +27,12 @@ const Promote = () => {
           />
         </>
       ) : (
-        <div className="my-4">
+        <div className="my-4 shadow-xl">
           <div className="flex items-center gap-2 text-common-gray  p-2 px-5 bg-white rounded-t-lg">
             <FaHands />
-            <span className="whitespace-nowrap overflow-hidden relative text-ellipsis">See Product from your suitable category</span>
+            <span className="whitespace-nowrap overflow-hidden relative text-ellipsis">
+              See Product from your suitable category
+            </span>
           </div>
           <div className="relative">
             <img
@@ -39,7 +41,9 @@ const Promote = () => {
               alt=""
             />
             <div className=" font-semibold text-white absolute bottom-0 m-5 left-0 border-l-4 leading-5 pl-1 ">
-              <h2 className="sm:w-auto w-[280px] overflow-hidden whitespace-nowrap relative text-ellipsis">Samsung HD Television with Wifi &Bluetooth.</h2>
+              <h2 className="sm:w-auto w-[280px] overflow-hidden whitespace-nowrap relative text-ellipsis">
+                Samsung HD Television with Wifi &Bluetooth.
+              </h2>
               <h2>$47320</h2>
             </div>
           </div>

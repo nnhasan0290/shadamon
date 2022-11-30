@@ -9,7 +9,7 @@ export default function ({ id, setState, state }: any) {
   return (
     <>
       <div
-        className={`text-center transition-all duration-300 sticky  pb-2 z-10  lg:bottom-3 ${
+        className={`text-center transition-all duration-300 sticky   pb-2 z-10  lg:bottom-3 ${
           isScrollTop ? "bottom-[68px]" : "bottom-3"
         }  `}
         onClick={() => {
@@ -22,7 +22,7 @@ export default function ({ id, setState, state }: any) {
           </div>
         </Link>
       </div>
-      <div className="flex justify-between translate-y-[-90%] mb-[-30px] bg-white pb-3">
+      <div className="flex justify-between translate-y-[-90%] mb-[-30px] rounded-md bg-white pb-3">
         <div className="w-[50%]  flex items-center justify-end pr-[60px] gap-2  bg-white">
           <div className="inline-block border rounded-full bg-muted-color">
             <BsExclamation size={25} />

@@ -2,7 +2,7 @@ import { BiPlus } from "react-icons/bi";
 
 const AddPost = () => {
   return (
-    <div className="flex my-4 gap-2">
+    <div className="flex my-4 gap-2 shadow-xl">
       <div className="basis-1/3  relative">
         <img
           className="sm:h-[250px] h-[190px] object-cover rounded-lg"

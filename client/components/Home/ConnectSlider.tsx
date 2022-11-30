@@ -46,7 +46,7 @@ const ConnectSlider = () => {
     },
   };
   return (
-    <div className="p-3 bg-white rounded-lg my-4">
+    <div className="p-3 bg-white rounded-lg my-4 shadow-xl">
       <div className=" flex justify-between items-center mb-2">
         <h2 className="text-smallest-color">Connect With Best Sellers</h2>
         <button>View All</button>
