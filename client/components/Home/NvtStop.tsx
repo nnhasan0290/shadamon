@@ -53,7 +53,7 @@ const NvtStop = () => {
       {...options}
       className=" rounded-md  mr-2 shadow-md my-4  sm:mx-0 mx-5"
     >
-      <div className="relative mr-2 cursor-pointer mb-[50px]">
+      <div className="relative mr-2 cursor-pointer mb-[70px]">
         <img src="/cover.jpg" className="rounded-md  object-cover" />
         <div className="absolute bottom-0  left-[50%] translate-x-[-50%] w-[85%] nvt__carousel rounded-md  ">
           <img
