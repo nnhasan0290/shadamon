@@ -28,7 +28,7 @@ const CategoryLocation = () => {
   }, [handleNavigation]);
   return (
     <div
-      className={`flex items-center justify-around shadow-2xl gap-5 sm:gap-10 bg-body-bg py-2 text-lg text-common-gray  rounded-b-lg mb-2 lg:static fixed w-full max-w-[500px] z-[100] transition-all duration-300 ${
+      className={`flex items-center justify-around shadow-xl gap-5 sm:gap-10 bg-body-bg py-2 text-lg text-common-gray  rounded-b-lg mb-2 lg:static fixed w-full max-w-[500px] z-[100] transition-all duration-300 ${
         !scrollTop ? "top-0" : "top-[48px]"
       }`}
     >

@@ -27,7 +27,7 @@ const Promote = () => {
           />
         </>
       ) : (
-        <div className="my-4 shadow-xl">
+        <div className="my-4 shadow-xl rounded-md">
           <div className="flex items-center gap-2 text-common-gray  p-2 px-5 bg-white rounded-t-lg">
             <FaHands />
             <span className="whitespace-nowrap overflow-hidden relative text-ellipsis">
