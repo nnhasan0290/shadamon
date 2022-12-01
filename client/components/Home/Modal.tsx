@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
 import { GlobalStates } from "../../context/ContextProvider";
-import ManualSignUp from "./ManualSignup";
-import SignUp from "./Signup";
-import PostAdd from "./PostAdd";
-import Dashboard from "./account/Dashboard";
 import Account from "./account/Account";
 
 const Modal = () => {
   //states
+  const {
+    modalState: { modalOpen, component },
+    modalDispatch,
+  } = GlobalStates();
+  console.log(modalOpen);
 
   const handleClick = (e: any) => {
     if (!e.target.closest(".modal")) {
+      modalDispatch({ type: "CLEAR_MODAL" });
     }
   };
 
@@ -23,13 +24,18 @@ const Modal = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 z-[130] flex items-end justify-center w-full h-screen bg-black/25 `}
+        className={`fixed top-0 left-0 z-[130] flex items-end justify-center w-full h-screen bg-black/25 ${
+          !modalOpen ? "hidden" : "block"
+        } `}
         onClick={handleClick}
       >
         <div className="w-[250px] hidden lg:block"></div>
         <div className="h-screen w-[500px] relative">
           <div className="bg-white modal  rounded-[15px] flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75vh] pb-5 w-full">
-            <div className="absolute p-2 ml-auto text-xl top-2 right-2 nav__icon">
+            <div
+              className="absolute p-2 ml-auto text-xl top-2 right-2 nav__icon"
+              onClick={() => modalDispatch({ type: "CLEAR_MODAL" })}
+            >
               <svg
                 className="h-[25px] w-[25px] "
                 fill="#5a5a5a"
