@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import React, { useReducer, useContext, useState, useEffect } from "react";
+import Dashboard from "../components/Home/account/Dashboard";
 import PostAdd from "../components/Home/PostAdd";
 import SignUp from "../components/Home/Signup";
 
@@ -7,7 +8,7 @@ const GlobalContext: any = React.createContext({});
 
 const initialState = {
   modalOpen: true,
-  component: <SignUp />,
+  component: <Dashboard />,
 };
 
 const reducer = (state: object, action: any) => {

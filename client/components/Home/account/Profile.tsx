@@ -1,0 +1,221 @@
+import { BiMinus, BiSave } from "react-icons/bi";
+import { BsPlus } from "react-icons/bs";
+import { FaCross } from "react-icons/fa";
+import { FcCancel } from "react-icons/fc";
+import { useRef } from "react";
+
+export default function () {
+  const cvRef = useRef<HTMLInputElement>(null);
+  return (
+    <div className="px-3">
+      <div className="mt-2">
+        <h2 className="mx-3 text-[13.5px] text-common-gray ">Profile</h2>
+        <div className="p-3 bg-white rounded-md shadow-lg">
+          <h2 className="text-sm text-smallest-color">BASIC INFORMATION</h2>
+          <form action="" className="">
+            <div className="flex flex-wrap items-center ">
+              <div className="basis-1/2">
+                <fieldset className="mb-2 mr-3 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Name</legend>
+                  <input
+                    className="p-2 pt-0"
+                    type="number"
+                    name=""
+                    id=""
+                    placeholder="Bebaha Support"
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Email</legend>
+                  <input
+                    className="p-2 pt-0"
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 mr-3 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Location</legend>
+                  <input
+                    className="p-2 pt-0"
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Sub Location</legend>
+                  <input
+                    className="p-2 pt-0"
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 mr-3 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">
+                    Mobile Verified
+                  </legend>
+                  <div className="flex items-center px-2">
+                    <input
+                      className="w-full p-2 pt-0 text-sm text-common-gray"
+                      type="text"
+                      name=""
+                      id=""
+                      placeholder=""
+                      value={"0183838948484"}
+                    />
+                    <span className="text-white bg-red-700 rounded-full">
+                      <BiMinus />
+                    </span>
+                  </div>
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">
+                    Add mobile number
+                  </legend>
+                  <div className="flex items-center px-2">
+                    <input
+                      className="w-full p-2 pt-0"
+                      type="text"
+                      name=""
+                      id=""
+                      placeholder=""
+                    />
+                    <span className="text-white bg-green-700 rounded-full">
+                      <BsPlus />
+                    </span>
+                  </div>
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 mr-3 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Date Of Birth</legend>
+                  <input
+                    className="p-2 pt-0 text-common-gray"
+                    type="date"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Education</legend>
+                  <input
+                    className="p-2 pt-0 "
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 mr-3 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Current Job</legend>
+                  <input
+                    className="p-2 pt-0 "
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">
+                    Job Experience
+                  </legend>
+                  <input
+                    className="p-2 pt-0 "
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 mr-3 border rounded-md ">
+                  <legend className="mx-3 leading-[12px]">Full Address</legend>
+                  <input
+                    className="p-2 pt-0 "
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder=""
+                  />
+                </fieldset>
+              </div>
+              <div className="basis-1/2">
+                <fieldset className="mb-2 border rounded-md ">
+                  <legend className="mx-3 text-[12px] leading-[15px]">
+                    Upload Cv(optional)
+                  </legend>
+
+                  <div
+                    className="flex items-center gap-2 p-1 text-common-gray"
+                    onClick={() => {
+                      cvRef.current?.click();
+                    }}
+                  >
+                    <span className="text-white rounded-full bg-common-gray">
+                      <BsPlus size={21} />
+                    </span>
+                    <span>cv pic max 30kb</span>
+                  </div>
+                  <input
+                    className="p-2 pt-0 "
+                    ref={cvRef}
+                    type="file"
+                    name=""
+                    id=""
+                    placeholder=""
+                    hidden
+                  />
+                </fieldset>
+              </div>
+            </div>
+            <div className="flex gap-1 my-2">
+              <button className="flex items-center w-full px-2 py-1 text-white rounded-sm bg-common-gray pl-[30%] cursor-pointer gap-1">
+                <span>
+                  <BiSave />
+                </span>
+                Save
+              </button>
+              <button className="flex items-center gap-1 px-2 py-1 text-white bg-red-700 rounded-sm">
+                <span>
+                  <svg
+                    className="h-[20px] w-[20px] "
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                  >
+                    <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
+                  </svg>
+                </span>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}

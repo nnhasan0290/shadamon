@@ -19,6 +19,7 @@ module.exports = {
         "heading-size": "17px",
         "smallest-color": "#00000060",
         "regular-border": "#6c757d",
+        "account-gray": "rgb(242, 243, 247)"
       },
     },
   },
