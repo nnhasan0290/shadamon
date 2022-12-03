@@ -13,8 +13,8 @@
   .nav__icon {
     @apply lg:bg-body-bg rounded-full text-[14px] w-[33px] h-[33px] flex items-center justify-center cursor-pointer bg-[#a3a3a3] capitalize text-black lg:text-[#5a5a5a];
   }
-  .nav__icon.active{
-  @apply  border-common-color border-2
+  .nav__icon.active {
+    @apply border-common-color border-2;
   }
 }
 
@@ -109,6 +109,29 @@ img {
 .MuiBox-root {
   padding: 0 !important;
 }
+
+.common__fieldset {
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  margin: 5px;
+}
+.common__fieldset legend {
+  width: 100px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  margin-left: 8px !important;
+}
+
+.common__fieldset input {
+  border: none !important;
+  padding-bottom:10px ;
+}
+.common__fieldset input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 @media screen and (max-width: 1024px) {
   .modal__cross {
     right: calc(50% - 265px) !important;

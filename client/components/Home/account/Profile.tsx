@@ -2,6 +2,7 @@ import { BiMinus, BiSave } from "react-icons/bi";
 import { BsPlus } from "react-icons/bs";
 import { HiPhotograph } from "react-icons/hi";
 import { useRef } from "react";
+import SellerInfo from "./SellerInfo";
 
 export default function () {
   const cvRef = useRef<HTMLInputElement>(null);
@@ -362,6 +363,7 @@ export default function () {
               </button>
             </div>
           </form>
+          <SellerInfo/>
         </div>
       </div>
     </div>
