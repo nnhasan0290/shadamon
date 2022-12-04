@@ -1,7 +1,11 @@
 import { useSession } from "next-auth/react";
 import React, { useReducer, useContext, useState, useEffect } from "react";
+import CallBack from "../components/Detail/Buttonwork/CallBack";
 import OrderNow from "../components/Detail/Buttonwork/OrderNow";
+import SendBiodata from "../components/Detail/Buttonwork/SendBiodata";
+import SendCode from "../components/Detail/Buttonwork/SendCode";
 import SendOffer from "../components/Detail/Buttonwork/SendOffer";
+import Telephone from "../components/Detail/Buttonwork/Telephone";
 import Account from "../components/Home/Modal/account/Account";
 import Dashboard from "../components/Home/Modal/account/Dashboard";
 import PostAdd from "../components/Home/PostAdd";
@@ -15,10 +19,20 @@ const initialState = {
 
 const reducer = (state: object, action: any) => {
   switch (action.type) {
+    case "BIODATA":
+      return { modalOpen: true, component: <SendBiodata/> };
+    case "CALLBACK":
+      return { modalOpen: true, component: <CallBack/> };
+    case "CODE":
+      return { modalOpen: true, component: <SendCode/> };
+    case "TELEPHONE":
+      return { modalOpen: true, component: <Telephone/> };
     case "ORDER_NOW":
       return { modalOpen: true, component: <OrderNow/> };
     case "SEND_OFFER":
-      return { modalOpen: true, component: <SendOffer/> };
+      return { modalOpen: true, chatState: false, component: <SendOffer/> };
+    case "MESSAGE":
+      return { modalOpen: true, chatState: true, component: <SendOffer/> };
     case "CLEAR_MODAL":
       return { modalOpen: false };
     default:

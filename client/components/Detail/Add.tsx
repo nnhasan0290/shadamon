@@ -24,19 +24,29 @@ const Add = () => {
   const { modalDispatch } = GlobalStates();
   const reducer = (state: any, action: any) => {
     switch (action.type) {
+      case "SHADAMON":
+        modalDispatch({type: "TELEPHONE"});
+        return null;
       case "TELEPHONE":
-        return { telephone: true };
+        modalDispatch({type: "TELEPHONE"});
+        return null;
       case "CODE":
-        return { code: true };
+        modalDispatch({type: "CODE"})
+        return null;
       case "CALLBACK":
-        return { callback: true };
+        modalDispatch({type: "CALLBACK"});
+        return null;
       case "BIODATA":
-        return { biodata: true };
+        modalDispatch({type: "BIODATA"});
+        return null;
       case "ORDER_NOW":
         modalDispatch({ type: "ORDER_NOW" });
         return null;
       case "SEND_OFFER":
         modalDispatch({ type: "SEND_OFFER" });
+        return null;
+      case "MESSAGE":
+        modalDispatch({ type: "MESSAGE" });
         return null;
       case "CLEAR":
         return null;
@@ -52,7 +62,7 @@ const Add = () => {
   return (
     <main className=" bg-white rounded-md sm:w-[500px] w-full ">
       <div className="">
-        <div className="relative ">
+        <div className="relative">
           <MyCarousel>
             <div className="rounded-md">
               <img src="/cover.jpg" alt="" className="rounded-md" />
@@ -77,14 +87,14 @@ const Add = () => {
         </div>
 
         <div className="px-3 pt-1">
-          <div className="flex items-center gap-2 ">
+          <div className="flex gap-2 items-center">
             <span className="p-1 text-[11px] leading-3 text-white bg-yellow-300 rounded-sm">
               Ad
             </span>
             <p className="leading-4 text-smallest-color text-[13.5px]">
               1 day ago Bashundhara, Dhaka
             </p>
-            <button className="px-2 text-sm transition-all duration-300 border rounded-lg hover:text-white text-common-gray whitespace-nowrap hover:bg-common-gray">
+            <button className="px-2 text-sm whitespace-nowrap rounded-lg border transition-all duration-300 hover:text-white text-common-gray hover:bg-common-gray">
               View Map
             </button>
           </div>
@@ -100,13 +110,13 @@ const Add = () => {
           </h2>
         </div>
 
-        <div className="p-3 m-3 border rounded-lg shadow-md">
+        <div className="p-3 m-3 rounded-lg border shadow-md">
           <span className="pl-3 text-smallest-color text-[13.5px]">
             Send seller a message{" "}
           </span>
           <div className="flex gap-2">
             <input
-              className="pl-3 bg-gray-300 border rounded-md placeholder:text-heading-color placeholder:font-semibold"
+              className="pl-3 bg-gray-300 rounded-md border placeholder:text-heading-color placeholder:font-semibold"
               placeholder="Is this still available?"
               type="text"
             />
@@ -116,8 +126,27 @@ const Add = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 pl-4 py-4  my-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
-          <div className="flex flex-col items-center justify-center gap-1">
+        <div className="flex overflow-y-hidden overflow-x-scroll flex-nowrap gap-5 items-center py-4 pl-4 my-3 text-sm tracking-tight text-common-gray">
+          <div className="flex flex-col gap-1 justify-center items-center">
+            <div
+              className={`p-2  rounded-full transition-all duration-300 ${
+                state?.telephone
+                  ? " bg-common-color text-white"
+                  : "bg-smallest-color text-black"
+              } cursor-pointer`}
+              onClick={() => {
+                if (!state?.telephone) {
+                  dispatch({ type: "SHADAMON" });
+                } else {
+                  dispatch({ type: "CLEAR" });
+                }
+              }}
+            >
+              <BsTelephone size={36} />
+            </div>
+            <span className="w-[40px] leading-3 text-center">Call Shadamon</span>
+          </div>
+          <div className="flex flex-col gap-1 justify-center items-center">
             <div
               className={`p-2  rounded-full transition-all duration-300 ${
                 state?.telephone
@@ -136,9 +165,9 @@ const Add = () => {
             </div>
             <span className="w-[40px] leading-3 text-center">Call Seller</span>
           </div>
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col gap-1 justify-center items-center">
             <div
-              className="p-2 text-black rounded-full bg-smallest-color cursor-pointer"
+              className="p-2 text-black rounded-full cursor-pointer bg-smallest-color"
               onClick={() => {
                 dispatch({ type: "ORDER_NOW" });
               }}
@@ -147,9 +176,9 @@ const Add = () => {
             </div>
             <span className="w-[40px] leading-3 text-center">Order now</span>
           </div>
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col gap-1 justify-center items-center">
           <div
-              className="p-2 text-black rounded-full bg-smallest-color cursor-pointer"
+              className="p-2 text-black rounded-full cursor-pointer bg-smallest-color"
               onClick={() => {
                 dispatch({ type: "SEND_OFFER" });
               }}
@@ -158,11 +187,11 @@ const Add = () => {
             </div>
             <span className="w-[40px] leading-3 text-center">Send Offer</span>
           </div>
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col gap-1 justify-center items-center">
           <div
-              className="p-2 text-black rounded-full bg-smallest-color cursor-pointer"
+              className="p-2 text-black rounded-full cursor-pointer bg-smallest-color"
               onClick={() => {
-                dispatch({ type: "SEND_OFFER" });
+                dispatch({ type: "MESSAGE" });
               }}
             >
               <BsFillChatDotsFill size={36} />
@@ -170,7 +199,7 @@ const Add = () => {
             <span className="w-[40px] leading-3 text-center">Chat/ Msg</span>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col gap-1 justify-center items-center">
             <div
               className={`p-2  rounded-full transition-all duration-300 ${
                 state?.biodata
@@ -190,7 +219,7 @@ const Add = () => {
             <span className="w-[40px] leading-3 text-center">Send Biodata</span>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col gap-1 justify-center items-center">
             <div
               className={`p-2 rounded-full cursor-pointer transition-all duration-300 ${
                 state?.code
@@ -209,7 +238,7 @@ const Add = () => {
             </div>
             <span className="w-[40px] leading-3 text-center">See Code</span>
           </div>
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col gap-1 justify-center items-center">
             <div
               className={`p-2  rounded-full transition-all duration-300 ${
                 state?.callback
@@ -231,29 +260,20 @@ const Add = () => {
             </span>
           </div>
         </div>
-
-        {state?.telephone && <Telephone />}
-        {state?.biodata && <SendBiodata />}
-        {state?.code && <SendCode />}
-        {state?.callback && (
-          <div className="mx-4 my-2 bg-body-bg rounded-md px-4">
-            <Advertisement />
-          </div>
-        )}
-
+        
         <div className="px-2 my-2">
           <hr className="w-full h-2px bg-common-gray" />
         </div>
 
-        <div className="flex items-center justify-between mx-3">
-          <div className="flex items-center gap-2">
+        <div className="flex justify-between items-center mx-3">
+          <div className="flex gap-2 items-center">
             <img
               className="w-[50px] h-[50px] rounded-full object-cover"
               alt=""
               src="/cover.jpg"
             />
             <div>
-              <div className="flex items-center ">
+              <div className="flex items-center">
                 <h2 className=" overflow-hidden leading-3 whitespace-nowrap w-[120px]  relative text-ellipsis">
                   Karuna Real Estate{" "}
                 </h2>
@@ -280,7 +300,7 @@ const Add = () => {
             </div>
           </div>
           <div>
-            <button className="px-2 text-blue-500 border rounded-md whitespace-nowrap">
+            <button className="px-2 text-blue-500 whitespace-nowrap rounded-md border">
               View Shop
             </button>
           </div>
@@ -291,7 +311,7 @@ const Add = () => {
         </div>
 
         <div className="px-3">
-          <div className="flex justify-between ">
+          <div className="flex justify-between">
             <span className=" rounded-md text-heading-color font-[500]">
               Details
             </span>
@@ -327,7 +347,7 @@ const Add = () => {
             <hr className="w-full h-2px bg-common-gray" />
           </div>
           <div className="">
-            <div className="flex justify-between ">
+            <div className="flex justify-between">
               <span className=" rounded-md text-heading-color font-[500]">
                 Details
               </span>
@@ -343,7 +363,7 @@ const Add = () => {
               </div>
             </div>
             {showDes && (
-              <p className="text-sm ">
+              <p className="text-sm">
                 - Inter H110 Express Chipset - Intel G4560 (7tel G4560 (7th
                 Gen), Clock Speed 3.50GHz (3MB Cache...{" "}
                 <Link href="#">See More </Link>{" "}
@@ -354,7 +374,7 @@ const Add = () => {
             <hr className="w-full h-2px bg-common-gray" />
           </div>
           <div className="">
-            <div className="flex justify-between font-bold ">
+            <div className="flex justify-between font-bold">
               <span className=" rounded-md text-heading-color font-[500]">
                 Shipping & Returns
               </span>
@@ -371,19 +391,19 @@ const Add = () => {
             </div>
             {showShipping && (
               <>
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex gap-2 items-center text-sm">
                   <div>
                     <FaTruckMoving />
                   </div>
                   <p>This Merchant can ship to BD</p>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex gap-2 items-center text-sm">
                   <div>
                     <FaTruckMoving />
                   </div>
                   <p>This Merchant can ship to BD</p>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex gap-2 items-center text-sm">
                   <div>
                     <FaTruckMoving />
                   </div>
@@ -398,7 +418,7 @@ const Add = () => {
           </div>
 
           <div className="">
-            <div className="flex items-center gap-2 py-1 text-sm font-bold border-b mbs-1">
+            <div className="flex gap-2 items-center py-1 text-sm font-bold border-b mbs-1">
               <div className="basis-1/5"></div>
 
               <p className="basis-1/5 text-heading-color font-[500]">Bidder</p>
@@ -409,7 +429,7 @@ const Add = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 py-1 mb-1 text-sm font-semibold border-b text-common-gray">
+            <div className="flex gap-2 items-center py-1 mb-1 text-sm font-semibold border-b text-common-gray">
               <div className="basis-1/5">
                 <img
                   src="/cover.jpg"
@@ -422,7 +442,7 @@ const Add = () => {
               <p className="basis-1/5">01/01/22</p>
               <p className="basis-1/5">3379</p>
             </div>
-            <div className="flex items-center gap-2 py-1 mb-1 text-sm font-semibold border-b text-common-gray">
+            <div className="flex gap-2 items-center py-1 mb-1 text-sm font-semibold border-b text-common-gray">
               <div className="basis-1/5">
                 <img
                   src="/cover.jpg"
