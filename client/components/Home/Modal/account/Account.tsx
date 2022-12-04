@@ -1,5 +1,5 @@
 import Dashboard from "./Dashboard";
-import Profile from "./Profile";
+import Profile from "./Profile/Profile";
 import { useState } from "react";
 
 export default function () {

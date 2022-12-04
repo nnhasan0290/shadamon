@@ -3,7 +3,11 @@ import { BiSearch } from "react-icons/bi";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Carousel } from "react-responsive-carousel";
 
-const Advertisement = () => {
+interface data {
+  home?: boolean;
+}
+
+const Advertisement = ({ home }: data) => {
   const [selected, setSelected] = useState(0);
   const handleChange = (a: number, b: any) => {
     setSelected(a);
@@ -42,8 +46,8 @@ const Advertisement = () => {
     },
   };
   return (
-    <div className="mt-[50px]">
-      <img src="/ad.jpg" alt="" />
+    <div className={`${home && "mt-[50px]"}`}>
+      {home && <img src="/ad.jpg" alt="" />}
       <div className="my-4 p-2 rounded-lg">
         <h2 className="font-bold py-2 text-sm tracking-tight">
           Chat or Send message

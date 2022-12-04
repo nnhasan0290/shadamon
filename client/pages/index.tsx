@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import BiggestPost from "../components/Home/BiggestAd";
 import CategoryLocation from "../components/Home/CategoryLocation";
 import Heading from "../components/Home/Heading";
-import Modal from "../components/Home/Modal";
+import Modal from "../components/Home/Modal/Modal";
 import NvtStop from "../components/Home/NvtStop";
 import SmallestAd from "../components/Home/SmallestAd";
 import WannaBid from "../components/Home/WannaBid";
@@ -52,7 +52,7 @@ export default function Home() {
             <Modal />
           </div>
           <div className=" w-[160px] hidden lg:block">
-            <Advertisement />
+            <Advertisement home={true} />
           </div>
         </div>
       </main>

@@ -10,7 +10,7 @@ import { FaPlus, FaVimeoSquare } from "react-icons/fa";
 import { useRef } from "react";
 import { CgNotifications } from "react-icons/cg";
 import { IoMdNotifications, IoMdNotificationsOutline } from "react-icons/io";
-import ConnectSlider from "../ConnectSlider";
+import ConnectSlider from "../../ConnectSlider";
 import { FcSettings } from "react-icons/fc";
 import { RiOrderPlayFill } from "react-icons/ri";
 

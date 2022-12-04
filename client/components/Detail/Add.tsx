@@ -1,6 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BiChevronDown, BiChevronUp, BiStar } from "react-icons/bi";
 import { FaTruckMoving, FaPeopleCarry, FaEye } from "react-icons/fa";
@@ -14,11 +14,41 @@ import { RiMailSendFill } from "react-icons/ri";
 import Link from "next/link";
 import DownCarousel from "./DownCarousel";
 import MyCarousel from "./MyCarousel";
+import Telephone from "./Buttonwork/Telephone";
+import SendBiodata from "./Buttonwork/SendBiodata";
+import SendCode from "./Buttonwork/SendCode";
+import Advertisement from "../Home/Advertisement";
+import { GlobalStates } from "../../context/ContextProvider";
 
 const Add = () => {
+  const { modalDispatch } = GlobalStates();
+  const reducer = (state: any, action: any) => {
+    switch (action.type) {
+      case "TELEPHONE":
+        return { telephone: true };
+      case "CODE":
+        return { code: true };
+      case "CALLBACK":
+        return { callback: true };
+      case "BIODATA":
+        return { biodata: true };
+      case "ORDER_NOW":
+        modalDispatch({ type: "ORDER_NOW" });
+        return null;
+      case "SEND_OFFER":
+        modalDispatch({ type: "SEND_OFFER" });
+        return null;
+      case "CLEAR":
+        return null;
+      default:
+        return state;
+    }
+  };
+
   const [showDetails, setShowDetails] = useState(true);
   const [showDes, setShowDes] = useState(true);
   const [showShipping, setShowShipping] = useState(true);
+  const [state, dispatch] = useReducer(reducer, null);
   return (
     <main className=" bg-white rounded-md sm:w-[500px] w-full ">
       <div className="">
@@ -88,45 +118,112 @@ const Add = () => {
 
         <div className="flex items-center gap-5 pl-4 py-4  my-3 overflow-x-scroll overflow-y-hidden text-sm tracking-tight flex-nowrap text-common-gray">
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+            <div
+              className={`p-2  rounded-full transition-all duration-300 ${
+                state?.telephone
+                  ? " bg-common-color text-white"
+                  : "bg-smallest-color text-black"
+              } cursor-pointer`}
+              onClick={() => {
+                if (!state?.telephone) {
+                  dispatch({ type: "TELEPHONE" });
+                } else {
+                  dispatch({ type: "CLEAR" });
+                }
+              }}
+            >
               <BsTelephone size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Call Seller</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+            <div
+              className="p-2 text-black rounded-full bg-smallest-color cursor-pointer"
+              onClick={() => {
+                dispatch({ type: "ORDER_NOW" });
+              }}
+            >
               <FaPeopleCarry size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Order now</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+          <div
+              className="p-2 text-black rounded-full bg-smallest-color cursor-pointer"
+              onClick={() => {
+                dispatch({ type: "SEND_OFFER" });
+              }}
+            >
               <BsPinterest size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Offer</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+          <div
+              className="p-2 text-black rounded-full bg-smallest-color cursor-pointer"
+              onClick={() => {
+                dispatch({ type: "SEND_OFFER" });
+              }}
+            >
               <BsFillChatDotsFill size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Chat/ Msg</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+            <div
+              className={`p-2  rounded-full transition-all duration-300 ${
+                state?.biodata
+                  ? " bg-common-color text-white"
+                  : "bg-smallest-color text-black"
+              } cursor-pointer`}
+              onClick={() => {
+                if (!state?.biodata) {
+                  dispatch({ type: "BIODATA" });
+                } else {
+                  dispatch({ type: "CLEAR" });
+                }
+              }}
+            >
               <RiMailSendFill size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">Send Biodata</span>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+            <div
+              className={`p-2 rounded-full cursor-pointer transition-all duration-300 ${
+                state?.code
+                  ? " bg-common-color text-white"
+                  : "bg-smallest-color text-black"
+              }`}
+              onClick={() => {
+                if (!state?.code) {
+                  dispatch({ type: "CODE" });
+                } else {
+                  dispatch({ type: "CLEAR" });
+                }
+              }}
+            >
               <FaEye size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">See Code</span>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
-            <div className="p-2 text-black rounded-full bg-smallest-color">
+            <div
+              className={`p-2  rounded-full transition-all duration-300 ${
+                state?.callback
+                  ? " bg-common-color text-white"
+                  : "bg-smallest-color text-black"
+              } cursor-pointer`}
+              onClick={() => {
+                if (!state?.callback) {
+                  dispatch({ type: "CALLBACK" });
+                } else {
+                  dispatch({ type: "CLEAR" });
+                }
+              }}
+            >
               <BsFillTelephoneInboundFill size={36} />
             </div>
             <span className="w-[40px] leading-3 text-center">
@@ -134,6 +231,15 @@ const Add = () => {
             </span>
           </div>
         </div>
+
+        {state?.telephone && <Telephone />}
+        {state?.biodata && <SendBiodata />}
+        {state?.code && <SendCode />}
+        {state?.callback && (
+          <div className="mx-4 my-2 bg-body-bg rounded-md px-4">
+            <Advertisement />
+          </div>
+        )}
 
         <div className="px-2 my-2">
           <hr className="w-full h-2px bg-common-gray" />

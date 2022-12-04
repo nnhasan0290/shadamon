@@ -116,11 +116,14 @@ img {
   margin: 5px;
 }
 .common__fieldset legend {
-  width: 100px !important;
+  width: auto;
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
   margin-left: 8px !important;
+  font-size: 13.5px !important;
+  color: black !important;
+  text-transform: capitalize;
 }
 
 .common__fieldset input {
