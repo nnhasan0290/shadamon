@@ -9,30 +9,34 @@ import Telephone from "../components/Detail/Buttonwork/Telephone";
 import Account from "../components/Home/Modal/account/Account";
 import Dashboard from "../components/Home/Modal/account/Dashboard";
 import PostAdd from "../components/Home/PostAdd";
+import BundlePromote from "../components/Home/promote/BundlePromote";
 import SignUp from "../components/Home/Signup";
 
 const GlobalContext: any = React.createContext({});
 
 const initialState = {
-  modalOpen: false
+  modalOpen: false,
 };
 
 const reducer = (state: object, action: any) => {
   switch (action.type) {
     case "BIODATA":
-      return { modalOpen: true, component: <SendBiodata/> };
+      return { modalOpen: true, component: <SendBiodata /> };
     case "CALLBACK":
-      return { modalOpen: true, component: <CallBack/> };
+      return { modalOpen: true, component: <CallBack /> };
     case "CODE":
-      return { modalOpen: true, component: <SendCode/> };
+      return { modalOpen: true, component: <SendCode /> };
     case "TELEPHONE":
-      return { modalOpen: true, component: <Telephone/> };
+      return { modalOpen: true, component: <Telephone /> };
     case "ORDER_NOW":
-      return { modalOpen: true, component: <OrderNow/> };
+      return { modalOpen: true, component: <OrderNow /> };
     case "SEND_OFFER":
-      return { modalOpen: true, chatState: false, component: <SendOffer/> };
+      return { modalOpen: true, chatState: false, component: <SendOffer /> };
     case "MESSAGE":
-      return { modalOpen: true, chatState: true, component: <SendOffer/> };
+      return { modalOpen: true, chatState: true, component: <SendOffer /> };
+
+    case "PROMOTE":
+      return { modalOpen: true, component: <BundlePromote /> };
     case "CLEAR_MODAL":
       return { modalOpen: false };
     default:

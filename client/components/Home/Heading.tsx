@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 const Heading = () => {
   //states
-  const { showModal, setShowModal } = GlobalStates();
+  const { modalDispatch } = GlobalStates();
   const [y, setY] = useState(0);
   const [scrollTop, setScrollTop] = useState(false);
   const router = useRouter();
@@ -77,10 +77,7 @@ const Heading = () => {
               <FaEnvelope />
             </div>
             <div>
-              <button
-                className="px-1 py-1 font-medium tracking-tight text-white whitespace-nowrap uppercase rounded-full text-[13px] hidden lg:block cursor-pointer bg-common-color"
-                onClick={() => setShowModal(!showModal)}
-              >
+              <button className="px-1 py-1 font-medium tracking-tight text-white whitespace-nowrap uppercase rounded-full text-[13px] hidden lg:block cursor-pointer bg-common-color">
                 post add
               </button>
             </div>
@@ -89,20 +86,23 @@ const Heading = () => {
             </div>
           </div>
         </div>
-        <div className="hidden justify-center lg:border-b lg:border-b-[#dee2e6]">
+        <div className="hidden lg:flex justify-center lg:border-b lg:border-b-[#dee2e6]">
           <div className="w-[250px]"></div>
           <div className="w-[500px] nav__item lg:flex hidden text-common-gray  items-center gap-2 font-semibold text-[1rem]">
-            <div className="w-auto p-2 my-1 rounded-md nav__icon text-common-color">
+            <div className="p-2 my-1 w-auto rounded-md nav__icon text-common-color">
               <Link href="#"> All Products</Link>
             </div>
-            <div className="w-auto p-2 my-1 rounded-md nav__icon">
+            <div className="p-2 my-1 w-auto rounded-md nav__icon">
               <Link href="#"> All Orders</Link>
             </div>
-            <div className="w-auto p-2 my-1 rounded-md nav__icon">
+            <div className="p-2 my-1 w-auto rounded-md nav__icon">
               <Link href="#"> My Page</Link>
             </div>
-            <div className="w-auto p-2 my-1 rounded-md nav__icon">
-              <Link href="#"> Promote</Link>
+            <div
+              className="p-2 my-1 w-auto rounded-md nav__icon"
+              onClick={() => modalDispatch({ type: "PROMOTE" })}
+            >
+              <span> Promote</span>
             </div>
           </div>
           <div className="w-[160px]"></div>
@@ -112,21 +112,21 @@ const Heading = () => {
         className={` bg-white items-center max-w-[500px] border lg:hidden rounded-t-[30px]  fixed bottom-0 z-50  w-full left-[50%] translate-x-[-50%] text-center
        transition-all duration-300 ${!scrollTop && "translate-y-[100%]"}`}
       >
-        <div className="justify-center hidden rounded-full ">
+        <div className="hidden justify-center rounded-full">
           <div className="basis-[30%] flex px-2 pt-1 rounded-full justify-around   bg-white  ">
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-black nav__icon ">
-                <BiHome size={22} />
-              </div>
-              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
-                Post
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col justify-center items-center">
               <div className="text-black nav__icon">
                 <BiHome size={22} />
               </div>
-              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
+              <span className="text-sm font-semibold tracking-tight leading-3 text-common-gray">
+                Post
+              </span>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <div className="text-black nav__icon">
+                <BiHome size={22} />
+              </div>
+              <span className="text-sm font-semibold tracking-tight leading-3 text-common-gray">
                 Post
               </span>
             </div>
@@ -137,46 +137,46 @@ const Heading = () => {
             </div>
           </div>
           <div className="basis-[30%] flex px-2 pt-1 rounded-full justify-around bg-white ">
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col justify-center items-center">
               <div className="text-black nav__icon">
                 <BiEnvelope size={22} />
               </div>
-              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
+              <span className="text-sm font-semibold tracking-tight leading-3 text-common-gray">
                 Page
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col justify-center items-center">
               <div className="text-black nav__icon">
                 <CgProfile size={22} />
               </div>
-              <span className="text-sm font-semibold leading-3 tracking-tight text-common-gray">
+              <span className="text-sm font-semibold tracking-tight leading-3 text-common-gray">
                 Promote
               </span>
             </div>
           </div>
         </div>
         <div className="flex justify-center text-[#747474]">
-          <div className="flex self-end justify-center gap-2 pr-2 bg-white border-t-2 rounded-full basis-full sm:justify-around sm:gap-0 border-t-common-gray ">
-            <div className="flex flex-col items-center justify-center px-2 py-1 text-black bg-gray-300  rounded-b-2xl">
+          <div className="flex gap-2 justify-center self-end pr-2 bg-white rounded-full border-t-2 basis-full sm:justify-around sm:gap-0 border-t-common-gray">
+            <div className="flex flex-col justify-center items-center px-2 py-1 text-black bg-gray-300 rounded-b-2xl">
               <BiHome size={25} />
               <span className="text-xs leading-3">Home</span>
             </div>
-            <div className="flex flex-col items-center justify-center px-2 py-1  rounded-b-2xl">
+            <div className="flex flex-col justify-center items-center px-2 py-1 rounded-b-2xl">
               <BiSearch size={25} />
               <span className="text-xs leading-3">Search</span>
             </div>
           </div>
-          <div className="p-2 pt-0 border-b-2 rounded-md rounded-b-full border-b-common-gray">
+          <div className="p-2 pt-0 rounded-md rounded-b-full border-b-2 border-b-common-gray">
             <div className=" flex items-center justify-center px-2 rounded-full  w-[37px] h-[37px] bg-common-color text-white ">
               <BsPlusLg className="font-bold" size={35} />
             </div>
           </div>
-          <div className="flex self-end justify-center gap-2 pr-2 bg-white border-t-2 rounded-full basis-full sm:justify-around sm:gap-0 border-t-common-gray ">
-            <div className="flex flex-col items-center justify-center px-2 py-1  rounded-b-2xl">
+          <div className="flex gap-2 justify-center self-end pr-2 bg-white rounded-full border-t-2 basis-full sm:justify-around sm:gap-0 border-t-common-gray">
+            <div className="flex flex-col justify-center items-center px-2 py-1 rounded-b-2xl">
               <BiEnvelope size={25} />
               <span className="text-xs leading-3">Message</span>
             </div>
-            <div className="flex flex-col items-center justify-center px-2 py-1  rounded-b-2xl">
+            <div className="flex flex-col justify-center items-center px-2 py-1 rounded-b-2xl">
               <CgProfile size={25} />
               <span className="text-xs leading-3">Profile</span>
             </div>

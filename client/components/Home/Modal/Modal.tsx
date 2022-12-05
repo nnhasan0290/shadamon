@@ -2,6 +2,7 @@ import { GlobalStates } from "../../../context/ContextProvider";
 import OrderNow from "../../Detail/Buttonwork/OrderNow";
 import SendBiodata from "../../Detail/Buttonwork/SendBiodata";
 import SendOffer from "../../Detail/Buttonwork/SendOffer";
+import BundlePromote from "../promote/BundlePromote";
 import Account from "./account/Account";
 
 const Modal = () => {
@@ -36,7 +37,7 @@ const Modal = () => {
         <div className="h-screen w-[500px] relative">
           <div className="bg-white modal  rounded-[15px] flex items-center  flex-col overflow-auto absolute bottom-0 mx-auto h-[75vh] pb-5 w-full">
             <div
-              className="absolute p-2 ml-auto text-xl top-2 right-2 nav__icon"
+              className="absolute top-2 right-2 p-2 ml-auto text-xl nav__icon"
               onClick={() => modalDispatch({ type: "CLEAR_MODAL" })}
             >
               <svg
