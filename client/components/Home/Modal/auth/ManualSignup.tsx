@@ -8,8 +8,9 @@ import { GlobalStates } from "../../../../context/ContextProvider";
 import PostAdd from "./PostAdd";
 
 let schema = yup.object().shape({
-  name: yup.string(),
-  email: yup.string().email().required(),
+  name: yup.string().min(3).required(),
+  email: yup.string(),
+  phone: yup.string(),
   password: yup.string().min(6).max(15).required(),
 });
 
@@ -17,9 +18,10 @@ interface IFormInputs {
   name: string;
   email: string;
   password: string;
+  phone: string;
 }
 
-const ManualSignUp = ({ signState, setSignState }: any) => {
+const ManualSignUp = ({ signState, setSignState, phone }: any) => {
   const { data, status }: any = useSession();
   console.log(data);
   const [user, setUser] = useState(data?.user);
@@ -51,6 +53,7 @@ const ManualSignUp = ({ signState, setSignState }: any) => {
         className="flex flex-col justify-center items-center w-full"
       >
         {signState === "SIGNUP" && (
+          <>
           <div className="border w-[78%] my-1 rounded-md relative text-common-gray">
             <input
               {...register("name")}
@@ -68,10 +71,14 @@ const ManualSignUp = ({ signState, setSignState }: any) => {
               Name
             </label>
           </div>
+          <p className="text-xs text-red-600 capitalize">{errors?.name?.message}</p>
+          </>
         )}
 
         <div className="border w-[78%] my-1 rounded-md relative text-common-gray">
-          <input
+          {
+            user ? (
+              <input
             {...register("email")}
             className="p-2 peer focus:placeholder-transparent"
             type="email"
@@ -80,6 +87,19 @@ const ManualSignUp = ({ signState, setSignState }: any) => {
             value={user?.email}
             placeholder="Email or Phone number"
           />
+            ) : (
+              <input
+              {...register("phone")}
+              className="p-2 peer focus:placeholder-transparent"
+              type="tell"
+              name="phone"
+              id=""
+              value={phone}
+              placeholder="Email or Phone number"
+            />
+            )
+          }
+          
           <label
             htmlFor=""
             className="absolute pl-2 text-xs top-0 left-0 visible text-[#777d83] peer-placeholder-shown:invisible peer-focus:visible"
@@ -87,7 +107,6 @@ const ManualSignUp = ({ signState, setSignState }: any) => {
             Email or Phone number
           </label>
         </div>
-        <p className="text-xs text-red-600 capitalize">{errors?.email?.message}</p>
         <div className="border w-[78%] my-1 rounded-md relative text-common-gray">
           <input
             {...register("password")}
@@ -121,6 +140,7 @@ const ManualSignUp = ({ signState, setSignState }: any) => {
           </button>
         )}
         <hr className="w-[78%] border my-3" />
+      </form>
         <div className="text-center">
           <p className="text-sm italic">
             {signState === "LOGIN" ? "Don't" : "Already"} Have an Account?
@@ -150,7 +170,6 @@ const ManualSignUp = ({ signState, setSignState }: any) => {
             <li>Help Chat</li>
           </ul>
         </div>
-      </form>
     </>
   );
 };
