@@ -8,14 +8,15 @@ import SendOffer from "../components/Detail/Buttonwork/SendOffer";
 import Telephone from "../components/Detail/Buttonwork/Telephone";
 import Account from "../components/Home/Modal/account/Account";
 import Dashboard from "../components/Home/Modal/account/Dashboard";
-import PostAdd from "../components/Home/PostAdd";
+import PostAdd from "../components/Home/Modal/auth/PostAdd";
 import BundlePromote from "../components/Home/promote/BundlePromote";
-import SignUp from "../components/Home/Signup";
+import SignUp from "../components/Home/Modal/auth/Signup";
 
 const GlobalContext: any = React.createContext({});
 
 const initialState = {
   modalOpen: false,
+  component: "",
 };
 
 const reducer = (state: object, action: any) => {
@@ -37,6 +38,10 @@ const reducer = (state: object, action: any) => {
 
     case "PROMOTE":
       return { modalOpen: true, component: <BundlePromote /> };
+
+    case "GLOBAL_MODAL":
+      return { modalOpen: true, component: action.payload };
+
     case "CLEAR_MODAL":
       return { modalOpen: false };
     default:

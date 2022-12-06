@@ -1,4 +1,4 @@
-import MultiSelectTreeView from "./TreeView";
+import MultiSelectTreeView from "../../TreeView";
 
 const PostAdd = () => {
   return (

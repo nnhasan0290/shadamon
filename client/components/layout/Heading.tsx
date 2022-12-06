@@ -8,34 +8,14 @@ import { BsPlusLg } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
+import { useScrollDir } from "../../utils/ScrollDir";
+import SignUp from "../Home/Modal/auth/Signup";
 
 const Heading = () => {
   //states
   const { modalDispatch } = GlobalStates();
-  const [y, setY] = useState(0);
-  const [scrollTop, setScrollTop] = useState(false);
+  const scrollTop = useScrollDir();
   const router = useRouter();
-
-  const handleNavigation = useCallback(
-    (e: any) => {
-      const window = e.currentTarget;
-      if (y > window.scrollY) {
-        setScrollTop(true);
-      } else if (y < window.scrollY) {
-        setScrollTop(false);
-      }
-      setY(window.scrollY);
-    },
-    [y]
-  );
-  useEffect(() => {
-    setY(window.scrollY);
-    window.addEventListener("scroll", handleNavigation);
-
-    return () => {
-      window.removeEventListener("scroll", handleNavigation);
-    };
-  }, [handleNavigation]);
 
   return (
     <>
@@ -77,7 +57,7 @@ const Heading = () => {
               <FaEnvelope />
             </div>
             <div>
-              <button className="px-1 py-1 font-medium tracking-tight text-white whitespace-nowrap uppercase rounded-full text-[13px] hidden lg:block cursor-pointer bg-common-color">
+              <button onClick={() => modalDispatch({type: "GLOBAL_MODAL", payload: <SignUp/>})} className="px-1 py-1 font-medium tracking-tight text-white whitespace-nowrap uppercase rounded-full text-[13px] hidden lg:block cursor-pointer bg-common-color">
                 post add
               </button>
             </div>

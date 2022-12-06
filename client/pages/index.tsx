@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import BiggestPost from "../components/Home/BiggestAd";
 import CategoryLocation from "../components/Home/CategoryLocation";
-import Heading from "../components/Home/Heading";
+import Heading from "../components/layout/Heading";
 import Modal from "../components/Home/Modal/Modal";
 import NvtStop from "../components/Home/NvtStop";
 import SmallestAd from "../components/Home/SmallestAd";
