@@ -19,23 +19,17 @@ import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
 import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
-import axios from "axios";
+import { useAppSelector } from "../redux/hooks";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const {
     modalState: { modalOpen },
   } = GlobalStates();
+
+  const data = useSelector(state => state);
+  console.log(data);
   
-  const config:any = {
-    withCredential: true
-  };
-  useEffect(() => {
-    axios
-      .get(
-        "https://3001-work0290-shadamon-6d0r1xcekjb.ws-us77.gitpod.io/api/user/load",config
-      )
-      .then((res) => console.log(res));
-  }, []);
   return (
     <>
       <Head>

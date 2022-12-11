@@ -5,19 +5,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { GlobalStates } from "../../../../context/ContextProvider";
 import { signIn, useSession } from "next-auth/react";
-import ManualSignUp from "./ManualSignup";
+import ManualSignUp from "./ManualSignup/ManualSignup";
 
 const SignUp = () => {
   const [signState, setSignState] = useState("SIGNUP");
   const [emailState, setEmailState] = useState(false);
   const [phoneState, setPhoneState] = useState("");
-  const {status} = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
-    if(status === "authenticated"){
+    if (status === "authenticated") {
       setEmailState(true);
     }
-  },[status])
+  }, [status]);
 
   return (
     <>
@@ -36,37 +36,43 @@ const SignUp = () => {
           <p className="mb-2 text-sm">Please Sign Up to post your ad</p>
           {!(signState === "LOGIN") && (
             <>
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              setEmailState(true);
-            }} action="" className="flex flex-col items-center w-full justify-content-center">
-              <div
-                className="border w-[78%] rounded-md "
-                id="recaptcha-container"
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setEmailState(true);
+                }}
+                action=""
+                className="flex flex-col items-center w-full justify-content-center"
               >
-                <select name="" id="" className="py-2">
-                  <option value="bd">+880</option>
-                </select>
-                <input
-                onChange={(e:any) => {setPhoneState(e.target.value)}}
-                  className="py-2 pl-2 w-auto"
-                  type="tel"
-                  name=""
-                  minLength={9}
-                  id=""
-                  value={phoneState}
-                  required
-                  placeholder="Enter mobile number"
-                />
-              </div>
-              <button
-              type="submit"
-                className={`pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-common-color disabled:opacity-70`}
-                disabled={!phoneState}
-              >
-                <p className="mx-auto">Continue</p>
-              </button>
-              <p>OR</p>
+                <div
+                  className="border w-[78%] rounded-md "
+                  id="recaptcha-container"
+                >
+                  <select name="" id="" className="py-2">
+                    <option value="bd">+880</option>
+                  </select>
+                  <input
+                    onChange={(e: any) => {
+                      setPhoneState(e.target.value);
+                    }}
+                    className="py-2 pl-2 w-auto"
+                    type="tel"
+                    name=""
+                    minLength={9}
+                    id=""
+                    value={phoneState}
+                    required
+                    placeholder="Enter mobile number"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className={`pl-5 my-1 border flex items-center gap-3 w-[78%] rounded-md p-2 text-white bg-common-color disabled:opacity-70`}
+                  disabled={!phoneState}
+                >
+                  <p className="mx-auto">Continue</p>
+                </button>
+                <p>OR</p>
               </form>
             </>
           )}
@@ -125,7 +131,11 @@ const SignUp = () => {
           </div>
         </>
       ) : (
-        <ManualSignUp phone={phoneState} signState={signState} setSignState={setSignState} />
+        <ManualSignUp
+          phone={phoneState}
+          signState={signState}
+          setSignState={setSignState}
+        />
       )}
     </>
   );
