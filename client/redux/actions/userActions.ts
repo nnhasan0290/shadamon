@@ -32,6 +32,7 @@ export const signUpAction = (myForm: any) => async (dispatch: any) => {
 export const loginAction = (myForm: any) => async (dispatch: any) => {
   try {
     dispatch({ type: LOGIN_USER_REQ });
+    console.log(process.env.NEXT_PUBLIC_HOST);
     const config = {
       withCredentials: true,
     };
