@@ -6,6 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { GlobalStates } from "../../../../../context/ContextProvider";
 import PostAdd from "../PostAdd";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginAction, signUpAction } from "../../../../../redux/actions/userActions";
+import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hook";
 
 let schema = yup.object().shape({
   name: yup.string(),
@@ -20,12 +24,16 @@ interface IFormInputs {
 
 const WithEmail = ({ signState }: any) => {
   const regExp = /[a-zA-Z]/g;
-  const { modalDispatch } = GlobalStates();
-  const { data, status }: any = useSession();
+  const {signUp, login} = useAppSelector(state => state);
+  console.log(signUp, login);
+  // const { modalDispatch } = GlobalStates();
+  // const { data, status }: any = useSession();
 
-  const [user, setUser] = useState(data?.user);
-  const [name, setName] = useState(user?.name);
-  const [email, setEmail] = useState(user?.email);
+  // const [user, setUser] = useState(data?.user);
+  // const [name, setName] = useState(user?.name);
+  // const [email, setEmail] = useState(user?.email);
+
+  const dispatch:any = useAppDispatch();
 
   const {
     register,
@@ -36,38 +44,16 @@ const WithEmail = ({ signState }: any) => {
   });
 
   const onSubmit = (data: any) => {
-    const config: any = {
-      header: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
+   
     if(signState !== 'LOGIN'){
       if (regExp.test(data.email)) {
-        axios
-          .post(" https://apiweb.cyclic.app/api/auth/register", data, config)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+       dispatch(signUpAction(data))
       } else {
-        console.log({
-          name: data.name,
-          phone: data.email,
-          password: data.password,
-        });
-        axios
-        .post(" https://apiweb.cyclic.app/api/auth/register", {
-          name: data.name,
-          phone: data.email,
-          password: data.password,
-        }, config)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        dispatch(signUpAction({name: data.name, phone: data.email, password: data.password}))
       }
       
     } else{
-      axios
-      .post(" https://apiweb.cyclic.app/api/auth/register", {emailphone: data.email, password: data.password}, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      dispatch(loginAction({emailphone: data.email, password: data.password}));
     }
 
     // modalDispatch({ type: "GLOBAL_MODAL", payload: <PostAdd /> });

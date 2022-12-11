@@ -19,7 +19,6 @@ import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
 import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
-import { useAppSelector } from "../redux/hooks";
 import { useSelector } from "react-redux";
 
 export default function Home() {
@@ -27,8 +26,6 @@ export default function Home() {
     modalState: { modalOpen },
   } = GlobalStates();
 
-  const data = useSelector(state => state);
-  console.log(data);
   
   return (
     <>
