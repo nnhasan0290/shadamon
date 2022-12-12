@@ -1,3 +1,4 @@
+import AdminModal from "../AllModal/AdminModal";
 import SideMenu from "../Menu/Menu";
 import MchantData from "./MchantData";
 
@@ -8,6 +9,7 @@ export default function MainAdmin() {
         <SideMenu />
       </div>
         <MchantData/>
+        <AdminModal/>
     </div>
   );
 }

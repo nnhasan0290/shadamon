@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
   .nav__item {
     @apply font-bold text-[18px] text-muted-color;
@@ -139,6 +140,20 @@ img {
   color: white !important;
   border: none !important;
 }
+
+.ant-select-selector{
+  border: none !important;
+}
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  border-color: #d9d9d9 !important;
+  box-shadow: none !important;
+}
+
+
 
 @media screen and (max-width: 1024px) {
   .modal__cross {
