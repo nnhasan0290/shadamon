@@ -135,6 +135,11 @@ img {
   box-shadow: none !important;
 }
 
+.ant-btn:hover{
+  color: white !important;
+  border: none !important;
+}
+
 @media screen and (max-width: 1024px) {
   .modal__cross {
     right: calc(50% - 265px) !important;
