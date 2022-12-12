@@ -1,7 +1,7 @@
 import { GlobalStates } from "../../../context/ContextProvider";
-import OrderNow from "../../Detail/Buttonwork/OrderNow";
-import SendBiodata from "../../Detail/Buttonwork/SendBiodata";
-import SendOffer from "../../Detail/Buttonwork/SendOffer";
+import OrderNow from "../Detail/Buttonwork/OrderNow";
+import SendBiodata from "../Detail/Buttonwork/SendBiodata";
+import SendOffer from "../Detail/Buttonwork/SendOffer";
 import BundlePromote from "../promote/BundlePromote";
 import Account from "./account/Account";
 

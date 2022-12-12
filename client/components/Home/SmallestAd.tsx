@@ -3,7 +3,7 @@ import { GoLocation } from "react-icons/go";
 import { useRouter } from "next/router";
 import { GlobalStates } from "../../context/ContextProvider";
 
-import Add from "../Detail/Add";
+import Add from "./Detail/Add";
 import { useScrollDir } from "../../utils/ScrollDir";
 import CloseBtn from "../layout/CloseBtn";
 import React from "react";

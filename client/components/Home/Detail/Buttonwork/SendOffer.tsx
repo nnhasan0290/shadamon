@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { BsArrowUp } from "react-icons/bs";
-import { GlobalStates } from "../../../context/ContextProvider";
+import { GlobalStates } from "../../../../context/ContextProvider";
 
 export default function () {
-  const {modalState:{chatState}} = GlobalStates()
+  const {
+    modalState: { chatState },
+  } = GlobalStates();
   const [chat, setChatState] = useState(chatState);
-  
+
   return (
     <div className="w-full mb-[60px]">
       <div className="flex self-start justify-start gap-2 p-2 bg-white  rounded-md align-start text-[13.5px] border-b shadow-lg">
         <h2
           onClick={() => setChatState(!chat)}
           className={`px-2  cursor-pointer  py-1 font-semibold rounded-md transition-all duration-300 ${
-            !chat? "text-white bg-common-color" : "bg-account-gray"
+            !chat ? "text-white bg-common-color" : "bg-account-gray"
           }`}
         >
           Message

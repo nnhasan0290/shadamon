@@ -1,11 +1,11 @@
 import { useSession } from "next-auth/react";
 import React, { useReducer, useContext, useState, useEffect } from "react";
-import CallBack from "../components/Detail/Buttonwork/CallBack";
-import OrderNow from "../components/Detail/Buttonwork/OrderNow";
-import SendBiodata from "../components/Detail/Buttonwork/SendBiodata";
-import SendCode from "../components/Detail/Buttonwork/SendCode";
-import SendOffer from "../components/Detail/Buttonwork/SendOffer";
-import Telephone from "../components/Detail/Buttonwork/Telephone";
+import CallBack from "../components/Home/Detail/Buttonwork/CallBack";
+import OrderNow from "../components/Home/Detail/Buttonwork/OrderNow";
+import SendBiodata from "../components/Home/Detail/Buttonwork/SendBiodata";
+import SendCode from "../components/Home/Detail/Buttonwork/SendCode";
+import SendOffer from "../components/Home/Detail/Buttonwork/SendOffer";
+import Telephone from "../components/Home/Detail/Buttonwork/Telephone";
 import Account from "../components/Home/Modal/account/Account";
 import Dashboard from "../components/Home/Modal/account/Dashboard";
 import PostAdd from "../components/Home/Modal/auth/PostAdd";
@@ -43,8 +43,8 @@ const reducer = (state: object, action: any) => {
     case "GLOBAL_MODAL":
       return { modalOpen: true, component: action.payload };
 
-    case "ADMIN_MODAL": 
-     return{ adminModalOpen: true, component: action.payload}
+    case "ADMIN_MODAL":
+      return { adminModalOpen: true, component: action.payload };
 
     case "CLEAR_MODAL":
       return { modalOpen: false, adminModalOpen: false };

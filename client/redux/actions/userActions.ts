@@ -46,7 +46,7 @@ export const loginAction = (myForm: any) => async (dispatch: any) => {
     );
     dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
   } catch (error: any) {
-    dispatch({ type: LOGIN_USER_FAIL, payload: error.response.data.error });
+    dispatch({ type: LOGIN_USER_FAIL, payload: error });
   }
 };
 
@@ -67,3 +67,8 @@ export const loadAction = () => async (dispatch: any) => {
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.error });
   }
 };
+
+export const clearError = () => (dispatch:any) => {
+  dispatch({type: "CLEAR_ERROR"})
+}
+

@@ -1,15 +1,12 @@
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { GlobalStates } from "../../../../../context/ContextProvider";
-import PostAdd from "../PostAdd";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { loginAction, signUpAction } from "../../../../../redux/actions/userActions";
-import { useSelector } from "react-redux";
+import { clearError, loginAction, signUpAction } from "../../../../../redux/actions/userActions";
 import { useAppDispatch, useAppSelector } from "../../../../../redux/hook";
+import {message} from "antd";
+import { RootState } from "../../../../../redux/store";
 
 let schema = yup.object().shape({
   name: yup.string(),
@@ -23,15 +20,29 @@ interface IFormInputs {
 }
 
 const WithEmail = ({ signState }: any) => {
+  const [messageApi, contextHolder] = message.useMessage()
   const regExp = /[a-zA-Z]/g;
-  const {signUp, login} = useAppSelector(state => state);
-  console.log(signUp, login);
+  const {signUp, login:{error,msg, success, loading}} = useAppSelector<any>((state: RootState) => state);
+  
   // const { modalDispatch } = GlobalStates();
   // const { data, status }: any = useSession();
 
   // const [user, setUser] = useState(data?.user);
   // const [name, setName] = useState(user?.name);
   // const [email, setEmail] = useState(user?.email);
+  const showError = () => {
+    messageApi.open({
+      type: 'error',
+      content: `${error}`,
+    });
+  }
+
+  useEffect(() => {
+    if(error){
+      showError();
+    }
+    dispatch(clearError());
+  },[error])
 
   const dispatch:any = useAppDispatch();
 
@@ -60,6 +71,7 @@ const WithEmail = ({ signState }: any) => {
   };
   return (
     <>
+    {contextHolder}
       <form
         action=""
         onSubmit={handleSubmit(onSubmit)}

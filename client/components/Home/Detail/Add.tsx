@@ -17,27 +17,27 @@ import MyCarousel from "./MyCarousel";
 import Telephone from "./Buttonwork/Telephone";
 import SendBiodata from "./Buttonwork/SendBiodata";
 import SendCode from "./Buttonwork/SendCode";
-import Advertisement from "../Home/Advertisement";
-import { GlobalStates } from "../../context/ContextProvider";
+import Advertisement from "../Advertisement";
+import { GlobalStates } from "../../../context/ContextProvider";
 
 const Add = () => {
   const { modalDispatch } = GlobalStates();
   const reducer = (state: any, action: any) => {
     switch (action.type) {
       case "SHADAMON":
-        modalDispatch({type: "TELEPHONE"});
+        modalDispatch({ type: "TELEPHONE" });
         return null;
       case "TELEPHONE":
-        modalDispatch({type: "TELEPHONE"});
+        modalDispatch({ type: "TELEPHONE" });
         return null;
       case "CODE":
-        modalDispatch({type: "CODE"})
+        modalDispatch({ type: "CODE" });
         return null;
       case "CALLBACK":
-        modalDispatch({type: "CALLBACK"});
+        modalDispatch({ type: "CALLBACK" });
         return null;
       case "BIODATA":
-        modalDispatch({type: "BIODATA"});
+        modalDispatch({ type: "BIODATA" });
         return null;
       case "ORDER_NOW":
         modalDispatch({ type: "ORDER_NOW" });
@@ -144,7 +144,9 @@ const Add = () => {
             >
               <BsTelephone size={36} />
             </div>
-            <span className="w-[40px] leading-3 text-center">Call Shadamon</span>
+            <span className="w-[40px] leading-3 text-center">
+              Call Shadamon
+            </span>
           </div>
           <div className="flex flex-col gap-1 justify-center items-center">
             <div
@@ -177,7 +179,7 @@ const Add = () => {
             <span className="w-[40px] leading-3 text-center">Order now</span>
           </div>
           <div className="flex flex-col gap-1 justify-center items-center">
-          <div
+            <div
               className="p-2 text-black rounded-full cursor-pointer bg-smallest-color"
               onClick={() => {
                 dispatch({ type: "SEND_OFFER" });
@@ -188,7 +190,7 @@ const Add = () => {
             <span className="w-[40px] leading-3 text-center">Send Offer</span>
           </div>
           <div className="flex flex-col gap-1 justify-center items-center">
-          <div
+            <div
               className="p-2 text-black rounded-full cursor-pointer bg-smallest-color"
               onClick={() => {
                 dispatch({ type: "MESSAGE" });
@@ -260,7 +262,7 @@ const Add = () => {
             </span>
           </div>
         </div>
-        
+
         <div className="px-2 my-2">
           <hr className="w-full h-2px bg-common-gray" />
         </div>

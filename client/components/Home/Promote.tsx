@@ -2,7 +2,7 @@ import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { FaHands } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { GlobalStates } from "../../context/ContextProvider";
-import Add from "../Detail/Add";
+import Add from "./Detail/Add";
 import { useScrollDir } from "../../utils/ScrollDir";
 import Link from "next/link";
 import CloseBtn from "../layout/CloseBtn";

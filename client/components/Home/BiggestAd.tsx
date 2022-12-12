@@ -4,7 +4,7 @@ import { GoClock, GoLocation } from "react-icons/go";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { GlobalStates } from "../../context/ContextProvider";
-import Add from "../Detail/Add";
+import Add from "./Detail/Add";
 
 import { useScrollDir } from "../../utils/ScrollDir";
 import CloseBtn from "../layout/CloseBtn";
