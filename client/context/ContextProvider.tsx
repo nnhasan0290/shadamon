@@ -16,6 +16,7 @@ const GlobalContext: any = React.createContext({});
 
 const initialState = {
   modalOpen: false,
+  adminModalOpen: false,
   component: "",
 };
 
@@ -42,8 +43,11 @@ const reducer = (state: object, action: any) => {
     case "GLOBAL_MODAL":
       return { modalOpen: true, component: action.payload };
 
+    case "ADMIN_MODAL": 
+     return{ adminModalOpen: true, component: action.payload}
+
     case "CLEAR_MODAL":
-      return { modalOpen: false };
+      return { modalOpen: false, adminModalOpen: false };
     default:
       return state;
   }

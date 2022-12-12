@@ -5,7 +5,11 @@ const handleChange = (value: string) => {
   console.log(`selected ${value}`);
 };
 
-const FormSelect: React.FC = () => (
+interface data {
+  label: string,
+}
+
+const FormSelect = ({label}:data) => (
   <>
     <Form.Item
       style={{
@@ -16,7 +20,7 @@ const FormSelect: React.FC = () => (
       }}
     >
       <fieldset className="common__fieldset">
-        <legend className="">label</legend>
+        <legend className="">{label}</legend>
         <Select
           defaultValue="lucy"
           style={{ width: "100%" }}

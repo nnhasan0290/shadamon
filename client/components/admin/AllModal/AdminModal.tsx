@@ -1,37 +1,27 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
-import { Form, Select, Input } from "antd";
-import FormInput from "./FormInput";
-import FormMultiSelect from "./FormMultiSelect";
-import FormSelect from "./FormSelect";
+import { Modal } from "antd";
+import { GlobalStates } from "../../../context/ContextProvider";
 
 const AdminModal: React.FC = () => {
-  const [open, setOpen] = useState(true);
+  const {modalState:{adminModalOpen, component}, modalDispatch} = GlobalStates();
 
   return (
     <div>
+      {
+        adminModalOpen && (
+
       <Modal
-        title="Modal 1000px width"
         centered
-        open={open}
-        onOk={() => setOpen(false)}
-        onCancel={() => setOpen(false)}
+        footer={null}
+        open={true}
+        onOk={() => modalDispatch({type: "CLEAR_MODAL"})}
+        onCancel={() => modalDispatch({type: "CLEAR_MODAL"})}
         width={"100%"}
       >
-        <Form>
-          <div className="flex flex-wrap">
-            <span className="basis-1/4">
-              <FormInput label="Person Name" />
-            </span>
-            <span className="basis-1/4">
-              <FormMultiSelect />
-            </span>
-            <span className="basis-1/4">
-              <FormSelect />
-            </span>
-          </div>
-        </Form>
+       {component}
       </Modal>
+        )
+      }
     </div>
   );
 };

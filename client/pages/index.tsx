@@ -19,13 +19,21 @@ import AddPost from "../components/Home/AddPost";
 import SearchSome from "../components/Home/SearchSome";
 import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { loadAction } from "../redux/actions/userActions";
 
 export default function Home() {
   const {
     modalState: { modalOpen },
   } = GlobalStates();
+  const dispatch:any = useAppDispatch();
 
+  const data = useAppSelector(state => state.load);
+  console.log(data);
+
+useEffect(() => {
+  dispatch(loadAction());
+},[])
   
   return (
     <>

@@ -1,6 +1,9 @@
 import axios from "axios";
 
 import {
+  LOAD_USER_FAIL,
+  LOAD_USER_REQ,
+  LOAD_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER_REQ,
   LOGIN_USER_SUCCESS,
@@ -44,5 +47,23 @@ export const loginAction = (myForm: any) => async (dispatch: any) => {
     dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
   } catch (error: any) {
     dispatch({ type: LOGIN_USER_FAIL, payload: error.response.data.error });
+  }
+};
+
+
+export const loadAction = () => async (dispatch: any) => {
+  try {
+    dispatch({ type: LOAD_USER_REQ });
+    console.log(process.env.NEXT_PUBLIC_HOST);
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/auth/cookiefind`,
+      config
+    );
+    dispatch({ type: LOAD_USER_SUCCESS, payload: data });
+  } catch (error: any) {
+    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.error });
   }
 };

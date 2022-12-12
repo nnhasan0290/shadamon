@@ -8,12 +8,13 @@ import {createStore} from "redux"
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { defaultReducer } from "./reducers/defaultReducer";
-import { loginReducer, signUpReducer } from "./reducers/userReducer";
+import { loadReducer, loginReducer, signUpReducer } from "./reducers/userReducer";
 
 const rootReducer = combineReducers({
   default: defaultReducer,
   signUp: signUpReducer,
   login: loginReducer,
+  load: loadReducer
 });
 
 const middleware:any = [thunk];
