@@ -21,20 +21,22 @@ import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { loadAction } from "../redux/actions/userActions";
+import ShowWarning from "../utils/ShowWarning";
 
 export default function Home() {
   const {
     modalState: { modalOpen },
   } = GlobalStates();
-  const dispatch:any = useAppDispatch();
+  // const dispatch: any = useAppDispatch();
 
-  const data = useAppSelector(state => state.load);
-  console.log(data);
+  // const data = useAppSelector((state) => state.load);
 
-useEffect(() => {
-  dispatch(loadAction());
-},[])
-  
+ 
+
+  // useEffect(() => {
+  //   dispatch(loadAction());
+  // }, []);
+
   return (
     <>
       <Head>
@@ -47,6 +49,7 @@ useEffect(() => {
           modalOpen && "h-[100vh] overflow-hidden"
         }`}
       >
+        <ShowWarning />
         <Heading />
         <div className="flex gap-[50px] justify-center">
           <div className=" w-[250px] hidden lg:block">

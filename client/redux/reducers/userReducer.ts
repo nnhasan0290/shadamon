@@ -1,13 +1,13 @@
 import { LOAD_USER_FAIL, LOAD_USER_REQ, LOAD_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_REQ, LOGIN_USER_SUCCESS, SIGNUP_USER_FAIL, SIGNUP_USER_REQ, SIGNUP_USER_SUCCESS } from "../consts/userConst";
 
 interface dataType{
-  laoding: boolean,
+  loading: boolean,
   msg: string,
   success: boolean,
   error: string,
 }
 const initialState: dataType = {
-  laoding: false,
+  loading: false,
   msg: "",
   success: false,
   error: ""

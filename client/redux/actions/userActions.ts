@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GlobalStates } from "../../context/ContextProvider";
 
 import {
   LOAD_USER_FAIL,
@@ -32,10 +33,9 @@ export const signUpAction = (myForm: any) => async (dispatch: any) => {
   }
 };
 
-export const loginAction = (myForm: any) => async (dispatch: any) => {
+export const loginAction = (myForm: any) => {
+  return async (dispatch: any) => {
   try {
-    dispatch({ type: LOGIN_USER_REQ });
-    console.log(process.env.NEXT_PUBLIC_HOST);
     const config = {
       withCredentials: true,
     };
@@ -48,7 +48,8 @@ export const loginAction = (myForm: any) => async (dispatch: any) => {
   } catch (error: any) {
     dispatch({ type: LOGIN_USER_FAIL, payload: error });
   }
-};
+}
+}
 
 
 export const loadAction = () => async (dispatch: any) => {

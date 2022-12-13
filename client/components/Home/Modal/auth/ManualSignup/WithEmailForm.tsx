@@ -1,16 +1,21 @@
-
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { clearError, loginAction, signUpAction } from "../../../../../redux/actions/userActions";
+import {
+  clearError,
+  loginAction,
+  signUpAction,
+} from "../../../../../redux/actions/userActions";
 import { useAppDispatch, useAppSelector } from "../../../../../redux/hook";
-import {message} from "antd";
+import { message } from "antd";
 import { RootState } from "../../../../../redux/store";
+import { useEffect } from "react";
+import { GlobalStates } from "../../../../../context/ContextProvider";
 
 let schema = yup.object().shape({
   name: yup.string(),
   password: yup.string().min(6).max(15).required(),
+  email: yup.string(),
 });
 
 interface IFormInputs {
@@ -20,31 +25,21 @@ interface IFormInputs {
 }
 
 const WithEmail = ({ signState }: any) => {
-  const [messageApi, contextHolder] = message.useMessage()
   const regExp = /[a-zA-Z]/g;
-  const {signUp, login:{error,msg, success, loading}} = useAppSelector<any>((state: RootState) => state);
+  const { signUp, login } = useAppSelector<any>((state: RootState) => state);
   
-  // const { modalDispatch } = GlobalStates();
+
+
+  const {
+    modalState: { warning },
+    modalDispatch,
+  } = GlobalStates();
   // const { data, status }: any = useSession();
 
   // const [user, setUser] = useState(data?.user);
   // const [name, setName] = useState(user?.name);
   // const [email, setEmail] = useState(user?.email);
-  const showError = () => {
-    messageApi.open({
-      type: 'error',
-      content: `${error}`,
-    });
-  }
-
-  useEffect(() => {
-    if(error){
-      showError();
-    }
-    dispatch(clearError());
-  },[error])
-
-  const dispatch:any = useAppDispatch();
+  const dispatch: any = useAppDispatch();
 
   const {
     register,
@@ -55,23 +50,30 @@ const WithEmail = ({ signState }: any) => {
   });
 
   const onSubmit = (data: any) => {
-   
-    if(signState !== 'LOGIN'){
+    modalDispatch({type:"WARNING", payload:{type:"loading", content: "please wait..."}})
+    if (signState !== "LOGIN") {
       if (regExp.test(data.email)) {
-       dispatch(signUpAction(data))
+        dispatch(signUpAction(data));
       } else {
-        dispatch(signUpAction({name: data.name, phone: data.email, password: data.password}))
+        dispatch(
+          signUpAction({
+            name: data.name,
+            phone: data.email,
+            password: data.password,
+          })
+        );
       }
-      
-    } else{
-      dispatch(loginAction({emailphone: data.email, password: data.password}));
+    } else {
+      dispatch(
+        loginAction({ emailphone: data.email, password: data.password })
+      );
     }
+    dispatch(clearError())
 
     // modalDispatch({ type: "GLOBAL_MODAL", payload: <PostAdd /> });
   };
   return (
     <>
-    {contextHolder}
       <form
         action=""
         onSubmit={handleSubmit(onSubmit)}

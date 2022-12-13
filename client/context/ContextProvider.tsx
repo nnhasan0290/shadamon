@@ -11,13 +11,16 @@ import Dashboard from "../components/Home/Modal/account/Dashboard";
 import PostAdd from "../components/Home/Modal/auth/PostAdd";
 import BundlePromote from "../components/Home/promote/BundlePromote";
 import SignUp from "../components/Home/Modal/auth/Signup";
-
 const GlobalContext: any = React.createContext({});
 
 const initialState = {
   modalOpen: false,
   adminModalOpen: false,
   component: "",
+  warning: {
+    type: "",
+    content: "",
+  },
 };
 
 const reducer = (state: object, action: any) => {
@@ -39,15 +42,20 @@ const reducer = (state: object, action: any) => {
 
     case "PROMOTE":
       return { modalOpen: true, component: <BundlePromote /> };
+    case "WARNING":
+      console.log("warn");
+      return { ...state,warning:{ ...action.payload} };
 
     case "GLOBAL_MODAL":
-      return { modalOpen: true, component: action.payload };
+      return { ...state,modalOpen: true, component: action.payload };
 
     case "ADMIN_MODAL":
       return { adminModalOpen: true, component: action.payload };
 
     case "CLEAR_MODAL":
-      return { modalOpen: false, adminModalOpen: false };
+      return {...state, modalOpen: false, adminModalOpen: false };
+    case "CLEEAR_WARNING":
+      return{...state,warning:{type:"", content: ""}}
     default:
       return state;
   }
