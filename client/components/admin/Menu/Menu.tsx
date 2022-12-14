@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from "next/link";
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -30,8 +31,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Dashboard', '1', <PieChartOutlined />),
-  getItem('Blogs', '2', <DesktopOutlined />),
+  getItem(<Link href="/admin">Dashboard</Link>, '1', <PieChartOutlined />),
+  getItem( <Link href="/admin/blogs">Blogs</Link>, '2', <DesktopOutlined />),
   getItem('Option 3', '3', <ContainerOutlined />),
 
   getItem('Navigation One', 'sub1', <MailOutlined />, [
