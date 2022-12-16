@@ -2,6 +2,9 @@ import Head from "next/head";
 import AdminModal from "../../components/admin/AllModal/AdminModal";
 import MchantData from "../../components/admin/dashboardPage/MchantData";
 import SideMenu from "../../components/admin/Menu/Menu";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Admin() {
 

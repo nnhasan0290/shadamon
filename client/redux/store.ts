@@ -7,6 +7,7 @@ import {
 import {createStore} from "redux"
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { GetParentCategoryReducer } from "./reducers/admin/catReducer";
 import { defaultReducer } from "./reducers/defaultReducer";
 import { loadReducer, loginReducer, signUpReducer } from "./reducers/userReducer";
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   default: defaultReducer,
   signUp: signUpReducer,
   login: loginReducer,
-  load: loadReducer
+  load: loadReducer,
+  adminCat: GetParentCategoryReducer
 });
 
 const middleware:any = [thunk];
