@@ -1,9 +1,11 @@
+import { useEffect } from "react";
+import { useAppSelector } from "../../../../redux/hook";
 import MultiSelectTreeView from "../../TreeView";
 
 const PostAdd = () => {
   return (
     <>
-      <p className="font-semibold bg-orange-100 w-full text-center py-2">
+      <p className="py-2 w-full font-semibold text-center bg-orange-100">
         Your account successfully created
       </p>
       <div>

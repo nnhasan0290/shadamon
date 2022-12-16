@@ -21,7 +21,9 @@ import Advertisement from "../components/Home/Advertisement";
 import CategoryArea from "../components/Home/CategoryArea";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { loadAction } from "../redux/actions/userActions";
-import ShowWarning from "../utils/ShowWarning";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const {
@@ -49,7 +51,7 @@ export default function Home() {
           modalOpen && "h-[100vh] overflow-hidden"
         }`}
       >
-        <ShowWarning />
+        <ToastContainer/>
         <Heading />
         <div className="flex gap-[50px] justify-center">
           <div className=" w-[250px] hidden lg:block">

@@ -17,10 +17,6 @@ const initialState = {
   modalOpen: false,
   adminModalOpen: false,
   component: "",
-  warning: {
-    type: "",
-    content: "",
-  },
 };
 
 const reducer = (state: object, action: any) => {
@@ -54,8 +50,6 @@ const reducer = (state: object, action: any) => {
 
     case "CLEAR_MODAL":
       return {...state, modalOpen: false, adminModalOpen: false };
-    case "CLEEAR_WARNING":
-      return{...state,warning:{type:"", content: ""}}
     default:
       return state;
   }

@@ -2,15 +2,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  clearError,
   loginAction,
   signUpAction,
 } from "../../../../../redux/actions/userActions";
 import { useAppDispatch, useAppSelector } from "../../../../../redux/hook";
-import { message } from "antd";
 import { RootState } from "../../../../../redux/store";
 import { useEffect } from "react";
 import { GlobalStates } from "../../../../../context/ContextProvider";
+import PostAdd from "../PostAdd";
 
 let schema = yup.object().shape({
   name: yup.string(),
@@ -26,14 +25,10 @@ interface IFormInputs {
 
 const WithEmail = ({ signState }: any) => {
   const regExp = /[a-zA-Z]/g;
+  const { modalDispatch } = GlobalStates();
   const { signUp, login } = useAppSelector<any>((state: RootState) => state);
-  
+  console.log(signUp, login);
 
-
-  const {
-    modalState: { warning },
-    modalDispatch,
-  } = GlobalStates();
   // const { data, status }: any = useSession();
 
   // const [user, setUser] = useState(data?.user);
@@ -50,7 +45,6 @@ const WithEmail = ({ signState }: any) => {
   });
 
   const onSubmit = (data: any) => {
-    modalDispatch({type:"WARNING", payload:{type:"loading", content: "please wait..."}})
     if (signState !== "LOGIN") {
       if (regExp.test(data.email)) {
         dispatch(signUpAction(data));
@@ -68,10 +62,17 @@ const WithEmail = ({ signState }: any) => {
         loginAction({ emailphone: data.email, password: data.password })
       );
     }
-    dispatch(clearError())
-
-    // modalDispatch({ type: "GLOBAL_MODAL", payload: <PostAdd /> });
   };
+  useEffect(() => {
+    if (login?.details?.success) {
+      modalDispatch({ type: "CLEAR_MODAL" });
+    }
+  }, [login]);
+  useEffect(() => {
+    if (signUp?.details?.success) {
+      modalDispatch({ type: "CLEAR_MODAL" });
+    }
+  }, [signUp]);
   return (
     <>
       <form

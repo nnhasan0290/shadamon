@@ -10,6 +10,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useScrollDir } from "../../utils/ScrollDir";
 import SignUp from "../Home/Modal/auth/Signup";
+import PostAdd from "../Home/Modal/auth/PostAdd";
 
 const Heading = () => {
   //states
@@ -57,11 +58,11 @@ const Heading = () => {
               <FaEnvelope />
             </div>
             <div>
-              <button onClick={() => modalDispatch({type: "GLOBAL_MODAL", payload: <SignUp/>})} className="px-1 py-1 font-medium tracking-tight text-white whitespace-nowrap uppercase rounded-full text-[13px] hidden lg:block cursor-pointer bg-common-color">
+              <button onClick={() => modalDispatch({type: "GLOBAL_MODAL", payload: <PostAdd/>})} className="px-1 py-1 font-medium tracking-tight text-white whitespace-nowrap uppercase rounded-full text-[13px] hidden lg:block cursor-pointer bg-common-color">
                 post add
               </button>
             </div>
-            <div className="nav__icon">
+            <div className="nav__icon" onClick={() => modalDispatch({type: "GLOBAL_MODAL", payload: <SignUp/>})}>
               <GoChevronDown />
             </div>
           </div>
