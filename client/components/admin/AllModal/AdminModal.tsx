@@ -6,7 +6,7 @@ const AdminModal: React.FC = () => {
   const {modalState:{adminModalOpen, component}, modalDispatch} = GlobalStates();
 
   return (
-    <div>
+    <div className="mt-10">
       {
         adminModalOpen && (
 
@@ -17,6 +17,7 @@ const AdminModal: React.FC = () => {
         onOk={() => modalDispatch({type: "CLEAR_MODAL"})}
         onCancel={() => modalDispatch({type: "CLEAR_MODAL"})}
         width={"100%"}
+        className="mt-[100px]"
       >
        {component}
       </Modal>

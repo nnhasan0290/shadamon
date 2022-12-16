@@ -7,7 +7,6 @@ import FormUpload from "../FormElements/FormUpload";
 export default function () {
   return (
     <Form>
-        <h2 className="p-1 px-3 mr-5 bg-gray-300 rounded-md">User Info</h2>
       <div className="flex flex-wrap">
         <span className="basis-1/5">
           <FormInput label="Person Name" />
@@ -67,17 +66,15 @@ export default function () {
         <span className="basis-2/5">
           <FormInput label="Full Address" />
         </span>
-        <span className="basis-full">
-            <FormTextArea label="Note"/>
-        </span>
-        <span className="basis-full">
-            <p>Upload document Photo</p>
-            <FormUpload/>
-        </span>
-        <Button className="py-1 text-white bg-red-700 basis-1/5 hover:border-none" > Cancel</Button>
-        <div className="pl-3  basis-4/5">
-            
-        <Button className="w-full text-white bg-green-700 hover:border-none" > Save</Button>
+        <div>
+          <Button className="py-1 text-white bg-red-700 hover:border-none">
+            {" "}
+            Hide Search
+          </Button>
+          <Button className="text-white bg-green-700 hover:border-none">
+            {" "}
+            Search
+          </Button>
         </div>
       </div>
     </Form>

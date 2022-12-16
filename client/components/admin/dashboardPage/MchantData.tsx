@@ -1,6 +1,6 @@
 import { Divider } from "antd";
 import ButtonArea from "./ButtonArea";
-import MerchantDetails from "./MerchantDetails";
+import MerchantDetails from "./MerchantDetailsTable";
 
 export default function MchantData() {
   return (
