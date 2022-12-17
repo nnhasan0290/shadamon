@@ -11,7 +11,7 @@ export default function ({ label }: any) {
       }}
     >
       <fieldset className="common__fieldset">
-        <legend className="">label</legend>
+        <legend className="">{label}</legend>
         <Select
           bordered={false}
           getPopupContainer={(trigger) => trigger.parentNode}

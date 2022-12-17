@@ -16,10 +16,8 @@ const FormSelect = ({ label, optionsObj, placeholder,name }: data) => {
   const { Option } = Select;
   return (
     <>
-      {/* <fieldset className="common__fieldset">
-        <legend className="">{label}</legend> */}
       <Form.Item
-        className="mx-2"
+        className=""
         name={name}
         rules={[{ required: true, message: " Required" }]}
       >
@@ -31,7 +29,6 @@ const FormSelect = ({ label, optionsObj, placeholder,name }: data) => {
           ))}
         </Select>
       </Form.Item>
-      {/* </fieldset> */}
     </>
   );
 };

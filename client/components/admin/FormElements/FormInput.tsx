@@ -4,7 +4,7 @@ export default function ({ label,name,placeholder }: any) {
   return (
     <Form.Item
     name={name}
-    className="mx-2"
+    className=""
     rules={[{ required: true, message: `Required` }]}
     
   >
