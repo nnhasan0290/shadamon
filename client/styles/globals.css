@@ -114,7 +114,6 @@ img {
 .common__fieldset {
   border: 1px solid #e5e7eb;
   border-radius: 5px;
-  margin: 5px;
 }
 .common__fieldset legend {
   width: auto;

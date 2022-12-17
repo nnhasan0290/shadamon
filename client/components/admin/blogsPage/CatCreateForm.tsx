@@ -2,7 +2,7 @@ import { Button, Divider, Form } from "antd";
 import { useEffect } from "react";
 import { BiPlus } from "react-icons/bi";
 import { GlobalStates } from "../../../context/ContextProvider";
-import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
+import { getAllCategories, getParentCategories } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import FormInput from "../FormElements/FormInput";
 import FormSelect from "../FormElements/FormSelect";
@@ -11,11 +11,15 @@ import SmallCreateCat from "./SmallCreateCat";
 export default function () {
   const dispatch = useAppDispatch();
   const { res } = useAppSelector((state) => state.adminCat);
+  const {allCat} = useAppSelector((state) => state);
   const { modalDispatch } = GlobalStates();
 
   const options: any = [];
   useEffect(() => {
     dispatch(getParentCategories());
+  }, []);
+  useEffect(() => {
+    dispatch(getAllCategories());
   }, []);
   return (
     <div className="flex">
@@ -46,7 +50,7 @@ export default function () {
           </div>
           <div className="flex gap-3 justify-between pr-5 basis-1/2">
             <div className="w-full">
-              <FormSelect label="" placeholder="Categories" />
+              <FormSelect label="" optionsObj={allCat?.res?.data} placeholder="Categories" />
             </div>
             <div className="py-1">
               <Button

@@ -1,6 +1,6 @@
 import { Form, Select, Input, Button } from "antd";
 import FormInput from "../FormElements/FormInput";
-import FormSelect from "../FormElements/FormSelect";
+import FormSelectWithFieldset from "../FormElements/FormSelectFieldset";
 import FormTextArea from "../FormElements/FormTextArea";
 import FormUpload from "../FormElements/FormUpload";
 
@@ -13,35 +13,35 @@ export default function () {
           <FormInput label="Person Name" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Account Status" />
+          <FormSelectWithFieldset label="Account Status" />
         </span>
         <span className="basis-1/5">
           <FormInput label="Email" />
         </span>
 
         <span className="basis-1/5">
-          <FormSelect label="Date Of Birth" />
+          <FormSelectWithFieldset label="Date Of Birth" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Gender" />
+          <FormSelectWithFieldset label="Gender" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Verification Icon" />
+          <FormSelectWithFieldset label="Verification Icon" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Location" />
+          <FormSelectWithFieldset label="Location" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Education" />
+          <FormSelectWithFieldset label="Education" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Education In" />
+          <FormSelectWithFieldset label="Education In" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Current Job" />
+          <FormSelectWithFieldset label="Current Job" />
         </span>
         <span className="basis-1/5">
-          <FormSelect label="Job Experience" />
+          <FormSelectWithFieldset label="Job Experience" />
         </span>
         <span className="basis-1/5">
           <FormInput label="Mobile Verified" />

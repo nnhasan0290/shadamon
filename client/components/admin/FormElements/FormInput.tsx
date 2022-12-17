@@ -4,13 +4,13 @@ export default function ({ label,name,placeholder }: any) {
   return (
     <Form.Item
     name={name}
-    className="w-full"
+    className="mx-2"
     rules={[{ required: true, message: `Required` }]}
     
   >
     <fieldset className="common__fieldset">
       <legend className=""> {label}</legend>
-      <Input placeholder={placeholder} className="p-0 px-3 pb-0 m-0"></Input>
+      <Input placeholder={placeholder} className=""></Input>
     </fieldset>
   </Form.Item>
 

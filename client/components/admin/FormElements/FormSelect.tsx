@@ -9,7 +9,7 @@ interface data {
   label?: string;
   optionsObj?: any;
   placeholder?: string;
-  name?:string
+  name?:string;
 }
 
 const FormSelect = ({ label, optionsObj, placeholder,name }: data) => {
@@ -19,14 +19,14 @@ const FormSelect = ({ label, optionsObj, placeholder,name }: data) => {
       {/* <fieldset className="common__fieldset">
         <legend className="">{label}</legend> */}
       <Form.Item
-        className=""
+        className="mx-2"
         name={name}
         rules={[{ required: true, message: " Required" }]}
       >
-        <Select className="w-full common__fieldset" placeholder={placeholder}>
+        <Select getPopupContainer={trigger => trigger.parentNode} className="common__fieldset" placeholder={placeholder}>
           {optionsObj?.map((each: any, i: any) => (
             <Option key={i} value={each._id}>
-              {each.name}
+              {each.name ? each.name : each.categoryName}
             </Option>
           ))}
         </Select>

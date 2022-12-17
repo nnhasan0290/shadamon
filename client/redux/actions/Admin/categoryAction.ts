@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   CREATE_CATEGORY,
+  GET_CATEGORIES,
   GET_PARENT_CATEGORY,
 } from "../../consts/admin/categoryConst";
 import { toast } from "react-toastify";
@@ -44,5 +45,21 @@ export const createCategory = (formdata: any) => async (dispatch: any) => {
       isLoading: false,
       autoClose: 2000,
     });
+  }
+};
+
+
+export const getAllCategories = () => async (dispatch: any) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/getallcategory`,
+      config
+    );
+    dispatch({ type: GET_CATEGORIES, payload: data });
+  } catch (error: any) {
+    console.log(error)
   }
 };
