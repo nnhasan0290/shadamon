@@ -7,6 +7,7 @@ import SideMenu from "../../components/admin/Menu/Menu";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import SmallModal from "../../components/admin/AllModal/SmallModal";
 
 export default function Admin() {
   return (
@@ -21,7 +22,8 @@ export default function Admin() {
         <div className="min-h-screen bg-[#001529]">
           <SideMenu />
         </div>
-        <AdminModal/>
+        <AdminModal />
+        <SmallModal/>
         <div className="mr-4 w-full">
           <TopAvatarArea/>
           <BlogBtn/>

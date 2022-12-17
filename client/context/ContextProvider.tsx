@@ -16,7 +16,9 @@ const GlobalContext: any = React.createContext({});
 const initialState = {
   modalOpen: false,
   adminModalOpen: false,
+  smallModalOpen:false,
   component: "",
+  smComponent: "",
 };
 
 const reducer = (state: object, action: any) => {
@@ -38,9 +40,6 @@ const reducer = (state: object, action: any) => {
 
     case "PROMOTE":
       return { modalOpen: true, component: <BundlePromote /> };
-    case "WARNING":
-      console.log("warn");
-      return { ...state,warning:{ ...action.payload} };
 
     case "GLOBAL_MODAL":
       return { ...state,modalOpen: true, component: action.payload };
@@ -48,8 +47,13 @@ const reducer = (state: object, action: any) => {
     case "ADMIN_MODAL":
       return { adminModalOpen: true, component: action.payload };
 
+    case "SMALL_MODAL":
+      return {...state, smallModalOpen: true, smComponent: action.payload };
+
     case "CLEAR_MODAL":
-      return {...state, modalOpen: false, adminModalOpen: false };
+      return {...state, modalOpen: false, adminModalOpen: false,smallModalOpen:false };
+    case "CLEAR_SM_MODAL":
+      return {...state, smallModalOpen:false };
     default:
       return state;
   }

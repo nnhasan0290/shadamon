@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Select, Form } from "antd";
 
 const handleChange = (value: string) => {
@@ -6,48 +6,34 @@ const handleChange = (value: string) => {
 };
 
 interface data {
-  label: string,
+  label?: string;
+  optionsObj?: any;
+  placeholder?: string;
+  name?:string
 }
 
-const FormSelect = ({label}:data) => (
-  <>
-    <Form.Item
-      style={{
-        marginBottom: 0,
-        padding: 0,
-        flexBasis: "50%",
-        position: "relative",
-      }}
-    >
-      <fieldset className="common__fieldset">
-        <legend className="">{label}</legend>
-        <Select
-          defaultValue="lucy"
-          style={{ width: "100%" }}
-          onChange={handleChange}
-          options={[
-            {
-              value: "jack",
-              label: "Jack",
-            },
-            {
-              value: "lucy",
-              label: "Lucy",
-            },
-            {
-              value: "disabled",
-              disabled: true,
-              label: "Disabled",
-            },
-            {
-              value: "Yiminghe",
-              label: "yiminghe",
-            },
-          ]}
-        />
-      </fieldset>
-    </Form.Item>
-  </>
-);
+const FormSelect = ({ label, optionsObj, placeholder,name }: data) => {
+  const { Option } = Select;
+  return (
+    <>
+      {/* <fieldset className="common__fieldset">
+        <legend className="">{label}</legend> */}
+      <Form.Item
+        className=""
+        name={name}
+        rules={[{ required: true, message: " Required" }]}
+      >
+        <Select className="w-full common__fieldset" placeholder={placeholder}>
+          {optionsObj?.map((each: any, i: any) => (
+            <Option key={i} value={each._id}>
+              {each.name}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+      {/* </fieldset> */}
+    </>
+  );
+};
 
 export default FormSelect;
