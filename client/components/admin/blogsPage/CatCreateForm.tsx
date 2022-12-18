@@ -11,7 +11,9 @@ import { useEffect } from "react";
 import { BiPlus } from "react-icons/bi";
 import { GlobalStates } from "../../../context/ContextProvider";
 import {
+  createSubCatAction,
   getAllCategories,
+  getFeaturesAction,
   getParentCategories,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
@@ -26,20 +28,37 @@ import FeatureForm from "./FeatureForm";
 export default function () {
   const dispatch = useAppDispatch();
   const { res } = useAppSelector((state) => state.adminCat);
-  const { allCat } = useAppSelector((state) => state);
+  const { allCat, allFeatures,createSub } = useAppSelector((state) => state);
   const { modalDispatch } = GlobalStates();
+  const [form] = Form.useForm();
 
-  const options: any = [];
+ 
   useEffect(() => {
     dispatch(getParentCategories());
-  }, []);
-  useEffect(() => {
     dispatch(getAllCategories());
+    dispatch(getFeaturesAction());
   }, []);
+
+  const onFinish = (values: any) => {
+    dispatch(createSubCatAction(values));
+    console.log("Success:", values);
+    console.log(createSub);
+    // form.resetFields();
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <div className="flex items-start">
-      <div className="flex flex-wrap justify-between py-1 pr-2 border-r border-b shadow-sm basis-1/2">
-        <Form className="flex flex-wrap justify-between basis-full">
+      <div className="flex flex-wrap justify-between py-1 pr-2 border-b shadow-sm basis-1/2">
+        <Form
+          form={form}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          className="flex flex-wrap justify-between basis-full"
+        >
           <div className="flex gap-2 items-center font-bold">
             <span className="p-1 text-white bg-gray-700 rounded-full">
               <BiPlus />
@@ -62,17 +81,11 @@ export default function () {
             </Button>
           </div>
           <Divider className="my-2" />
-          <div className="basis-[250px]">
-            <FormSelect optionsObj={res?.data} placeholder="parent" label="" />
-          </div>
-          <div className="basis-[250px]">
-            <FormMultiSelect />
-          </div>
-
           <div className="flex gap-3 justify-between basis-[250px]">
             <div className="w-full">
               <FormSelect
                 label=""
+                name="categoryId"
                 optionsObj={allCat?.res?.data}
                 placeholder="Categories"
               />
@@ -93,84 +106,68 @@ export default function () {
             </div>
           </div>
           <div className="basis-[250px]">
-            <InputNumber
-              placeholder="Ordering"
-              className="w-full"
-            ></InputNumber>
+            <FormMultiSelect
+              name="features"
+              placeholder="Feature Type"
+              optionsObj={allFeatures?.res?.data}
+            />
           </div>
           <div className="basis-[250px]">
-            <InputNumber
-              placeholder="Free Post"
-              className="w-full"
-            ></InputNumber>
+            <Form.Item
+              name="subCategoryName"
+              rules={[{ required: true, message: " Required" }]}
+            >
+              <Input placeholder="Sub Category Name" className="w-full"></Input>
+            </Form.Item>
           </div>
           <div className="basis-[250px]">
-            <FormSelect label="" placeholder="Button Type" />
+            <Form.Item
+              name="ordering"
+              rules={[{ required: true, message: " Required" }]}
+            >
+              <InputNumber
+                placeholder="Ordering"
+                className="w-full"
+              ></InputNumber>
+            </Form.Item>
           </div>
           <div className="basis-[250px]">
-            <Form.List name="names">
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item required={false} key={field.key} className="">
-                      <div className="flex gap-2 items-center">
-                        <Form.Item
-                          className=""
-                          {...field}
-                          validateTrigger={["onChange", "onBlur"]}
-                          rules={[
-                            {
-                              required: true,
-                              whitespace: true,
-                              message: "Please input field.",
-                            },
-                          ]}
-                          noStyle
-                        >
-                          <Input placeholder="SubCategory name" />
-                        </Form.Item>
-                        {fields.length > 1 ? (
-                          <MinusCircleOutlined
-                            className="dynamic-delete-button"
-                            onClick={() => remove(field.name)}
-                          />
-                        ) : null}
-                      </div>
-                    </Form.Item>
-                  ))}
-                  <Form.Item>
-                    <Button
-                      className="hover:bg-blue-600"
-                      type="dashed"
-                      onClick={() => add()}
-                      icon={<PlusOutlined />}
-                    >
-                      Add SubCategory
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
+            <Form.Item
+              name="freePost"
+              rules={[{ required: true, message: " Required" }]}
+            >
+              <InputNumber
+                placeholder="Free Post"
+                className="w-full"
+              ></InputNumber>
+            </Form.Item>
           </div>
+
           <div className="basis-[250px] flex justify-between">
             <Typography>Status</Typography>
-            <Radio.Group name="radiogroup" defaultValue={1}>
-              <Radio value={1}>Yes</Radio>
-              <Radio value={2}>No</Radio>
-            </Radio.Group>
+            <Form.Item
+              name="status"
+              rules={[{ required: true, message: " Required" }]}
+            >
+              <Radio.Group>
+                <Radio value={true}> Yes </Radio>
+                <Radio value={false}> No </Radio>
+              </Radio.Group>
+            </Form.Item>
           </div>
         </Form>
       </div>
-      <div className="basis-1/2">
-        <Divider className="mb-2"/>
-        <Button className="flex items-center text-white bg-gray-700" icon={<BiPlus size={20}/>}> </Button>
-        <Divider className="my-2"/>
+      <div className="px-2 pt-1 border-l basis-1/2">
+        <Button
+          className="flex items-center text-white bg-gray-700"
+          icon={<BiPlus size={20} />}
+        >
+          {" "}
+        </Button>
+        <Divider className="my-2" />
         <FeatureTable />
-        <Divider />
-        <div className="mx-2">
-        <FeatureForm/>
-          
+        <div className="mt-[100px]">
+          <FeatureForm />
         </div>
       </div>
     </div>

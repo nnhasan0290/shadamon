@@ -23,12 +23,13 @@ import FormSelect from "../FormElements/FormSelect";
 
 export default function ({ parentCat }: any) {
   const dispatch = useAppDispatch();
+  const [form] = Form.useForm();
 
   const { res } = useAppSelector((state) => state.createCat);
   console.log(res);
 
   const onFinish = (values: any) => {
-    //  dispatch(createCategory(values))
+      dispatch(createCategory(values))
     console.log("Success:", values);
   };
 
@@ -36,28 +37,29 @@ export default function ({ parentCat }: any) {
     console.log("Failed:", errorInfo);
   };
 
-  const props: UploadProps = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+  // const props: UploadProps = {
+  //   name: "file",
+   
+  //   headers: {
+  //     authorization: "authorization-text",
+  //   },
+  //   onChange(info) {
+  //     if (info.file.status !== "uploading") {
+  //       console.log(info.file, info.fileList);
+  //     }
+  //     if (info.file.status === "done") {
+  //       message.success(`${info.file.name} file uploaded successfully`);
+  //     } else if (info.file.status === "error") {
+  //       message.error(`${info.file.name} file upload failed.`);
+  //     }
+  //   },
+  // };
   return (
     <Form
       initialValues={{ remember: false }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      
       autoComplete="off"
       className="p-5"
     >
@@ -76,7 +78,7 @@ export default function ({ parentCat }: any) {
         ></InputNumber>
       </Form.Item>
       <Form.Item name="categoryImg" className="mx-2 text-right">
-        <Upload {...props} className="">
+        <Upload  className="">
           <Button className="transition-all duration-300 hover:bg-black" icon={<UploadOutlined />}>Click to Upload</Button>
         </Upload>
       </Form.Item>

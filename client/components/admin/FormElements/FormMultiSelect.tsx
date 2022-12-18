@@ -1,30 +1,34 @@
 import { Form, Select } from "antd";
 
-export default function ({ label }: any) {
+export default function ({ label, optionsObj, placeholder, name }: any) {
+  const { Option } = Select;
   return (
-    <Form.Item
-      style={{
-        marginBottom: 0,
-        padding: 0,
-        flexBasis: "50%",
-        position: "relative",
-      }}
-    >
-      <fieldset className="common__fieldset">
-        <legend className="">{label}</legend>
+    <fieldset className="common__fieldset">
+      <legend className="">{label}</legend>
+      <Form.Item
+        style={{
+          marginBottom: 0,
+          padding: 0,
+          flexBasis: "50%",
+          position: "relative",
+        }}
+        name={name}
+        rules={[{ required: true, message: " Required" }]}
+      >
         <Select
           bordered={false}
           getPopupContainer={(trigger) => trigger.parentNode}
           mode="tags"
-          placeholder="Please select"
-          defaultValue={["option-1"]}
+          placeholder={placeholder}
           style={{ width: "100%", whiteSpace: "nowrap" }}
-          options={[
-            { label: "opton-1", value: "option" },
-            { label: "opton-2", value: "optio2" },
-          ]}
-        />
-      </fieldset>
-    </Form.Item>
+        >
+          {optionsObj?.map((each: any, i: any) => (
+            <Option key={i} value={each._id}>
+              {each.featureName}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+    </fieldset>
   );
 }
