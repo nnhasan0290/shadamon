@@ -20,6 +20,8 @@ import FormSelect from "../FormElements/FormSelect";
 import SmallCreateCat from "./SmallCreateCat";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import FormMultiSelect from "../FormElements/FormMultiSelect";
+import FeatureTable from "./FeatureTable";
+import FeatureForm from "./FeatureForm";
 
 export default function () {
   const dispatch = useAppDispatch();
@@ -35,26 +37,31 @@ export default function () {
     dispatch(getAllCategories());
   }, []);
   return (
-    <div className="flex">
-      <div className="flex flex-wrap justify-between py-1 border-b shadow-sm basis-1/2">
-        <div className="flex gap-2 items-center font-bold">
-          <span className="p-1 text-white bg-gray-700 rounded-full">
-            <BiPlus />
-          </span>
-          <h4>New Category</h4>
-        </div>
-        <div>
-          <Button className="text-white bg-blue-700 hover:border-none">
-            {" "}
-            Save
-          </Button>
-          <Button className="text-white bg-gray-700 hover:border-none">
-            {" "}
-            cancel
-          </Button>
-        </div>
-        <Divider />
+    <div className="flex items-start">
+      <div className="flex flex-wrap justify-between py-1 pr-2 border-r border-b shadow-sm basis-1/2">
         <Form className="flex flex-wrap justify-between basis-full">
+          <div className="flex gap-2 items-center font-bold">
+            <span className="p-1 text-white bg-gray-700 rounded-full">
+              <BiPlus />
+            </span>
+            <h4>New Category</h4>
+          </div>
+          <div className="flex items-center">
+            <Form.Item className="mb-0">
+              <Button
+                htmlType="submit"
+                className="text-white bg-blue-700 hover:border-none"
+              >
+                {" "}
+                Save
+              </Button>
+            </Form.Item>
+            <Button className="text-white bg-gray-700 hover:border-none">
+              {" "}
+              cancel
+            </Button>
+          </div>
+          <Divider className="my-2" />
           <div className="basis-[250px]">
             <FormSelect optionsObj={res?.data} placeholder="parent" label="" />
           </div>
@@ -86,12 +93,22 @@ export default function () {
             </div>
           </div>
           <div className="basis-[250px]">
-            <InputNumber placeholder="Ordering" className="w-full"></InputNumber>
+            <InputNumber
+              placeholder="Ordering"
+              className="w-full"
+            ></InputNumber>
           </div>
           <div className="basis-[250px]">
-            <Form.List
-              name="names"
-            >
+            <InputNumber
+              placeholder="Free Post"
+              className="w-full"
+            ></InputNumber>
+          </div>
+          <div className="basis-[250px]">
+            <FormSelect label="" placeholder="Button Type" />
+          </div>
+          <div className="basis-[250px]">
+            <Form.List name="names">
               {(fields, { add, remove }, { errors }) => (
                 <>
                   {fields.map((field, index) => (
@@ -144,6 +161,17 @@ export default function () {
             </Radio.Group>
           </div>
         </Form>
+      </div>
+      <div className="basis-1/2">
+        <Divider className="mb-2"/>
+        <Button className="flex items-center text-white bg-gray-700" icon={<BiPlus size={20}/>}> </Button>
+        <Divider className="my-2"/>
+        <FeatureTable />
+        <Divider />
+        <div className="mx-2">
+        <FeatureForm/>
+          
+        </div>
       </div>
     </div>
   );
