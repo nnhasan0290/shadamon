@@ -114,9 +114,9 @@ export default function () {
       </Form>
 
       <Form className="my-[50px] flex flex-wrap gap-3">
-      <h2 className="p-2 my-3 w-full bg-gray-300 rounded-md">Premier Zone</h2>
-      <p className="w-full text-blue-500">Bundle Promote</p>
-      <Divider className="my-0"/>
+        <h2 className="p-2 my-3 w-full bg-gray-300 rounded-md">Premier Zone</h2>
+        <p className="w-full text-blue-500">Bundle Promote</p>
+        <Divider className="my-0" />
         <div>
           <label htmlFor="">Package</label>
           <Form.Item>
@@ -198,8 +198,8 @@ export default function () {
             </Select>
           </Form.Item>
         </div>
-      <p className="w-full text-blue-500">Single Promote</p>
-      <Divider className="my-0"/>
+        <p className="w-full text-blue-500">Single Promote</p>
+        <Divider className="my-0" />
         <div>
           <label htmlFor="">Package</label>
           <Form.Item>
@@ -247,7 +247,7 @@ export default function () {
         <div>
           <label htmlFor="">Category</label>
           <Form.Item>
-            <Select placeholder="package">
+            <Select placeholder="category">
               <Option>Option</Option>
             </Select>
           </Form.Item>
@@ -255,7 +255,7 @@ export default function () {
         <div>
           <label htmlFor="">Sub Category</label>
           <Form.Item>
-            <Select placeholder="package">
+            <Select placeholder="Sub category">
               <Option>Option</Option>
             </Select>
           </Form.Item>
@@ -263,7 +263,7 @@ export default function () {
         <div>
           <label htmlFor="">Sub Sub Category</label>
           <Form.Item>
-            <Select placeholder="package">
+            <Select placeholder="Sub Sub">
               <Option>Option</Option>
             </Select>
           </Form.Item>
