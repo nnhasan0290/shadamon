@@ -3,6 +3,7 @@ import { BiChevronDown, BiPlus, BiSearch, BiTrash } from "react-icons/bi";
 import { TbArrowsRightLeft } from "react-icons/tb";
 import { GlobalStates } from "../../../context/ContextProvider";
 import ProductCreateModal from "./ProductCreateModal";
+import ProductSearch from "./ProductSearch";
 
 export default function () {
   const { modalDispatch } = GlobalStates();
@@ -25,6 +26,7 @@ export default function () {
         {" "}
       </Button>
       <Button
+      onClick={() => {modalDispatch({type:"ADMIN_MODAL", payload: <ProductSearch/>})}}
         className="flex items-center text-white bg-green-700"
         icon={<BiSearch size={20} />}
       >

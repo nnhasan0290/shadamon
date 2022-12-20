@@ -29,7 +29,7 @@ export default function ({ parentCat }: any) {
   console.log(res);
 
   const onFinish = (values: any) => {
-      dispatch(createCategory(values))
+    dispatch(createCategory(values));
     console.log("Success:", values);
   };
 
@@ -39,7 +39,7 @@ export default function ({ parentCat }: any) {
 
   // const props: UploadProps = {
   //   name: "file",
-   
+
   //   headers: {
   //     authorization: "authorization-text",
   //   },
@@ -59,7 +59,6 @@ export default function ({ parentCat }: any) {
       initialValues={{ remember: false }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      
       autoComplete="off"
       className="p-5"
     >
@@ -70,18 +69,31 @@ export default function ({ parentCat }: any) {
       />
       <FormInput name={"categoryName"} placeholder="Category Name" />
       <div className="grid grid-cols-2">
-        
-      <Form.Item className="mx-2" name="categoryOrder" rules={[{ required: true, message: `Required` }]}>
-        <InputNumber
-          placeholder="Order"
-          className="w-full"
-        ></InputNumber>
-      </Form.Item>
-      <Form.Item name="categoryImg" className="mx-2 text-right">
-        <Upload  className="">
-          <Button className="transition-all duration-300 hover:bg-black" icon={<UploadOutlined />}>Click to Upload</Button>
-        </Upload>
-      </Form.Item>
+        <Form.Item
+          className="mx-2"
+          name="categoryOrder"
+          rules={[{ required: true, message: `Required` }]}
+        >
+          <InputNumber placeholder="Order" className="w-full"></InputNumber>
+        </Form.Item>
+        <Form.Item label="Upload" valuePropName="fileList" name="categoryImg">
+          <Upload action="/upload.do" listType="picture-card">
+            <div>
+              <UploadOutlined />
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+          </Upload>
+        </Form.Item>
+        {/* <Form.Item name="categoryImg" className="mx-2 text-right">
+          <Upload className="">
+            <Button
+              className="transition-all duration-300 hover:bg-black"
+              icon={<UploadOutlined />}
+            >
+              Click to Upload
+            </Button>
+          </Upload>
+        </Form.Item> */}
       </div>
       <Form.Item>
         <Button

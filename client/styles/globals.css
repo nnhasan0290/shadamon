@@ -140,6 +140,10 @@ img {
   border: none !important;
 }
 
+.ant-select-selector{
+  min-width: 200px;
+}
+
 /* .ant-select-selector{
   border: none !important;
 }
