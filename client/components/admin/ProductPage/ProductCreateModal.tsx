@@ -1,5 +1,6 @@
 import { Button, Divider, Form, Input, InputNumber, Select } from "antd";
-import TextArea from "antd/es/input/TextArea";
+
+const {TextArea} = Input;
 
 export default function () {
   const { Option } = Select;
