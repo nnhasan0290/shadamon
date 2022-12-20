@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Divider, Dropdown, Radio, Space, Table } from "antd";
+import { Carousel, Divider, Dropdown, Radio, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 
 interface DataType {
   key: React.Key;
   id: string;
+  productImg: any;
   name: string;
   category: string;
   location: string;
@@ -32,7 +33,29 @@ const columns: ColumnsType<DataType> = [
     title: "Product Id",
     dataIndex: "id",
     render: (text: string) => <a>{text}</a>,
-    fixed: "left"
+    fixed: "left",
+  },
+  {
+    title: "Product Img",
+    dataIndex: "productImg",
+    width: 150,
+    render: (text: string) => (
+      <Carousel>
+        <div>
+          <img src="https://images.unsplash.com/photo-1671531009361-8846ff0d7ae4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
+        </div>
+        <div>
+          <img src="https://plus.unsplash.com/premium_photo-1661715499352-51bf121480d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
+        </div>
+        <div>
+          <img src="https://plus.unsplash.com/premium_photo-1661715499352-51bf121480d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
+        </div>
+        <div>
+          <img src="https://plus.unsplash.com/premium_photo-1661715499352-51bf121480d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
+        </div>
+      </Carousel>
+    ),
+    fixed: "left",
   },
   {
     title: "Name",
@@ -102,7 +125,7 @@ const columns: ColumnsType<DataType> = [
   {
     title: "Edited",
     dataIndex: "edited",
-    fixed: "right"
+    fixed: "right",
   },
 ];
 
@@ -125,6 +148,7 @@ const data: DataType[] = [
     report: "active",
     sign: "active",
     edited: "active",
+    productImg: [],
   },
 ];
 
@@ -153,7 +177,7 @@ const ProductTable: React.FC = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-        scroll={{x:1500}}
+        scroll={{ x: 1500 }}
       />
     </div>
   );

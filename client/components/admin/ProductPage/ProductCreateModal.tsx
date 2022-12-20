@@ -1,4 +1,5 @@
 import { Button, Divider, Form, Input, InputNumber, Select } from "antd";
+import UploadComponent from "../FormElements/UploadComponent";
 
 const {TextArea} = Input;
 
@@ -110,6 +111,9 @@ export default function () {
             <Form.Item>
               <Input placeholder="Name"></Input>
             </Form.Item>
+          </div>
+          <div className="w-full">
+            <UploadComponent/>
           </div>
         </div>
       </Form>
