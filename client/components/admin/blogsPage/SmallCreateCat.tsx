@@ -29,8 +29,12 @@ export default function ({ parentCat }: any) {
   console.log(res);
 
   const onFinish = (values: any) => {
-    dispatch(createCategory(values));
-    console.log("Success:", values);
+   const data = {...values};
+   data.categoryImg = values.categoryImage.file.originFileObj;
+   delete data.categoryImage;
+   console.log(data);
+     dispatch(createCategory(data));
+    console.log("Success:", data);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -76,16 +80,9 @@ export default function ({ parentCat }: any) {
         >
           <InputNumber placeholder="Order" className="w-full"></InputNumber>
         </Form.Item>
-        <Form.Item label="Upload" valuePropName="fileList" name="categoryImg">
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <UploadOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          </Upload>
-        </Form.Item>
-        {/* <Form.Item name="categoryImg" className="mx-2 text-right">
-          <Upload className="">
+        
+        <Form.Item name="categoryImage" className="mx-2 text-right">
+          <Upload >
             <Button
               className="transition-all duration-300 hover:bg-black"
               icon={<UploadOutlined />}
@@ -93,7 +90,7 @@ export default function ({ parentCat }: any) {
               Click to Upload
             </Button>
           </Upload>
-        </Form.Item> */}
+        </Form.Item>
       </div>
       <Form.Item>
         <Button
