@@ -60,7 +60,6 @@ const columns: ColumnsType<DataType> = [
   {
     title: "Name",
     dataIndex: "name",
-    fixed: "left",
   },
   {
     title: "Category",
@@ -177,7 +176,7 @@ const ProductTable: React.FC = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-        scroll={{ x: 1500 }}
+        scroll={{ x: 2000 }}
       />
     </div>
   );

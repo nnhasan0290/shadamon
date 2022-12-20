@@ -112,6 +112,32 @@ export default function () {
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
+          <div>
+           <label htmlFor="">Product Status</label>   
+          <Form.Item>
+              <Select placeholder="New/Used">
+                <Option>Active</Option>
+                <Option>Notification</Option>
+                <Option>Pause</Option>
+                <Option>Review</Option>
+                <Option>Delete(Reason)</Option>
+                <Option>Product Atv+Msg</Option>
+                <Option>Product UnAtv+Msg</Option>
+              </Select>
+            </Form.Item>
+          </div>
+          <div className="w-full">
+            <label>Notification Dialogue</label>
+            <Form.Item>
+              <Input placeholder="Name"></Input>
+            </Form.Item>
+          </div>
+          <div className="w-full">
+            <label>Video Link</label>
+            <Form.Item>
+              <Input placeholder="Name"></Input>
+            </Form.Item>
+          </div>
           <div className="w-full">
             <UploadComponent/>
           </div>

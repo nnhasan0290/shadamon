@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { Form, Modal, Upload } from "antd";
+import { Checkbox, Form, Modal, Upload } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadFile } from "antd/es/upload/interface";
 
@@ -47,6 +47,7 @@ const UploadComponent: React.FC = () => {
     <>
       <Form.Item className="">
         <Upload
+         itemRender={() => <span>data</span>}
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
@@ -55,6 +56,7 @@ const UploadComponent: React.FC = () => {
           {fileList.length >= 5 ? null : uploadButton}
         </Upload>
       </Form.Item>
+      
       <Modal
         open={previewOpen}
         title={previewTitle}
