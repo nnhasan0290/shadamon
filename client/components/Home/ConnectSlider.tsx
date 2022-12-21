@@ -51,7 +51,7 @@ const ConnectSlider = (followingSellers: any) => {
         !followingSellers && "my-4"
       }  bg-white rounded-lg shadow-xl`}
     >
-      <div className="flex items-center justify-between mb-2 ">
+      <div className="flex justify-between items-center mb-2">
         {!followingSellers && (
           <>
             <h2 className="text-smallest-color">Connect With Best Sellers</h2>
@@ -59,9 +59,9 @@ const ConnectSlider = (followingSellers: any) => {
           </>
         )}
       </div>
-      <Carousel {...options} className="relative rounded-md ">
-        <div className="flex flex-col items-center justify-center mr-1 rounded-md">
-          <div className="flex flex-col items-center justify-center ">
+      <Carousel {...options} className="relative rounded-md">
+        <div className="flex flex-col justify-center items-center mr-1 rounded-md">
+          <div className="flex flex-col justify-center items-center">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
                 className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
@@ -86,15 +86,15 @@ const ConnectSlider = (followingSellers: any) => {
             {!followingSellers && (
               <>
                 <p className="text-xs leading-4">Dhaka</p>
-                <button className="px-4 text-blue-400 border-2 border-blue-400 rounded-full">
+                <button className="px-4 text-blue-400 rounded-full border-2 border-blue-400">
                   Connect
                 </button>
               </>
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center mr-1 rounded-md">
-          <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col justify-center items-center mr-1 rounded-md">
+          <div className="flex flex-col justify-center items-center">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
                 className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
@@ -119,15 +119,15 @@ const ConnectSlider = (followingSellers: any) => {
             {!followingSellers && (
               <>
                 <p className="text-xs leading-4">Dhaka</p>
-                <button className="px-4 text-blue-400 border-2 border-blue-400 rounded-full">
+                <button className="px-4 text-blue-400 rounded-full border-2 border-blue-400">
                   Connect
                 </button>
               </>
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center mr-1 rounded-md">
-          <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col justify-center items-center mr-1 rounded-md">
+          <div className="flex flex-col justify-center items-center">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
                 className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
@@ -152,15 +152,15 @@ const ConnectSlider = (followingSellers: any) => {
             {!followingSellers && (
               <>
                 <p className="text-xs leading-4">Dhaka</p>
-                <button className="px-4 text-blue-400 border-2 border-blue-400 rounded-full">
+                <button className="px-4 text-blue-400 rounded-full border-2 border-blue-400">
                   Connect
                 </button>
               </>
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center mr-1 rounded-md">
-          <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col justify-center items-center mr-1 rounded-md">
+          <div className="flex flex-col justify-center items-center">
             <div className="sm:w-[128px] w-[88px] rounded-full border-2 border-blue-600 flex items-center justify-center">
               <img
                 className=" rounded-full sm:w-[120px] w-[80px] sm:h-[120px] h-[80px] object-cover overflow-hidden m-[2px]"
@@ -185,7 +185,7 @@ const ConnectSlider = (followingSellers: any) => {
             {!followingSellers && (
               <>
                 <p className="text-xs leading-4">Dhaka</p>
-                <button className="px-4 text-blue-400 border-2 border-blue-400 rounded-full">
+                <button className="px-4 text-blue-400 rounded-full border-2 border-blue-400">
                   Connect
                 </button>
               </>

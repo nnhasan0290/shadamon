@@ -10,13 +10,48 @@ import {
 } from "antd";
 import UploadComponent from "../FormElements/UploadComponent";
 import { PlusOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import ManualUpload from "./ManualUpload";
+import { Carousel } from "react-responsive-carousel";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const { TextArea } = Input;
+const options = {
+  renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
+    return (
+      <span
+        className={`arrow-left absolute top-[50%] bg-gray-500 p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white`}
+        onClick={clickHandler}
+      >
+        <BsArrowLeft size={23} />
+      </span>
+    );
+  },
+  renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
+    return (
+      <span
+        className={`arrow-right absolute top-[50%] bg-gray-500 p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white 
+        `}
+        onClick={clickHandler}
+      >
+        <BsArrowRight size={23} />
+      </span>
+    );
+  },
+}
 
 export default function () {
   const { Option } = Select;
+  const [imgArr, setImgArr] = useState<any>([]);
+  console.log(imgArr);
   const handleCreateProduct = (values: any) => {
-    console.log(values);
+    setImgArr([]);
+    values.img.fileList.forEach((each: any) => {
+      setImgArr([...imgArr, { img: each, longImg: false }]);
+    });
+    values.longImg.fileList.forEach((each: any) => {
+      setImgArr([...imgArr, { img: each, longImg: true }]);
+    });
   };
   return (
     <div>
@@ -83,14 +118,14 @@ export default function () {
               <Input placeholder="Hd Amount" />
             </Form.Item>
             <div className="w-full">
-            <label>Notification Dialogue</label>
-            <Form.Item name="notificationDialogue">
-              <Input placeholder="Name"></Input>
-            </Form.Item>
-          </div>
+              <label>Notification Dialogue</label>
+              <Form.Item name="notificationDialogue">
+                <Input placeholder="Name"></Input>
+              </Form.Item>
+            </div>
           </div>
         </div>
-        <div className="flex flex-wrap gap-1 pl-5 basis-1/2">
+        <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
           <div>
             <label>Show Till</label>
             <Form.Item>
@@ -135,24 +170,21 @@ export default function () {
               </Select>
             </Form.Item>
           </div>
-          
+
           <div className="w-full">
             <label>Video Link</label>
             <Form.Item name="videoLink">
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
-          <div className="">
-            <label>Image</label>
-            <div>
-              <UploadComponent name="img" />
-            </div>
-          </div>
-          <div className="">
-            <label>Long Image</label>
-            <div>
-              <UploadComponent name="longImg" />
-            </div>
+          <div className="flex overflow-hidden gap-3">
+            <Carousel {...options} className="w-full" centerMode={true} 
+            showStatus={false} showIndicators={false} centerSlidePercentage={40} >
+              <ManualUpload />
+              <ManualUpload />
+              <ManualUpload />
+              <ManualUpload />
+            </Carousel>
           </div>
         </div>
         <div className="flex gap-5 basis-full">

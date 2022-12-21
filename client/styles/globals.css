@@ -17,6 +17,9 @@
   .nav__icon.active {
     @apply border-2 border-common-color;
   }
+  .upload__btn{
+    @apply hover:bg-gray-400/80 rounded-full h-[35px] w-[35px] flex items-center justify-center transition-all duration-300 cursor-pointer
+  }
 }
 
 input {
@@ -135,14 +138,12 @@ img {
   box-shadow: none !important;
 }
 
-.ant-btn:hover{
-  color: white !important;
-  border: none !important;
-}
+
 
 .ant-select-selector{
   min-width: 200px;
 }
+
 
 /* .ant-select-selector{
   border: none !important;
