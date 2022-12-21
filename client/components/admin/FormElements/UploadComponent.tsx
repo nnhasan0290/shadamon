@@ -12,7 +12,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const UploadComponent: React.FC = () => {
+const UploadComponent = ({name}:any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -32,7 +32,7 @@ const UploadComponent: React.FC = () => {
     );
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList, file }) => {
     console.log(newFileList);
     setFileList(newFileList);
   };
@@ -45,9 +45,8 @@ const UploadComponent: React.FC = () => {
   );
   return (
     <>
-      <Form.Item className="">
+      <Form.Item name={name}>
         <Upload
-         itemRender={() => <span>data</span>}
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
@@ -56,7 +55,7 @@ const UploadComponent: React.FC = () => {
           {fileList.length >= 5 ? null : uploadButton}
         </Upload>
       </Form.Item>
-      
+
       <Modal
         open={previewOpen}
         title={previewTitle}

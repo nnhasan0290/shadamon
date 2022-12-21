@@ -1,21 +1,37 @@
-import { Button, Divider, Form, Input, InputNumber, Select } from "antd";
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Upload,
+} from "antd";
 import UploadComponent from "../FormElements/UploadComponent";
+import { PlusOutlined } from "@ant-design/icons";
 
-const {TextArea} = Input;
+const { TextArea } = Input;
 
 export default function () {
   const { Option } = Select;
+  const handleCreateProduct = (values: any) => {
+    console.log(values);
+  };
   return (
     <div>
-      <Form className="flex gap-[50px] items-start">
-        <div className="p-1 basis-1/2">
-          <Form.Item>
+      <Form
+        onFinish={handleCreateProduct}
+        className="flex flex-wrap items-start"
+      >
+        <h2 className="p-2 my-3 w-full bg-gray-300 rounded-md">
+          Create Product
+        </h2>
+        <div className="flex flex-wrap justify-between pr-5 basis-1/2">
+          <Form.Item className="w-full">
             <Input placeholder="heading" />
           </Form.Item>
-          <Form.Item>
-            <TextArea placeholder="Description" />
-          </Form.Item>
-          <Form.Item>
+          <Form.Item className="w-full">
             <TextArea placeholder="Description" />
           </Form.Item>
           <div className="flex flex-wrap gap-2">
@@ -26,11 +42,6 @@ export default function () {
             </Form.Item>
             <Form.Item>
               <Select placeholder="Location/Sub">
-                <Option>Option</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item>
-              <Select placeholder="Product Stats">
                 <Option>Option</Option>
               </Select>
             </Form.Item>
@@ -71,17 +82,15 @@ export default function () {
             <Form.Item>
               <Input placeholder="Hd Amount" />
             </Form.Item>
-            <div className="flex gap-5 w-full">
-              <Button className="text-white bg-red-600 basis-1/3">
-                Cancel
-              </Button>
-              <Button className="text-white bg-green-600 basis-2/3">
-                Save
-              </Button>
-            </div>
+            <div className="w-full">
+            <label>Notification Dialogue</label>
+            <Form.Item name="notificationDialogue">
+              <Input placeholder="Name"></Input>
+            </Form.Item>
+          </div>
           </div>
         </div>
-        <div className="flex flex-wrap gap-1 p-1 basis-1/2">
+        <div className="flex flex-wrap gap-1 pl-5 basis-1/2">
           <div>
             <label>Show Till</label>
             <Form.Item>
@@ -108,13 +117,13 @@ export default function () {
           </div>
           <div>
             <label>Slot Status</label>
-            <Form.Item>
+            <Form.Item name="slotStatus">
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
           <div>
-           <label htmlFor="">Product Status</label>   
-          <Form.Item>
+            <label htmlFor="">Product Status</label>
+            <Form.Item name="productStatus">
               <Select placeholder="New/Used">
                 <Option>Active</Option>
                 <Option>Notification</Option>
@@ -126,21 +135,36 @@ export default function () {
               </Select>
             </Form.Item>
           </div>
-          <div className="w-full">
-            <label>Notification Dialogue</label>
-            <Form.Item>
-              <Input placeholder="Name"></Input>
-            </Form.Item>
-          </div>
+          
           <div className="w-full">
             <label>Video Link</label>
-            <Form.Item>
+            <Form.Item name="videoLink">
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
-          <div className="w-full">
-            <UploadComponent/>
+          <div className="">
+            <label>Image</label>
+            <div>
+              <UploadComponent name="img" />
+            </div>
           </div>
+          <div className="">
+            <label>Long Image</label>
+            <div>
+              <UploadComponent name="longImg" />
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-5 basis-full">
+          <Button className="text-white bg-red-600 basis-1/3">Cancel</Button>
+          <Form.Item className="basis-2/3">
+            <Button
+              htmlType="submit"
+              className="w-full text-white bg-green-600"
+            >
+              Save
+            </Button>
+          </Form.Item>
         </div>
       </Form>
 
