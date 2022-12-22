@@ -10,10 +10,12 @@ import {
 } from "antd";
 import UploadComponent from "../FormElements/UploadComponent";
 import { PlusOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ManualUpload from "./ManualUpload";
 import { Carousel } from "react-responsive-carousel";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { getAllCategories, getLocationAction,getParentCategories } from "../../../redux/actions/Admin/categoryAction";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 
 const { TextArea } = Input;
 const options = {
@@ -40,26 +42,31 @@ const options = {
   },
 }
 
+
+
+
+
 export default function () {
   const { Option } = Select;
-  const [imgArr, setImgArr] = useState<any>([]);
-  console.log(imgArr);
+  const [imgArr, setImgArr] = useState<any>([])
+  const dispatch = useAppDispatch();
+  const {adminCat, allCat, locations} = useAppSelector(state => state)
+  console.log(allCat, locations);
+  
   const handleCreateProduct = (values: any) => {
-    setImgArr([]);
-    values.img.fileList.forEach((each: any) => {
-      setImgArr([...imgArr, { img: each, longImg: false }]);
-    });
-    values.longImg.fileList.forEach((each: any) => {
-      setImgArr([...imgArr, { img: each, longImg: true }]);
-    });
   };
+  useEffect(() => {
+    dispatch(getAllCategories());
+    dispatch(getLocationAction());
+    dispatch(getParentCategories());
+  },[])
   return (
     <div>
       <Form
         onFinish={handleCreateProduct}
         className="flex flex-wrap items-start"
       >
-        <h2 className="p-2 my-3 w-full bg-gray-300 rounded-md">
+        <h2 className="p-2 my-3 mr-10 w-full bg-gray-300 rounded-md">
           Create Product
         </h2>
         <div className="flex flex-wrap justify-between pr-5 basis-1/2">
@@ -69,20 +76,31 @@ export default function () {
           <Form.Item className="w-full">
             <TextArea placeholder="Description" />
           </Form.Item>
+          <Form.Item className="w-full">
+            <TextArea placeholder="Description/Edit" />
+          </Form.Item>
           <div className="flex flex-wrap gap-2">
             <Form.Item>
-              <Select placeholder="Category/Sub">
+              <Select placeholder="Category">
+                {
+                  allCat?.res?.data.map((each:any,i:any) => (
+                    <Option value={each._id}>{each.categoryName}</Option>
+                  ))
+                }
+              </Select>
+            </Form.Item>
+            <Form.Item>
+              <Select placeholder="SubCategory">
                 <Option>Option</Option>
               </Select>
             </Form.Item>
             <Form.Item>
-              <Select placeholder="Location/Sub">
-                <Option>Option</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item>
-              <Select placeholder="Merchants">
-                <Option>Option</Option>
+              <Select placeholder="Location">
+              {
+                  locations?.res?.data.map((each:any,i:any) => (
+                    <Option value={each._id}>{each.name}</Option>
+                  ))
+                }
               </Select>
             </Form.Item>
             <Form.Item>
@@ -117,12 +135,7 @@ export default function () {
             <Form.Item>
               <Input placeholder="Hd Amount" />
             </Form.Item>
-            <div className="w-full">
-              <label>Notification Dialogue</label>
-              <Form.Item name="notificationDialogue">
-                <Input placeholder="Name"></Input>
-              </Form.Item>
-            </div>
+           
           </div>
         </div>
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
@@ -170,20 +183,26 @@ export default function () {
               </Select>
             </Form.Item>
           </div>
-
+          <div className="w-full">
+              <label>Notification Dialogue</label>
+              <Form.Item name="notificationDialogue">
+                <Input placeholder="Name"></Input>
+              </Form.Item>
+            </div>
           <div className="w-full">
             <label>Video Link</label>
             <Form.Item name="videoLink">
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
-          <div className="flex overflow-hidden gap-3">
+          <div className="flex overflow-hidden gap-3 mb-3">
             <Carousel {...options} className="w-full" centerMode={true} 
             showStatus={false} showIndicators={false} centerSlidePercentage={40} >
-              <ManualUpload />
-              <ManualUpload />
-              <ManualUpload />
-              <ManualUpload />
+              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
+              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
+              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
+              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
+              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
             </Carousel>
           </div>
         </div>

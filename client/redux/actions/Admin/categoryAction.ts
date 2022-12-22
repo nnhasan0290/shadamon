@@ -4,6 +4,7 @@ import {
   CREATE_SUBCATEGORY,
   GET_CATEGORIES,
   GET_FEATURES,
+  GET_LOCATIONS,
   GET_PARENT_CATEGORY,
 } from "../../consts/admin/categoryConst";
 import { toast } from "react-toastify";
@@ -108,5 +109,20 @@ export const createSubCatAction = (formdata: any) => async (dispatch: any) => {
       isLoading: false,
       autoClose: 2000,
     });
+  }
+};
+
+export const getLocationAction = () => async (dispatch: any) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/location`,
+      config
+    );
+    dispatch({ type: GET_LOCATIONS, payload: data });
+  } catch (error: any) {
+    console.log(error);
   }
 };

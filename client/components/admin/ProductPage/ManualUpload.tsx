@@ -1,13 +1,14 @@
 import { FileImageOutlined, EyeOutlined } from "@ant-design/icons";
 import { HiHandRaised } from "react-icons/hi2";
 import { GrClose } from "react-icons/gr";
-import { useRef, useState } from "react";
-import { Modal } from "antd";
+import { useEffect, useRef, useState } from "react";
+import { Checkbox, Modal } from "antd";
 import { BiCheck } from "react-icons/bi";
 
-const ManualUpload = () => {
+const ManualUpload = ({ imgArr, setImgArr }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const uploadRef = useRef<any>();
+  const [long, setLong] = useState<any>(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -22,10 +23,13 @@ const ManualUpload = () => {
   };
   const [inputImg, setInputImg] = useState<any>(null);
   const [file, setFile] = useState<any>({});
+
   const fileUpload = (e: any) => {
     const files = Array.from(e.target.files);
     setFile(files[0]);
-    console.log(file);
+    if (files[0]) {
+      setImgArr([...imgArr, { img: files[0], longImg: long }]);
+    }
     setInputImg([]);
 
     files.forEach((each: any) => {
@@ -39,6 +43,7 @@ const ManualUpload = () => {
       reader.readAsDataURL(each);
     });
   };
+
   return (
     <div className="mr-5">
       <div className="flex justify-between">
@@ -53,7 +58,15 @@ const ManualUpload = () => {
         />
         <div className="flex gap-1 items-center">
           <span className="whitespace-nowrap">Long Img?</span>
-          <input className="cursor-pointer" type="checkbox" name="" id="" />
+          <Checkbox
+            onChange={() => {
+              setLong(!long);
+              const filtered = imgArr.filter(
+                (each: any) => each.img.name !== file.name
+              );
+              setImgArr([...filtered, { img: file, longImg: !long }]);
+            }}
+          ></Checkbox>
         </div>
       </div>
       <div className="w-full h-[150px] pt-1 rounded-md ">
@@ -73,6 +86,10 @@ const ManualUpload = () => {
               </div>
               <div
                 onClick={() => {
+                  const filtered = imgArr.filter(
+                    (each: any) => each.img.name !== file.name
+                  );
+                  setImgArr(filtered);
                   setInputImg(null);
                   uploadRef.current.value = null;
                 }}
@@ -98,7 +115,10 @@ const ManualUpload = () => {
             </Modal>
           </div>
         ) : (
-          <div className="flex justify-center items-center w-full h-full rounded-md border cursor-pointer" onClick={() => uploadRef.current.click()}>
+          <div
+            className="flex justify-center items-center w-full h-full rounded-md border cursor-pointer"
+            onClick={() => uploadRef.current.click()}
+          >
             <FileImageOutlined style={{ fontSize: "32px" }} />
           </div>
         )}

@@ -29,12 +29,7 @@ const items = [
 ];
 
 const columns: ColumnsType<DataType> = [
-  {
-    title: "Product Id",
-    dataIndex: "id",
-    render: (text: string) => <a>{text}</a>,
-    fixed: "left",
-  },
+  
   {
     title: "Product Img",
     dataIndex: "productImg",
@@ -56,6 +51,11 @@ const columns: ColumnsType<DataType> = [
       </Carousel>
     ),
     fixed: "left",
+  },
+  {
+    title: "Product Id",
+    dataIndex: "id",
+    render: (text: string) => <a>{text}</a>,
   },
   {
     title: "Name",
@@ -176,7 +176,7 @@ const ProductTable: React.FC = () => {
         columns={columns}
         dataSource={data}
         pagination={false}
-        scroll={{ x: 2000 }}
+        scroll={{ x: 1400 }}
       />
     </div>
   );
