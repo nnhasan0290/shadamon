@@ -5,6 +5,7 @@ import {
   Form,
   Input,
   InputNumber,
+  Radio,
   Select,
   Upload,
 } from "antd";
@@ -14,7 +15,13 @@ import { useEffect, useState } from "react";
 import ManualUpload from "./ManualUpload";
 import { Carousel } from "react-responsive-carousel";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import { getAllCategories, getLocationAction,getParentCategories } from "../../../redux/actions/Admin/categoryAction";
+import {
+  getAllCategories,
+  getCategoriesUnderParentAction,
+  getLocationAction,
+  getParentCategories,
+  getSubCategoriesAction,
+} from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 
 const { TextArea } = Input;
@@ -40,26 +47,23 @@ const options = {
       </span>
     );
   },
-}
-
-
-
-
+};
 
 export default function () {
   const { Option } = Select;
-  const [imgArr, setImgArr] = useState<any>([])
+  const [imgArr, setImgArr] = useState<any>([]);
+  const [showFeatureField, setShowFeatureField] = useState<any>([]);
   const dispatch = useAppDispatch();
-  const {adminCat, allCat, locations} = useAppSelector(state => state)
-  console.log(allCat, locations);
-  
-  const handleCreateProduct = (values: any) => {
-  };
+  const { adminCat, allCat, locations, subCat, catUnderParent } =
+    useAppSelector((state) => state);
+  console.log(subCat);
+
+  const handleCreateProduct = (values: any) => {};
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getLocationAction());
     dispatch(getParentCategories());
-  },[])
+  }, []);
   return (
     <div>
       <Form
@@ -81,28 +85,63 @@ export default function () {
           </Form.Item>
           <div className="flex flex-wrap gap-2">
             <Form.Item>
-              <Select placeholder="Category">
-                {
-                  allCat?.res?.data.map((each:any,i:any) => (
-                    <Option value={each._id}>{each.categoryName}</Option>
-                  ))
-                }
+              <Select
+                onSelect={(id: any) => {
+                  dispatch(getCategoriesUnderParentAction(id));
+                }}
+                placeholder="Parent"
+              >
+                {adminCat?.res?.data?.map((each: any, i: any) => (
+                  <Option value={each._id}>{each.name}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item>
+              <Select
+                onSelect={(id: any) => {
+                  dispatch(getSubCategoriesAction(id));
+                }}
+                placeholder="Categories"
+              >
+                {catUnderParent?.res?.data?.map((each: any, i: any) => (
+                  <Option value={each._id}>{each.categoryName}</Option>
+                ))}
               </Select>
             </Form.Item>
             <Form.Item>
               <Select placeholder="SubCategory">
-                <Option>Option</Option>
+                {subCat?.res?.data?.map((each: any, i: any) => (
+                  <Option
+                    onChange={() => console.log("changed")}
+                    key={each._id}
+                  >
+                    {each.subCategoryName}
+                  </Option>
+                ))}
               </Select>
             </Form.Item>
+            {subCat?.res?.data?.features?.map((feature: any, i: any) => (
+              <div>
+                <label>{feature.featureName}</label>
+                {feature.featureType === "radio" && (
+                  <Form.Item>
+                    <Radio.Group>
+                      {feature.options.map((option: any, i: any) => (
+                        <Option value={option._id}>{option.optionName}</Option>
+                      ))}
+                    </Radio.Group>
+                  </Form.Item>
+                )}
+              </div>
+            ))}
             <Form.Item>
               <Select placeholder="Location">
-              {
-                  locations?.res?.data.map((each:any,i:any) => (
-                    <Option value={each._id}>{each.name}</Option>
-                  ))
-                }
+                {locations?.res?.data?.map((each: any, i: any) => (
+                  <Option value={each._id}>{each.name}</Option>
+                ))}
               </Select>
             </Form.Item>
+
             <Form.Item>
               <Select placeholder="Sell/Rent/Job/Bid/Offer">
                 <Option>Option</Option>
@@ -135,7 +174,27 @@ export default function () {
             <Form.Item>
               <Input placeholder="Hd Amount" />
             </Form.Item>
-           
+            <div>
+              <label>Condition</label>
+              <Form.Item>
+                <Radio.Group>
+                  <Radio value={true}> Option </Radio>
+                  <Radio value={false}> Option </Radio>
+                </Radio.Group>
+              </Form.Item>
+            </div>
+            <div>
+              <label>MultiSelect</label>
+              <Form.Item>
+                <Checkbox.Group>
+                  <Checkbox value={"optionone"}> Option </Checkbox>
+                  <Checkbox value={"two"}> Option </Checkbox>
+                  <Checkbox value={"two"}> Option </Checkbox>
+                  <Checkbox value={"two"}> Option </Checkbox>
+                  <Checkbox value={"two"}> Option </Checkbox>
+                </Checkbox.Group>
+              </Form.Item>
+            </div>
           </div>
         </div>
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
@@ -184,20 +243,71 @@ export default function () {
             </Form.Item>
           </div>
           <div className="w-full">
-              <label>Notification Dialogue</label>
-              <Form.Item name="notificationDialogue">
-                <Input placeholder="Name"></Input>
-              </Form.Item>
-            </div>
+            <label>Notification Dialogue</label>
+            <Form.Item name="notificationDialogue">
+              <Input placeholder="Name"></Input>
+            </Form.Item>
+          </div>
           <div className="w-full">
             <label>Video Link</label>
             <Form.Item name="videoLink">
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
+          <div className="">
+            <label>Total</label>
+            <div className="flex gap-1">
+              <Form.Item>
+                 <InputNumber placeholder="impression"></InputNumber>
+              </Form.Item>
+              <Form.Item>
+                 <InputNumber placeholder="reach"></InputNumber>
+              </Form.Item>
+              <Form.Item>
+                 <InputNumber placeholder="click"></InputNumber>
+              </Form.Item>
+              
+            </div>
+          </div>
+          <div className="">
+            <label>Normal</label>
+            <div className="flex gap-1">
+              <Form.Item>
+                 <InputNumber placeholder="impression"></InputNumber>
+              </Form.Item>
+              <Form.Item>
+                 <InputNumber placeholder="reach"></InputNumber>
+              </Form.Item>
+              <Form.Item>
+                 <InputNumber placeholder="click"></InputNumber>
+              </Form.Item>
+              
+            </div>
+          </div>
+          <div className="">
+            <label>Paid</label>
+            <div className="flex gap-1">
+              <Form.Item>
+                 <InputNumber placeholder="impression"></InputNumber>
+              </Form.Item>
+              <Form.Item>
+                 <InputNumber placeholder="reach"></InputNumber>
+              </Form.Item>
+              <Form.Item>
+                 <InputNumber placeholder="click"></InputNumber>
+              </Form.Item>
+              
+            </div>
+          </div>
           <div className="flex overflow-hidden gap-3 mb-3">
-            <Carousel {...options} className="w-full" centerMode={true} 
-            showStatus={false} showIndicators={false} centerSlidePercentage={40} >
+            <Carousel
+              {...options}
+              className="w-full"
+              centerMode={true}
+              showStatus={false}
+              showIndicators={false}
+              centerSlidePercentage={40}
+            >
               <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
               <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
               <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />

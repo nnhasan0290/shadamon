@@ -1,4 +1,4 @@
-import { CREATE_SUBCATEGORY, GET_CATEGORIES, GET_FEATURES, GET_LOCATIONS, GET_PARENT_CATEGORY } from "../../consts/admin/categoryConst";
+import { CREATE_SUBCATEGORY, GET_CATEGORIES, GET_CATEGORIES_UNDER_PARENT, GET_FEATURES, GET_LOCATIONS, GET_PARENT_CATEGORY, GET_SUB_CATEGORIES } from "../../consts/admin/categoryConst";
 
 interface dataType{
     res: object,
@@ -69,6 +69,30 @@ interface dataType{
   export const getLocationReducer = (state = initialState, action:any) => {
       switch (action.type) {
         case GET_LOCATIONS:
+          return {
+            res: action.payload
+          };
+    
+        default:
+          return state;
+      }
+    };
+  
+  export const getSubCatReducer = (state = initialState, action:any) => {
+      switch (action.type) {
+        case GET_SUB_CATEGORIES:
+          return {
+            res: action.payload
+          };
+    
+        default:
+          return state;
+      }
+    };
+  
+  export const getCatUnderParentReducer = (state = initialState, action:any) => {
+      switch (action.type) {
+        case GET_CATEGORIES_UNDER_PARENT:
           return {
             res: action.payload
           };
