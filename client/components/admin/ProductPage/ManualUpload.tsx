@@ -60,11 +60,13 @@ const ManualUpload = ({ imgArr, setImgArr }: any) => {
           <span className="whitespace-nowrap">Long Img?</span>
           <Checkbox
             onChange={() => {
-              setLong(!long);
-              const filtered = imgArr.filter(
-                (each: any) => each.img.name !== file.name
-              );
-              setImgArr([...filtered, { img: file, longImg: !long }]);
+              if (file) {
+                setLong(!long);
+                const filtered = imgArr.filter(
+                  (each: any) => each.img.name !== file.name
+                );
+                setImgArr([...filtered, { img: file, longImg: !long }]);
+              }
             }}
           ></Checkbox>
         </div>
@@ -91,6 +93,8 @@ const ManualUpload = ({ imgArr, setImgArr }: any) => {
                   );
                   setImgArr(filtered);
                   setInputImg(null);
+                  setFile(null);
+                  setLong(false);
                   uploadRef.current.value = null;
                 }}
                 className="rounded-md border bg-black/30 upload__btn h-[30px] hover:bg-red-600 w-[30px] text-white"

@@ -1,10 +1,12 @@
 import axios from "axios";
 import {
   CREATE_CATEGORY,
+  CREATE_PRODUCT,
   CREATE_SUBCATEGORY,
   GET_CATEGORIES,
   GET_CATEGORIES_UNDER_PARENT,
   GET_FEATURES,
+  GET_FEATURE_UNDER_SUB,
   GET_LOCATIONS,
   GET_PARENT_CATEGORY,
   GET_SUB_CATEGORIES,
@@ -156,5 +158,49 @@ export const getCategoriesUnderParentAction = (id:any) => async (dispatch: any) 
     dispatch({ type: GET_CATEGORIES_UNDER_PARENT, payload: data });
   } catch (error: any) {
     console.log(error);
+  }
+};
+export const getFeatureUnderSubAction = (id:any) => async (dispatch: any) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/getfeaturesofsubcat/${id}`,
+      config
+    );
+    dispatch({ type: GET_FEATURE_UNDER_SUB, payload: data });
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+
+export const createProductAction = (formdata: any) => async (dispatch: any) => {
+  const id = toast.loading("Please wait...");
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/addproduct`,
+      formdata,
+      config
+    );
+    dispatch({ type: CREATE_PRODUCT, payload: data });
+    toast.update(id, {
+      render: `${data.message}`,
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+    });
+  } catch (error: any) {
+    console.log(error);
+    // toast.update(id, {
+    //   render: `${error.response.data.message}`,
+    //   type: "error",
+    //   isLoading: false,
+    //   autoClose: 2000,
+    // });
   }
 };

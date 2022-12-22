@@ -16,8 +16,10 @@ import ManualUpload from "./ManualUpload";
 import { Carousel } from "react-responsive-carousel";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import {
+  createProductAction,
   getAllCategories,
   getCategoriesUnderParentAction,
+  getFeatureUnderSubAction,
   getLocationAction,
   getParentCategories,
   getSubCategoriesAction,
@@ -52,13 +54,24 @@ const options = {
 export default function () {
   const { Option } = Select;
   const [imgArr, setImgArr] = useState<any>([]);
-  const [showFeatureField, setShowFeatureField] = useState<any>([]);
+  console.log(imgArr);
   const dispatch = useAppDispatch();
-  const { adminCat, allCat, locations, subCat, catUnderParent } =
-    useAppSelector((state) => state);
-  console.log(subCat);
+  const {
+    adminCat,
+    allCat,
+    locations,
+    subCat,
+    catUnderParent,
+    featureUnderSub,
+    createPd
+  } = useAppSelector((state) => state);
+  console.log(createPd);
 
-  const handleCreateProduct = (values: any) => {};
+  const handleCreateProduct = (values: any) => {
+    const data = {...values, productImg: imgArr}
+    console.log(data);
+    dispatch(createProductAction(data));
+  };
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getLocationAction());
@@ -74,17 +87,17 @@ export default function () {
           Create Product
         </h2>
         <div className="flex flex-wrap justify-between pr-5 basis-1/2">
-          <Form.Item className="w-full">
+          <Form.Item name="heading" className="w-full">
             <Input placeholder="heading" />
           </Form.Item>
-          <Form.Item className="w-full">
+          <Form.Item name="description" className="w-full">
             <TextArea placeholder="Description" />
           </Form.Item>
           <Form.Item className="w-full">
             <TextArea placeholder="Description/Edit" />
           </Form.Item>
           <div className="flex flex-wrap gap-2">
-            <Form.Item>
+            <Form.Item >
               <Select
                 onSelect={(id: any) => {
                   dispatch(getCategoriesUnderParentAction(id));
@@ -96,7 +109,7 @@ export default function () {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item>
+            <Form.Item name="categoryId">
               <Select
                 onSelect={(id: any) => {
                   dispatch(getSubCategoriesAction(id));
@@ -108,97 +121,59 @@ export default function () {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item>
-              <Select placeholder="SubCategory">
+            <Form.Item name={"subCategory"}>
+              <Select
+                onChange={(id: any) => dispatch(getFeatureUnderSubAction(id))}
+                placeholder="SubCategory"
+              >
                 {subCat?.res?.data?.map((each: any, i: any) => (
-                  <Option
-                    onChange={() => console.log("changed")}
-                    key={each._id}
-                  >
-                    {each.subCategoryName}
-                  </Option>
+                  <Option key={each._id}>{each.subCategoryName}</Option>
                 ))}
               </Select>
             </Form.Item>
-            {subCat?.res?.data?.features?.map((feature: any, i: any) => (
-              <div>
-                <label>{feature.featureName}</label>
-                {feature.featureType === "radio" && (
-                  <Form.Item>
-                    <Radio.Group>
-                      {feature.options.map((option: any, i: any) => (
-                        <Option value={option._id}>{option.optionName}</Option>
-                      ))}
-                    </Radio.Group>
-                  </Form.Item>
+            {featureUnderSub?.res?.data && (
+              <>
+                {featureUnderSub?.res?.data[0].features?.map(
+                  (feature: any, i: any) => (
+                    <div>
+                      <label>{feature.featureName}</label>
+                      {feature.featureType === "radio" && (
+                        <Form.Item name={feature.featureName}>
+                          <Radio.Group>
+                            {feature?.options?.map((option: any, i: any) => (
+                              <Radio value={option._id}>
+                                {option.optionName}
+                              </Radio>
+                            ))}
+                          </Radio.Group>
+                        </Form.Item>
+                      )}
+                    </div>
+                  )
                 )}
-              </div>
-            ))}
-            <Form.Item>
+              </>
+            )}
+
+            <Form.Item name={"location"}>
               <Select placeholder="Location">
                 {locations?.res?.data?.map((each: any, i: any) => (
                   <Option value={each._id}>{each.name}</Option>
                 ))}
               </Select>
             </Form.Item>
-
-            <Form.Item>
-              <Select placeholder="Sell/Rent/Job/Bid/Offer">
-                <Option>Option</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item>
-              <Select placeholder="New/Used">
-                <Option>Option</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item>
-              <Select placeholder="Brand">
-                <Option>Option</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item>
+            <Form.Item name={"quantity"}>
               <InputNumber placeholder="Quantity"></InputNumber>
             </Form.Item>
-            <Form.Item>
+            <Form.Item name={"payablePrice"}>
               <InputNumber placeholder="Price(payable)"></InputNumber>
             </Form.Item>
-            <Form.Item>
+            <Form.Item name={"oldPrice"}>
               <InputNumber placeholder="Price(old)"></InputNumber>
             </Form.Item>
-            <Form.Item>
-              <Select placeholder="Home Dlevary">
-                <Option>Option</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item>
+            <Form.Item name={"homeDelivery"}>
               <Input placeholder="Hd Amount" />
             </Form.Item>
             <div>
-              <label>Condition</label>
-              <Form.Item>
-                <Radio.Group>
-                  <Radio value={true}> Option </Radio>
-                  <Radio value={false}> Option </Radio>
-                </Radio.Group>
-              </Form.Item>
-            </div>
-            <div>
-              <label>MultiSelect</label>
-              <Form.Item>
-                <Checkbox.Group>
-                  <Checkbox value={"optionone"}> Option </Checkbox>
-                  <Checkbox value={"two"}> Option </Checkbox>
-                  <Checkbox value={"two"}> Option </Checkbox>
-                  <Checkbox value={"two"}> Option </Checkbox>
-                  <Checkbox value={"two"}> Option </Checkbox>
-                </Checkbox.Group>
-              </Form.Item>
-            </div>
-          </div>
-        </div>
-        <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
-          <div>
             <label>Show Till</label>
             <Form.Item>
               <Input placeholder="Name"></Input>
@@ -216,6 +191,10 @@ export default function () {
               <Input placeholder="Name"></Input>
             </Form.Item>
           </div>
+          </div>
+        </div>
+        <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
+         
           <div>
             <label>Ordering</label>
             <Form.Item>
@@ -232,13 +211,13 @@ export default function () {
             <label htmlFor="">Product Status</label>
             <Form.Item name="productStatus">
               <Select placeholder="New/Used">
-                <Option>Active</Option>
-                <Option>Notification</Option>
-                <Option>Pause</Option>
-                <Option>Review</Option>
-                <Option>Delete(Reason)</Option>
-                <Option>Product Atv+Msg</Option>
-                <Option>Product UnAtv+Msg</Option>
+                <Option value="active">Active</Option>
+                <Option value="notification">Notification</Option>
+                <Option value="pause">Pause</Option>
+                <Option value="review">Review</Option>
+                <Option value="delete">Delete(Reason)</Option>
+                <Option value="atv+msg">Product Atv+Msg</Option>
+                <Option value="unatv+msg">Product UnAtv+Msg</Option>
               </Select>
             </Form.Item>
           </div>
@@ -258,45 +237,42 @@ export default function () {
             <label>Total</label>
             <div className="flex gap-1">
               <Form.Item>
-                 <InputNumber placeholder="impression"></InputNumber>
+                <InputNumber placeholder="impression"></InputNumber>
               </Form.Item>
               <Form.Item>
-                 <InputNumber placeholder="reach"></InputNumber>
+                <InputNumber placeholder="reach"></InputNumber>
               </Form.Item>
               <Form.Item>
-                 <InputNumber placeholder="click"></InputNumber>
+                <InputNumber placeholder="click"></InputNumber>
               </Form.Item>
-              
             </div>
           </div>
           <div className="">
             <label>Normal</label>
             <div className="flex gap-1">
               <Form.Item>
-                 <InputNumber placeholder="impression"></InputNumber>
+                <InputNumber placeholder="impression"></InputNumber>
               </Form.Item>
               <Form.Item>
-                 <InputNumber placeholder="reach"></InputNumber>
+                <InputNumber placeholder="reach"></InputNumber>
               </Form.Item>
               <Form.Item>
-                 <InputNumber placeholder="click"></InputNumber>
+                <InputNumber placeholder="click"></InputNumber>
               </Form.Item>
-              
             </div>
           </div>
           <div className="">
             <label>Paid</label>
             <div className="flex gap-1">
               <Form.Item>
-                 <InputNumber placeholder="impression"></InputNumber>
+                <InputNumber placeholder="impression"></InputNumber>
               </Form.Item>
               <Form.Item>
-                 <InputNumber placeholder="reach"></InputNumber>
+                <InputNumber placeholder="reach"></InputNumber>
               </Form.Item>
               <Form.Item>
-                 <InputNumber placeholder="click"></InputNumber>
+                <InputNumber placeholder="click"></InputNumber>
               </Form.Item>
-              
             </div>
           </div>
           <div className="flex overflow-hidden gap-3 mb-3">
