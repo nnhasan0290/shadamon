@@ -34,16 +34,16 @@ const columns: any = [
   {
     title: "Product Img",
     dataIndex: "productImg",
-    width: 150,
+    width: 100,
     render: (imgArr: any) => (
       <Carousel>
         {
           imgArr?.map((each:any,i:any) => (
             <div>
             <img
-              src={each.img}
+              src={`${process.env.NEXT_PUBLIC_HOST}/img/${each.img}`}
               alt=""
-              className="h-[50px]"
+              className="h-[50px] object-cover w-full"
             />
           </div>
           ))
@@ -80,14 +80,7 @@ const columns: any = [
   {
     title: "Status",
     dataIndex: "status",
-    key: "status",
-    render: () => (
-      <Space size="middle">
-        <Dropdown menu={{ items }}>
-          <a>More</a>
-        </Dropdown>
-      </Space>
-    ),
+    key: "status"
   },
   {
     title: "Click",
@@ -124,7 +117,6 @@ const columns: any = [
   {
     title: "Edited",
     dataIndex: "edited",
-    fixed: "right",
   },
 ];
 
@@ -177,12 +169,11 @@ const ProductTable: React.FC = () => {
   return (
     <div className="w-full">
       <Table
-        rowSelection={{
-          ...rowSelection,
-        }}
+      bordered
         columns={columns}
         dataSource={allProduct?.res?.data}
         scroll={{ x: 1400 }}
+        pagination={{defaultPageSize:5}}
       />
     </div>
   );

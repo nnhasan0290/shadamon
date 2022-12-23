@@ -53,8 +53,6 @@ const options = {
 
 export default function () {
   const { Option } = Select;
-  const [features, setFeatures] = useState<any>([]);
-  console.log(features);
   const [imgArr, setImgArr] = useState<any>([]);
   console.log(imgArr);
   const dispatch = useAppDispatch();
@@ -73,7 +71,7 @@ export default function () {
   const handleCreateProduct = (values: any) => {
     const data = { ...values, productImg: imgArr };
     console.log(data);
-    // dispatch(createProductAction(data));
+   dispatch(createProductAction(data));
   };
   useEffect(() => {
     dispatch(getAllCategories());
@@ -233,13 +231,13 @@ export default function () {
           <div>
             <label>Ordering</label>
             <Form.Item>
-              <Input placeholder="Name"></Input>
+              <InputNumber placeholder="Ordering"></InputNumber>
             </Form.Item>
           </div>
           <div>
             <label>Slot Status</label>
             <Form.Item name="slotStatus">
-              <Input placeholder="Name"></Input>
+              <Input placeholder="Slot"></Input>
             </Form.Item>
           </div>
           <div>
