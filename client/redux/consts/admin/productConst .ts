@@ -1,0 +1,2 @@
+export const CREATE_PRODUCT = "CREATE_PRODUCT"
+export const GET_ALL_PRODUCT= "GET_ALL_PRODUCT"

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Space, Table, Tag } from "antd";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { getFeaturesAction } from "../../../redux/actions/Admin/categoryAction";
 
 const { Column, ColumnGroup } = Table;
 
@@ -21,8 +23,14 @@ const data: DataType[] = [
   },
 ];
 
-const FeatureTable: React.FC = () => (
-  <Table pagination={false} dataSource={data}>
+const FeatureTable: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const {res} = useAppSelector(state => state.allFeatures)
+useEffect(() => {
+  dispatch(getFeaturesAction());
+},[])
+  return(
+  <Table dataSource={res?.data}>
     <Column title="Feature  Name" dataIndex="featureName" key="featureName" />
     <Column title="Order" dataIndex="order" key="order" />
     <Column title="Input" dataIndex="input" key="input" />
@@ -46,6 +54,8 @@ const FeatureTable: React.FC = () => (
       )}
     />
   </Table>
-);
+
+  )
+};
 
 export default FeatureTable;

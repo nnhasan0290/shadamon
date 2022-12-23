@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Space, Table, Tag } from 'antd';
+import { useAppDispatch, useAppSelector } from '../../../redux/hook';
+import { getAllCategories } from '../../../redux/actions/Admin/categoryAction';
 
 const { Column, ColumnGroup } = Table;
 
@@ -21,11 +23,17 @@ const data: DataType[] = [
   },
 ];
 
-const CatTable: React.FC = () => (
-  <Table pagination={false} dataSource={data}>
-      <Column title="Category" dataIndex="catName" key="catName" />
-      <Column title="Order" dataIndex="order" key="order" />
-    <Column title="Entry Date" dataIndex="entryDate" key="entryDate" />
+const CatTable: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const {res} = useAppSelector(state => state.allCat)
+  useEffect(() => {
+   dispatch(getAllCategories());
+  },[])
+  return(
+  <Table  dataSource={res?.data}>
+      <Column title="Category" dataIndex="categoryName" key="catName" />
+      <Column title="Order" dataIndex="categoryOrder" key="order" />
+    <Column title="Entry Date" dataIndex="createdAt" key="entryDate" />
     <Column title="Created By" dataIndex="creator" key="creator" />
     {/* <Column
       title="Tags"
@@ -60,6 +68,6 @@ const CatTable: React.FC = () => (
       )}
     />
   </Table>
-);
+)};
 
 export default CatTable;

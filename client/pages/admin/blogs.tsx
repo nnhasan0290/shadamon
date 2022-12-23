@@ -18,7 +18,7 @@ export default function Admin() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ToastContainer/>
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         <div className="min-h-screen bg-[#001529]">
           <SideMenu />
         </div>

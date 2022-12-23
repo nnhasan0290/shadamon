@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel, Divider, Dropdown, Radio, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { getAllProductsAction } from "../../../redux/actions/Admin/productAction";
 
 interface DataType {
   key: React.Key;
@@ -13,7 +15,7 @@ interface DataType {
   reach: string;
   status: string;
   click: string;
-  slot: string;
+  slotStatus: string;
   userType: string;
   verify: string;
   accountSts: string;
@@ -28,26 +30,24 @@ const items = [
   { key: "2", label: "Action 2" },
 ];
 
-const columns: ColumnsType<DataType> = [
-  
+const columns: any = [
   {
     title: "Product Img",
     dataIndex: "productImg",
     width: 150,
-    render: (text: string) => (
+    render: (imgArr: any) => (
       <Carousel>
-        <div>
-          <img src="https://images.unsplash.com/photo-1671531009361-8846ff0d7ae4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
-        </div>
-        <div>
-          <img src="https://plus.unsplash.com/premium_photo-1661715499352-51bf121480d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
-        </div>
-        <div>
-          <img src="https://plus.unsplash.com/premium_photo-1661715499352-51bf121480d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
-        </div>
-        <div>
-          <img src="https://plus.unsplash.com/premium_photo-1661715499352-51bf121480d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" className="h-[80px]"/>
-        </div>
+        {
+          imgArr.map((each:any,i:any) => (
+            <div>
+            <img
+              src={each.img}
+              alt=""
+              className="h-[50px]"
+            />
+          </div>
+          ))
+        }
       </Carousel>
     ),
     fixed: "left",
@@ -67,14 +67,14 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: "Location",
-    dataIndex: "location",
+    dataIndex: "loction",
   },
   {
     title: "Price",
     dataIndex: "price",
   },
   {
-    title: "React",
+    title: "Reach",
     dataIndex: "reach",
   },
   {
@@ -94,8 +94,8 @@ const columns: ColumnsType<DataType> = [
     dataIndex: "click",
   },
   {
-    title: "Slot Sits",
-    dataIndex: "slot",
+    title: "Slot Stats",
+    dataIndex: "slotStatus",
   },
   {
     title: "User Type",
@@ -106,8 +106,8 @@ const columns: ColumnsType<DataType> = [
     dataIndex: "verify",
   },
   {
-    title: "Account Sts",
-    dataIndex: "accountSts",
+    title: "Quantity",
+    dataIndex: "quantity",
   },
   {
     title: "Product Sts",
@@ -128,28 +128,28 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    id: "827272",
-    name: "John Brown",
-    category: "electronics",
-    location: "malibug",
-    price: "37837",
-    reach: "8373",
-    status: "status",
-    click: "837",
-    slot: "37",
-    userType: "Post Pro",
-    verify: "Mobile",
-    accountSts: "active",
-    productSts: "active",
-    report: "active",
-    sign: "active",
-    edited: "active",
-    productImg: [],
-  },
-];
+// const data: DataType[] = [
+//   {
+//     key: "1",
+//     id: "827272",
+//     name: "John Brown",
+//     category: "electronics",
+//     location: "malibug",
+//     price: "37837",
+//     reach: "8373",
+//     status: "status",
+//     click: "837",
+//     slot: "37",
+//     userType: "Post Pro",
+//     verify: "Mobile",
+//     accountSts: "active",
+//     productSts: "active",
+//     report: "active",
+//     sign: "active",
+//     edited: "active",
+//     productImg: [],
+//   },
+// ];
 
 // rowSelection object indicates the need for row selection
 const rowSelection = {
@@ -167,6 +167,13 @@ const rowSelection = {
 };
 
 const ProductTable: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { allProduct } = useAppSelector((state) => state);
+  console.log(allProduct);
+  useEffect(() => {
+    dispatch(getAllProductsAction());
+  }, []);
+
   return (
     <div className="w-full">
       <Table
@@ -174,8 +181,7 @@ const ProductTable: React.FC = () => {
           ...rowSelection,
         }}
         columns={columns}
-        dataSource={data}
-        pagination={false}
+        dataSource={allProduct?.res?.data}
         scroll={{ x: 1400 }}
       />
     </div>
