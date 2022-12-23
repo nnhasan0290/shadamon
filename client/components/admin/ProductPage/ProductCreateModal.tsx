@@ -16,7 +16,6 @@ import ManualUpload from "./ManualUpload";
 import { Carousel } from "react-responsive-carousel";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import {
-  createProductAction,
   getAllCategories,
   getCategoriesUnderParentAction,
   getFeatureUnderSubAction,
@@ -25,6 +24,7 @@ import {
   getSubCategoriesAction,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { createProductAction } from "../../../redux/actions/Admin/productAction";
 
 const { TextArea } = Input;
 const options = {
