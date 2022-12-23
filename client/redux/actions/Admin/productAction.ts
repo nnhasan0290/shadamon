@@ -27,12 +27,12 @@ export const createProductAction = (formdata: any) => async (dispatch: any) => {
     });
   } catch (error: any) {
     console.log(error);
-    // toast.update(id, {
-    //   render: `${error.response.data.message}`,
-    //   type: "error",
-    //   isLoading: false,
-    //   autoClose: 2000,
-    // });
+    toast.update(id, {
+      render: `${error.response.data.message}`,
+      type: "error",
+      isLoading: false,
+      autoClose: 2000,
+    });
   }
 };
 

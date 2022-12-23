@@ -38,7 +38,7 @@ const columns: any = [
     render: (imgArr: any) => (
       <Carousel>
         {
-          imgArr.map((each:any,i:any) => (
+          imgArr?.map((each:any,i:any) => (
             <div>
             <img
               src={each.img}
@@ -53,7 +53,7 @@ const columns: any = [
     fixed: "left",
   },
   {
-    title: "Product Id",
+    title: "Id",
     dataIndex: "id",
     render: (text: string) => <a>{text}</a>,
   },
@@ -94,7 +94,7 @@ const columns: any = [
     dataIndex: "click",
   },
   {
-    title: "Slot Stats",
+    title: "S. Status",
     dataIndex: "slotStatus",
   },
   {
@@ -106,11 +106,11 @@ const columns: any = [
     dataIndex: "verify",
   },
   {
-    title: "Quantity",
+    title: "Qty",
     dataIndex: "quantity",
   },
   {
-    title: "Product Sts",
+    title: "Pd. Status",
     dataIndex: "productSts",
   },
   {

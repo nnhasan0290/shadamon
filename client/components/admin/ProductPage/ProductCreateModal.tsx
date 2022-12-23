@@ -53,9 +53,12 @@ const options = {
 
 export default function () {
   const { Option } = Select;
+  const [features, setFeatures] = useState<any>([]);
+  console.log(features);
   const [imgArr, setImgArr] = useState<any>([]);
   console.log(imgArr);
   const dispatch = useAppDispatch();
+  const [form] = Form.useForm();
   const {
     adminCat,
     allCat,
@@ -63,14 +66,14 @@ export default function () {
     subCat,
     catUnderParent,
     featureUnderSub,
-    createPd
+    createPd,
   } = useAppSelector((state) => state);
   console.log(createPd);
 
   const handleCreateProduct = (values: any) => {
-    const data = {...values, productImg: imgArr}
+    const data = { ...values, productImg: imgArr };
     console.log(data);
-    dispatch(createProductAction(data));
+    // dispatch(createProductAction(data));
   };
   useEffect(() => {
     dispatch(getAllCategories());
@@ -80,6 +83,7 @@ export default function () {
   return (
     <div>
       <Form
+        form={form}
         onFinish={handleCreateProduct}
         className="flex flex-wrap items-start"
       >
@@ -90,14 +94,18 @@ export default function () {
           <Form.Item name="heading" className="w-full">
             <Input placeholder="heading" />
           </Form.Item>
+         
           <Form.Item name="description" className="w-full">
             <TextArea placeholder="Description" />
           </Form.Item>
           <Form.Item className="w-full">
             <TextArea placeholder="Description/Edit" />
           </Form.Item>
+          <Form.Item name="address" className="w-full">
+            <Input placeholder="address" />
+          </Form.Item>
           <div className="flex flex-wrap gap-2">
-            <Form.Item >
+            <Form.Item>
               <Select
                 onSelect={(id: any) => {
                   dispatch(getCategoriesUnderParentAction(id));
@@ -131,27 +139,55 @@ export default function () {
                 ))}
               </Select>
             </Form.Item>
-            {featureUnderSub?.res?.data && (
+            {/* {featureUnderSub?.res?.data && (
               <>
                 {featureUnderSub?.res?.data[0].features?.map(
                   (feature: any, i: any) => (
                     <div>
                       <label>{feature.featureName}</label>
                       {feature.featureType === "radio" && (
-                        <Form.Item name={feature.featureName}>
-                          <Radio.Group>
+                        <Form.Item>
+                          <Radio.Group name={feature.featureName}>
                             {feature?.options?.map((option: any, i: any) => (
                               <Radio value={option._id}>
                                 {option.optionName}
                               </Radio>
                             ))}
                           </Radio.Group>
-                        </Form.Item>
+                          </Form.Item>
                       )}
                     </div>
                   )
                 )}
               </>
+            )} */}
+            {featureUnderSub?.res?.data && (
+              <Form.List name={"features"}>
+                {(fields) => (
+                  <>
+                    {featureUnderSub?.res?.data[0].features?.map(
+                      (feature: any, i: any) => (
+                        <div>
+                          <label>{feature.featureName}</label>
+                          {feature.featureType === "radio" && (
+                            <Form.Item name={feature.featureName}>
+                              <Radio.Group name={feature.featureName}>
+                                {feature?.options?.map(
+                                  (option: any, i: any) => (
+                                    <Radio value={option._id}>
+                                      {option.optionName}
+                                    </Radio>
+                                  )
+                                )}
+                              </Radio.Group>
+                            </Form.Item>
+                          )}
+                        </div>
+                      )
+                    )}
+                  </>
+                )}
+              </Form.List>
             )}
 
             <Form.Item name={"location"}>
@@ -174,27 +210,26 @@ export default function () {
               <Input placeholder="Hd Amount" />
             </Form.Item>
             <div>
-            <label>Show Till</label>
-            <Form.Item>
-              <Input placeholder="Name"></Input>
-            </Form.Item>
-          </div>
-          <div>
-            <label>Create</label>
-            <Form.Item>
-              <Input placeholder="Name"></Input>
-            </Form.Item>
-          </div>
-          <div>
-            <label>Pub</label>
-            <Form.Item>
-              <Input placeholder="Name"></Input>
-            </Form.Item>
-          </div>
+              <label>Show Till</label>
+              <Form.Item>
+                <Input disabled placeholder="Name"></Input>
+              </Form.Item>
+            </div>
+            <div>
+              <label>Create</label>
+              <Form.Item>
+                <Input disabled placeholder="Name"></Input>
+              </Form.Item>
+            </div>
+            <div>
+              <label>Pub</label>
+              <Form.Item>
+                <Input disabled placeholder="Name"></Input>
+              </Form.Item>
+            </div>
           </div>
         </div>
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
-         
           <div>
             <label>Ordering</label>
             <Form.Item>
@@ -237,13 +272,13 @@ export default function () {
             <label>Total</label>
             <div className="flex gap-1">
               <Form.Item>
-                <InputNumber placeholder="impression"></InputNumber>
+                <InputNumber disabled placeholder="impression"></InputNumber>
               </Form.Item>
               <Form.Item>
-                <InputNumber placeholder="reach"></InputNumber>
+                <InputNumber disabled placeholder="reach"></InputNumber>
               </Form.Item>
               <Form.Item>
-                <InputNumber placeholder="click"></InputNumber>
+                <InputNumber disabled placeholder="click"></InputNumber>
               </Form.Item>
             </div>
           </div>
@@ -251,13 +286,13 @@ export default function () {
             <label>Normal</label>
             <div className="flex gap-1">
               <Form.Item>
-                <InputNumber placeholder="impression"></InputNumber>
+                <InputNumber disabled placeholder="impression"></InputNumber>
               </Form.Item>
               <Form.Item>
-                <InputNumber placeholder="reach"></InputNumber>
+                <InputNumber disabled placeholder="reach"></InputNumber>
               </Form.Item>
               <Form.Item>
-                <InputNumber placeholder="click"></InputNumber>
+                <InputNumber disabled placeholder="click"></InputNumber>
               </Form.Item>
             </div>
           </div>
@@ -265,13 +300,13 @@ export default function () {
             <label>Paid</label>
             <div className="flex gap-1">
               <Form.Item>
-                <InputNumber placeholder="impression"></InputNumber>
+                <InputNumber disabled placeholder="impression"></InputNumber>
               </Form.Item>
               <Form.Item>
-                <InputNumber placeholder="reach"></InputNumber>
+                <InputNumber disabled placeholder="reach"></InputNumber>
               </Form.Item>
               <Form.Item>
-                <InputNumber placeholder="click"></InputNumber>
+                <InputNumber disabled placeholder="click"></InputNumber>
               </Form.Item>
             </div>
           </div>
