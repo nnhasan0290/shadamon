@@ -34,11 +34,11 @@ const items: MenuItem[] = [
   getItem(<Link href="/admin">Dashboard</Link>, '1', <PieChartOutlined />),
   getItem( <Link href="/admin/blogs">Blogs</Link>, '2', <DesktopOutlined />),
   getItem(<Link href="/admin/allProduct">All</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Order</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Staffing</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Report</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Settings</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Blogs</Link>, '3', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">Order</Link>, '4', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">Staffing</Link>, '5', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">Report</Link>, '6', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">Settings</Link>, '7', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">Blogs</Link>, '8', <ContainerOutlined />),
  
 ];
 
