@@ -10,7 +10,7 @@ import {
   Upload,
 } from "antd";
 import UploadComponent from "../FormElements/UploadComponent";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import ManualUpload from "./ManualUpload";
 import { Carousel } from "react-responsive-carousel";
@@ -57,6 +57,8 @@ export default function () {
   console.log(imgArr);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
+  const staticValue = [{ formItem1: "value1", formItem2: "value2" }];
+
   const {
     adminCat,
     allCat,
@@ -137,14 +139,21 @@ export default function () {
                 ))}
               </Select>
             </Form.Item>
-            {/* {featureUnderSub?.res?.data && (
+            {featureUnderSub?.res?.data && (
               <>
                 {featureUnderSub?.res?.data[0].features?.map(
                   (feature: any, i: any) => (
                     <div>
                       <label>{feature.featureName}</label>
+                      <Form.Item
+                        name={["features", i,"feature"]}
+                        initialValue={feature._id}
+                        hidden
+                      >
+                        <Input />
+                      </Form.Item>
                       {feature.featureType === "radio" && (
-                        <Form.Item name={['features']}>
+                        <Form.Item name={["features", i, "selectedOption",0]}>
                           <Radio.Group>
                             {feature?.options?.map((option: any, i: any) => (
                               <Radio value={option._id}>
@@ -152,39 +161,33 @@ export default function () {
                               </Radio>
                             ))}
                           </Radio.Group>
-                          </Form.Item>
+                        </Form.Item>
                       )}
                     </div>
                   )
                 )}
               </>
-            )} */}
-            {featureUnderSub?.res?.data && (
-              <Form.List name="names">
+            )}
+            {/* {featureUnderSub?.res?.data && (
+              <Form.List name={"features"} >
                 {(fields) => (
-                  <>
-                  {featureUnderSub?.res?.data[0].features?.map((each:any,i:any) => (
-                      <Form.Item required={false} key={i}>
-                        <Form.Item
-                          name={"optionsName"}
-                          validateTrigger={["onChange", "onBlur"]}
-                          noStyle
-                        >
-                          <Radio.Group>
-                            {each?.options?.map((option: any, i: any) => (
-                              <Radio value={option._id}>
-                                {option.optionName}
-                              </Radio>
-                            ))}
-                          </Radio.Group>
-                        </Form.Item>
-                      </Form.Item>
-                    
-                  ))}
-                  </>
+                  <div>
+                    {featureUnderSub?.res?.data[0].features.map(
+                      (field: any, i:any) => (
+                        <>
+                          <Form.Item {...field} name={["feature", i]}>
+                            <Input placeholder="field 1" />
+                          </Form.Item>
+                          <Form.Item {...field} name={["feature", i]} className="absolute">
+                            <Input hidden value={field.featureName} placeholder="field 1" />
+                          </Form.Item>
+                          </>
+                      )
+                    )}
+                  </div>
                 )}
               </Form.List>
-            )}
+            )} */}
 
             <Form.Item name={"location"}>
               <Select placeholder="Location">
