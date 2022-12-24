@@ -30,7 +30,7 @@ const items = [
   { key: "2", label: "Action 2" },
 ];
 
-const columns: any = [
+const firstColumns: any = [
   {
     title: "Product Img",
     dataIndex: "productImg",
@@ -51,6 +51,7 @@ const columns: any = [
       </Carousel>
     ),
     fixed: "left",
+    
   },
   
   {
@@ -124,6 +125,7 @@ const columns: any = [
   },
 ];
 
+
 // const data: DataType[] = [
 //   {
 //     key: "1",
@@ -170,11 +172,12 @@ const ProductTable: React.FC = () => {
     dispatch(getAllProductsAction());
   }, []);
 
+
   return (
     <div className="w-full">
       <Table
       bordered
-        columns={columns}
+        columns={firstColumns}
         dataSource={allProduct?.res?.data}
         scroll={{ x: 1400 }}
         pagination={{defaultPageSize:5}}
