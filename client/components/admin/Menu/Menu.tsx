@@ -34,11 +34,11 @@ const items: MenuItem[] = [
   getItem(<Link href="/admin">Dashboard</Link>, '1', <PieChartOutlined />),
   getItem( <Link href="/admin/blogs">Blogs</Link>, '2', <DesktopOutlined />),
   getItem(<Link href="/admin/allProduct">All</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Order</Link>, '4', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Staffing</Link>, '5', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Report</Link>, '6', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Settings</Link>, '7', <ContainerOutlined />),
-  getItem(<Link href="/admin/allProduct">Blogs</Link>, '8', <ContainerOutlined />),
+  getItem(<Link href="/admin/order">Order</Link>, '4', <ContainerOutlined />),
+  getItem(<Link href="/admin/staff">Staffing</Link>, '5', <ContainerOutlined />),
+  getItem(<Link href="/admin/report">Report</Link>, '6', <ContainerOutlined />),
+  getItem(<Link href="/admin/settings">Settings</Link>, '7', <ContainerOutlined />),
+  getItem(<Link href="/admin/blogs">Blogs</Link>, '8', <ContainerOutlined />),
  
 ];
 
@@ -55,12 +55,12 @@ const SideMenu: React.FC = () => {
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
-        defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"
         inlineCollapsed={collapsed}
         items={items}
+        
       />
     </div>
   );
