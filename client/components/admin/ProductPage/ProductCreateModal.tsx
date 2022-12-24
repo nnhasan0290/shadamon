@@ -147,7 +147,7 @@ export default function () {
                       <label>{feature.featureName}</label>
                       <Form.Item
                         name={["features", i,"feature"]}
-                        initialValue={feature.featureName}
+                        initialValue={feature._id}
                         hidden
                       >
                         <Input />
@@ -156,7 +156,7 @@ export default function () {
                         <Form.Item name={["features", i, "selectedOption",0]}>
                           <Radio.Group>
                             {feature?.options?.map((option: any, i: any) => (
-                              <Radio value={option._id}>
+                              <Radio value={option.optionName}>
                                 {option.optionName}
                               </Radio>
                             ))}

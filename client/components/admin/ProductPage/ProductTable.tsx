@@ -52,6 +52,7 @@ const columns: any = [
     ),
     fixed: "left",
   },
+  
   {
     title: "Id",
     dataIndex: "_id",
