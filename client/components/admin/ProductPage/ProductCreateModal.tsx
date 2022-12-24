@@ -71,7 +71,7 @@ export default function () {
   const handleCreateProduct = (values: any) => {
     const data = { ...values, productImg: imgArr };
     console.log(data);
-   dispatch(createProductAction(data));
+    dispatch(createProductAction(data));
   };
   useEffect(() => {
     dispatch(getAllCategories());
@@ -92,7 +92,7 @@ export default function () {
           <Form.Item name="heading" className="w-full">
             <Input placeholder="heading" />
           </Form.Item>
-         
+
           <Form.Item name="description" className="w-full">
             <TextArea placeholder="Description" />
           </Form.Item>
@@ -144,8 +144,8 @@ export default function () {
                     <div>
                       <label>{feature.featureName}</label>
                       {feature.featureType === "radio" && (
-                        <Form.Item>
-                          <Radio.Group name={feature.featureName}>
+                        <Form.Item name={['features']}>
+                          <Radio.Group>
                             {feature?.options?.map((option: any, i: any) => (
                               <Radio value={option._id}>
                                 {option.optionName}
@@ -160,29 +160,27 @@ export default function () {
               </>
             )} */}
             {featureUnderSub?.res?.data && (
-              <Form.List name={"features"}>
+              <Form.List name="names">
                 {(fields) => (
                   <>
-                    {featureUnderSub?.res?.data[0].features?.map(
-                      (feature: any, i: any) => (
-                        <div>
-                          <label>{feature.featureName}</label>
-                          {feature.featureType === "radio" && (
-                            <Form.Item name={feature.featureName}>
-                              <Radio.Group name={feature.featureName}>
-                                {feature?.options?.map(
-                                  (option: any, i: any) => (
-                                    <Radio value={option._id}>
-                                      {option.optionName}
-                                    </Radio>
-                                  )
-                                )}
-                              </Radio.Group>
-                            </Form.Item>
-                          )}
-                        </div>
-                      )
-                    )}
+                  {featureUnderSub?.res?.data[0].features?.map((each:any,i:any) => (
+                      <Form.Item required={false} key={i}>
+                        <Form.Item
+                          name={"optionsName"}
+                          validateTrigger={["onChange", "onBlur"]}
+                          noStyle
+                        >
+                          <Radio.Group>
+                            {each?.options?.map((option: any, i: any) => (
+                              <Radio value={option._id}>
+                                {option.optionName}
+                              </Radio>
+                            ))}
+                          </Radio.Group>
+                        </Form.Item>
+                      </Form.Item>
+                    
+                  ))}
                   </>
                 )}
               </Form.List>
