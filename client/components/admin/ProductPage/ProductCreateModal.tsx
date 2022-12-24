@@ -147,7 +147,7 @@ export default function () {
                       <label>{feature.featureName}</label>
                       <Form.Item
                         name={["features", i,"feature"]}
-                        initialValue={feature._id}
+                        initialValue={feature.featureName}
                         hidden
                       >
                         <Input />
