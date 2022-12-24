@@ -6,10 +6,10 @@ import { getAllProductsAction } from "../../../redux/actions/Admin/productAction
 
 interface DataType {
   key: React.Key;
-  id: string;
+  _id: string;
   productImg: any;
-  name: string;
-  category: string;
+  heading: string;
+  categoryId: string;
   location: string;
   price: string;
   reach: string;
@@ -54,20 +54,23 @@ const columns: any = [
   },
   {
     title: "Id",
-    dataIndex: "id",
-    render: (text: string) => <a>{text}</a>,
+    dataIndex: "_id",
+    render: (text: string) => <div className=" truncate w-full"><span>{text}</span></div>,
   },
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "heading",
+    render: (text: string) => <div className=" truncate w-full"><span>{text}</span></div>,
   },
   {
     title: "Category",
-    dataIndex: "category",
+    dataIndex: "categoryId",
+    render: (arr:any)=> arr.categoryName 
   },
   {
     title: "Location",
-    dataIndex: "loction",
+    dataIndex: "location",
+    render: (arr:any) => arr.name
   },
   {
     title: "Price",
@@ -152,10 +155,10 @@ const rowSelection = {
       selectedRows
     );
   },
-  getCheckboxProps: (record: DataType) => ({
-    disabled: record.name === "Disabled User", // Column configuration not to be checked
-    name: record.name,
-  }),
+  // getCheckboxProps: (record: DataType) => ({
+  //   disabled: record.name === "Disabled User", // Column configuration not to be checked
+  //   name: record.name,
+  // }),
 };
 
 const ProductTable: React.FC = () => {
