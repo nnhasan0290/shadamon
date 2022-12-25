@@ -21,7 +21,7 @@ export default function(){
 
     return(
         
-            <Input value={today} type="text"/>
+            <Input  value={today} type="text"/>
        
     )
 }

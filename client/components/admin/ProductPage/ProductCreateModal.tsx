@@ -80,7 +80,7 @@ export default function () {
       } 
     });
     values.productImg = newProductImg;
-    console.log(values);
+    dispatch(createProductAction(values));
   };
   useEffect(() => {
     dispatch(getAllCategories());
@@ -135,7 +135,7 @@ export default function () {
                   placeholder="Parent"
                 >
                   {adminCat?.res?.data?.map((each: any, i: any) => (
-                    <Option value={each._id}>{each.name}</Option>
+                    <Option value={each._id}>{each?.name}</Option>
                   ))}
                 </Select>
               </Form.Item>

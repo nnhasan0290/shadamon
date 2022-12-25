@@ -76,7 +76,7 @@ const firstColumns: any = [
     title: "Location",
     ellipsis:true,
     dataIndex: "location",
-    render: (arr:any) => arr.name
+    render: (arr:any) => arr?.location
   },
   {
     title: "Price",
