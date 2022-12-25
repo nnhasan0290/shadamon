@@ -23,7 +23,7 @@ export default function Admin() {
       <ToastContainer/>
       <div className="flex gap-2">
         <div className="min-h-screen bg-[#001529]">
-          <SideMenu />
+          <SideMenu activeItem="2" />
         </div>
         <AdminModal />
         <div className="overflow-hidden mr-4 w-full">

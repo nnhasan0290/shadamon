@@ -17,7 +17,7 @@ export default function Admin() {
       </Head>
       <div className="flex gap-4">
       <div className="min-h-screen bg-[#001529]">
-        <SideMenu />
+        <SideMenu activeItem="1" />
       </div>
         <MchantData/>
         <AdminModal/>

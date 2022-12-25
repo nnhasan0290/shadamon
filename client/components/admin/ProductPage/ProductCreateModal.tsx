@@ -71,9 +71,16 @@ export default function () {
   console.log(createPd);
 
   const handleCreateProduct = (values: any) => {
-    const data = { ...values, productImg: imgArr };
-    console.log(data);
-    dispatch(createProductAction(data));
+    console.log(values);
+    let newProductImg:any = [];
+    values.productImg.forEach((each: any, i: any) => {
+      if (each.img) {
+        each.img = each.img.file;
+        newProductImg.push(each);
+      } 
+    });
+    values.productImg = newProductImg;
+    console.log(values);
   };
   useEffect(() => {
     dispatch(getAllCategories());
@@ -91,54 +98,76 @@ export default function () {
           Create Product
         </h2>
         <div className="flex flex-wrap justify-between pr-5 basis-1/2">
-          <Form.Item name="heading" className="w-full">
-            <Input placeholder="heading" />
-          </Form.Item>
+          <div className="w-full">
+            <label htmlFor="">Heading</label>
+            <Form.Item name="heading" className="">
+              <Input placeholder="heading" />
+            </Form.Item>
+          </div>
 
-          <Form.Item name="description" className="w-full">
-            <TextArea placeholder="Description" />
-          </Form.Item>
-          <Form.Item className="w-full">
-            <TextArea placeholder="Description/Edit" />
-          </Form.Item>
-          <Form.Item name="address" className="w-full">
-            <Input placeholder="address" />
-          </Form.Item>
+          <div className="w-full">
+            <label htmlFor="">Description</label>
+            <Form.Item name="description" className="">
+              <TextArea placeholder="Description" />
+            </Form.Item>
+          </div>
+          <div className="w-full">
+            <label htmlFor="">Description/Edit</label>
+            <Form.Item name="description" className="">
+              <TextArea placeholder="Description/edit" />
+            </Form.Item>
+          </div>
+          <div className="w-full">
+            <label htmlFor="">Address</label>
+            <Form.Item name="address" className="w-full">
+              <Input placeholder="address" />
+            </Form.Item>
+          </div>
+
           <div className="flex flex-wrap gap-2">
-            <Form.Item>
-              <Select
-                onSelect={(id: any) => {
-                  dispatch(getCategoriesUnderParentAction(id));
-                }}
-                placeholder="Parent"
-              >
-                {adminCat?.res?.data?.map((each: any, i: any) => (
-                  <Option value={each._id}>{each.name}</Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item name="categoryId">
-              <Select
-                onSelect={(id: any) => {
-                  dispatch(getSubCategoriesAction(id));
-                }}
-                placeholder="Categories"
-              >
-                {catUnderParent?.res?.data?.map((each: any, i: any) => (
-                  <Option value={each._id}>{each.categoryName}</Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item name={"subCategory"}>
-              <Select
-                onChange={(id: any) => dispatch(getFeatureUnderSubAction(id))}
-                placeholder="SubCategory"
-              >
-                {subCat?.res?.data?.map((each: any, i: any) => (
-                  <Option key={each._id}>{each.subCategoryName}</Option>
-                ))}
-              </Select>
-            </Form.Item>
+            <div>
+              <label htmlFor="">Parent</label>
+              <Form.Item>
+                <Select
+                  onSelect={(id: any) => {
+                    dispatch(getCategoriesUnderParentAction(id));
+                  }}
+                  placeholder="Parent"
+                >
+                  {adminCat?.res?.data?.map((each: any, i: any) => (
+                    <Option value={each._id}>{each.name}</Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </div>
+            <div>
+              <label htmlFor="">category</label>
+              <Form.Item name="categoryId">
+                <Select
+                  onSelect={(id: any) => {
+                    dispatch(getSubCategoriesAction(id));
+                  }}
+                  placeholder="Categories"
+                >
+                  {catUnderParent?.res?.data?.map((each: any, i: any) => (
+                    <Option value={each._id}>{each.categoryName}</Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </div>
+            <div>
+              <label htmlFor="">Sub Category</label>
+              <Form.Item name={"subCategory"}>
+                <Select
+                  onChange={(id: any) => dispatch(getFeatureUnderSubAction(id))}
+                  placeholder="SubCategory"
+                >
+                  {subCat?.res?.data?.map((each: any, i: any) => (
+                    <Option key={each._id}>{each.subCategoryName}</Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </div>
             {featureUnderSub?.res?.data && (
               <>
                 {featureUnderSub?.res?.data[0].features?.map(
@@ -146,14 +175,14 @@ export default function () {
                     <div>
                       <label>{feature.featureName}</label>
                       <Form.Item
-                        name={["features", i,"feature"]}
+                        name={["features", i, "feature"]}
                         initialValue={feature._id}
                         hidden
                       >
                         <Input />
                       </Form.Item>
                       {feature.featureType === "radio" && (
-                        <Form.Item name={["features", i, "selectedOption",0]}>
+                        <Form.Item name={["features", i, "selectedOption", 0]}>
                           <Radio.Group>
                             {feature?.options?.map((option: any, i: any) => (
                               <Radio value={option.optionName}>
@@ -188,26 +217,40 @@ export default function () {
                 )}
               </Form.List>
             )} */}
-
-            <Form.Item name={"location"}>
-              <Select placeholder="Location">
-                {locations?.res?.data?.map((each: any, i: any) => (
-                  <Option value={each._id}>{each.name}</Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item name={"quantity"}>
-              <InputNumber placeholder="Quantity"></InputNumber>
-            </Form.Item>
-            <Form.Item name={"payablePrice"}>
-              <InputNumber placeholder="Price(payable)"></InputNumber>
-            </Form.Item>
-            <Form.Item name={"oldPrice"}>
-              <InputNumber placeholder="Price(old)"></InputNumber>
-            </Form.Item>
-            <Form.Item name={"homeDelivery"}>
-              <Input placeholder="Hd Amount" />
-            </Form.Item>
+            <div>
+              <label htmlFor="">Location</label>
+              <Form.Item name={"location"}>
+                <Select placeholder="Location">
+                  {locations?.res?.data?.map((each: any, i: any) => (
+                    <Option value={each._id}>{each.name}</Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </div>
+            <div>
+              <label htmlFor="">Quantity</label>
+              <Form.Item name={"quantity"}>
+                <InputNumber placeholder="Quantity"></InputNumber>
+              </Form.Item>
+            </div>
+            <div>
+              <label htmlFor="">Payable Price</label>
+              <Form.Item name={"payablePrice"}>
+                <InputNumber placeholder="Price(payable)"></InputNumber>
+              </Form.Item>
+            </div>
+            <div>
+              <label htmlFor="">Old Price</label>
+              <Form.Item name={"oldPrice"}>
+                <InputNumber placeholder="Price(old)"></InputNumber>
+              </Form.Item>
+            </div>
+            <div>
+              <label htmlFor="">Home Delivery</label>
+              <Form.Item name={"homeDelivery"}>
+                <Input placeholder="Hd Amount" />
+              </Form.Item>
+            </div>
             <div>
               <label>Show Till</label>
               <Form.Item>
@@ -309,7 +352,7 @@ export default function () {
               </Form.Item>
             </div>
           </div>
-          <div className="flex overflow-hidden gap-3 mb-3">
+          {/* <div className="flex overflow-hidden gap-3 mb-3">
             <Carousel
               {...options}
               className="w-full"
@@ -324,6 +367,64 @@ export default function () {
               <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
               <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
             </Carousel>
+          </div> */}
+
+          <div className="w-full flex gap-3">
+            <div className="">
+              <Form.Item
+              initialValue={false}
+                name={["productImg", 0, "longImg"]}
+                valuePropName="checked"
+                noStyle
+              >
+                <Checkbox>Long Img?</Checkbox>
+              </Form.Item>
+              <UploadComponent index={0} />
+            </div>
+            <div className="">
+              <Form.Item
+               initialValue={false}
+                name={["productImg", 1, "longImg"]}
+                valuePropName="checked"
+                noStyle
+              >
+                <Checkbox>Long Img?</Checkbox>
+              </Form.Item>
+              <UploadComponent index={1} />
+            </div>
+            <div className="">
+              <Form.Item
+               initialValue={false}
+                name={["productImg", 2, "longImg"]}
+                valuePropName="checked"
+                noStyle
+              >
+                <Checkbox>Long Img?</Checkbox>
+              </Form.Item>
+              <UploadComponent index={2} />
+            </div>
+            <div className="">
+              <Form.Item
+               initialValue={false}
+                name={["productImg", 3, "longImg"]}
+                valuePropName="checked"
+                noStyle
+              >
+                <Checkbox>Long Img?</Checkbox>
+              </Form.Item>
+              <UploadComponent index={3} />
+            </div>
+            <div className="">
+              <Form.Item
+               initialValue={false}
+                name={["productImg", 4, "longImg"]}
+                valuePropName="checked"
+                noStyle
+              >
+                <Checkbox>Long Img?</Checkbox>
+              </Form.Item>
+              <UploadComponent index={4} />
+            </div>
           </div>
         </div>
         <div className="flex gap-5 basis-full">

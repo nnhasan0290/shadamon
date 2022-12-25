@@ -16,21 +16,21 @@ interface DataType {
 const data: DataType[] = [
   {
     key: "1",
-    catName: "category name",
+    catName: "location name",
     order: "2",
     entryDate: "1/2/33",
     creator: "creator",
   },
 ];
 
-const CatTable: React.FC = () => {
+const LocationTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const { res } = useAppSelector((state) => state.allCat);
   useEffect(() => {
     dispatch(getAllCategories());
   }, []);
   return (
-    <Table dataSource={res?.data}>
+    <Table dataSource={data}>
       <Column title="Category" dataIndex="categoryName" key="catName" />
       <Column title="Order" dataIndex="categoryOrder" key="order" />
       <Column title="Entry Date" dataIndex="createdAt" key="entryDate" />
@@ -71,4 +71,4 @@ const CatTable: React.FC = () => {
   );
 };
 
-export default CatTable;
+export default LocationTable;

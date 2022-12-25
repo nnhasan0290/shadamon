@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { Checkbox, Form, Modal, Upload } from "antd";
+import { Form, Modal, Upload } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadFile } from "antd/es/upload/interface";
 
@@ -12,7 +12,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const UploadComponent = ({ name }: any) => {
+const UploadComponent = ({ index }: any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -32,12 +32,8 @@ const UploadComponent = ({ name }: any) => {
     );
   };
 
-  const handleChange: UploadProps["onChange"] = ({
-    fileList: newFileList,
-    file,
-  }) => {
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
     setFileList(newFileList);
-  };
 
   const uploadButton = (
     <div>
@@ -47,15 +43,15 @@ const UploadComponent = ({ name }: any) => {
   );
   return (
     <>
-     <Form.Item name={name}>
-      <Upload
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-      >
-        {fileList.length >= 5 ? null : uploadButton}
-      </Upload>
+      <Form.Item name={["productImg", index, "img"]}>
+        <Upload
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={handlePreview}
+          onChange={handleChange}
+        >
+          {fileList.length >= 1 ? null : uploadButton}
+        </Upload>
       </Form.Item>
       <Modal
         open={previewOpen}

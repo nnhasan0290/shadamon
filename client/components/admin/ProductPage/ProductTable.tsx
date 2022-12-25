@@ -32,9 +32,10 @@ const items = [
 
 const firstColumns: any = [
   {
-    title: "Product Img",
+    title: "Img",
     dataIndex: "productImg",
     width: 100,
+    ellipsis: true,
     render: (imgArr: any) => (
       <Carousel>
         {
@@ -66,49 +67,61 @@ const firstColumns: any = [
   },
   {
     title: "Category",
+    align:"center",
     dataIndex: "categoryId",
-    render: (arr:any)=> arr.categoryName 
+    render: (arr:any)=> arr.categoryName ,
+    ellipsis:true,
   },
   {
     title: "Location",
+    ellipsis:true,
     dataIndex: "location",
     render: (arr:any) => arr.name
   },
   {
     title: "Price",
+    ellipsis:true,
     dataIndex: "price",
   },
   {
     title: "Reach",
+    ellipsis:true,
     dataIndex: "reach",
   },
   {
     title: "Status",
+    ellipsis:true,
     dataIndex: "status",
     key: "status"
   },
   {
     title: "Click",
+    ellipsis:true,
     dataIndex: "click",
   },
   {
     title: "S. Status",
+    ellipsis:true,
     dataIndex: "slotStatus",
   },
   {
     title: "User Type",
+    ellipsis:true,
     dataIndex: "userType",
   },
   {
     title: "Verify",
+    ellipsis:true,
     dataIndex: "verify",
   },
   {
     title: "Qty",
+    ellipsis:true,
     dataIndex: "quantity",
   },
   {
     title: "Pd. Status",
+    ellipsis:true,
     dataIndex: "productSts",
   },
   {
@@ -176,6 +189,8 @@ const ProductTable: React.FC = () => {
   return (
     <div className="w-full">
       <Table
+      size="small"
+      showSorterTooltip={true}
       bordered
         columns={firstColumns}
         dataSource={allProduct?.res?.data}

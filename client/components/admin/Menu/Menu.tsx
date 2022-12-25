@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
+import { useRouter } from 'next/router';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -30,24 +31,27 @@ function getItem(
   } as MenuItem;
 }
 
+
+
 const items: MenuItem[] = [
   getItem(<Link href="/admin">Dashboard</Link>, '1', <PieChartOutlined />),
-  getItem( <Link href="/admin/blogs">Blogs</Link>, '2', <DesktopOutlined />),
-  getItem(<Link href="/admin/allProduct">All</Link>, '3', <ContainerOutlined />),
-  getItem(<Link href="/admin/order">Order</Link>, '4', <ContainerOutlined />),
-  getItem(<Link href="/admin/staff">Staffing</Link>, '5', <ContainerOutlined />),
-  getItem(<Link href="/admin/report">Report</Link>, '6', <ContainerOutlined />),
-  getItem(<Link href="/admin/settings">Settings</Link>, '7', <ContainerOutlined />),
-  getItem(<Link href="/admin/blogs">Blogs</Link>, '8', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">All</Link>, '2', <ContainerOutlined />),
+  getItem(<Link href="/admin/order">Order</Link>, '3', <ContainerOutlined />),
+  getItem(<Link href="/admin/staff">Staffing</Link>, '4', <ContainerOutlined />),
+  getItem(<Link href="/admin/report">Report</Link>, '5', <ContainerOutlined />),
+  getItem(<Link href="/admin/settings">Settings</Link>, '6', <ContainerOutlined />),
+  getItem( <Link href="/admin/blogs">Blogs</Link>, '7', <DesktopOutlined />),
  
 ];
 
-const SideMenu: React.FC = () => {
+const SideMenu = ({activeItem}:any) => {
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
+
 
   return (
     <div style={{ width: "auto" }}>
@@ -55,6 +59,7 @@ const SideMenu: React.FC = () => {
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
+      defaultSelectedKeys={[activeItem]}
         defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"
