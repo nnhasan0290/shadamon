@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Space, Table, Tag } from "antd";
+import { Popconfirm, Space, Table, Tag } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import {
   getAllCategories,
@@ -30,13 +30,14 @@ for (let i = 0; i < 3; ++i) {
 const LocationTable: React.FC = () => {
   const { modalDispatch } = GlobalStates();
   const dispatch = useAppDispatch();
-  const { locations } = useAppSelector((state) => state);
-  console.log(locations);
+  const { locations, deleteParentLoc, editParentLocation}:any = useAppSelector((state) => state);
+  console.log(editParentLocation)
   useEffect(() => {
     dispatch(getLocationAction());
-  }, [locations]);
+  }, [deleteParentLoc.success, editParentLocation.success]);
   return (
     <Table
+      onChange={() => dispatch(getLocationAction())}
       rowKey={(record: any) => record._id}
       dataSource={locations?.res?.data}
       expandable={{
@@ -120,9 +121,19 @@ const LocationTable: React.FC = () => {
         title="Delete"
         key="delete"
         render={(_: any, record: any) => (
-          <Space size="middle">
-            <a color="red">Delete</a>
-          </Space>
+          <Popconfirm
+            title="Delete the data?"
+            onConfirm={(e: any) => {
+              dispatch(deleteParentLocationAction(record._id));
+            }}
+            onCancel={(e: any) => console.log(e)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Space size="middle">
+              <a>Delete</a>
+            </Space>
+          </Popconfirm>
         )}
       />
     </Table>

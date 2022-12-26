@@ -20,6 +20,17 @@
   .upload__btn{
     @apply hover:bg-gray-400/80 rounded-full h-[35px] w-[35px] flex items-center justify-center transition-all duration-300 cursor-pointer
   }
+  
+}
+
+.ant-space-item a{
+  color: #1677ff !important;
+}
+
+.ant-btn-primary {
+  color: #fff !important;
+  background-color: #1677ff !important;
+  box-shadow: 0 2px 0 rgb(5 145 255 / 10%) !important;
 }
 
 input {
