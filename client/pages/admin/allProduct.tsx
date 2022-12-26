@@ -1,8 +1,6 @@
 import Head from "next/head";
 import AdminModal from "../../components/admin/AllModal/AdminModal";
-import BlogBtn from "../../components/admin/blogsPage/BlogBtn";
-import CatTable from "../../components/admin/blogsPage/CatTable";
-import TopAvatarArea from "../../components/admin/blogsPage/TopAvatarArea";
+import TopAvatarArea from "../../components/admin/categoryPage/TopAvatarArea";
 import SideMenu from "../../components/admin/Menu/Menu";
 import { ToastContainer } from "react-toastify";
 
