@@ -17,13 +17,14 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getLocationAction } from "../../../redux/actions/Admin/categoryAction";
 import { createLocationAction } from "../../../redux/actions/Admin/locationAction";
 import ParentLocationModal from "./ParentLocationModal";
+import { GlobalStates } from "../../../context/ContextProvider";
 const { Option } = Select;
 
 export default function () {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const { locations, createLocation } = useAppSelector((state) => state);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {modalDispatch} = GlobalStates();
   const onFinish = (values: any) => {
     console.log(values);
     dispatch(createLocationAction(values));
@@ -69,11 +70,10 @@ export default function () {
             ))}
           </Select>
         </Form.Item>
-        <Button className="text-white bg-blue-700 hover:border-none" onClick={() => setIsModalOpen(true)}>
+        <Button className="text-white bg-blue-700 hover:border-none" onClick={() => modalDispatch(({type:"MIDDLE_MODAL", payload:<ParentLocationModal/>}))}>
           {" "}
           Add New
         </Button>
-        <ParentLocationModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
       </div>
 
       <Form.Item className="px-1 basis-1/2">

@@ -9,6 +9,7 @@ import SmallModal from "../../components/admin/AllModal/SmallModal";
 import SettingBtnArea from "../../components/admin/SettingsPage/SettingBtnArea";
 import { Divider } from "antd";
 import LocationTable from "../../components/admin/SettingsPage/LocationTable";
+import MiddleModal from "../../components/admin/AllModal/MidModal";
 
 export default function Admin() {
   return (
@@ -25,6 +26,7 @@ export default function Admin() {
         </div>
         <AdminModal />
         <SmallModal/>
+        <MiddleModal/>
         <div className="mr-4 w-full">
           <TopAvatarArea/>
           <SettingBtnArea/>

@@ -17,8 +17,10 @@ const initialState = {
   modalOpen: false,
   adminModalOpen: false,
   smallModalOpen:false,
+  middleModalOpen:false,
   component: "",
   smComponent: "",
+  mdComponent:""
 };
 
 const reducer = (state: object, action: any) => {
@@ -49,11 +51,15 @@ const reducer = (state: object, action: any) => {
 
     case "SMALL_MODAL":
       return {...state, smallModalOpen: true, smComponent: action.payload };
+    case "MIDDLE_MODAL":
+      return {...state, middleModalOpen: true, mdComponent: action.payload };
 
     case "CLEAR_MODAL":
       return {...state, modalOpen: false, adminModalOpen: false,smallModalOpen:false };
     case "CLEAR_SM_MODAL":
       return {...state, smallModalOpen:false };
+    case "CLEAR_MD_MODAL":
+      return {...state, middleModalOpen:false };
     default:
       return state;
   }

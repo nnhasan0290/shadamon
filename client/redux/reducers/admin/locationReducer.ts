@@ -1,4 +1,4 @@
-import { CREATE_LOCATION, CREATE_PARENT_LOCATION } from "../../consts/admin/locationConst";
+import { CREATE_LOCATION, CREATE_PARENT_LOCATION, EDIT_PARENT_LOCATION } from "../../consts/admin/locationConst";
 
 interface dataType {
   res: object;
@@ -16,6 +16,13 @@ export const createLocationReducer = (state = initialState, action: any) => {
 };
 export const createParentLocationReducer = (state = initialState, action: any) => {
   if (action.type === CREATE_PARENT_LOCATION) {
+    return { res: action.payload };
+  } else {
+    return state;
+  }
+};
+export const editParentLocationReducer = (state = initialState, action: any) => {
+  if (action.type === EDIT_PARENT_LOCATION) {
     return { res: action.payload };
   } else {
     return state;

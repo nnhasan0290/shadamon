@@ -4,32 +4,27 @@ import {
   Form,
   Input,
   InputNumber,
-  Modal,
   Radio,
-  Select,
   Typography,
 } from "antd";
 import { BiPlus } from "react-icons/bi";
-import { createParentLocationAction } from "../../../redux/actions/Admin/locationAction";
+import { createParentLocationAction, editParentLocationAction } from "../../../redux/actions/Admin/locationAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import DateInput from "../../layout/DateInput";
 
-export default function ({ isModalOpen, setIsModalOpen }: any) {
+export default function ({record}:any) {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
-  const {createParentLocation} = useAppSelector(state => state);
-  console.log(createParentLocation);
   const onFinish = (values: any) => {
-    console.log(values);
-    dispatch(createParentLocationAction(values));
-    console.log(createParentLocation);
+    if(record){
+      console.log(values);
+      dispatch(editParentLocationAction({...values, _id:record._id}))
+    }else{
+     dispatch(createParentLocationAction(values));
+
+    }
   };
   return (
-    <Modal
-      footer={null}
-      open={isModalOpen}
-      onCancel={() => setIsModalOpen(false)}
-    >
       <Form
         form={form}
         onFinish={onFinish}
@@ -57,16 +52,18 @@ export default function ({ isModalOpen, setIsModalOpen }: any) {
           <Form.Item
             name={"locationName"}
             rules={[{ required: true, message: " Required" }]}
+            initialValue={record && record.locationName}
           >
-            <Input placeholder="Location Name" />
+            <Input defaultValue={record && record.locationName} placeholder="Location Name" />
           </Form.Item>
         </div>
         <Form.Item className="px-1 basis-1/2">
           <DateInput />
         </Form.Item>
         <div className="basis-1/2 px-1">
-          <Form.Item name="ordering" rules={[{required:true, message: "Required"}]}>
+          <Form.Item name="ordering" rules={[{required:true, message: "Required"}]} initialValue={record && record.ordering}>
             <InputNumber
+              defaultValue={record && record.ordering}
               placeholder="Ordering"
               className="w-full"
             ></InputNumber>
@@ -75,14 +72,13 @@ export default function ({ isModalOpen, setIsModalOpen }: any) {
 
         <div className="basis-[250px] px-1 flex justify-between">
           <Typography>Status</Typography>
-          <Form.Item name="status" initialValue={"active"} noStyle>
-            <Radio.Group defaultValue={"active"}>
+          <Form.Item name="status" initialValue={record ? record.status : "active"} noStyle>
+            <Radio.Group defaultValue={record ? record.status : "active"}>
               <Radio value={"active"}> Active </Radio>
               <Radio value={"inactive"}> Inactive </Radio>
             </Radio.Group>
           </Form.Item>
         </div>
       </Form>
-    </Modal>
   );
 }

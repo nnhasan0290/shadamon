@@ -1,59 +1,117 @@
 import React, { useEffect } from "react";
 import { Space, Table, Tag } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
-import { getAllCategories } from "../../../redux/actions/Admin/categoryAction";
+import {
+  getAllCategories,
+  getLocationAction,
+} from "../../../redux/actions/Admin/categoryAction";
+import ParentLocationModal from "./ParentLocationModal";
+import { GlobalStates } from "../../../context/ContextProvider";
+import { deleteParentLocationAction } from "../../../redux/actions/Admin/locationAction";
 
 const { Column, ColumnGroup } = Table;
 
 interface DataType {
   key: React.Key;
-  catName: string;
-  order: string;
-  entryDate: string;
-  creator: string;
+  locationName: string;
+  ordering: string;
+  status: string;
+  createdAt: string;
+}
+const data: any = [];
+for (let i = 0; i < 3; ++i) {
+  data.push({
+    key: i.toString(),
+    name: "Screen",
+    ordering: 2,
+  });
 }
 
-const data: DataType[] = [
-  {
-    key: "1",
-    catName: "location name",
-    order: "2",
-    entryDate: "1/2/33",
-    creator: "creator",
-  },
-];
-
 const LocationTable: React.FC = () => {
+  const { modalDispatch } = GlobalStates();
   const dispatch = useAppDispatch();
-  const { res } = useAppSelector((state) => state.allCat);
+  const { locations } = useAppSelector((state) => state);
+  console.log(locations);
   useEffect(() => {
-    dispatch(getAllCategories());
-  }, []);
+    dispatch(getLocationAction());
+  }, [locations]);
   return (
-    <Table dataSource={data}>
-      <Column title="Category" dataIndex="categoryName" key="catName" />
-      <Column title="Order" dataIndex="categoryOrder" key="order" />
-      <Column title="Entry Date" dataIndex="createdAt" key="entryDate" />
-      <Column title="Created By" dataIndex="creator" key="creator" />
-      {/* <Column
-      title="Tags"
-      dataIndex="tags"
-      key="tags"
-      render={(tags: string[]) => (
-        <>
-          {tags.map((tag) => (
-            <Tag color="blue" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </>
-      )}
-    /> */}
+    <Table
+      rowKey={(record: any) => record._id}
+      dataSource={locations?.res?.data}
+      expandable={{
+        rowExpandable: (record: any) => true,
+        expandedRowRender: (record: any) => {
+          return (
+            <Table
+              size="small"
+              bordered
+              className="mt-1 mb-5"
+              pagination={false}
+              dataSource={data}
+            >
+              <Column
+                title="Sub Location"
+                dataIndex="subLocationName"
+                key="subLocationName"
+              />
+              <Column title="Name" dataIndex="name" key="name" />
+              <Column
+                title="Entry Date"
+                dataIndex="createdAt"
+                key="createdAt"
+              />
+              <Column title="Status" dataIndex="status" key="status" />
+
+              <Column
+                title="Edit"
+                key="edit"
+                render={(_: any, record: DataType) => (
+                  <Space
+                    onClick={(e: any) =>
+                      modalDispatch({
+                        type: "MIDDLE_MODAL",
+                        payload: <ParentLocationModal record={record} />,
+                      })
+                    }
+                    size="middle"
+                  >
+                    <a>Edit</a>
+                  </Space>
+                )}
+              />
+              <Column
+                title="Delete"
+                key="delete"
+                render={(_: any, record: any) => (
+                  <Space size="middle">
+                    <a>Delete</a>
+                  </Space>
+                )}
+              />
+            </Table>
+          );
+        },
+      }}
+    >
+      <Column title="Location" dataIndex="locationName" key="locationName" />
+      <Column title="Order" dataIndex="ordering" key="ordering" />
+      <Column title="Entry Date" dataIndex="createdAt" key="createdAt" />
+      <Column title="Status" dataIndex="status" key="status" />
+
       <Column
         title="Edit"
         key="edit"
         render={(_: any, record: DataType) => (
-          <Space size="middle">
+          <Space
+            onClick={(e: any) =>
+              modalDispatch({
+                type: "MIDDLE_MODAL",
+                payload: <ParentLocationModal record={record} />,
+              })
+            }
+            size="middle"
+          >
             <a>Edit</a>
           </Space>
         )}
@@ -61,9 +119,9 @@ const LocationTable: React.FC = () => {
       <Column
         title="Delete"
         key="delete"
-        render={(_: any, record: DataType) => (
+        render={(_: any, record: any) => (
           <Space size="middle">
-            <a>Delete</a>
+            <a color="red">Delete</a>
           </Space>
         )}
       />
