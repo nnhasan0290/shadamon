@@ -2,14 +2,19 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import {
   CREATE_LOCATION,
+  CREATE_LOCATION_REQ,
   CREATE_PARENT_LOCATION,
+  CREATE_PARENT_LOCATION_REQ,
   DELETE_PARENT_LOCATION,
+  DELETE_PARENT_LOCATION_REQ,
   EDIT_PARENT_LOCATION,
+  EDIT_PARENT_LOCATION_REQ,
 } from "../../consts/admin/locationConst";
 
 export const createParentLocationAction =
   (formdata: any) => async (dispatch: any) => {
     const id = toast.loading("Please wait...");
+    dispatch({type:CREATE_PARENT_LOCATION_REQ})
     try {
       const config = {
         withCredentials: true,
@@ -39,6 +44,7 @@ export const createParentLocationAction =
 export const createLocationAction =
   (formdata: any) => async (dispatch: any) => {
     const id = toast.loading("Please wait...");
+    dispatch({type: CREATE_LOCATION_REQ})
     try {
       const config = {
         headers: {
@@ -72,6 +78,7 @@ export const createLocationAction =
 export const editParentLocationAction =
   (formdata: any) => async (dispatch: any) => {
     const id = toast.loading("Please wait...");
+    dispatch({type:EDIT_PARENT_LOCATION_REQ})
     try {
       const config = {
         withCredentials: true,
@@ -100,6 +107,7 @@ export const editParentLocationAction =
   };
 export const deleteParentLocationAction =
   (id: any) => async (dispatch: any) => {
+    dispatch({ type: DELETE_PARENT_LOCATION_REQ });
     try {
       const config = {
         withCredentials: true,

@@ -1,4 +1,4 @@
-import { CREATE_LOCATION, CREATE_PARENT_LOCATION, DELETE_PARENT_LOCATION, EDIT_PARENT_LOCATION } from "../../consts/admin/locationConst";
+import { CREATE_LOCATION, CREATE_LOCATION_REQ, CREATE_PARENT_LOCATION, CREATE_PARENT_LOCATION_REQ, DELETE_PARENT_LOCATION, DELETE_PARENT_LOCATION_REQ, EDIT_PARENT_LOCATION, EDIT_PARENT_LOCATION_REQ } from "../../consts/admin/locationConst";
 
 interface dataType {
   res: object;
@@ -7,31 +7,43 @@ const initialState: dataType = {
   res: {},
 };
 
-export const createLocationReducer = (state = initialState, action: any) => {
-  if (action.type === CREATE_LOCATION) {
-    return { res: action.payload.data };
-  } else {
-    return state;
+export const createLocationReducer = (state = {success:false}, action: any) => {
+  switch (action.type) {
+    case CREATE_LOCATION_REQ :
+      return {...state, success: false}
+    case CREATE_LOCATION:
+      return {...state, success:true, res: action.payload}
+    default:
+      return state;
   }
 };
-export const createParentLocationReducer = (state = initialState, action: any) => {
-  if (action.type === CREATE_PARENT_LOCATION) {
-    return { res: action.payload };
-  } else {
-    return state;
+export const createParentLocationReducer = (state = {success:false}, action: any) => {
+  switch (action.type) {
+    case CREATE_PARENT_LOCATION_REQ :
+      return {...state, success: false}
+    case CREATE_PARENT_LOCATION:
+      return {...state, success:true, res: action.payload}
+    default:
+      return state;
   }
 };
 export const editParentLocationReducer = (state = {success:false}, action: any) => {
-  if (action.type === EDIT_PARENT_LOCATION) {
-    return { res: action.payload };
-  } else {
-    return state;
+  switch (action.type) {
+    case EDIT_PARENT_LOCATION_REQ :
+      return {...state, success: false}
+    case EDIT_PARENT_LOCATION:
+      return {...state, success:true, res: action.payload}
+    default:
+      return state;
   }
 };
 export const deleteParentLocationReducer = (state = {success:false}, action: any) => {
-  if (action.type === DELETE_PARENT_LOCATION) {
-    return { res: action.payload };
-  } else {
-    return state;
+  switch (action.type) {
+    case DELETE_PARENT_LOCATION_REQ :
+      return {...state, success: false}
+    case DELETE_PARENT_LOCATION:
+      return {...state, success:true, res: action.payload}
+    default:
+      return state;
   }
 };

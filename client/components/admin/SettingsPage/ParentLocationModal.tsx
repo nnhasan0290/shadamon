@@ -21,7 +21,7 @@ export default function ({record}:any) {
       dispatch(editParentLocationAction({...values, _id:record._id}))
     }else{
      dispatch(createParentLocationAction(values));
-
+      form.resetFields();
     }
   };
   return (

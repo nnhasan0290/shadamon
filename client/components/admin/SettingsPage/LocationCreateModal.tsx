@@ -24,7 +24,7 @@ export default function () {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const { locations, createLocation } = useAppSelector((state) => state);
-  const {modalDispatch} = GlobalStates();
+  const { modalDispatch } = GlobalStates();
   const onFinish = (values: any) => {
     console.log(values);
     dispatch(createLocationAction(values));
@@ -70,12 +70,27 @@ export default function () {
             ))}
           </Select>
         </Form.Item>
-        <Button className="text-white bg-blue-700 hover:border-none" onClick={() => modalDispatch(({type:"MIDDLE_MODAL", payload:<ParentLocationModal/>}))}>
+        <Button
+          className="text-white bg-blue-700 hover:border-none"
+          onClick={() =>
+            modalDispatch({
+              type: "MIDDLE_MODAL",
+              payload: <ParentLocationModal />,
+            })
+          }
+        >
           {" "}
           Add New
         </Button>
       </div>
-
+      <div className="basis-full px-1">
+        <Form.Item
+          name={"subLocationName"}
+          rules={[{ required: true, message: " Required" }]}
+        >
+          <Input placeholder="Sub Location Name" />
+        </Form.Item>
+      </div>
       <Form.Item className="px-1 basis-1/2">
         <DateInput />
       </Form.Item>
@@ -90,14 +105,6 @@ export default function () {
           rules={[{ required: true, message: " Required" }]}
         >
           <Input placeholder="Map Link" />
-        </Form.Item>
-      </div>
-      <div className="basis-full px-1">
-        <Form.Item
-          name={"subLocationName"}
-          rules={[{ required: true, message: " Required" }]}
-        >
-          <Input placeholder="Sub Location Name" />
         </Form.Item>
       </div>
 

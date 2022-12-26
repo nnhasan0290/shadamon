@@ -30,11 +30,22 @@ for (let i = 0; i < 3; ++i) {
 const LocationTable: React.FC = () => {
   const { modalDispatch } = GlobalStates();
   const dispatch = useAppDispatch();
-  const { locations, deleteParentLoc, editParentLocation}:any = useAppSelector((state) => state);
-  console.log(editParentLocation)
+  const {
+    locations,
+    deleteParentLoc,
+    editParentLocation,
+    createLocation,
+    createParentLocation,
+  }: any = useAppSelector((state) => state);
+  console.log(deleteParentLoc);
   useEffect(() => {
     dispatch(getLocationAction());
-  }, [deleteParentLoc.success, editParentLocation.success]);
+  }, [
+    deleteParentLoc.success,
+    editParentLocation.success,
+    createLocation.success,
+    createParentLocation.success,
+  ]);
   return (
     <Table
       onChange={() => dispatch(getLocationAction())}
