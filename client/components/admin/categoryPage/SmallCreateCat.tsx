@@ -5,17 +5,12 @@ import {
   Form,
   Input,
   InputNumber,
-  message,
-  Select,
   Upload,
-  UploadProps,
 } from "antd";
 import { useEffect } from "react";
 import { BiPlus } from "react-icons/bi";
-import { GlobalStates } from "../../../context/ContextProvider";
 import {
   createCategory,
-  getParentCategories,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import FormInput from "../FormElements/FormInput";
@@ -29,11 +24,11 @@ export default function ({ parentCat }: any) {
   console.log(res);
 
   const onFinish = (values: any) => {
-   const data = {...values};
-   data.categoryImg = values.categoryImage.file.originFileObj;
-   delete data.categoryImage;
-   console.log(data);
-     dispatch(createCategory(data));
+    const data = { ...values };
+    data.categoryImg = values.categoryImage.file.originFileObj;
+    delete data.categoryImage;
+    console.log(data);
+    dispatch(createCategory(data));
     console.log("Success:", data);
   };
 
@@ -41,23 +36,7 @@ export default function ({ parentCat }: any) {
     console.log("Failed:", errorInfo);
   };
 
-  // const props: UploadProps = {
-  //   name: "file",
-
-  //   headers: {
-  //     authorization: "authorization-text",
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status !== "uploading") {
-  //       console.log(info.file, info.fileList);
-  //     }
-  //     if (info.file.status === "done") {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === "error") {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
+ 
   return (
     <Form
       initialValues={{ remember: false }}
@@ -66,12 +45,21 @@ export default function ({ parentCat }: any) {
       autoComplete="off"
       className="p-5"
     >
+      <div className="flex gap-2 items-center font-bold">
+        <span className="p-1 text-white bg-gray-700 rounded-full">
+          <BiPlus />
+        </span>
+        <h4>New Category</h4>
+      </div>
+      <Divider className="my-2"/>
       <FormSelect
         name={"parentId"}
         placeholder="Parent"
         optionsObj={parentCat}
       />
-      <FormInput name={"categoryName"} placeholder="Category Name" />
+      <Form.Item name={"categoryName"}  rules={[{ required: true, message: `Required` }]}>
+        <Input placeholder="Category Name"/>
+      </Form.Item>
       <div className="grid grid-cols-2">
         <Form.Item
           className="mx-2"
@@ -80,9 +68,9 @@ export default function ({ parentCat }: any) {
         >
           <InputNumber placeholder="Order" className="w-full"></InputNumber>
         </Form.Item>
-        
+
         <Form.Item name="categoryImage" className="mx-2 text-right">
-          <Upload >
+          <Upload>
             <Button
               className="transition-all duration-300 hover:bg-black"
               icon={<UploadOutlined />}

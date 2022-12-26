@@ -10,66 +10,89 @@ import {
 } from "antd";
 import { BiPlus } from "react-icons/bi";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import DateInput from "../../layout/DateInput";
 const { Option } = Select;
 
 export default function () {
-  const onFinish = (values:any) => {
+  const onFinish = (values: any) => {
     console.log(values);
-  }
+  };
   return (
-    <Form onFinish={onFinish} className="flex flex-wrap justify-between basis-full">
+    <Form
+      onFinish={onFinish}
+      className="flex flex-wrap justify-between basis-full"
+    >
       <div className="flex gap-2 items-center font-bold">
         <span className="p-1 text-white bg-gray-700 rounded-full">
           <BiPlus />
         </span>
         <h4>New Feature</h4>
       </div>
-      <div className="flex items-center">
-        <Form.Item  className="mb-0">
-          <Button
-            htmlType="submit"
-            className="text-white bg-blue-700 hover:border-none"
-          >
-            {" "}
-            Save
-          </Button>
-        </Form.Item>
-        <Button className="text-white bg-gray-700 hover:border-none">
+      <Form.Item className="mb-0 mr-5">
+        <Button
+          htmlType="submit"
+          className="text-white bg-blue-700 hover:border-none"
+        >
           {" "}
-          cancel
+          Save
         </Button>
-      </div>
+      </Form.Item>
       <Divider className="my-2" />
-      <div className="basis-[250px]">
-        <Form.Item name={"featureName"}>
-          
-        <Input placeholder="Feature Name" />
+      <div className=" basis-1/2 px-1">
+        <Form.Item
+          name={"featureName"}
+          rules={[{ required: true, message: `Required` }]}
+        >
+          <Input placeholder="Feature Name" />
         </Form.Item>
       </div>
-      <div className="basis-[250px]">
-        <Input placeholder="Feature Default Value" />
+      <div className="basis-1/2 px-1">
+        <Form.Item className="ordering">
+          <InputNumber placeholder="Ordering" className="w-full"></InputNumber>
+        </Form.Item>
       </div>
-      <div className="basis-[250px]">
-        <Form.Item name="featureType">
-          <Select placeholder="feature Type">
+      <div className="basis-full px-1">
+        <Form.Item
+          name="featureType"
+          className=""
+          rules={[{ required: true, message: `Required` }]}
+        >
+          <Select placeholder="feature Type" className="">
             <Option value="radio">Radio</Option>
             <Option value="multiselect">MultiSelect</Option>
             <Option value="dropdown">DropDown</Option>
           </Select>
         </Form.Item>
       </div>
-      <div className="basis-[250px]">
-        <Input placeholder="date" />
+      <div className="basis-1/2 px-1">
+        <Form.Item
+          name={"featureDefaultValue"}
+          rules={[{ required: true, message: `Required` }]}
+        >
+          <Input placeholder="Feature Default Value" />
+        </Form.Item>
       </div>
-     
-      <div className="basis-[250px]">
-        <Form.List name="options">
+      <div className=" basis-1/2 px-1">
+        <DateInput />
+      </div>
+      <div className=" flex justify-center mb-3 gap-5 basis-full">
+        <Typography>Status</Typography>
+        <Form.Item noStyle>
+          <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio value={1}>Yes</Radio>
+            <Radio value={2}>No</Radio>
+          </Radio.Group>
+        </Form.Item>
+      </div>
+
+      <div className=" basis-full px-1 text-center">
+        <Form.List name="options" >
           {(fields, { add, remove }, { errors }) => (
             <>
               {fields.map((field, index) => (
-                <Form.Item  key={field.key} className="">
+                <Form.Item key={field.key} className="">
                   <div className="flex gap-2 items-center">
-                    <Form.Item 
+                    <Form.Item
                       className=""
                       {...field}
                       validateTrigger={["onChange", "onBlur"]}
@@ -77,7 +100,7 @@ export default function () {
                         {
                           required: true,
                           whitespace: true,
-                          message: "Please input field.",
+                          message: "Please input..",
                         },
                       ]}
                       noStyle
@@ -93,7 +116,7 @@ export default function () {
                   </div>
                 </Form.Item>
               ))}
-              <Form.Item>
+              <Form.Item className="w-full">
                 <Button
                   className=""
                   type="dashed"
@@ -107,19 +130,6 @@ export default function () {
             </>
           )}
         </Form.List>
-      </div>
-      <div className="basis-[250px]">
-        <Form.Item className="ordering">
-        <InputNumber placeholder="Ordering" className="w-full"></InputNumber>
-
-        </Form.Item>
-      </div>
-      <div className="basis-[250px] flex justify-between">
-        <Typography>Status</Typography>
-        <Radio.Group name="radiogroup" defaultValue={1}>
-          <Radio value={1}>Yes</Radio>
-          <Radio value={2}>No</Radio>
-        </Radio.Group>
       </div>
     </Form>
   );

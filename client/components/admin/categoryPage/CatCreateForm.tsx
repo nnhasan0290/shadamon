@@ -90,7 +90,7 @@ export default function () {
                 placeholder="Categories"
               />
             </div>
-            <div className="py-1">
+            <div className="">
               <Button
                 className="text-white bg-blue-700 hover:border-none"
                 onClick={() =>
@@ -147,9 +147,9 @@ export default function () {
             <Typography>Status</Typography>
             <Form.Item
               name="status"
-              rules={[{ required: true, message: " Required" }]}
+              initialValue={true}
             >
-              <Radio.Group>
+              <Radio.Group defaultValue={true}>
                 <Radio value={true}> Yes </Radio>
                 <Radio value={false}> No </Radio>
               </Radio.Group>
@@ -161,14 +161,15 @@ export default function () {
         <Button
           className="flex items-center text-white bg-gray-700"
           icon={<BiPlus size={20} />}
+          onClick={() => modalDispatch({type: "SMALL_MODAL", payload: <FeatureForm/>})}
         >
           {" "}
         </Button>
         <Divider className="my-2" />
         <FeatureTable />
-        <div className="mt-[100px]">
+        {/* <div className="mt-[100px]">
           <FeatureForm />
-        </div>
+        </div> */}
       </div>
     </div>
   );

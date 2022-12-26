@@ -36,12 +36,12 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(<Link href="/admin">Dashboard</Link>, '1', <PieChartOutlined />),
-  getItem(<Link href="/admin/allProduct">All</Link>, '2', <ContainerOutlined />),
+  getItem(<Link href="/admin/allProduct">All Product</Link>, '2', <ContainerOutlined />),
   getItem(<Link href="/admin/order">Order</Link>, '3', <ContainerOutlined />),
   getItem(<Link href="/admin/staff">Staffing</Link>, '4', <ContainerOutlined />),
   getItem(<Link href="/admin/report">Report</Link>, '5', <ContainerOutlined />),
   getItem(<span className='mr-5'>Settings</span> , 'subMenu', <SettingOutlined />,  [
-    getItem('Category', '8'),
+    getItem(<Link href="/admin/category">Categories</Link>, '8'),
     getItem(<Link href="/admin/locations">Location</Link>, '9'),
     getItem('Merchant/User', '10'),
     getItem('Package', '11'),
