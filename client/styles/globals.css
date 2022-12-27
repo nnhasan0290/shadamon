@@ -154,6 +154,16 @@ img {
 .ant-select-selector{
   min-width: 200px;
 }
+.ant-image-preview-img-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .ant-image-preview-img{
+  margin-left: auto !important;
+  margin-right: auto !important;
+} */
 
 /* .table-striped-rows tr:nth-child(2n) td {
   background-color: #333;

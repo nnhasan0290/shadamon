@@ -3,10 +3,13 @@ import {
   Checkbox,
   Divider,
   Form,
+  Image,
   Input,
   InputNumber,
   Radio,
   Select,
+  Table,
+  Tag,
   Upload,
 } from "antd";
 import UploadComponent from "../FormElements/UploadComponent";
@@ -72,12 +75,12 @@ export default function () {
 
   const handleCreateProduct = (values: any) => {
     console.log(values);
-    let newProductImg:any = [];
+    let newProductImg: any = [];
     values.productImg.forEach((each: any, i: any) => {
       if (each.img) {
         each.img = each.img.file;
         newProductImg.push(each);
-      } 
+      }
     });
     values.productImg = newProductImg;
     dispatch(createProductAction(values));
@@ -197,26 +200,6 @@ export default function () {
                 )}
               </>
             )}
-            {/* {featureUnderSub?.res?.data && (
-              <Form.List name={"features"} >
-                {(fields) => (
-                  <div>
-                    {featureUnderSub?.res?.data[0].features.map(
-                      (field: any, i:any) => (
-                        <>
-                          <Form.Item {...field} name={["feature", i]}>
-                            <Input placeholder="field 1" />
-                          </Form.Item>
-                          <Form.Item {...field} name={["feature", i]} className="absolute">
-                            <Input hidden value={field.featureName} placeholder="field 1" />
-                          </Form.Item>
-                          </>
-                      )
-                    )}
-                  </div>
-                )}
-              </Form.List>
-            )} */}
             <div>
               <label htmlFor="">Location</label>
               <Form.Item name={"location"}>
@@ -352,27 +335,11 @@ export default function () {
               </Form.Item>
             </div>
           </div>
-          {/* <div className="flex overflow-hidden gap-3 mb-3">
-            <Carousel
-              {...options}
-              className="w-full"
-              centerMode={true}
-              showStatus={false}
-              showIndicators={false}
-              centerSlidePercentage={40}
-            >
-              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
-              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
-              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
-              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
-              <ManualUpload imgArr={imgArr} setImgArr={setImgArr} />
-            </Carousel>
-          </div> */}
 
           <div className="w-full flex gap-3">
             <div className="">
               <Form.Item
-              initialValue={false}
+                initialValue={false}
                 name={["productImg", 0, "longImg"]}
                 valuePropName="checked"
                 noStyle
@@ -383,7 +350,7 @@ export default function () {
             </div>
             <div className="">
               <Form.Item
-               initialValue={false}
+                initialValue={false}
                 name={["productImg", 1, "longImg"]}
                 valuePropName="checked"
                 noStyle
@@ -394,7 +361,7 @@ export default function () {
             </div>
             <div className="">
               <Form.Item
-               initialValue={false}
+                initialValue={false}
                 name={["productImg", 2, "longImg"]}
                 valuePropName="checked"
                 noStyle
@@ -405,7 +372,7 @@ export default function () {
             </div>
             <div className="">
               <Form.Item
-               initialValue={false}
+                initialValue={false}
                 name={["productImg", 3, "longImg"]}
                 valuePropName="checked"
                 noStyle
@@ -416,7 +383,7 @@ export default function () {
             </div>
             <div className="">
               <Form.Item
-               initialValue={false}
+                initialValue={false}
                 name={["productImg", 4, "longImg"]}
                 valuePropName="checked"
                 noStyle
@@ -426,6 +393,49 @@ export default function () {
               <UploadComponent index={4} />
             </div>
           </div>
+          <Table
+            className="w-full"
+            dataSource={[
+              {
+                productImg:
+                  "https://images.unsplash.com/photo-1664575599730-0814817939de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+              },
+            ]}
+            bordered
+            size="small"
+          >
+            <Table.Column
+              align="center"
+              title={"ProductImg"}
+              dataIndex={"productImg"}
+              key={"productImg"}
+              render={(imglink) => {
+                return <Image src={imglink} className="max-w-[100px]" />;
+              }}
+            />
+            <Table.Column
+              align="center"
+              title={"Accept"}
+              render={() => {
+                return (
+                  <Tag className="cursor-pointer" color="green">
+                    Accept
+                  </Tag>
+                );
+              }}
+            />
+            <Table.Column
+              align="center"
+              title={"Delete"}
+              render={() => {
+                return (
+                  <Tag className="cursor-pointer" color="red">
+                    Delete
+                  </Tag>
+                );
+              }}
+            />
+          </Table>
         </div>
         <div className="flex gap-5 basis-full">
           <Button className="text-white bg-red-600 basis-1/3">Cancel</Button>
