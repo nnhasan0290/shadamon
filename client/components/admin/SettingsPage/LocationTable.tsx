@@ -8,6 +8,7 @@ import {
 import ParentLocationModal from "./ParentLocationModal";
 import { GlobalStates } from "../../../context/ContextProvider";
 import { deleteParentLocationAction } from "../../../redux/actions/Admin/locationAction";
+import LocationCreateModal from "./LocationCreateModal";
 
 const { Column, ColumnGroup } = Table;
 
@@ -37,7 +38,7 @@ const LocationTable: React.FC = () => {
     createLocation,
     createParentLocation,
   }: any = useAppSelector((state) => state);
-  console.log(deleteParentLoc);
+  console.log(locations);
   useEffect(() => {
     dispatch(getLocationAction());
   }, [
@@ -49,41 +50,45 @@ const LocationTable: React.FC = () => {
   return (
     <Table
       onChange={() => dispatch(getLocationAction())}
-      rowKey={(record: any) => record._id}
+      rowKey={(record: any) => record.location._id}
       dataSource={locations?.res?.data}
       expandable={{
         rowExpandable: (record: any) => true,
         expandedRowRender: (record: any) => {
           return (
             <Table
+
               size="small"
               bordered
               className="mt-1 mb-5"
-              pagination={false}
-              dataSource={data}
+              pagination={{defaultPageSize:3}}
+              dataSource={record.sublocations}
             >
               <Column
                 title="Sub Location"
                 dataIndex="subLocationName"
                 key="subLocationName"
               />
-              <Column title="Name" dataIndex="name" key="name" />
+              <Column title="Link" dataIndex="link" key="link" ellipsis={true} render={(link) => <a>{link}</a>} />
+              <Column title="Order" dataIndex="ordering" key="ordering" align="center"/>
               <Column
                 title="Entry Date"
                 dataIndex="createdAt"
                 key="createdAt"
+                ellipsis={true}
+                render={(date) => <span>{date}</span>}
               />
               <Column title="Status" dataIndex="status" key="status" />
 
               <Column
                 title="Edit"
                 key="edit"
-                render={(_: any, record: DataType) => (
+                render={(_: any, record:any) => (
                   <Space
                     onClick={(e: any) =>
                       modalDispatch({
-                        type: "MIDDLE_MODAL",
-                        payload: <ParentLocationModal record={record} />,
+                        type: "SMALL_MODAL",
+                        payload: <LocationCreateModal record={record} />,
                       })
                     }
                     size="middle"
@@ -106,20 +111,20 @@ const LocationTable: React.FC = () => {
         },
       }}
     >
-      <Column title="Location" dataIndex="locationName" key="locationName" />
-      <Column title="Order" dataIndex="ordering" key="ordering" />
-      <Column title="Entry Date" dataIndex="createdAt" key="createdAt" />
-      <Column title="Status" dataIndex="status" key="status" />
+      <Column title="Location" dataIndex="location" key="locationName"  render={(record) => record.locationName}/>
+      <Column title="Order" dataIndex="location" key="ordering" render={(record) => record.ordering} />
+      <Column title="Entry Date" dataIndex="location" key="createdAt" render={(record) => record.createdAt} />
+      <Column title="Status" dataIndex="location" key="status" render={(record) => record.status}/>
 
       <Column
         title="Edit"
         key="edit"
-        render={(_: any, record: DataType) => (
+        render={(_: any, record: any) => (
           <Space
             onClick={(e: any) =>
               modalDispatch({
                 type: "MIDDLE_MODAL",
-                payload: <ParentLocationModal record={record} />,
+                payload: <ParentLocationModal record={record.location} />,
               })
             }
             size="middle"
@@ -135,7 +140,7 @@ const LocationTable: React.FC = () => {
           <Popconfirm
             title="Delete the data?"
             onConfirm={(e: any) => {
-              dispatch(deleteParentLocationAction(record._id));
+              dispatch(deleteParentLocationAction(record.location._id));
             }}
             onCancel={(e: any) => console.log(e)}
             okText="Yes"

@@ -8,7 +8,7 @@ import {createStore} from "redux"
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { createCategoryReducer, createSubCatReducer, getAllCategoryReducer, getCatUnderParentReducer, getFeaturesReducer, getFeatureUnderSubReducer, getLocationReducer, GetParentCategoryReducer, getSubCatReducer } from "./reducers/admin/catReducer";
-import { createLocationReducer, createParentLocationReducer, deleteParentLocationReducer, editParentLocationReducer } from "./reducers/admin/locationReducer";
+import { createLocationReducer, createParentLocationReducer, deleteParentLocationReducer, editParentLocationReducer, editSubLocationReducer } from "./reducers/admin/locationReducer";
 import { createProductReducer, getAllProductReducer } from "./reducers/admin/productReducer";
 import { defaultReducer } from "./reducers/defaultReducer";
 import { loadReducer, loginReducer, signUpReducer } from "./reducers/userReducer";
@@ -34,6 +34,7 @@ const rootReducer = combineReducers({
   createParentLocation: createParentLocationReducer,
   editParentLocation: editParentLocationReducer,
   deleteParentLoc: deleteParentLocationReducer,
+  editSubLocation: editSubLocationReducer,
 });
 
 const store = createStore(

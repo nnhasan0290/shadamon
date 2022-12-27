@@ -9,6 +9,8 @@ import {
   DELETE_PARENT_LOCATION_REQ,
   EDIT_PARENT_LOCATION,
   EDIT_PARENT_LOCATION_REQ,
+  SUB_LOCATION_EDIT,
+  SUB_LOCATION_EDIT_REQ
 } from "../../consts/admin/locationConst";
 
 export const createParentLocationAction =
@@ -47,9 +49,6 @@ export const createLocationAction =
     dispatch({type: CREATE_LOCATION_REQ})
     try {
       const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
         withCredentials: true,
       };
       const { data } = await axios.post(
@@ -120,5 +119,36 @@ export const deleteParentLocationAction =
     } catch (error: any) {
       console.log(error);
       toast.error("Something Wrong");
+    }
+  };
+
+  export const editSubLocationAction =
+  (formdata: any) => async (dispatch: any) => {
+    const id = toast.loading("Please wait...");
+    dispatch({type: SUB_LOCATION_EDIT_REQ })
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_HOST}/api/product/editSubLocation`,
+        formdata,
+        config
+      );
+      dispatch({ type: SUB_LOCATION_EDIT, payload: data });
+      toast.update(id, {
+        render: `${data.message}`,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast.update(id, {
+        render: `${error.response.data.message}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
     }
   };

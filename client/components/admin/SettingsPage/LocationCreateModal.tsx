@@ -15,20 +15,27 @@ import DateInput from "../../layout/DateInput";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getLocationAction } from "../../../redux/actions/Admin/categoryAction";
-import { createLocationAction } from "../../../redux/actions/Admin/locationAction";
+import {
+  createLocationAction,
+  editSubLocationAction,
+} from "../../../redux/actions/Admin/locationAction";
 import ParentLocationModal from "./ParentLocationModal";
 import { GlobalStates } from "../../../context/ContextProvider";
 const { Option } = Select;
 
-export default function () {
+export default function ({ record }: any) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const { locations, createLocation } = useAppSelector((state) => state);
   const { modalDispatch } = GlobalStates();
   const onFinish = (values: any) => {
-    console.log(values);
-    dispatch(createLocationAction(values));
-    // form.resetFields();
+    if (record) {
+      console.log(values);
+       dispatch(editSubLocationAction(values));
+    } else {
+      dispatch(createLocationAction(values));
+      // form.resetFields();
+    }
   };
 
   useEffect(() => {
@@ -58,35 +65,38 @@ export default function () {
         </Form.Item>
       </div>
       <Divider className="my-2" />
-      <div className="basis-full flex justify-between px-1">
-        <Form.Item
-          className="w-full"
-          name={"locationId"}
-          rules={[{ required: true, message: " Required" }]}
-        >
-          <Select placeholder="Location">
-            {locations?.res?.data?.map((each: any, i: any) => (
-              <Option value={each._id}>{each?.locationName}</Option>
-            ))}
-          </Select>
-        </Form.Item>
-        <Button
-          className="text-white bg-blue-700 hover:border-none"
-          onClick={() =>
-            modalDispatch({
-              type: "MIDDLE_MODAL",
-              payload: <ParentLocationModal />,
-            })
-          }
-        >
-          {" "}
-          Add New
-        </Button>
-      </div>
+      {!record && (
+        <div className="basis-full flex justify-between px-1">
+          <Form.Item
+            className="w-full"
+            name={"locationId"}
+            rules={[{ required: true, message: "Required" }]}
+          >
+            <Select placeholder="Location">
+              {locations?.res?.data?.map((each: any, i: any) => (
+                <Option value={each._id}>{each?.locationName}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Button
+            className="text-white bg-blue-700 hover:border-none"
+            onClick={() =>
+              modalDispatch({
+                type: "MIDDLE_MODAL",
+                payload: <ParentLocationModal />,
+              })
+            }
+          >
+            {" "}
+            Add New
+          </Button>
+        </div>
+      )}
       <div className="basis-full px-1">
         <Form.Item
           name={"subLocationName"}
           rules={[{ required: true, message: " Required" }]}
+          initialValue={record && record.subLocationName}
         >
           <Input placeholder="Sub Location Name" />
         </Form.Item>
@@ -95,7 +105,7 @@ export default function () {
         <DateInput />
       </Form.Item>
       <div className="basis-1/2 px-1">
-        <Form.Item name="ordering">
+        <Form.Item name="ordering" initialValue={record && record.ordering}>
           <InputNumber placeholder="Ordering" className="w-full"></InputNumber>
         </Form.Item>
       </div>
@@ -103,6 +113,7 @@ export default function () {
         <Form.Item
           name={"link"}
           rules={[{ required: true, message: " Required" }]}
+          initialValue={record && record.link}
         >
           <Input placeholder="Map Link" />
         </Form.Item>
@@ -110,8 +121,12 @@ export default function () {
 
       <div className="basis-[250px] px-1 flex justify-between">
         <Typography>Status</Typography>
-        <Form.Item name="status" initialValue={"active"} noStyle>
-          <Radio.Group defaultValue={"active"}>
+        <Form.Item
+          name="status"
+          noStyle
+          initialValue={record ? record.status : "active"}
+        >
+          <Radio.Group defaultValue={record ? record.status : "active"}>
             <Radio value={"active"}> Active </Radio>
             <Radio value={"inactive"}> Inactive </Radio>
           </Radio.Group>

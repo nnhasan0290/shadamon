@@ -121,7 +121,7 @@ export const getLocationAction = () => async (dispatch: any) => {
       withCredentials: true,
     };
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST}/api/product/location`,
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/alllocations`,
       config
     );
     dispatch({ type: GET_LOCATIONS, payload: data });
