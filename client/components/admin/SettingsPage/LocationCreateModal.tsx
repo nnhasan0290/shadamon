@@ -31,7 +31,13 @@ export default function ({ record }: any) {
   const onFinish = (values: any) => {
     if (record) {
       console.log(values);
-       dispatch(editSubLocationAction(values));
+      dispatch(
+        editSubLocationAction({
+          ...values,
+          _id: record._id,
+          locationId: record.locationId,
+        })
+      );
     } else {
       dispatch(createLocationAction(values));
       // form.resetFields();
@@ -74,7 +80,7 @@ export default function ({ record }: any) {
           >
             <Select placeholder="Location">
               {locations?.res?.data?.map((each: any, i: any) => (
-                <Option value={each._id}>{each?.locationName}</Option>
+                <Option value={each?.location._id}>{each?.location?.locationName}</Option>
               ))}
             </Select>
           </Form.Item>

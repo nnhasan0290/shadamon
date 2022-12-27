@@ -7,6 +7,8 @@ import {
   CREATE_PARENT_LOCATION_REQ,
   DELETE_PARENT_LOCATION,
   DELETE_PARENT_LOCATION_REQ,
+  DELETE_SUB_LOCATION,
+  DELETE_SUB_LOCATION_REQ,
   EDIT_PARENT_LOCATION,
   EDIT_PARENT_LOCATION_REQ,
   SUB_LOCATION_EDIT,
@@ -112,7 +114,7 @@ export const deleteParentLocationAction =
         withCredentials: true,
       };
       const { data } = await axios.delete(
-        `${process.env.NEXT_PUBLIC_HOST}/api/product//deletelocation/${id}`,
+        `${process.env.NEXT_PUBLIC_HOST}/api/product/deletelocation/${id}`,
         config
       );
       dispatch({ type: DELETE_PARENT_LOCATION, payload: data });
@@ -150,5 +152,24 @@ export const deleteParentLocationAction =
         isLoading: false,
         autoClose: 2000,
       });
+    }
+  };
+
+
+  export const deleteSubLocationAction =
+  (id: any) => async (dispatch: any) => {
+    dispatch({ type: DELETE_SUB_LOCATION_REQ });
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.delete(
+        `${process.env.NEXT_PUBLIC_HOST}/api/product/deletesublocation/${id}`,
+        config
+      );
+      dispatch({ type: DELETE_SUB_LOCATION, payload: data });
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Something Wrong");
     }
   };
