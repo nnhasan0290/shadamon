@@ -1,7 +1,13 @@
 import axios from "axios";
 import {
   CREATE_CATEGORY,
+  CREATE_CATEGORY_REQ,
   CREATE_SUBCATEGORY,
+  DELETE_CATEGORY,
+  DELETE_CATEGORY_REQ,
+  EDIT_CATEGORY,
+  EDIT_CATEGORY_REQ,
+  GET_ALL_BUTTONS,
   GET_CATEGORIES,
   GET_CATEGORIES_UNDER_PARENT,
   GET_FEATURES,
@@ -27,6 +33,7 @@ export const getParentCategories = () => async (dispatch: any) => {
 
 export const createCategory = (formdata: any) => async (dispatch: any) => {
   const id = toast.loading("Please wait...");
+  dispatch({ type: CREATE_CATEGORY_REQ });
   try {
     const config = {
       headers: {
@@ -130,8 +137,7 @@ export const getLocationAction = () => async (dispatch: any) => {
   }
 };
 
-
-export const getSubCategoriesAction = (id:any) => async (dispatch: any) => {
+export const getSubCategoriesAction = (id: any) => async (dispatch: any) => {
   try {
     const config = {
       withCredentials: true,
@@ -145,21 +151,22 @@ export const getSubCategoriesAction = (id:any) => async (dispatch: any) => {
     console.log(error);
   }
 };
-export const getCategoriesUnderParentAction = (id:any) => async (dispatch: any) => {
-  try {
-    const config = {
-      withCredentials: true,
-    };
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST}/api/admin/getcatofparent/${id}`,
-      config
-    );
-    dispatch({ type: GET_CATEGORIES_UNDER_PARENT, payload: data });
-  } catch (error: any) {
-    console.log(error);
-  }
-};
-export const getFeatureUnderSubAction = (id:any) => async (dispatch: any) => {
+export const getCategoriesUnderParentAction =
+  (id: any) => async (dispatch: any) => {
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST}/api/admin/getcatofparent/${id}`,
+        config
+      );
+      dispatch({ type: GET_CATEGORIES_UNDER_PARENT, payload: data });
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+export const getFeatureUnderSubAction = (id: any) => async (dispatch: any) => {
   try {
     const config = {
       withCredentials: true,
@@ -174,4 +181,65 @@ export const getFeatureUnderSubAction = (id:any) => async (dispatch: any) => {
   }
 };
 
+export const deleteCategoryAction = (id: any) => async (dispatch: any) => {
+  console.log("data");
+  dispatch({ type: DELETE_CATEGORY_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.delete(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/deletecategory/${id}`,
+      config
+    );
+    dispatch({ type: DELETE_CATEGORY, payload: data });
+  } catch (error: any) {
+    console.log(error);
+    toast.error("Something Wrong");
+  }
+};
 
+export const editCategoryAction = (formdata: any) => async (dispatch: any) => {
+  const id = toast.loading("Please wait...");
+  dispatch({ type: EDIT_CATEGORY_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/editcategory`,
+      formdata,
+      config
+    );
+    dispatch({ type: EDIT_CATEGORY, payload: data });
+    toast.update(id, {
+      render: `${data.message}`,
+      type: "success",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  } catch (error: any) {
+    console.log(error);
+    toast.update(id, {
+      render: `${error.response.data.message}`,
+      type: "error",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  }
+};
+
+export const getAllButtonsAction = () => async (dispatch: any) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/buttons`,
+      config
+    );
+    dispatch({ type: GET_ALL_BUTTONS, payload: data });
+  } catch (error: any) {
+    console.log(error);
+  }
+};

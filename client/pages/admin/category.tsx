@@ -18,9 +18,9 @@ export default function Admin() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ToastContainer/>
-      <div className="flex gap-2">
+      <div className="flex gap-1">
         <div className="min-h-screen bg-[#001529]">
-          <SideMenu activeItem="7" />
+          <SideMenu activeItem="8" />
         </div>
         <AdminModal />
         <SmallModal/>

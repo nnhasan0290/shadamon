@@ -17,10 +17,8 @@ import {
   getParentCategories,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
-import FormInput from "../FormElements/FormInput";
 import FormSelect from "../FormElements/FormSelect";
 import SmallCreateCat from "./SmallCreateCat";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import FormMultiSelect from "../FormElements/FormMultiSelect";
 import FeatureTable from "./FeatureTable";
 import FeatureForm from "./FeatureForm";
@@ -96,7 +94,7 @@ export default function () {
                 onClick={() =>
                   modalDispatch({
                     type: "SMALL_MODAL",
-                    payload: <SmallCreateCat parentCat={res?.data} />,
+                    payload: <SmallCreateCat />,
                   })
                 }
               >

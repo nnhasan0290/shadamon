@@ -1,59 +1,92 @@
 import React, { useEffect } from "react";
-import { Space, Table, Tag } from "antd";
+import { Popconfirm, Space, Table, Tag } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
-import { getAllCategories } from "../../../redux/actions/Admin/categoryAction";
+import {
+  deleteCategoryAction,
+  getAllCategories,
+} from "../../../redux/actions/Admin/categoryAction";
+import { GlobalStates } from "../../../context/ContextProvider";
+import SmallCreateCat from "./SmallCreateCat";
+import { spawn } from "child_process";
 
 const { Column, ColumnGroup } = Table;
 
-interface DataType {
-  key: React.Key;
-  catName: string;
-  order: string;
-  entryDate: string;
-  creator: string;
-}
-
-const data: DataType[] = [
-  {
-    key: "1",
-    catName: "category name",
-    order: "2",
-    entryDate: "1/2/33",
-    creator: "creator",
-  },
-];
+const data =[
+  {name: "nazmul", lastName: "hasan", }
+]
 
 const CatTable: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { res } = useAppSelector((state) => state.allCat);
+  const { allCat, deleteCat, createCat, editCat } = useAppSelector(
+    (state) => state
+  );
+  const { modalDispatch } = GlobalStates();
   useEffect(() => {
     dispatch(getAllCategories());
-  }, []);
+  }, [deleteCat.success, createCat.success, editCat.success]);
   return (
-    <Table dataSource={res?.data}>
-      <Column title="Category" dataIndex="categoryName" key="catName" />
-      <Column title="Order" dataIndex="categoryOrder" key="order" />
-      <Column title="Entry Date" dataIndex="createdAt" key="entryDate" />
-      <Column title="Created By" dataIndex="creator" key="creator" />
-      {/* <Column
-      title="Tags"
-      dataIndex="tags"
-      key="tags"
-      render={(tags: string[]) => (
-        <>
-          {tags.map((tag) => (
-            <Tag color="blue" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </>
-      )}
-    /> */}
+    <Table
+    bordered
+      rowKey={(record: any) => record._id}
+      pagination={{ defaultPageSize: 6 }}
+      dataSource={allCat?.res?.data}
+      expandable={{
+        rowExpandable: (record: any) => true,
+        expandedRowRender: (record) => {
+          return(
+            <Table dataSource={data} bordered size="small">
+              <Column title={"name"} dataIndex={"name"} key={"name"}/>
+              <Column title={"lastName"} dataIndex={"lastName"} key={"name"}/>
+            </Table>
+          )
+        }
+      }}
+    >
+      <Column
+        title="Image"
+        align="center"
+        dataIndex="categoryImg"
+        key="categoryImg"
+        render={(imglink) => (
+          <img
+            src={`${process.env.NEXT_PUBLIC_HOST}/img/${imglink}`}
+            className="h-[30px] mx-auto"
+          />
+        )}
+      />
+      <Column
+        title="Category"
+        dataIndex="categoryName"
+        key="catName"
+        align="center"
+      />
+      <Column
+        title="Order"
+        dataIndex="categoryOrder"
+        key="order"
+        align="center"
+      />
+      <Column
+        title="Entry Date"
+        dataIndex="createdAt"
+        key="entryDate"
+        align="center"
+        render={(date) => <span>{new Date(date).toDateString()}</span>}
+      />
+
       <Column
         title="Edit"
         key="edit"
-        render={(_: any, record: DataType) => (
-          <Space size="middle">
+        render={(_: any, record: any) => (
+          <Space
+            onClick={(e: any) =>
+              modalDispatch({
+                type: "SMALL_MODAL",
+                payload: <SmallCreateCat record={record} />,
+              })
+            }
+            size="middle"
+          >
             <a>Edit</a>
           </Space>
         )}
@@ -61,10 +94,20 @@ const CatTable: React.FC = () => {
       <Column
         title="Delete"
         key="delete"
-        render={(_: any, record: DataType) => (
-          <Space size="middle">
-            <a>Delete</a>
-          </Space>
+        render={(_: any, record: any) => (
+          <Popconfirm
+            title="Delete the data?"
+            onConfirm={(e: any) => {
+              dispatch(deleteCategoryAction(record._id));
+            }}
+            onCancel={(e: any) => console.log(e)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Space size="middle">
+              <a>Delete</a>
+            </Space>
+          </Popconfirm>
         )}
       />
     </Table>
