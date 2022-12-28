@@ -3,12 +3,18 @@ import {
   CREATE_CATEGORY,
   CREATE_CATEGORY_REQ,
   CREATE_SUBCATEGORY,
+  CREATE_SUBCATEGORY_REQ,
   DELETE_CATEGORY,
   DELETE_CATEGORY_REQ,
+  DELETE_SUB_CATEGORY,
+  DELETE_SUB_CATEGORY_REQ,
   EDIT_CATEGORY,
   EDIT_CATEGORY_REQ,
+  EDIT_SUB_CATEGORY,
+  EDIT_SUB_CATEGORY_REQ,
   GET_ALL_BUTTONS,
   GET_CATEGORIES,
+  GET_CATEGORIES_REQ,
   GET_CATEGORIES_UNDER_PARENT,
   GET_FEATURES,
   GET_FEATURE_UNDER_SUB,
@@ -65,6 +71,7 @@ export const createCategory = (formdata: any) => async (dispatch: any) => {
 };
 
 export const getAllCategories = () => async (dispatch: any) => {
+  dispatch({type:GET_CATEGORIES_REQ})
   try {
     const config = {
       withCredentials: true,
@@ -95,6 +102,7 @@ export const getFeaturesAction = () => async (dispatch: any) => {
 
 export const createSubCatAction = (formdata: any) => async (dispatch: any) => {
   const id = toast.loading("Please wait...");
+  dispatch({type:CREATE_SUBCATEGORY_REQ})
   try {
     const config = {
       withCredentials: true,
@@ -243,3 +251,52 @@ export const getAllButtonsAction = () => async (dispatch: any) => {
     console.log(error);
   }
 };
+
+export const editSubCategoryAction = (formdata: any) => async (dispatch: any) => {
+  const id = toast.loading("Please wait...");
+  dispatch({ type: EDIT_SUB_CATEGORY_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/editsubcategory`,
+      formdata,
+      config
+    );
+    dispatch({ type: EDIT_SUB_CATEGORY, payload: data });
+    toast.update(id, {
+      render: `${data.message}`,
+      type: "success",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  } catch (error: any) {
+    console.log(error);
+    toast.update(id, {
+      render: `${error.response.data.message}`,
+      type: "error",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  }
+};
+
+export const deleteSubCategoryAction = (id: any) => async (dispatch: any) => {
+  console.log("data");
+  dispatch({ type: DELETE_SUB_CATEGORY_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.delete(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/deletesubcat/${id}`,
+      config
+    );
+    dispatch({ type: DELETE_SUB_CATEGORY, payload: data });
+  } catch (error: any) {
+    console.log(error);
+    toast.error("Something Wrong");
+  }
+};
+

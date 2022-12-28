@@ -2,28 +2,15 @@ import React, { useEffect } from "react";
 import { Space, Table, Tag } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getFeaturesAction } from "../../../redux/actions/Admin/categoryAction";
+import { GlobalStates } from "../../../context/ContextProvider";
+import FeatureForm from "./FeatureForm";
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
-interface DataType {
-  key: React.Key;
-  featureName: string;
-  input: string;
-  order: number;
-  status: boolean;
-}
 
-const data: DataType[] = [
-  {
-    key: "1",
-    featureName: "Feature Name",
-    input: "Text",
-    order: 1,
-    status: true,
-  },
-];
 
 const FeatureTable: React.FC = () => {
+  const {modalDispatch} = GlobalStates();
   const dispatch = useAppDispatch();
   const {res} = useAppSelector(state => state.allFeatures)
 useEffect(() => {
@@ -33,13 +20,13 @@ useEffect(() => {
   <Table dataSource={res?.data}>
     <Column title="Feature  Name" dataIndex="featureName" key="featureName" />
     <Column title="Order" dataIndex="order" key="order" />
-    <Column title="Input" dataIndex="input" key="input" />
+    <Column title="Input" dataIndex="featureType" key="input" />
     <Column title="status" dataIndex="status" key="status" />
     <Column
       title="Edit"
       key="edit"
-      render={(_: any, record: DataType) => (
-        <Space size="middle">
+      render={(_: any, record: any) => (
+        <Space onClick={() => modalDispatch({type:"SMALL_MODAL", payload:<FeatureForm record={record}/>})} size="middle">
           <a>Edit</a>
         </Space>
       )}
@@ -47,7 +34,7 @@ useEffect(() => {
     <Column
       title="Delete"
       key="delete"
-      render={(_: any, record: DataType) => (
+      render={(_: any, record: any) => (
         <Space size="middle">
           <a>Delete</a>
         </Space>

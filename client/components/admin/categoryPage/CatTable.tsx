@@ -3,26 +3,32 @@ import { Popconfirm, Space, Table, Tag } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import {
   deleteCategoryAction,
+  deleteSubCategoryAction,
   getAllCategories,
 } from "../../../redux/actions/Admin/categoryAction";
 import { GlobalStates } from "../../../context/ContextProvider";
 import SmallCreateCat from "./SmallCreateCat";
 import { spawn } from "child_process";
+import CatCreateForm from "./CatCreateForm";
 
 const { Column } = Table;
 
-const data = [{ name: "nazmul", lastName: "hasan" }];
-
 const CatTable: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { allCat, deleteCat, createCat, editCat } = useAppSelector(
-    (state) => state
-  );
-  console.log(allCat);
+  const { allCat, deleteCat, createCat, editCat, createSub, deleteSub,editSub } =
+    useAppSelector((state) => state);
+  console.log(createCat);
   const { modalDispatch } = GlobalStates();
   useEffect(() => {
     dispatch(getAllCategories());
-  }, [deleteCat.success, createCat.success, editCat.success]);
+  }, [
+    deleteCat.success,
+    createCat.success,
+    editCat.success,
+    createSub.success,
+    deleteSub.success,
+    editSub.success,
+  ]);
   return (
     <Table
       bordered
@@ -58,8 +64,8 @@ const CatTable: React.FC = () => {
                   <Space
                     onClick={(e: any) =>
                       modalDispatch({
-                        type: "SMALL_MODAL",
-                        payload: <SmallCreateCat record={record} />,
+                        type: "ADMIN_MODAL",
+                        payload: <CatCreateForm record={record} />,
                       })
                     }
                     size="middle"
@@ -75,7 +81,7 @@ const CatTable: React.FC = () => {
                   <Popconfirm
                     title="Delete the data?"
                     onConfirm={(e: any) => {
-                      dispatch(deleteCategoryAction(record._id));
+                      dispatch(deleteSubCategoryAction(record._id));
                     }}
                     onCancel={(e: any) => console.log(e)}
                     okText="Yes"

@@ -35,7 +35,7 @@ export default function ({ record }: any) {
         delete values.categoryImg;
       }
       console.log(values);
-      dispatch(editCategoryAction({ ...values, id: record._id }));
+      dispatch(editCategoryAction({ ...values, _id: record._id }));
     } else {
       if (values.categoryImg) {
         values.categoryImg = values.categoryImg.file.originFileObj;

@@ -5,6 +5,7 @@ import {
   Input,
   InputNumber,
   Radio,
+  Select,
   Typography,
 } from "antd";
 import { useEffect } from "react";
@@ -23,14 +24,14 @@ import FormMultiSelect from "../FormElements/FormMultiSelect";
 import FeatureTable from "./FeatureTable";
 import FeatureForm from "./FeatureForm";
 
-export default function () {
+export default function ({ record }: any) {
+  console.log(record);
   const dispatch = useAppDispatch();
-  const { res } = useAppSelector((state) => state.adminCat);
-  const { allCat, allFeatures,createSub } = useAppSelector((state) => state);
+  const { allCat, allFeatures, createSub } = useAppSelector((state) => state);
   const { modalDispatch } = GlobalStates();
   const [form] = Form.useForm();
+  console.log(allFeatures);
 
- 
   useEffect(() => {
     dispatch(getParentCategories());
     dispatch(getAllCategories());
@@ -38,10 +39,13 @@ export default function () {
   }, []);
 
   const onFinish = (values: any) => {
-    dispatch(createSubCatAction(values));
-    console.log("Success:", values);
-    console.log(createSub);
-    // form.resetFields();
+    if (record) {
+      console.log("editing");
+    } else {
+      dispatch(createSubCatAction(values));
+      console.log("Success:", values);
+      // form.resetFields();
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -81,12 +85,18 @@ export default function () {
           <Divider className="my-2" />
           <div className="flex gap-3 justify-between basis-[250px]">
             <div className="w-full">
-              <FormSelect
-                label=""
-                name="categoryId"
-                optionsObj={allCat?.res?.data}
-                placeholder="Categories"
-              />
+              <Form.Item
+                name={"categoryId"}
+                initialValue={record && record.categoryId}
+              >
+                <Select placeholder="Category ">
+                  {allCat.res.data.map((each: any, i: any) => (
+                    <Select.Option key={i} value={each.category._id}>
+                      {each.category.categoryName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
             </div>
             <div className="">
               <Button
@@ -104,15 +114,23 @@ export default function () {
             </div>
           </div>
           <div className="basis-[250px]">
-            <FormMultiSelect
-              name="features"
-              placeholder="Feature Type"
-              optionsObj={allFeatures?.res?.data}
-            />
+            <Form.Item
+              name={"features"}
+              initialValue={record && record.features}
+            >
+              <Select mode="tags" placeholder="features">
+                {allFeatures?.res?.data?.map((each: any, i: any) => (
+                  <Select.Option key={i} value={each._id}>
+                    {each.featureName}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
           </div>
           <div className="basis-[250px]">
             <Form.Item
               name="subCategoryName"
+              initialValue={record && record.subCategoryName}
               rules={[{ required: true, message: " Required" }]}
             >
               <Input placeholder="Sub Category Name" className="w-full"></Input>
@@ -122,6 +140,7 @@ export default function () {
             <Form.Item
               name="ordering"
               rules={[{ required: true, message: " Required" }]}
+              initialValue={record && record.ordering}
             >
               <InputNumber
                 placeholder="Ordering"
@@ -133,6 +152,7 @@ export default function () {
             <Form.Item
               name="freePost"
               rules={[{ required: true, message: " Required" }]}
+              initialValue={record && record.freePost}
             >
               <InputNumber
                 placeholder="Free Post"
@@ -145,11 +165,12 @@ export default function () {
             <Typography>Status</Typography>
             <Form.Item
               name="status"
-              initialValue={true}
+              initialValue={record ? record.status : "active"}
+              noStyle
             >
-              <Radio.Group defaultValue={true}>
-                <Radio value={true}> Yes </Radio>
-                <Radio value={false}> No </Radio>
+              <Radio.Group defaultValue={"active"}>
+                <Radio value={"active"}> Active </Radio>
+                <Radio value={"inactive"}> Inactive </Radio>
               </Radio.Group>
             </Form.Item>
           </div>
@@ -159,7 +180,9 @@ export default function () {
         <Button
           className="flex items-center text-white bg-gray-700"
           icon={<BiPlus size={20} />}
-          onClick={() => modalDispatch({type: "SMALL_MODAL", payload: <FeatureForm/>})}
+          onClick={() =>
+            modalDispatch({ type: "SMALL_MODAL", payload: <FeatureForm /> })
+          }
         >
           {" "}
         </Button>

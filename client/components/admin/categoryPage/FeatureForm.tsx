@@ -13,7 +13,8 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import DateInput from "../../layout/DateInput";
 const { Option } = Select;
 
-export default function () {
+export default function ({ record }: any) {
+  console.log(record);
   const onFinish = (values: any) => {
     console.log(values);
   };
@@ -42,12 +43,17 @@ export default function () {
         <Form.Item
           name={"featureName"}
           rules={[{ required: true, message: `Required` }]}
+          initialValue={record && record.featureName}
         >
           <Input placeholder="Feature Name" />
         </Form.Item>
       </div>
       <div className="basis-1/2 px-1">
-        <Form.Item className="ordering">
+        <Form.Item
+          className="ordering"
+          rules={[{ required: true, message: `Required` }]}
+          initialValue={record && record.ordering}
+        >
           <InputNumber placeholder="Ordering" className="w-full"></InputNumber>
         </Form.Item>
       </div>
@@ -56,6 +62,7 @@ export default function () {
           name="featureType"
           className=""
           rules={[{ required: true, message: `Required` }]}
+          initialValue={record && record.featureType}
         >
           <Select placeholder="feature Type" className="">
             <Option value="radio">Radio</Option>
@@ -86,11 +93,11 @@ export default function () {
       </div>
 
       <div className=" basis-full px-1 text-center">
-        <Form.List name="options" >
+        <Form.List name="options" initialValue={record && record.options}>
           {(fields, { add, remove }, { errors }) => (
             <>
               {fields.map((field, index) => (
-                <Form.Item key={field.key} className="">
+                <Form.Item key={field.key} className="" name="optionName">
                   <div className="flex gap-2 items-center">
                     <Form.Item
                       className=""
