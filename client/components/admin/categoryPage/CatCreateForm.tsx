@@ -41,7 +41,7 @@ export default function ({ record }: any) {
 
   const onFinish = (values: any) => {
     if (record) {
-      dispatch(editSubCategoryAction(values))
+      dispatch(editSubCategoryAction({ ...values, id: record._id }));
     } else {
       dispatch(createSubCatAction(values));
       console.log("Success:", values);
