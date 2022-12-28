@@ -13,6 +13,7 @@ import { BiPlus } from "react-icons/bi";
 import { GlobalStates } from "../../../context/ContextProvider";
 import {
   createSubCatAction,
+  editSubCategoryAction,
   getAllCategories,
   getFeaturesAction,
   getParentCategories,
@@ -40,7 +41,7 @@ export default function ({ record }: any) {
 
   const onFinish = (values: any) => {
     if (record) {
-      console.log("editing");
+      dispatch(editSubCategoryAction(values))
     } else {
       dispatch(createSubCatAction(values));
       console.log("Success:", values);
