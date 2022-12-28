@@ -70,7 +70,7 @@ export const getAllCategories = () => async (dispatch: any) => {
       withCredentials: true,
     };
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST}/api/admin/getallcategory`,
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/allcategorynsubcat`,
       config
     );
     dispatch({ type: GET_CATEGORIES, payload: data });

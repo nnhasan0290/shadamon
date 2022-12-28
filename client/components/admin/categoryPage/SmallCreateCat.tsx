@@ -19,7 +19,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 
 export default function ({ record }: any) {
-  console.log(record);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
@@ -33,9 +32,10 @@ export default function ({ record }: any) {
       if (values.categoryImg) {
         values.categoryImg = values.categoryImg.file.originFileObj;
       } else {
-        values.categoryImg = record.categoryImg;
+        delete values.categoryImg;
       }
-      dispatch(editCategoryAction({ ...values, _id: record._id }));
+      console.log(values);
+      dispatch(editCategoryAction({ ...values, id: record._id }));
     } else {
       if (values.categoryImg) {
         values.categoryImg = values.categoryImg.file.originFileObj;
