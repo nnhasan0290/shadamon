@@ -212,6 +212,9 @@ export const editCategoryAction = (formdata: any) => async (dispatch: any) => {
   dispatch({ type: EDIT_CATEGORY_REQ });
   try {
     const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
       withCredentials: true,
     };
     const { data } = await axios.post(
