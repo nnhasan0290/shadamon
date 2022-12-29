@@ -91,7 +91,7 @@ export default function ({ record }: any) {
                 initialValue={record && record.categoryId}
               >
                 <Select placeholder="Category ">
-                  {allCat.res.data.map((each: any, i: any) => (
+                  {allCat?.res?.data?.map((each: any, i: any) => (
                     <Select.Option key={i} value={each.category._id}>
                       {each.category.categoryName}
                     </Select.Option>
