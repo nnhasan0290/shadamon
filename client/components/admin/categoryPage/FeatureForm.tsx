@@ -68,55 +68,32 @@ export default function ({ record }: any) {
             <Option value="radio">Radio</Option>
             <Option value="multiselect">MultiSelect</Option>
             <Option value="dropdown">DropDown</Option>
+            <Option value="singleBox">Price</Option>
+            <Option value="doubleBox">Price Limit</Option>
+            <Option value="datePicker">DatePicker</Option>
+            <Option value="rule">Rule</Option>
           </Select>
-        </Form.Item>
-      </div>
-      <div className="basis-1/2 px-1">
-        <Form.Item
-          name={"featureDefaultValue"}
-          rules={[{ required: true, message: `Required` }]}
-        >
-          <Input placeholder="Feature Default Value" />
-        </Form.Item>
-      </div>
-      <div className=" basis-1/2 px-1">
-        <DateInput />
-      </div>
-      <div className=" flex justify-center mb-3 gap-5 basis-full">
-        <Typography>Status</Typography>
-        <Form.Item noStyle>
-          <Radio.Group name="radiogroup" defaultValue={1}>
-            <Radio value={1}>Yes</Radio>
-            <Radio value={2}>No</Radio>
-          </Radio.Group>
         </Form.Item>
       </div>
 
       <div className=" basis-full px-1 text-center">
-        <Form.List name="options" initialValue={record && record.options}>
+        <Form.List name={"options"}>
           {(fields, { add, remove }, { errors }) => (
             <>
               {fields.map((field, index) => (
-                <Form.Item key={field.key} className="" name="optionName">
-                  <div className="flex gap-2 items-center">
+                <Form.Item key={field.key} className="">
+                  <div className="flex gap-2 items-start w-full">
                     <Form.Item
-                      className=""
                       {...field}
-                      validateTrigger={["onChange", "onBlur"]}
-                      rules={[
-                        {
-                          required: true,
-                          whitespace: true,
-                          message: "Please input..",
-                        },
-                      ]}
-                      noStyle
+                      name={[index, "optionName"]}
+                      style={{ width: "100%", marginBottom:0, paddingBottom:0 }}
+                      rules={[{ required: true, message: `Required` }]}
                     >
-                      <Input placeholder="feature  Option" />
+                      <Input />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <MinusCircleOutlined
-                        className="dynamic-delete-button"
+                        className="dynamic-delete-button mt-3"
                         onClick={() => remove(field.name)}
                       />
                     ) : null}
@@ -137,6 +114,15 @@ export default function ({ record }: any) {
             </>
           )}
         </Form.List>
+      </div>
+      <div className=" flex justify-center mb-3 gap-5 basis-full">
+        <Typography>Status</Typography>
+        <Form.Item noStyle>
+          <Radio.Group name="radiogroup" defaultValue={"active"}>
+            <Radio value={"active"}>Active</Radio>
+            <Radio value={"inactive"}>Inactive</Radio>
+          </Radio.Group>
+        </Form.Item>
       </div>
     </Form>
   );
