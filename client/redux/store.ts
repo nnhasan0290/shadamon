@@ -7,7 +7,7 @@ import {
 import {createStore} from "redux"
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { createCategoryReducer, createSubCatReducer, deleteCategoryReducer, deleteSubCategoryReducer, editCategoryReducer, editSubCategoryReducer, getAllCategoryReducer, getButtonsReducer, getCatUnderParentReducer, getFeaturesReducer, getFeatureUnderSubReducer, getLocationReducer, GetParentCategoryReducer, getSubCatReducer } from "./reducers/admin/catReducer";
+import { createCategoryReducer, createFeatureReducer, createSubCatReducer, deleteCategoryReducer, deleteFeatureReducer, deleteSubCategoryReducer, editCategoryReducer, editFeatureReducer, editSubCategoryReducer, getAllCategoryReducer, getButtonsReducer, getCatUnderParentReducer, getFeaturesReducer, getFeatureUnderSubReducer, getLocationReducer, GetParentCategoryReducer, getSubCatReducer } from "./reducers/admin/catReducer";
 import { createLocationReducer, createParentLocationReducer, deleteParentLocationReducer, deleteSubLocationReducer, editParentLocationReducer, editSubLocationReducer } from "./reducers/admin/locationReducer";
 import { createProductReducer, getAllProductReducer } from "./reducers/admin/productReducer";
 import { defaultReducer } from "./reducers/defaultReducer";
@@ -41,6 +41,9 @@ const rootReducer = combineReducers({
   allBtns: getButtonsReducer,
   deleteSub: deleteSubCategoryReducer,
   editSub: editSubCategoryReducer,
+  createFeature:createFeatureReducer,
+  editFeature: editFeatureReducer,
+  deleteFeature: deleteFeatureReducer,
 });
 
 const store = createStore(

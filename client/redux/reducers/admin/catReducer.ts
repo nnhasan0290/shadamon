@@ -1,14 +1,20 @@
 import {
   CREATE_CATEGORY,
   CREATE_CATEGORY_REQ,
+  CREATE_FEATURE,
+  CREATE_FEATURE_REQ,
   CREATE_SUBCATEGORY,
   CREATE_SUBCATEGORY_REQ,
   DELETE_CATEGORY,
   DELETE_CATEGORY_REQ,
+  DELETE_FEATURE,
+  DELETE_FEATURE_REQ,
   DELETE_SUB_CATEGORY,
   DELETE_SUB_CATEGORY_REQ,
   EDIT_CATEGORY,
   EDIT_CATEGORY_REQ,
+  EDIT_FEATURE,
+  EDIT_FEATURE_REQ,
   EDIT_SUB_CATEGORY,
   EDIT_SUB_CATEGORY_REQ,
   GET_ALL_BUTTONS,
@@ -233,3 +239,68 @@ export const deleteSubCategoryReducer = (
       return state;
   }
 };
+
+export const createFeatureReducer = (
+  state = { success: false, res: {} },
+  action: any
+) => {
+  switch (action.type) {
+    case CREATE_FEATURE_REQ:
+      return {
+        ...state,
+        success: false,
+      };
+    case CREATE_FEATURE:
+      return {
+        ...state,
+        success: true,
+        res: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+export const editFeatureReducer = (
+  state = { success: false, res: {} },
+  action: any
+) => {
+  switch (action.type) {
+    case EDIT_FEATURE_REQ:
+      return {
+        ...state,
+        success: false,
+      };
+    case EDIT_FEATURE:
+      return {
+        ...state,
+        success: true,
+        res: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+export const deleteFeatureReducer = (
+  state = { success: false, res: {} },
+  action: any
+) => {
+  switch (action.type) {
+    case DELETE_FEATURE_REQ:
+      return {
+        ...state,
+        success: false,
+      };
+    case DELETE_FEATURE:
+      return {
+        ...state,
+        success: true,
+        res: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+

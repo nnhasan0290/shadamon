@@ -2,14 +2,20 @@ import axios from "axios";
 import {
   CREATE_CATEGORY,
   CREATE_CATEGORY_REQ,
+  CREATE_FEATURE,
+  CREATE_FEATURE_REQ,
   CREATE_SUBCATEGORY,
   CREATE_SUBCATEGORY_REQ,
   DELETE_CATEGORY,
   DELETE_CATEGORY_REQ,
+  DELETE_FEATURE,
+  DELETE_FEATURE_REQ,
   DELETE_SUB_CATEGORY,
   DELETE_SUB_CATEGORY_REQ,
   EDIT_CATEGORY,
   EDIT_CATEGORY_REQ,
+  EDIT_FEATURE,
+  EDIT_FEATURE_REQ,
   EDIT_SUB_CATEGORY,
   EDIT_SUB_CATEGORY_REQ,
   GET_ALL_BUTTONS,
@@ -302,4 +308,83 @@ export const deleteSubCategoryAction = (id: any) => async (dispatch: any) => {
     toast.error("Something Wrong");
   }
 };
+
+export const createFeatureAction = (formdata: any) => async (dispatch: any) => {
+  const id = toast.loading("Please wait...");
+  dispatch({type:CREATE_FEATURE_REQ})
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/createfeature`,
+      formdata,
+      config
+    );
+    dispatch({ type: CREATE_FEATURE, payload: data });
+    toast.update(id, {
+      render: `${data.message}`,
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+    });
+  } catch (error: any) {
+    console.log(error);
+    toast.update(id, {
+      render: `${error.response.data.message._message}`,
+      type: "error",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  }
+};
+
+export const editFeatureAction = (formdata: any) => async (dispatch: any) => {
+  const id = toast.loading("Please wait...");
+  dispatch({ type: EDIT_FEATURE_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/editfeature`,
+      formdata,
+      config
+    );
+    dispatch({ type: EDIT_FEATURE, payload: data });
+    toast.update(id, {
+      render: `${data.message}`,
+      type: "success",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  } catch (error: any) {
+    console.log(error);
+    toast.update(id, {
+      render: `${error.response.data.message}`,
+      type: "error",
+      isLoading: false,
+      autoClose: 2000,
+    });
+  }
+};
+
+export const deleteFeatureAction = (id: any) => async (dispatch: any) => {
+  console.log("data");
+  dispatch({ type: DELETE_FEATURE_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.delete(
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/deletefeature/${id}`,
+      config
+    );
+    dispatch({ type: DELETE_FEATURE, payload: data });
+  } catch (error: any) {
+    console.log(error);
+    toast.error("Something Wrong");
+  }
+};
+
 
