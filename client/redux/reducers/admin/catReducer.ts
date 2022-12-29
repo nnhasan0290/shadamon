@@ -25,6 +25,7 @@ import {
   GET_FEATURE_UNDER_SUB,
   GET_LOCATIONS,
   GET_PARENT_CATEGORY,
+  GET_PARENT_CAT_SUB,
   GET_SUB_CATEGORIES,
 } from "../../consts/admin/categoryConst";
 
@@ -40,6 +41,20 @@ export const GetParentCategoryReducer = (
 ) => {
   switch (action.type) {
     case GET_PARENT_CATEGORY:
+      return {
+        res: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+export const getParentCatSubReducer = (
+  state = { res: { data: [] } },
+  action: any
+) => {
+  switch (action.type) {
+    case GET_PARENT_CAT_SUB:
       return {
         res: action.payload,
       };

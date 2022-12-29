@@ -26,6 +26,7 @@ import {
   GET_FEATURE_UNDER_SUB,
   GET_LOCATIONS,
   GET_PARENT_CATEGORY,
+  GET_PARENT_CAT_SUB,
   GET_SUB_CATEGORIES,
 } from "../../consts/admin/categoryConst";
 import { toast } from "react-toastify";
@@ -42,6 +43,20 @@ export const getParentCategories = () => async (dispatch: any) => {
     dispatch({ type: GET_PARENT_CATEGORY, payload: data });
   } catch (error: any) {}
 };
+
+export const getParentCatSubAction = () => async (dispatch: any) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/allcat`,
+      config
+    );
+    dispatch({ type: GET_PARENT_CAT_SUB, payload: data });
+  } catch (error: any) {}
+};
+
 
 export const createCategory = (formdata: any) => async (dispatch: any) => {
   const id = toast.loading("Please wait...");

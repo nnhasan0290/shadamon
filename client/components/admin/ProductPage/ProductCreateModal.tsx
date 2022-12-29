@@ -25,6 +25,7 @@ import {
   getFeatureUnderSubAction,
   getLocationAction,
   getParentCategories,
+  getParentCatSubAction,
   getSubCategoriesAction,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
@@ -70,6 +71,7 @@ export default function () {
     catUnderParent,
     featureUnderSub,
     createPd,
+    getParentCatSub,
   } = useAppSelector((state) => state);
   console.log(createPd);
 
@@ -89,6 +91,7 @@ export default function () {
     dispatch(getAllCategories());
     dispatch(getLocationAction());
     dispatch(getParentCategories());
+    dispatch(getParentCatSubAction());
   }, []);
   return (
     <div>
@@ -132,29 +135,31 @@ export default function () {
                 allowClear
                 getPopupContainer={(trigger) => trigger.parentNode}
               >
-                <TreeSelect.TreeNode
-                  selectable={false}
-                  value="parent 1"
-                  title="parent 1"
-                  key="0-1"
-                >
+                {getParentCatSub?.res?.data?.map((each: any, i: any) => (
                   <TreeSelect.TreeNode
-                    value="parent 1-0"
-                    title="parent 1-0"
-                    key="0-1-1"
+                    selectable={false}
+                    value={each?.parent?._id}
+                    title={each?.parent?.name}
+                    key={each?.parent?._id}
                   >
-                    <TreeSelect.TreeNode
-                      value="leaf1"
-                      title="my leaf"
-                      key="random"
-                    />
-                    <TreeSelect.TreeNode
-                      value="leaf2"
-                      title="your leaf"
-                      key="random1"
-                    />
+                    {each?.categories?.map((cat: any, i: any) => (
+                      <TreeSelect.TreeNode
+                        selectable={false}
+                        value={cat?.category?._id}
+                        title={cat?.category?.categoryName}
+                        key={cat?.category?._id}
+                      >
+                        {cat?.subcategories?.map((sub: any, i: any) => (
+                          <TreeSelect.TreeNode
+                            value={sub?._id}
+                            title={sub?.subCategoryName}
+                            key={cat?._id}
+                          ></TreeSelect.TreeNode>
+                        ))}
+                      </TreeSelect.TreeNode>
+                    ))}
                   </TreeSelect.TreeNode>
-                </TreeSelect.TreeNode>
+                ))}
               </TreeSelect>
             </div>
             {/* <div>
