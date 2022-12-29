@@ -10,6 +10,7 @@ import {
   Select,
   Table,
   Tag,
+  TreeSelect,
   Upload,
 } from "antd";
 import UploadComponent from "../FormElements/UploadComponent";
@@ -28,7 +29,6 @@ import {
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { createProductAction } from "../../../redux/actions/Admin/productAction";
-
 const { TextArea } = Input;
 const options = {
   renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
@@ -120,15 +120,44 @@ export default function () {
               <TextArea placeholder="Description/edit" />
             </Form.Item>
           </div>
-          <div className="w-full">
-            <label htmlFor="">Address</label>
-            <Form.Item name="address" className="w-full">
-              <Input placeholder="address" />
-            </Form.Item>
-          </div>
 
           <div className="flex flex-wrap gap-2">
             <div>
+              <label htmlFor="">Category</label>
+              <TreeSelect
+                showSearch
+                style={{ width: "100%" }}
+                dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                placeholder="Please select"
+                allowClear
+                getPopupContainer={(trigger) => trigger.parentNode}
+              >
+                <TreeSelect.TreeNode
+                  selectable={false}
+                  value="parent 1"
+                  title="parent 1"
+                  key="0-1"
+                >
+                  <TreeSelect.TreeNode
+                    value="parent 1-0"
+                    title="parent 1-0"
+                    key="0-1-1"
+                  >
+                    <TreeSelect.TreeNode
+                      value="leaf1"
+                      title="my leaf"
+                      key="random"
+                    />
+                    <TreeSelect.TreeNode
+                      value="leaf2"
+                      title="your leaf"
+                      key="random1"
+                    />
+                  </TreeSelect.TreeNode>
+                </TreeSelect.TreeNode>
+              </TreeSelect>
+            </div>
+            {/* <div>
               <label htmlFor="">Parent</label>
               <Form.Item>
                 <Select
@@ -170,7 +199,7 @@ export default function () {
                   ))}
                 </Select>
               </Form.Item>
-            </div>
+            </div> */}
             {featureUnderSub?.res?.data && (
               <>
                 {featureUnderSub?.res?.data[0].features?.map(
@@ -203,11 +232,33 @@ export default function () {
             <div>
               <label htmlFor="">Location</label>
               <Form.Item name={"location"}>
-                <Select placeholder="Location">
+                <TreeSelect
+                  showSearch
+                  style={{ width: "100%" }}
+                  dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                  placeholder="Please select"
+                  allowClear
+                  getPopupContainer={(triggerNode: HTMLElement) =>
+                    triggerNode.parentNode as HTMLElement
+                  }
+                >
                   {locations?.res?.data?.map((each: any, i: any) => (
-                    <Option value={each._id}>{each.name}</Option>
+                    <TreeSelect.TreeNode
+                      selectable={false}
+                      value={each?.location.locationName}
+                      title={each.location.locationName}
+                      key={i}
+                    >
+                      {each?.sublocations.map((sub: any, j: any) => (
+                        <TreeSelect.TreeNode
+                          value={sub.subLocationName}
+                          title={sub.subLocationName}
+                          key={j}
+                        ></TreeSelect.TreeNode>
+                      ))}
+                    </TreeSelect.TreeNode>
                   ))}
-                </Select>
+                </TreeSelect>
               </Form.Item>
             </div>
             <div>

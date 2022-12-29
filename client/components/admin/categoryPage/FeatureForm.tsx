@@ -79,9 +79,11 @@ export default function ({ record }: any) {
           <Select placeholder="feature Type" className="">
             <Option value="radio">Radio</Option>
             <Option value="multiselect">MultiSelect</Option>
+            <Option value="multiselect">MultiSelect</Option>
             <Option value="select">Select</Option>
             <Option value="singleinput">Single Input</Option>
             <Option value="doubleinput">Double Input</Option>
+            <Option value="checkinput">Input With Checkbox</Option>
             <Option value="datepicker">DatePicker</Option>
             <Option value="rule">Rule</Option>
           </Select>
