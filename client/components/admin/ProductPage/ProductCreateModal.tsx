@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  DatePicker,
   Divider,
   Form,
   Image,
@@ -30,38 +31,14 @@ import {
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { createProductAction } from "../../../redux/actions/Admin/productAction";
+import { BiPlus } from "react-icons/bi";
 const { TextArea } = Input;
-const options = {
-  renderArrowPrev: (clickHandler: any, hasPrev: any, label: any) => {
-    return (
-      <span
-        className={`arrow-left absolute top-[50%] bg-gray-500 p-2 rounded-full left-0   z-10 translate-y-[-50%] cursor-pointer text-white`}
-        onClick={clickHandler}
-      >
-        <BsArrowLeft size={23} />
-      </span>
-    );
-  },
-  renderArrowNext: (clickHandler: any, hasNext: any, label: any) => {
-    return (
-      <span
-        className={`arrow-right absolute top-[50%] bg-gray-500 p-2 rounded-full right-0 translate-y-[-50%] cursor-pointer text-white 
-        `}
-        onClick={clickHandler}
-      >
-        <BsArrowRight size={23} />
-      </span>
-    );
-  },
-};
 
 export default function () {
   const { Option } = Select;
-  const [imgArr, setImgArr] = useState<any>([]);
-  console.log(imgArr);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const staticValue = [{ formItem1: "value1", formItem2: "value2" }];
+  const subCategoryId = Form.useWatch("subcategoryId", form);
 
   const {
     adminCat,
@@ -69,14 +46,14 @@ export default function () {
     locations,
     subCat,
     catUnderParent,
-    featureUnderSub,
+    featureUnderSub: {
+      res: { data },
+    },
     createPd,
     getParentCatSub,
   } = useAppSelector((state) => state);
-  console.log(createPd);
 
   const handleCreateProduct = (values: any) => {
-    console.log(values);
     let newProductImg: any = [];
     values.productImg.forEach((each: any, i: any) => {
       if (each.img) {
@@ -84,9 +61,25 @@ export default function () {
         newProductImg.push(each);
       }
     });
+
+    if (values.acceptDescription === false) {
+      values.acceptDescription = "reject";
+    } else {
+      values.acceptDescription = "accept";
+    }
+    if (values.videoLinkAccept === false) {
+      values.videoLinkAccept = "reject";
+    } else {
+      values.videoLinkAccept = "accept";
+    }
+
     values.productImg = newProductImg;
+    console.log(values);
     dispatch(createProductAction(values));
   };
+  useEffect(() => {
+    dispatch(getFeatureUnderSubAction(subCategoryId));
+  }, [subCategoryId]);
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getLocationAction());
@@ -100,9 +93,13 @@ export default function () {
         onFinish={handleCreateProduct}
         className="flex flex-wrap items-start"
       >
-        <h2 className="p-2 my-3 mr-10 w-full bg-gray-300 rounded-md">
-          Create Product
-        </h2>
+        <div className="flex gap-2 items-center font-bold w-full">
+          <span className="p-1 text-white bg-gray-700 rounded-full">
+            <BiPlus />
+          </span>
+          <h4>New Product</h4>
+        </div>
+        <Divider className="my-2" />
         <div className="flex flex-wrap justify-between pr-5 basis-1/2">
           <div className="w-full">
             <label htmlFor="">Heading</label>
@@ -118,8 +115,21 @@ export default function () {
             </Form.Item>
           </div>
           <div className="w-full">
-            <label htmlFor="">Description/Edit</label>
-            <Form.Item name="description" className="">
+            <div className="flex justify-between">
+              <label>Description/Edit</label>
+              <Form.Item
+                className="ml-auto"
+                name={"acceptDescription"}
+                valuePropName="checked"
+                initialValue={"accept"}
+                noStyle
+              >
+                <Checkbox name="acceptDescription" defaultChecked={false}>
+                  Accept?
+                </Checkbox>
+              </Form.Item>
+            </div>
+            <Form.Item name="editDescription" className="">
               <TextArea placeholder="Description/edit" />
             </Form.Item>
           </div>
@@ -127,40 +137,42 @@ export default function () {
           <div className="flex flex-wrap gap-2">
             <div>
               <label htmlFor="">Category</label>
-              <TreeSelect
-                showSearch
-                style={{ width: "100%" }}
-                dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                placeholder="Please select"
-                allowClear
-                getPopupContainer={(trigger) => trigger.parentNode}
-              >
-                {getParentCatSub?.res?.data?.map((each: any, i: any) => (
-                  <TreeSelect.TreeNode
-                    selectable={false}
-                    value={each?.parent?._id}
-                    title={each?.parent?.name}
-                    key={each?.parent?._id}
-                  >
-                    {each?.categories?.map((cat: any, i: any) => (
-                      <TreeSelect.TreeNode
-                        selectable={false}
-                        value={cat?.category?._id}
-                        title={cat?.category?.categoryName}
-                        key={cat?.category?._id}
-                      >
-                        {cat?.subcategories?.map((sub: any, i: any) => (
-                          <TreeSelect.TreeNode
-                            value={sub?._id}
-                            title={sub?.subCategoryName}
-                            key={cat?._id}
-                          ></TreeSelect.TreeNode>
-                        ))}
-                      </TreeSelect.TreeNode>
-                    ))}
-                  </TreeSelect.TreeNode>
-                ))}
-              </TreeSelect>
+              <Form.Item name={"subcategoryId"}>
+                <TreeSelect
+                  showSearch
+                  style={{ width: "100%" }}
+                  dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                  placeholder="Please select"
+                  allowClear
+                  getPopupContainer={(trigger) => trigger.parentNode}
+                >
+                  {getParentCatSub?.res?.data?.map((each: any, i: any) => (
+                    <TreeSelect.TreeNode
+                      selectable={false}
+                      value={each?.parent?._id}
+                      title={each?.parent?.name}
+                      key={each?.parent?.name}
+                    >
+                      {each?.categories?.map((cat: any, i: any) => (
+                        <TreeSelect.TreeNode
+                          selectable={false}
+                          value={cat?.category?._id}
+                          title={cat?.category?.categoryName}
+                          key={cat?.category?.categoryName}
+                        >
+                          {cat?.subcategories?.map((sub: any, i: any) => (
+                            <TreeSelect.TreeNode
+                              value={sub?._id}
+                              title={sub?.subCategoryName}
+                              key={cat?.subCAtegoryName}
+                            ></TreeSelect.TreeNode>
+                          ))}
+                        </TreeSelect.TreeNode>
+                      ))}
+                    </TreeSelect.TreeNode>
+                  ))}
+                </TreeSelect>
+              </Form.Item>
             </div>
             {/* <div>
               <label htmlFor="">Parent</label>
@@ -205,38 +217,35 @@ export default function () {
                 </Select>
               </Form.Item>
             </div> */}
-            {featureUnderSub?.res?.data && (
-              <>
-                {featureUnderSub?.res?.data[0].features?.map(
-                  (feature: any, i: any) => (
-                    <div>
-                      <label>{feature.featureName}</label>
-                      <Form.Item
-                        name={["features", i, "feature"]}
-                        initialValue={feature._id}
-                        hidden
-                      >
-                        <Input />
-                      </Form.Item>
-                      {feature.featureType === "radio" && (
-                        <Form.Item name={["features", i, "selectedOption", 0]}>
-                          <Radio.Group>
-                            {feature?.options?.map((option: any, i: any) => (
-                              <Radio value={option.optionName}>
-                                {option.optionName}
-                              </Radio>
-                            ))}
-                          </Radio.Group>
-                        </Form.Item>
-                      )}
-                    </div>
-                  )
-                )}
-              </>
-            )}
+            {data &&
+              data[0]?.features?.map((feature: any, i: any) => (
+                <div>
+                  <label>{feature.featureName}</label>
+                  <Form.Item
+                    name={["features", i, "feature"]}
+                    initialValue={feature._id}
+                    hidden
+                  >
+                    <Input />
+                  </Form.Item>
+                  {(feature.featureType === "radio" ||
+                    feature.featureType === "select") && (
+                    <Form.Item name={["features", i, "selectedOption", 0]}>
+                      <Select placeholder={feature.featureName}>
+                        {feature?.options?.map((option: any, i: any) => (
+                          <Select.Option value={option.optionName}>
+                            {option.optionName}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  )}
+                </div>
+              ))}
+
             <div>
               <label htmlFor="">Location</label>
-              <Form.Item name={"location"}>
+              <Form.Item name={"sublocation"}>
                 <TreeSelect
                   showSearch
                   style={{ width: "100%" }}
@@ -256,7 +265,7 @@ export default function () {
                     >
                       {each?.sublocations.map((sub: any, j: any) => (
                         <TreeSelect.TreeNode
-                          value={sub.subLocationName}
+                          value={sub._id}
                           title={sub.subLocationName}
                           key={j}
                         ></TreeSelect.TreeNode>
@@ -267,45 +276,9 @@ export default function () {
               </Form.Item>
             </div>
             <div>
-              <label htmlFor="">Quantity</label>
-              <Form.Item name={"quantity"}>
-                <InputNumber placeholder="Quantity"></InputNumber>
-              </Form.Item>
-            </div>
-            <div>
-              <label htmlFor="">Payable Price</label>
-              <Form.Item name={"payablePrice"}>
-                <InputNumber placeholder="Price(payable)"></InputNumber>
-              </Form.Item>
-            </div>
-            <div>
-              <label htmlFor="">Old Price</label>
-              <Form.Item name={"oldPrice"}>
-                <InputNumber placeholder="Price(old)"></InputNumber>
-              </Form.Item>
-            </div>
-            <div>
-              <label htmlFor="">Home Delivery</label>
-              <Form.Item name={"homeDelivery"}>
-                <Input placeholder="Hd Amount" />
-              </Form.Item>
-            </div>
-            <div>
               <label>Show Till</label>
-              <Form.Item>
-                <Input disabled placeholder="Name"></Input>
-              </Form.Item>
-            </div>
-            <div>
-              <label>Create</label>
-              <Form.Item>
-                <Input disabled placeholder="Name"></Input>
-              </Form.Item>
-            </div>
-            <div>
-              <label>Pub</label>
-              <Form.Item>
-                <Input disabled placeholder="Name"></Input>
+              <Form.Item name={"showTill"}>
+                <DatePicker />
               </Form.Item>
             </div>
           </div>
@@ -313,38 +286,58 @@ export default function () {
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
           <div>
             <label>Ordering</label>
-            <Form.Item>
+            <Form.Item name={"ordering"}>
               <InputNumber placeholder="Ordering"></InputNumber>
             </Form.Item>
           </div>
           <div>
             <label>Slot Status</label>
-            <Form.Item name="slotStatus">
-              <Input placeholder="Slot"></Input>
+            <Form.Item>
+              <Select placeholder="slot Status">
+                <Select.Option value={"ok"}>Ok</Select.Option>
+                <Select.Option value={"fail"}>Fail</Select.Option>
+              </Select>
             </Form.Item>
           </div>
           <div>
             <label htmlFor="">Product Status</label>
             <Form.Item name="productStatus">
-              <Select placeholder="New/Used">
+              <Select
+                placeholder="Product Status"
+                getPopupContainer={(triggerNode: HTMLElement) =>
+                  triggerNode.parentNode as HTMLElement
+                }
+              >
                 <Option value="active">Active</Option>
+                <Option value="inactive">Inactive</Option>
                 <Option value="notification">Notification</Option>
                 <Option value="pause">Pause</Option>
                 <Option value="review">Review</Option>
                 <Option value="delete">Delete(Reason)</Option>
-                <Option value="atv+msg">Product Atv+Msg</Option>
-                <Option value="unatv+msg">Product UnAtv+Msg</Option>
+                <Option value="atvMsg">Product Atv+Msg</Option>
+                <Option value="unatvMsg">Product UnAtv+Msg</Option>
               </Select>
             </Form.Item>
           </div>
           <div className="w-full">
             <label>Notification Dialogue</label>
             <Form.Item name="notificationDialogue">
-              <Input placeholder="Name"></Input>
+              <Input placeholder="Notification Dialague"></Input>
             </Form.Item>
           </div>
           <div className="w-full">
-            <label>Video Link</label>
+            <div className="flex justify-between">
+              <label>Video Link</label>
+              <Form.Item
+                className="ml-auto"
+                name={"videoLinkAccept"}
+                initialValue="accept"
+                valuePropName="checked"
+                noStyle
+              >
+                <Checkbox>Accept?</Checkbox>
+              </Form.Item>
+            </div>
             <Form.Item name="videoLink">
               <Input placeholder="Name"></Input>
             </Form.Item>
