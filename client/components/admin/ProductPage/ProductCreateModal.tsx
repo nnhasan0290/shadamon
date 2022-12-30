@@ -272,51 +272,54 @@ export default function () {
             </div>
             <div>
               <Form.Item name={"showTill"}>
-                <DatePicker placeholder="Show Till"  getPopupContainer={(triggerNode: HTMLElement) =>
+                <DatePicker
+                  placeholder="Show Till"
+                  getPopupContainer={(triggerNode: HTMLElement) =>
                     triggerNode.parentNode as HTMLElement
-                  } />
+                  }
+                />
+              </Form.Item>
+            </div>
+            <div>
+              <Form.Item name={"ordering"}>
+                <InputNumber placeholder="Order"></InputNumber>
+              </Form.Item>
+            </div>
+            <div>
+              <Form.Item>
+                <Select placeholder="slot Status">
+                  <Select.Option value={"ok"}>Ok</Select.Option>
+                  <Select.Option value={"fail"}>Fail</Select.Option>
+                </Select>
+              </Form.Item>
+            </div>
+            <div>
+              <Form.Item name="productStatus">
+                <Select
+                  placeholder="Product Status"
+                  getPopupContainer={(triggerNode: HTMLElement) =>
+                    triggerNode.parentNode as HTMLElement
+                  }
+                >
+                  <Option value="active">Active</Option>
+                  <Option value="inactive">Inactive</Option>
+                  <Option value="notification">Notification</Option>
+                  <Option value="pause">Pause</Option>
+                  <Option value="review">Review</Option>
+                  <Option value="delete">Delete(Reason)</Option>
+                  <Option value="atvMsg">Product Atv+Msg</Option>
+                  <Option value="unatvMsg">Product UnAtv+Msg</Option>
+                </Select>
+              </Form.Item>
+            </div>
+            <div className="w-full">
+              <Form.Item name="notificationDialogue">
+                <Input placeholder="Notification Dialague"></Input>
               </Form.Item>
             </div>
           </div>
         </div>
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
-          <div>
-            <Form.Item name={"ordering"}>
-              <InputNumber placeholder="Order"></InputNumber>
-            </Form.Item>
-          </div>
-          <div>
-            <Form.Item>
-              <Select placeholder="slot Status">
-                <Select.Option value={"ok"}>Ok</Select.Option>
-                <Select.Option value={"fail"}>Fail</Select.Option>
-              </Select>
-            </Form.Item>
-          </div>
-          <div>
-            <Form.Item name="productStatus">
-              <Select
-                placeholder="Product Status"
-                getPopupContainer={(triggerNode: HTMLElement) =>
-                  triggerNode.parentNode as HTMLElement
-                }
-              >
-                <Option value="active">Active</Option>
-                <Option value="inactive">Inactive</Option>
-                <Option value="notification">Notification</Option>
-                <Option value="pause">Pause</Option>
-                <Option value="review">Review</Option>
-                <Option value="delete">Delete(Reason)</Option>
-                <Option value="atvMsg">Product Atv+Msg</Option>
-                <Option value="unatvMsg">Product UnAtv+Msg</Option>
-              </Select>
-            </Form.Item>
-          </div>
-          <div className="w-full">
-            <Form.Item name="notificationDialogue">
-              <Input placeholder="Notification Dialague"></Input>
-            </Form.Item>
-          </div>
           <div className="w-full">
             <div className="flex justify-between">
               <span></span>
