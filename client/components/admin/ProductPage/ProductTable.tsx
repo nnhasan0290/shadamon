@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Carousel, Divider, Dropdown, Radio, Space, Table } from "antd";
+import { Carousel, Divider, Dropdown, Image, Radio, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getAllProductsAction } from "../../../redux/actions/Admin/productAction";
@@ -31,6 +31,7 @@ const items = [
 ];
 
 const firstColumns: any = [
+
   {
     title: "Img",
     dataIndex: "productImg",
@@ -50,6 +51,7 @@ const firstColumns: any = [
           ))
         }
       </Carousel>
+      
     ),
     fixed: "left",
     
@@ -179,6 +181,7 @@ const rowSelection = {
 
 const ProductTable: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [visible, setVisible] = useState(false);
   const { allProduct } = useAppSelector((state) => state);
   console.log(allProduct);
   useEffect(() => {
@@ -192,11 +195,31 @@ const ProductTable: React.FC = () => {
       size="small"
       showSorterTooltip={true}
       bordered
-        columns={firstColumns}
-        dataSource={allProduct?.res?.data}
+        dataSource={[{img:[]}]}
         scroll={{ x: 1400 }}
         pagination={{defaultPageSize:5}}
-      />
+        
+      >
+        <Table.Column dataIndex={"img"} title="Image" width={100} render={() => (
+           <>
+           <Image
+             preview={{ visible: false }}
+             width={80}
+             height={50}
+             className="object-cover"
+             src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+             onClick={() => setVisible(true)}
+           />
+           <div style={{ display: 'none' }}>
+             <Image.PreviewGroup preview={{ visible, onVisibleChange: (vis) => setVisible(vis) }}>
+               <Image src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp" />
+               <Image src="https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp" />
+               <Image src="https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp" />
+             </Image.PreviewGroup>
+           </div>
+           </>
+        )}/>
+      </Table>
     </div>
   );
 };
