@@ -171,49 +171,6 @@ export default function () {
                 </TreeSelect>
               </Form.Item>
             </div>
-            {/* <div>
-              <label htmlFor="">Parent</label>
-              <Form.Item>
-                <Select
-                  onSelect={(id: any) => {
-                    dispatch(getCategoriesUnderParentAction(id));
-                  }}
-                  placeholder="Parent"
-                >
-                  {adminCat?.res?.data?.map((each: any, i: any) => (
-                    <Option value={each._id}>{each?.name}</Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </div>
-            <div>
-              <label htmlFor="">category</label>
-              <Form.Item name="categoryId">
-                <Select
-                  onSelect={(id: any) => {
-                    dispatch(getSubCategoriesAction(id));
-                  }}
-                  placeholder="Categories"
-                >
-                  {catUnderParent?.res?.data?.map((each: any, i: any) => (
-                    <Option value={each._id}>{each.categoryName}</Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </div>
-            <div>
-              <label htmlFor="">Sub Category</label>
-              <Form.Item name={"subCategory"}>
-                <Select
-                  onChange={(id: any) => dispatch(getFeatureUnderSubAction(id))}
-                  placeholder="SubCategory"
-                >
-                  {subCat?.res?.data?.map((each: any, i: any) => (
-                    <Option key={each._id}>{each.subCategoryName}</Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </div> */}
             {data &&
               data[0]?.features?.map((feature: any, i: any) => (
                 <div>
@@ -236,8 +193,11 @@ export default function () {
                       </Select>
                     </Form.Item>
                   )}
-                  {(feature.featureType === "multiselect") && (
-                    <Form.Item name={["features", i, "selectedOption", 0]}>
+                  {feature.featureType === "multiselect" && (
+                    <Form.Item
+                      className="max-w-[300px]"
+                      name={["features", i, "selectedOption", 0]}
+                    >
                       <Select mode="tags" placeholder={feature.featureName}>
                         {feature?.options?.map((option: any, i: any) => (
                           <Select.Option value={option.optionName}>
@@ -324,14 +284,6 @@ export default function () {
               </Form.Item>
             </div>
             <div className="w-full">
-              <Form.Item name="notificationDialogue">
-                <Input placeholder="Notification Dialague"></Input>
-              </Form.Item>
-            </div>
-          </div>
-        </div>
-        <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
-          <div className="w-full">
             <div className="flex justify-between">
               <span></span>
               <Form.Item
@@ -348,6 +300,15 @@ export default function () {
               <Input placeholder="Video Link"></Input>
             </Form.Item>
           </div>
+           
+          </div>
+        </div>
+        <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
+        <div className="w-full">
+              <Form.Item name="notificationDialogue">
+                <Input placeholder="Notification Dialague"></Input>
+              </Form.Item>
+            </div>
           <div className="">
             <label>Total</label>
             <div className="flex gap-1">
