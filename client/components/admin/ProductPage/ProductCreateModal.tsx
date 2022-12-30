@@ -53,6 +53,8 @@ export default function () {
     getParentCatSub,
   } = useAppSelector((state) => state);
 
+  const handleSubCategoryChange = () => form.resetFields(["features"])
+
   const handleCreateProduct = (values: any) => {
     let newProductImg: any = [];
     values.productImg.forEach((each: any, i: any) => {
@@ -134,7 +136,7 @@ export default function () {
 
           <div className="flex flex-wrap gap-2">
             <div>
-              <Form.Item name={"subcategoryId"}>
+              <Form.Item name={"subcategoryId"} >
                 <TreeSelect
                   showSearch
                   style={{ width: "100%" }}
@@ -142,6 +144,7 @@ export default function () {
                   placeholder="Category"
                   allowClear
                   getPopupContainer={(trigger) => trigger.parentNode}
+                  onChange={handleSubCategoryChange}
                 >
                   {getParentCatSub?.res?.data?.map((each: any, i: any) => (
                     <TreeSelect.TreeNode
@@ -159,6 +162,7 @@ export default function () {
                         >
                           {cat?.subcategories?.map((sub: any, i: any) => (
                             <TreeSelect.TreeNode
+                              
                               value={sub?._id}
                               title={sub?.subCategoryName}
                               key={sub?._id}
@@ -195,7 +199,7 @@ export default function () {
                   )}
                   {feature.featureType === "multiselect" && (
                     <Form.Item
-                      className="max-w-[300px]"
+                      className="max-w-[200px]"
                       name={["features", i, "selectedOption", 0]}
                     >
                       <Select mode="tags" placeholder={feature.featureName}>
