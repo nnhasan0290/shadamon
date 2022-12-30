@@ -9,7 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { createCategoryReducer, createFeatureReducer, createSubCatReducer, deleteCategoryReducer, deleteFeatureReducer, deleteSubCategoryReducer, editCategoryReducer, editFeatureReducer, editSubCategoryReducer, getAllCategoryReducer, getButtonsReducer, getCatUnderParentReducer, getFeaturesReducer, getFeatureUnderSubReducer, getLocationReducer, GetParentCategoryReducer, getParentCatSubReducer, getSubCatReducer } from "./reducers/admin/catReducer";
 import { createLocationReducer, createParentLocationReducer, deleteParentLocationReducer, deleteSubLocationReducer, editParentLocationReducer, editSubLocationReducer } from "./reducers/admin/locationReducer";
-import { createProductReducer, getAllProductReducer } from "./reducers/admin/productReducer";
+import { createProductReducer, deleteProductReducer, editProductReducer, getAllProductReducer } from "./reducers/admin/productReducer";
 import { defaultReducer } from "./reducers/defaultReducer";
 import { loadReducer, loginReducer, signUpReducer } from "./reducers/userReducer";
 
@@ -45,6 +45,8 @@ const rootReducer = combineReducers({
   editFeature: editFeatureReducer,
   deleteFeature: deleteFeatureReducer,
   getParentCatSub: getParentCatSubReducer,
+  editProduct: editProductReducer,
+  deleteProduct: deleteProductReducer,
 });
 
 const store = createStore(

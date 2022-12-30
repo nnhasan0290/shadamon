@@ -34,7 +34,8 @@ import { createProductAction } from "../../../redux/actions/Admin/productAction"
 import { BiPlus } from "react-icons/bi";
 const { TextArea } = Input;
 
-export default function () {
+export default function ({record}:any) {
+  console.log(record);
   const { Option } = Select;
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
