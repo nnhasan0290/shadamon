@@ -236,6 +236,17 @@ export default function () {
                       </Select>
                     </Form.Item>
                   )}
+                  {(feature.featureType === "multiselect") && (
+                    <Form.Item name={["features", i, "selectedOption", 0]}>
+                      <Select mode="tags" placeholder={feature.featureName}>
+                        {feature?.options?.map((option: any, i: any) => (
+                          <Select.Option value={option.optionName}>
+                            {option.optionName}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  )}
                 </div>
               ))}
 
