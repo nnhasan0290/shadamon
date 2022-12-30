@@ -331,7 +331,7 @@ export default function () {
               </Form.Item>
             </div>
             <Form.Item name="videoLink">
-              <Input placeholder="Name"></Input>
+              <Input placeholder="Video Link"></Input>
             </Form.Item>
           </div>
           <div className="">
