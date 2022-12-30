@@ -17,29 +17,25 @@ import {
 import UploadComponent from "../FormElements/UploadComponent";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import ManualUpload from "./ManualUpload";
-import { Carousel } from "react-responsive-carousel";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import {
   getAllCategories,
-  getCategoriesUnderParentAction,
   getFeatureUnderSubAction,
   getLocationAction,
   getParentCategories,
   getParentCatSubAction,
-  getSubCategoriesAction,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { createProductAction } from "../../../redux/actions/Admin/productAction";
 import { BiPlus } from "react-icons/bi";
 const { TextArea } = Input;
 
-export default function ({record}:any) {
+export default function ({ record }: any) {
   console.log(record);
   const { Option } = Select;
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const subCategoryId = Form.useWatch("subcategoryId", form);
+  const features = Form.useWatch("features", form);
 
   const {
     adminCat,
@@ -53,10 +49,12 @@ export default function ({record}:any) {
     createPd,
     getParentCatSub,
   } = useAppSelector((state) => state);
+  console.log(subCategoryId, data);
 
-  const handleSubCategoryChange = () => form.resetFields(["features"])
+  const handleSubCategoryChange = () => form.resetFields(["features"]);
 
   const handleCreateProduct = (values: any) => {
+    console.log(values);
     let newProductImg: any = [];
     values.productImg.forEach((each: any, i: any) => {
       if (each.img) {
@@ -78,11 +76,16 @@ export default function ({record}:any) {
 
     values.productImg = newProductImg;
     console.log(values);
-    dispatch(createProductAction(values));
+    if (!record) {
+      dispatch(createProductAction(values));
+    }
   };
   useEffect(() => {
-    dispatch(getFeatureUnderSubAction(subCategoryId));
+    if (subCategoryId) {
+      dispatch(getFeatureUnderSubAction(subCategoryId));
+    }
   }, [subCategoryId]);
+
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getLocationAction());
@@ -95,6 +98,19 @@ export default function ({record}:any) {
         form={form}
         onFinish={handleCreateProduct}
         className="flex flex-wrap items-start"
+        initialValues={
+          record && {
+            heading: record.heading,
+            description: record.description,
+            subcategoryId: record.subcategoryId._id,
+            features: record.features,
+            sublocation: record.sublocation._id,
+            notificationDialogue: record.notificationDialogue,
+            videoLink: record.videoLink,
+            videoLinkAccept: record.videoLinkAccept,
+            productImgs: record.productImgs,
+          }
+        }
       >
         <div className="flex gap-2 items-center font-bold w-full">
           <span className="p-1 text-white bg-gray-700 rounded-full">
@@ -116,29 +132,36 @@ export default function ({record}:any) {
             </Form.Item>
           </div>
           <div className="w-full">
-            <div className="flex justify-between">
-              <span></span>
-              <Form.Item
-                className="ml-auto"
-                name={"acceptDescription"}
-                valuePropName="checked"
-                initialValue={"accept"}
-                noStyle
-              >
-                <Checkbox name="acceptDescription" defaultChecked={false}>
-                  Accept?
-                </Checkbox>
-              </Form.Item>
-            </div>
-            <Form.Item name="editDescription" className="">
-              <TextArea placeholder="Description/edit" />
-            </Form.Item>
+            {record && record.editDescription && (
+              <>
+                <div className="flex justify-between">
+                  <span></span>
+                  <Form.Item
+                    className="ml-auto"
+                    name={"acceptDescription"}
+                    valuePropName="checked"
+                    initialValue={record ? record.acceptDescription : "accept"}
+                    noStyle
+                  >
+                    <Checkbox name="acceptDescription" defaultChecked={false}>
+                      Accept?
+                    </Checkbox>
+                  </Form.Item>
+                </div>
+                <Form.Item name="editDescription" className="">
+                  <TextArea placeholder="Description/edit" />
+                </Form.Item>
+              </>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-2">
             <div>
-              <Form.Item name={"subcategoryId"} >
+              <Form.Item name={"subcategoryId"}>
                 <TreeSelect
+                  onSelect={(val) => {
+                    form.setFieldValue("features", {});
+                  }}
                   showSearch
                   style={{ width: "100%" }}
                   dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
@@ -163,7 +186,6 @@ export default function ({record}:any) {
                         >
                           {cat?.subcategories?.map((sub: any, i: any) => (
                             <TreeSelect.TreeNode
-                              
                               value={sub?._id}
                               title={sub?.subCategoryName}
                               key={sub?._id}
@@ -180,6 +202,7 @@ export default function ({record}:any) {
               data[0]?.features?.map((feature: any, i: any) => (
                 <div>
                   <Form.Item
+                    key={subCategoryId}
                     name={["features", i, "feature"]}
                     initialValue={feature._id}
                     hidden
@@ -188,7 +211,10 @@ export default function ({record}:any) {
                   </Form.Item>
                   {(feature.featureType === "radio" ||
                     feature.featureType === "select") && (
-                    <Form.Item name={["features", i, "selectedOption", 0]}>
+                    <Form.Item
+                      key={"select"}
+                      name={["features", i, "selectedOption", 0]}
+                    >
                       <Select placeholder={feature.featureName}>
                         {feature?.options?.map((option: any, i: any) => (
                           <Select.Option value={option.optionName}>
@@ -200,6 +226,7 @@ export default function ({record}:any) {
                   )}
                   {feature.featureType === "multiselect" && (
                     <Form.Item
+                      key={"multiSelect"}
                       className="max-w-[200px]"
                       name={["features", i, "selectedOption", 0]}
                     >
@@ -257,7 +284,7 @@ export default function ({record}:any) {
               </Form.Item>
             </div>
             <div>
-              <Form.Item name={"ordering"}>
+              <Form.Item name={"productOrder"}>
                 <InputNumber placeholder="Order"></InputNumber>
               </Form.Item>
             </div>
@@ -289,31 +316,30 @@ export default function ({record}:any) {
               </Form.Item>
             </div>
             <div className="w-full">
-            <div className="flex justify-between">
-              <span></span>
-              <Form.Item
-                className="ml-auto"
-                name={"videoLinkAccept"}
-                initialValue="accept"
-                valuePropName="checked"
-                noStyle
-              >
-                <Checkbox>Accept?</Checkbox>
+              <div className="flex justify-between">
+                <span></span>
+                <Form.Item
+                  className="ml-auto"
+                  name={"videoLinkAccept"}
+                  initialValue="accept"
+                  valuePropName="checked"
+                  noStyle
+                >
+                  <Checkbox>Accept?</Checkbox>
+                </Form.Item>
+              </div>
+              <Form.Item name="videoLink">
+                <Input placeholder="Video Link"></Input>
               </Form.Item>
             </div>
-            <Form.Item name="videoLink">
-              <Input placeholder="Video Link"></Input>
-            </Form.Item>
-          </div>
-           
           </div>
         </div>
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
-        <div className="w-full">
-              <Form.Item name="notificationDialogue">
-                <Input placeholder="Notification Dialague"></Input>
-              </Form.Item>
-            </div>
+          <div className="w-full">
+            <Form.Item name="notificationDialogue">
+              <Input placeholder="Notification Dialague"></Input>
+            </Form.Item>
+          </div>
           <div className="">
             <label>Total</label>
             <div className="flex gap-1">

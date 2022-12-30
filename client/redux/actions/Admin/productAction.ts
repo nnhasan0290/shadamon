@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import {
   CREATE_PRODUCT,
+  CREATE_PRODUCT_REQ,
   DELETE_PRODUCT,
   DELETE_PRODUCT_REQ,
   EDIT_PRODUCT,
@@ -10,6 +11,7 @@ import {
 } from "../../consts/admin/productConst ";
 export const createProductAction = (formdata: any) => async (dispatch: any) => {
   const id = toast.loading("Please wait...");
+  dispatch({type: CREATE_PRODUCT_REQ})
   try {
     const config = {
       headers: {

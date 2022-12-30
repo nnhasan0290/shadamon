@@ -9,159 +9,22 @@ import {
   Space,
   Table,
 } from "antd";
-import type { ColumnsType } from "antd/es/table";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import {
   deleteProductAction,
   getAllProductsAction,
 } from "../../../redux/actions/Admin/productAction";
-
-interface DataType {
-  key: React.Key;
-  _id: string;
-  productImg: any;
-  heading: string;
-  categoryId: string;
-  location: string;
-  price: string;
-  reach: string;
-  status: string;
-  click: string;
-  slotStatus: string;
-  userType: string;
-  verify: string;
-  accountSts: string;
-  productSts: string;
-  report: string;
-  sign: string;
-  edited: string;
-}
-
-const items = [
-  { key: "1", label: "Action 1" },
-  { key: "2", label: "Action 2" },
-];
-
-const firstColumns: any = [
-  {
-    title: "Img",
-    dataIndex: "productImg",
-    width: 100,
-    ellipsis: true,
-    render: (imgArr: any) => (
-      <Carousel>
-        {imgArr?.map((each: any, i: any) => (
-          <div>
-            <img
-              src={`${process.env.NEXT_PUBLIC_HOST}/img/${each.img}`}
-              alt=""
-              className="h-[50px] object-cover w-full"
-            />
-          </div>
-        ))}
-      </Carousel>
-    ),
-    fixed: "left",
-  },
-
-  {
-    title: "Id",
-    dataIndex: "_id",
-    render: (text: string) => (
-      <div className=" truncate w-full">
-        <span>{text}</span>
-      </div>
-    ),
-  },
-  {
-    title: "Name",
-    dataIndex: "heading",
-    render: (text: string) => (
-      <div className=" truncate w-full">
-        <span>{text}</span>
-      </div>
-    ),
-  },
-  {
-    title: "Category",
-    align: "center",
-    dataIndex: "categoryId",
-    render: (arr: any) => arr.categoryName,
-    ellipsis: true,
-  },
-  {
-    title: "Location",
-    ellipsis: true,
-    dataIndex: "location",
-    render: (arr: any) => arr?.location,
-  },
-  {
-    title: "Price",
-    ellipsis: true,
-    dataIndex: "price",
-  },
-  {
-    title: "Reach",
-    ellipsis: true,
-    dataIndex: "reach",
-  },
-  {
-    title: "Status",
-    ellipsis: true,
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Click",
-    ellipsis: true,
-    dataIndex: "click",
-  },
-  {
-    title: "S. Status",
-    ellipsis: true,
-    dataIndex: "slotStatus",
-  },
-  {
-    title: "User Type",
-    ellipsis: true,
-    dataIndex: "userType",
-  },
-  {
-    title: "Verify",
-    ellipsis: true,
-    dataIndex: "verify",
-  },
-  {
-    title: "Qty",
-    ellipsis: true,
-    dataIndex: "quantity",
-  },
-  {
-    title: "Pd. Status",
-    ellipsis: true,
-    dataIndex: "productSts",
-  },
-  {
-    title: "Report",
-    dataIndex: "report",
-  },
-  {
-    title: "Sign",
-    dataIndex: "sign",
-  },
-  {
-    title: "Edited",
-    dataIndex: "edited",
-  },
-];
+import { GlobalStates } from "../../../context/ContextProvider";
+import ProductCreateModal from "./ProductCreateModal";
 
 const ProductTable: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { modalDispatch } = GlobalStates();
   const [visible, setVisible] = useState(false);
-  const { allProduct, deleteProduct } = useAppSelector((state) => state);
+  const { allProduct, deleteProduct, createPd } = useAppSelector((state) => state);
   useEffect(() => {
     dispatch(getAllProductsAction());
-  }, [deleteProduct.success]);
+  }, [deleteProduct.success,createPd.success]);
 
   return (
     <div className="w-full">
@@ -282,7 +145,15 @@ const ProductTable: React.FC = () => {
           fixed="right"
           key="edit"
           render={(_: any, record: any) => (
-            <Space size="middle">
+            <Space
+              onClick={(e) =>
+                modalDispatch({
+                  type: "ADMIN_MODAL",
+                  payload: <ProductCreateModal record={record} />,
+                })
+              }
+              size="middle"
+            >
               <a>Edit</a>
             </Space>
           )}
