@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .nav__item {
     @apply font-bold text-[18px] text-muted-color;
@@ -17,13 +16,12 @@
   .nav__icon.active {
     @apply border-2 border-common-color;
   }
-  .upload__btn{
-    @apply hover:bg-gray-400/80 rounded-full h-[35px] w-[35px] flex items-center justify-center transition-all duration-300 cursor-pointer
+  .upload__btn {
+    @apply hover:bg-gray-400/80 rounded-full h-[35px] w-[35px] flex items-center justify-center transition-all duration-300 cursor-pointer;
   }
-  
 }
 
-.ant-space-item a{
+.ant-space-item a {
   color: #1677ff !important;
 }
 
@@ -142,22 +140,38 @@ img {
 
 .common__fieldset input {
   border: none !important;
-  padding-bottom:10px ;
+  padding-bottom: 10px;
 }
 .common__fieldset input:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-
-
-.ant-select-selector{
+.ant-select-selector {
   min-width: 200px;
 }
-.ant-image-preview-img-wrapper{
+.ant-image-preview-img-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.ant-select-tree-switcher{
+  position: absolute !important;
+  width: 100% !important;
+  z-index: 20000 !important;
+  text-align: right !important;
+  padding-right: 15px !important;
+}
+
+.ant-select-selection__placeholder{
+  color : blue !important;
+}
+
+*::placeholder, .ant-select-selection-placeholder {
+  color: black !important;
+  text-transform: capitalize !important;
+  opacity: 0.7 !important;
 }
 
 /* .ant-image-preview-img{
@@ -176,7 +190,6 @@ img {
 }
  */
 
-
 /* .ant-select-selector{
   border: none !important;
 }
@@ -188,8 +201,6 @@ img {
   border-color: #d9d9d9 !important;
   box-shadow: none !important;
 } */
-
-
 
 @media screen and (max-width: 1024px) {
   .modal__cross {

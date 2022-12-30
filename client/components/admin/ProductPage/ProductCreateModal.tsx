@@ -102,21 +102,19 @@ export default function () {
         <Divider className="my-2" />
         <div className="flex flex-wrap justify-between pr-5 basis-1/2">
           <div className="w-full">
-            <label htmlFor="">Heading</label>
             <Form.Item name="heading" className="">
               <Input placeholder="heading" />
             </Form.Item>
           </div>
 
           <div className="w-full">
-            <label htmlFor="">Description</label>
             <Form.Item name="description" className="">
               <TextArea placeholder="Description" />
             </Form.Item>
           </div>
           <div className="w-full">
             <div className="flex justify-between">
-              <label>Description/Edit</label>
+              <span></span>
               <Form.Item
                 className="ml-auto"
                 name={"acceptDescription"}
@@ -136,35 +134,34 @@ export default function () {
 
           <div className="flex flex-wrap gap-2">
             <div>
-              <label htmlFor="">Category</label>
               <Form.Item name={"subcategoryId"}>
                 <TreeSelect
                   showSearch
                   style={{ width: "100%" }}
                   dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                  placeholder="Please select"
+                  placeholder="Category"
                   allowClear
                   getPopupContainer={(trigger) => trigger.parentNode}
                 >
                   {getParentCatSub?.res?.data?.map((each: any, i: any) => (
                     <TreeSelect.TreeNode
                       selectable={false}
-                      value={each?.parent?._id}
+                      value={each?.parent?.name}
                       title={each?.parent?.name}
                       key={each?.parent?.name}
                     >
                       {each?.categories?.map((cat: any, i: any) => (
                         <TreeSelect.TreeNode
                           selectable={false}
-                          value={cat?.category?._id}
+                          value={cat?.category?.categoryName}
                           title={cat?.category?.categoryName}
-                          key={cat?.category?.categoryName}
+                          key={i}
                         >
                           {cat?.subcategories?.map((sub: any, i: any) => (
                             <TreeSelect.TreeNode
                               value={sub?._id}
                               title={sub?.subCategoryName}
-                              key={cat?.subCAtegoryName}
+                              key={sub?._id}
                             ></TreeSelect.TreeNode>
                           ))}
                         </TreeSelect.TreeNode>
@@ -220,7 +217,6 @@ export default function () {
             {data &&
               data[0]?.features?.map((feature: any, i: any) => (
                 <div>
-                  <label>{feature.featureName}</label>
                   <Form.Item
                     name={["features", i, "feature"]}
                     initialValue={feature._id}
@@ -244,13 +240,12 @@ export default function () {
               ))}
 
             <div>
-              <label htmlFor="">Location</label>
               <Form.Item name={"sublocation"}>
                 <TreeSelect
                   showSearch
                   style={{ width: "100%" }}
                   dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                  placeholder="Please select"
+                  placeholder="Location"
                   allowClear
                   getPopupContainer={(triggerNode: HTMLElement) =>
                     triggerNode.parentNode as HTMLElement
@@ -276,22 +271,21 @@ export default function () {
               </Form.Item>
             </div>
             <div>
-              <label>Show Till</label>
               <Form.Item name={"showTill"}>
-                <DatePicker />
+                <DatePicker placeholder="Show Till"  getPopupContainer={(triggerNode: HTMLElement) =>
+                    triggerNode.parentNode as HTMLElement
+                  } />
               </Form.Item>
             </div>
           </div>
         </div>
         <div className="flex overflow-hidden flex-wrap gap-1 pl-5 basis-1/2">
           <div>
-            <label>Ordering</label>
             <Form.Item name={"ordering"}>
-              <InputNumber placeholder="Ordering"></InputNumber>
+              <InputNumber placeholder="Order"></InputNumber>
             </Form.Item>
           </div>
           <div>
-            <label>Slot Status</label>
             <Form.Item>
               <Select placeholder="slot Status">
                 <Select.Option value={"ok"}>Ok</Select.Option>
@@ -300,7 +294,6 @@ export default function () {
             </Form.Item>
           </div>
           <div>
-            <label htmlFor="">Product Status</label>
             <Form.Item name="productStatus">
               <Select
                 placeholder="Product Status"
@@ -320,14 +313,13 @@ export default function () {
             </Form.Item>
           </div>
           <div className="w-full">
-            <label>Notification Dialogue</label>
             <Form.Item name="notificationDialogue">
               <Input placeholder="Notification Dialague"></Input>
             </Form.Item>
           </div>
           <div className="w-full">
             <div className="flex justify-between">
-              <label>Video Link</label>
+              <span></span>
               <Form.Item
                 className="ml-auto"
                 name={"videoLinkAccept"}
