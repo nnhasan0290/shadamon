@@ -412,9 +412,6 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={0} />
-              {record && record?.productImgs[0]?.approved === false && (
-                <ApproveBtn record={record} index={0} />
-              )}
             </div>
             <div className="">
               <Form.Item
@@ -426,9 +423,6 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={1} />
-              {record && record?.productImgs[0]?.approved === false && (
-                <ApproveBtn record={record} index={1} />
-              )}
             </div>
             <div className="">
               <Form.Item
@@ -440,9 +434,6 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={2} />
-              {record && record?.productImgs[0]?.approved === false && (
-               <ApproveBtn record={record} index={2} />
-              )}
             </div>
             <div className="">
               <Form.Item
@@ -454,9 +445,6 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={3} />
-              {record && record?.productImgs[0]?.approved === false && (
-                <ApproveBtn record={record} index={3} />
-              )}
             </div>
             <div className="">
               <Form.Item
@@ -468,9 +456,6 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={4} />
-              {record && record?.productImgs[0]?.approved === false && (
-                <ApproveBtn record={record} index={4} />
-              )}
             </div>
           </div>
 
