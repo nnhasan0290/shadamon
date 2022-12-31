@@ -16,13 +16,11 @@ import {
 } from "../../../redux/actions/Admin/productAction";
 import { GlobalStates } from "../../../context/ContextProvider";
 import ProductCreateModal from "./ProductCreateModal";
-import { RecordVoiceOver } from "@mui/icons-material";
 import ImagePreviewSlider from "./ImagePreviewSlider";
 
 const ProductTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const { modalDispatch } = GlobalStates();
-  const [visible, setVisible] = useState(false);
   const { allProduct, deleteProduct, createPd, editProduct } = useAppSelector(
     (state) => state
   );

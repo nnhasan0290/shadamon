@@ -54,11 +54,10 @@ export default function ({ record }: any) {
   const handleSubCategoryChange = () => form.resetFields(["features"]);
 
   const handleCreateProduct = (values: any) => {
-    console.log(values);
     if (values.productImg) {
       let newProductImg: any = [];
       values.productImg.forEach((each: any, i: any) => {
-        if (each.img) {
+        if (each?.img?.file) {
           each.img = each.img.file;
           newProductImg.push(each);
         }
@@ -89,8 +88,7 @@ export default function ({ record }: any) {
           (each: any) => (each.feature = each.feature._id)
         );
       }
-      console.log(values);
-      dispatch(editProductAction(values));
+       dispatch(editProductAction({...values, _id:record._id}));
     }
   };
   useEffect(() => {
@@ -121,7 +119,7 @@ export default function ({ record }: any) {
             notificationDialogue: record.notificationDialogue,
             videoLink: record.videoLink,
             videoLinkAccept: record.videoLinkAccept === "accept" ? true : false,
-            productImgs: record.productImgs,
+            productImg: record.productImgs,
             productStatus: record.productStatus,
             productOrder: record.productOrder,
           }
