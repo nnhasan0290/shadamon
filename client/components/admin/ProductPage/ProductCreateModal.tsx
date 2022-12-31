@@ -31,6 +31,7 @@ import {
   editProductAction,
 } from "../../../redux/actions/Admin/productAction";
 import { BiPlus } from "react-icons/bi";
+import ApproveBtn from "./ApproveBtn";
 const { TextArea } = Input;
 
 export default function ({ record }: any) {
@@ -48,7 +49,7 @@ export default function ({ record }: any) {
     getParentCatSub,
     deletePdImg,
     editProduct,
-    approvePdImg
+    approvePdImg,
   } = useAppSelector((state) => state);
   console.log(approvePdImg);
 
@@ -412,22 +413,7 @@ export default function ({ record }: any) {
               </Form.Item>
               <UploadComponent record={record} index={0} />
               {record && record?.productImgs[0]?.approved === false && (
-                <Button
-                disabled={approvePdImg?.success }
-                  onClick={() =>
-                    dispatch(
-                      approvePdImgAction({
-                        id: record?.productImgs[0]?._id,
-                        approved: true,
-                      })
-                    )
-                  }
-                  className="flex w-[93%] justify-center items-center"
-                >
-                  {
-                    approvePdImg?.success ? "Approved" : "Approve"
-                  }
-                </Button>
+                <ApproveBtn record={record} index={0} />
               )}
             </div>
             <div className="">
@@ -440,23 +426,8 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={1} />
-              {record && record?.productImgs[1]?.approved === false && (
-                <Button
-                disabled={approvePdImg?.success }
-                  onClick={() =>
-                    dispatch(
-                      approvePdImgAction({
-                        id: record?.productImgs[1]?._id,
-                        approved: true,
-                      })
-                    )
-                  }
-                  className="flex w-[93%] justify-center items-center"
-                >
-                  {
-                    approvePdImg?.success ? "Approved" : "Approve"
-                  }
-                </Button>
+              {record && record?.productImgs[0]?.approved === false && (
+                <ApproveBtn record={record} index={1} />
               )}
             </div>
             <div className="">
@@ -469,23 +440,8 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={2} />
-              {record && record?.productImgs[2]?.approved === false && (
-                <Button
-                disabled={approvePdImg?.success }
-                  onClick={() =>
-                    dispatch(
-                      approvePdImgAction({
-                        id: record?.productImgs[2]?._id,
-                        approved: true,
-                      })
-                    )
-                  }
-                  className="flex w-[93%] justify-center items-center"
-                >
-                  {
-                    approvePdImg?.success ? "Approved" : "Approve"
-                  }
-                </Button>
+              {record && record?.productImgs[0]?.approved === false && (
+               <ApproveBtn record={record} index={2} />
               )}
             </div>
             <div className="">
@@ -498,23 +454,8 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={3} />
-              {record && record?.productImgs[3]?.approved === false && (
-                <Button
-                disabled={approvePdImg?.success }
-                  onClick={() =>
-                    dispatch(
-                      approvePdImgAction({
-                        id: record?.productImgs[3]?._id,
-                        approved: true,
-                      })
-                    )
-                  }
-                  className="flex w-[93%] justify-center items-center"
-                >
-                  {
-                    approvePdImg?.success ? "Approved" : "Approve"
-                  }
-                </Button>
+              {record && record?.productImgs[0]?.approved === false && (
+                <ApproveBtn record={record} index={3} />
               )}
             </div>
             <div className="">
@@ -527,23 +468,8 @@ export default function ({ record }: any) {
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
               <UploadComponent record={record} index={4} />
-              {record && record?.productImgs[4]?.approved === false && (
-                <Button
-                disabled={approvePdImg?.success }
-                  onClick={() =>
-                    dispatch(
-                      approvePdImgAction({
-                        id: record?.productImgs[4]?._id,
-                        approved: true,
-                      })
-                    )
-                  }
-                  className="flex w-[93%] justify-center items-center"
-                >
-                  {
-                    approvePdImg?.success ? "Approved" : "Approve"
-                  }
-                </Button>
+              {record && record?.productImgs[0]?.approved === false && (
+                <ApproveBtn record={record} index={4} />
               )}
             </div>
           </div>
