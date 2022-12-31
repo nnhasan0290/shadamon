@@ -16,15 +16,19 @@ import {
 } from "../../../redux/actions/Admin/productAction";
 import { GlobalStates } from "../../../context/ContextProvider";
 import ProductCreateModal from "./ProductCreateModal";
+import { RecordVoiceOver } from "@mui/icons-material";
+import ImagePreviewSlider from "./ImagePreviewSlider";
 
 const ProductTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const { modalDispatch } = GlobalStates();
   const [visible, setVisible] = useState(false);
-  const { allProduct, deleteProduct, createPd } = useAppSelector((state) => state);
+  const { allProduct, deleteProduct, createPd, editProduct } = useAppSelector(
+    (state) => state
+  );
   useEffect(() => {
     dispatch(getAllProductsAction());
-  }, [deleteProduct.success,createPd.success]);
+  }, [deleteProduct.success, createPd.success, editProduct.success]);
 
   return (
     <div className="w-full">
@@ -55,36 +59,14 @@ const ProductTable: React.FC = () => {
       >
         <Table.Column
           align="center"
-          dataIndex={"productImg"}
+          dataIndex={"productImgs"}
           title="Image"
           width={100}
-          render={(imgArr) => (
+          render={(imgArr:any, record:any) => (
             <>
               {imgArr && (
                 <>
-                  <Image
-                    preview={{ visible: false }}
-                    width={80}
-                    height={40}
-                    className="object-cover"
-                    src={`${process.env.NEXT_PUBLIC_HOST}/img/${imgArr[0]?.img}`}
-                    onClick={() => setVisible(true)}
-                  />
-                  <div style={{ display: "none" }}>
-                    <Image.PreviewGroup
-                      preview={{
-                        visible,
-                        onVisibleChange: (vis) => setVisible(vis),
-                      }}
-                    >
-                      {imgArr?.map((img: any, i: any) => (
-                        <Image
-                          key={i}
-                          src={`https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60`}
-                        />
-                      ))}
-                    </Image.PreviewGroup>
-                  </div>
+                    <ImagePreviewSlider imgArr={imgArr}/>
                 </>
               )}
             </>

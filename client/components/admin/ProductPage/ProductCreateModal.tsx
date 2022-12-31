@@ -25,17 +25,18 @@ import {
   getParentCatSubAction,
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
-import { createProductAction } from "../../../redux/actions/Admin/productAction";
+import {
+  createProductAction,
+  editProductAction,
+} from "../../../redux/actions/Admin/productAction";
 import { BiPlus } from "react-icons/bi";
 const { TextArea } = Input;
 
 export default function ({ record }: any) {
-  console.log(record);
   const { Option } = Select;
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const subCategoryId = Form.useWatch("subcategoryId", form);
-  const features = Form.useWatch("features", form);
 
   const {
     adminCat,
@@ -49,19 +50,25 @@ export default function ({ record }: any) {
     createPd,
     getParentCatSub,
   } = useAppSelector((state) => state);
-  console.log(subCategoryId, data);
 
   const handleSubCategoryChange = () => form.resetFields(["features"]);
 
   const handleCreateProduct = (values: any) => {
     console.log(values);
-    let newProductImg: any = [];
-    values.productImg.forEach((each: any, i: any) => {
-      if (each.img) {
-        each.img = each.img.file;
-        newProductImg.push(each);
-      }
-    });
+    if (values.productImg) {
+      let newProductImg: any = [];
+      values.productImg.forEach((each: any, i: any) => {
+        if (each.img) {
+          each.img = each.img.file;
+          newProductImg.push(each);
+        }
+      });
+      values.productImg = newProductImg;
+    }
+
+    if (record && !values.productImg.length) {
+      delete values.productImg;
+    }
 
     if (values.acceptDescription === false) {
       values.acceptDescription = "reject";
@@ -74,10 +81,16 @@ export default function ({ record }: any) {
       values.videoLinkAccept = "accept";
     }
 
-    values.productImg = newProductImg;
-    console.log(values);
     if (!record) {
       dispatch(createProductAction(values));
+    } else {
+      if (values.features[0]?.feature?._id) {
+        values.features.forEach(
+          (each: any) => (each.feature = each.feature._id)
+        );
+      }
+      console.log(values);
+      dispatch(editProductAction(values));
     }
   };
   useEffect(() => {
@@ -107,8 +120,10 @@ export default function ({ record }: any) {
             sublocation: record.sublocation._id,
             notificationDialogue: record.notificationDialogue,
             videoLink: record.videoLink,
-            videoLinkAccept: record.videoLinkAccept,
+            videoLinkAccept: record.videoLinkAccept === "accept" ? true : false,
             productImgs: record.productImgs,
+            productStatus: record.productStatus,
+            productOrder: record.productOrder,
           }
         }
       >
@@ -140,7 +155,6 @@ export default function ({ record }: any) {
                     className="ml-auto"
                     name={"acceptDescription"}
                     valuePropName="checked"
-                    initialValue={record ? record.acceptDescription : "accept"}
                     noStyle
                   >
                     <Checkbox name="acceptDescription" defaultChecked={false}>
@@ -207,7 +221,7 @@ export default function ({ record }: any) {
                     initialValue={feature._id}
                     hidden
                   >
-                    <Input />
+                    <Input/>
                   </Form.Item>
                   {(feature.featureType === "radio" ||
                     feature.featureType === "select") && (
@@ -306,7 +320,6 @@ export default function ({ record }: any) {
                 >
                   <Option value="active">Active</Option>
                   <Option value="inactive">Inactive</Option>
-                  <Option value="notification">Notification</Option>
                   <Option value="pause">Pause</Option>
                   <Option value="review">Review</Option>
                   <Option value="delete">Delete(Reason)</Option>
@@ -321,7 +334,7 @@ export default function ({ record }: any) {
                 <Form.Item
                   className="ml-auto"
                   name={"videoLinkAccept"}
-                  initialValue="accept"
+                  initialValue="false"
                   valuePropName="checked"
                   noStyle
                 >
@@ -393,7 +406,10 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent index={0} />
+              <UploadComponent
+                editImg={record?.productImgs[0]?.img}
+                index={0}
+              />
             </div>
             <div className="">
               <Form.Item
@@ -441,7 +457,7 @@ export default function ({ record }: any) {
             </div>
           </div>
           <Table
-            className="w-full"
+            className="w-full hidden"
             dataSource={[
               {
                 productImg:

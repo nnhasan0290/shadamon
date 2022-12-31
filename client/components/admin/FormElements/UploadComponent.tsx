@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Form, Modal, Upload } from "antd";
 import type { RcFile, UploadProps } from "antd/es/upload";
@@ -12,14 +12,12 @@ const getBase64 = (file: RcFile): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-const UploadComponent = ({ index }: any) => {
+const UploadComponent = ({ index, editImg }: any) => {
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-
+  const [fileList, setFileList] = useState<any>([]);
   const handleCancel = () => setPreviewOpen(false);
-
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as RcFile);
@@ -41,6 +39,18 @@ const UploadComponent = ({ index }: any) => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+  useEffect(() => {
+    if (editImg) {
+      setFileList([
+        {
+          uid: "-1",
+          name: "image.png",
+          status: "done",
+          url: `${process.env.NEXT_PUBLIC_HOST}/img/${editImg}`
+        },
+      ]);
+    }
+  }, [editImg]);
   return (
     <>
       <Form.Item name={["productImg", index, "img"]}>
