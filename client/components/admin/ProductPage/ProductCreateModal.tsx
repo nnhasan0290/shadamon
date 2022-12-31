@@ -26,6 +26,7 @@ import {
 } from "../../../redux/actions/Admin/categoryAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import {
+  approvePdImgAction,
   createProductAction,
   editProductAction,
 } from "../../../redux/actions/Admin/productAction";
@@ -33,23 +34,23 @@ import { BiPlus } from "react-icons/bi";
 const { TextArea } = Input;
 
 export default function ({ record }: any) {
+  console.log(record);
   const { Option } = Select;
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const subCategoryId = Form.useWatch("subcategoryId", form);
 
   const {
-    adminCat,
-    allCat,
     locations,
-    subCat,
-    catUnderParent,
     featureUnderSub: {
       res: { data },
     },
-    createPd,
     getParentCatSub,
+    deletePdImg,
+    editProduct,
+    approvePdImg
   } = useAppSelector((state) => state);
+  console.log(approvePdImg);
 
   const handleSubCategoryChange = () => form.resetFields(["features"]);
 
@@ -88,7 +89,7 @@ export default function ({ record }: any) {
           (each: any) => (each.feature = each.feature._id)
         );
       }
-       dispatch(editProductAction({...values, _id:record._id}));
+      dispatch(editProductAction({ ...values, _id: record._id }));
     }
   };
   useEffect(() => {
@@ -100,9 +101,8 @@ export default function ({ record }: any) {
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getLocationAction());
-    dispatch(getParentCategories());
     dispatch(getParentCatSubAction());
-  }, []);
+  }, [deletePdImg.success, editProduct.success]);
   return (
     <div>
       <Form
@@ -122,6 +122,7 @@ export default function ({ record }: any) {
             productImg: record.productImgs,
             productStatus: record.productStatus,
             productOrder: record.productOrder,
+            acceptDescription: record.acceptDescription,
           }
         }
       >
@@ -141,11 +142,14 @@ export default function ({ record }: any) {
 
           <div className="w-full">
             <Form.Item name="description" className="">
-              <TextArea placeholder="Description" />
+              <TextArea
+                placeholder="Description"
+                disabled={record ? true : false}
+              />
             </Form.Item>
           </div>
           <div className="w-full">
-            {record && record.editDescription && (
+            {record && (
               <>
                 <div className="flex justify-between">
                   <span></span>
@@ -155,12 +159,14 @@ export default function ({ record }: any) {
                     valuePropName="checked"
                     noStyle
                   >
-                    <Checkbox name="acceptDescription" defaultChecked={false}>
-                      Accept?
-                    </Checkbox>
+                    <Checkbox name="acceptDescription">Accept?</Checkbox>
                   </Form.Item>
                 </div>
-                <Form.Item name="editDescription" className="">
+                <Form.Item
+                  name="editDescription"
+                  className=""
+                  initialValue={record && record.description}
+                >
                   <TextArea placeholder="Description/edit" />
                 </Form.Item>
               </>
@@ -219,7 +225,7 @@ export default function ({ record }: any) {
                     initialValue={feature._id}
                     hidden
                   >
-                    <Input/>
+                    <Input />
                   </Form.Item>
                   {(feature.featureType === "radio" ||
                     feature.featureType === "select") && (
@@ -404,10 +410,25 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent
-                editImg={record?.productImgs[0]?.img}
-                index={0}
-              />
+              <UploadComponent record={record} index={0} />
+              {record && record?.productImgs[0]?.approved === false && (
+                <Button
+                disabled={approvePdImg?.success }
+                  onClick={() =>
+                    dispatch(
+                      approvePdImgAction({
+                        id: record?.productImgs[0]?._id,
+                        approved: true,
+                      })
+                    )
+                  }
+                  className="flex w-[93%] justify-center items-center"
+                >
+                  {
+                    approvePdImg?.success ? "Approved" : "Approve"
+                  }
+                </Button>
+              )}
             </div>
             <div className="">
               <Form.Item
@@ -418,7 +439,25 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent editImg={record?.productImgs[1]?.img} index={1} />
+              <UploadComponent record={record} index={1} />
+              {record && record?.productImgs[1]?.approved === false && (
+                <Button
+                disabled={approvePdImg?.success }
+                  onClick={() =>
+                    dispatch(
+                      approvePdImgAction({
+                        id: record?.productImgs[1]?._id,
+                        approved: true,
+                      })
+                    )
+                  }
+                  className="flex w-[93%] justify-center items-center"
+                >
+                  {
+                    approvePdImg?.success ? "Approved" : "Approve"
+                  }
+                </Button>
+              )}
             </div>
             <div className="">
               <Form.Item
@@ -429,7 +468,25 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent editImg={record?.productImgs[2]?.img} index={2} />
+              <UploadComponent record={record} index={2} />
+              {record && record?.productImgs[2]?.approved === false && (
+                <Button
+                disabled={approvePdImg?.success }
+                  onClick={() =>
+                    dispatch(
+                      approvePdImgAction({
+                        id: record?.productImgs[2]?._id,
+                        approved: true,
+                      })
+                    )
+                  }
+                  className="flex w-[93%] justify-center items-center"
+                >
+                  {
+                    approvePdImg?.success ? "Approved" : "Approve"
+                  }
+                </Button>
+              )}
             </div>
             <div className="">
               <Form.Item
@@ -440,7 +497,25 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent editImg={record?.productImgs[3]?.img} index={3} />
+              <UploadComponent record={record} index={3} />
+              {record && record?.productImgs[3]?.approved === false && (
+                <Button
+                disabled={approvePdImg?.success }
+                  onClick={() =>
+                    dispatch(
+                      approvePdImgAction({
+                        id: record?.productImgs[3]?._id,
+                        approved: true,
+                      })
+                    )
+                  }
+                  className="flex w-[93%] justify-center items-center"
+                >
+                  {
+                    approvePdImg?.success ? "Approved" : "Approve"
+                  }
+                </Button>
+              )}
             </div>
             <div className="">
               <Form.Item
@@ -451,36 +526,56 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent editImg={record?.productImgs[4]?.img} index={4} />
+              <UploadComponent record={record} index={4} />
+              {record && record?.productImgs[4]?.approved === false && (
+                <Button
+                disabled={approvePdImg?.success }
+                  onClick={() =>
+                    dispatch(
+                      approvePdImgAction({
+                        id: record?.productImgs[4]?._id,
+                        approved: true,
+                      })
+                    )
+                  }
+                  className="flex w-[93%] justify-center items-center"
+                >
+                  {
+                    approvePdImg?.success ? "Approved" : "Approve"
+                  }
+                </Button>
+              )}
             </div>
           </div>
-          <Table
+
+          {/* <Table
             className="w-full hidden"
-            dataSource={[
-              {
-                productImg:
-                  "https://images.unsplash.com/photo-1664575599730-0814817939de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-              },
-            ]}
+            dataSource={record.productImgs}
             bordered
             size="small"
           >
             <Table.Column
-              align="center"
               title={"ProductImg"}
-              dataIndex={"productImg"}
+              dataIndex={"img"}
               key={"productImg"}
               render={(imglink) => {
-                return <Image src={imglink} className="max-w-[100px]" />;
+                return (
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_HOST}/img/${imglink}`}
+                    className="max-w-[100px] h-[80px]"
+                  />
+                );
               }}
             />
             <Table.Column
               align="center"
               title={"Accept"}
-              render={() => {
+              dataIndex={"approved"}
+              render={(approved) => {
+                console.log(approved);
                 return (
                   <Tag className="cursor-pointer" color="green">
-                    Accept
+                    {approved === true ? "Accepted" : "Accept"}
                   </Tag>
                 );
               }}
@@ -496,7 +591,7 @@ export default function ({ record }: any) {
                 );
               }}
             />
-          </Table>
+          </Table> */}
         </div>
         <div className="flex gap-5 basis-full">
           <Button className="text-white bg-red-600 basis-1/3">Cancel</Button>

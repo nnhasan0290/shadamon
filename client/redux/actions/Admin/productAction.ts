@@ -1,9 +1,13 @@
 import { toast } from "react-toastify";
 import axios from "axios";
 import {
+  APPROVE_PD_IMG,
+  APPROVE_PD_IMG_REQ,
   CREATE_PRODUCT,
   CREATE_PRODUCT_REQ,
   DELETE_PRODUCT,
+  DELETE_PRODUCT_IMG,
+  DELETE_PRODUCT_IMG_REQ,
   DELETE_PRODUCT_REQ,
   EDIT_PRODUCT,
   EDIT_PRODUCT_REQ,
@@ -102,6 +106,39 @@ export const deleteProductAction = (id: any) => async (dispatch: any) => {
       config
     );
     dispatch({ type: DELETE_PRODUCT, payload: data });
+  } catch (error: any) {
+    console.log(error);
+    toast.error("Something Wrong");
+  }
+};
+
+export const deletePdImgAction = (values:any) => async (dispatch: any) => {
+  dispatch({ type: DELETE_PRODUCT_IMG_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/productimgdelete`,values,
+      config
+    );
+    dispatch({ type: DELETE_PRODUCT_IMG, payload: data });
+  } catch (error: any) {
+    console.log(error);
+    toast.error("Something Wrong");
+  }
+};
+export const approvePdImgAction = (values:any) => async (dispatch: any) => {
+  dispatch({ type: APPROVE_PD_IMG_REQ });
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_HOST}/api/product/approvephoto`,values,
+      config
+    );
+    dispatch({ type: APPROVE_PD_IMG, payload: data });
   } catch (error: any) {
     console.log(error);
     toast.error("Something Wrong");

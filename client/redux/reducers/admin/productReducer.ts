@@ -1,7 +1,11 @@
 import {
+  APPROVE_PD_IMG,
+  APPROVE_PD_IMG_REQ,
   CREATE_PRODUCT,
   CREATE_PRODUCT_REQ,
   DELETE_PRODUCT,
+  DELETE_PRODUCT_IMG,
+  DELETE_PRODUCT_IMG_REQ,
   DELETE_PRODUCT_REQ,
   EDIT_PRODUCT,
   EDIT_PRODUCT_REQ,
@@ -62,6 +66,32 @@ export const deleteProductReducer = (
     case DELETE_PRODUCT_REQ:
       return { ...state, success: false };
     case DELETE_PRODUCT:
+      return { ...state, success: true, res: action.payload };
+    default:
+      return state;
+  }
+};
+export const deletePdImgReducer = (
+  state = { success: false },
+  action: any
+) => {
+  switch (action.type) {
+    case DELETE_PRODUCT_IMG_REQ:
+      return { ...state, success: false };
+    case DELETE_PRODUCT_IMG:
+      return { ...state, success: true, res: action.payload };
+    default:
+      return state;
+  }
+};
+export const approvePdImgReducer = (
+  state = { success: false },
+  action: any
+) => {
+  switch (action.type) {
+    case APPROVE_PD_IMG_REQ:
+      return { ...state, success: false };
+    case APPROVE_PD_IMG:
       return { ...state, success: true, res: action.payload };
     default:
       return state;

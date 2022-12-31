@@ -21,12 +21,12 @@ import ImagePreviewSlider from "./ImagePreviewSlider";
 const ProductTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const { modalDispatch } = GlobalStates();
-  const { allProduct, deleteProduct, createPd, editProduct } = useAppSelector(
+  const { allProduct, deleteProduct, createPd, editProduct, deletePdImg } = useAppSelector(
     (state) => state
   );
   useEffect(() => {
     dispatch(getAllProductsAction());
-  }, [deleteProduct.success, createPd.success, editProduct.success]);
+  }, [deleteProduct.success, createPd.success, editProduct.success, deletePdImg.success]);
 
   return (
     <div className="w-full">
