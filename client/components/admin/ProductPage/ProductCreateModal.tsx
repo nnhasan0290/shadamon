@@ -420,7 +420,7 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent index={1} />
+              <UploadComponent editImg={record?.productImgs[1]?.img} index={1} />
             </div>
             <div className="">
               <Form.Item
@@ -431,7 +431,7 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent index={2} />
+              <UploadComponent editImg={record?.productImgs[2]?.img} index={2} />
             </div>
             <div className="">
               <Form.Item
@@ -442,7 +442,7 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent index={3} />
+              <UploadComponent editImg={record?.productImgs[3]?.img} index={3} />
             </div>
             <div className="">
               <Form.Item
@@ -453,7 +453,7 @@ export default function ({ record }: any) {
               >
                 <Checkbox>Long Img?</Checkbox>
               </Form.Item>
-              <UploadComponent index={4} />
+              <UploadComponent editImg={record?.productImgs[4]?.img} index={4} />
             </div>
           </div>
           <Table
