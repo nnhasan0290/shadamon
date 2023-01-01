@@ -31,11 +31,13 @@ export default function ({ record }: any) {
             <Form.Item name={"valid"}>
               <Input placeholder="Valid" />
             </Form.Item>
-            <Form.Item name={"valid"}>
-              <Input placeholder="Valid" />
+            <Form.Item name={"postAccess"}>
+              <Input placeholder="Post Access" />
             </Form.Item>
           </div>
           <div>
+            <EachPackageTable/>
+            <EachPackageTable/>
             <EachPackageTable/>
           </div>
         </div>

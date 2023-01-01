@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import type { InputRef } from 'antd';
-import { Button, Form, Input, Popconfirm, Table } from 'antd';
-import type { FormInstance } from 'antd/es/form';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Divider, InputNumber, InputRef, Select, Tag, Typography } from "antd";
+import { Button, Form, Input, Popconfirm, Table } from "antd";
+import type { FormInstance } from "antd/es/form";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
 interface Item {
   key: string;
-  name: string;
-  age: string;
-  address: string;
+  categories: string[];
+  reach: number;
+  click: number;
 }
 
 interface EditableRowProps {
@@ -18,6 +18,7 @@ interface EditableRowProps {
 
 const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
   const [form] = Form.useForm();
+
   return (
     <Form form={form} component={false}>
       <EditableContext.Provider value={form}>
@@ -30,7 +31,7 @@ const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
 interface EditableCellProps {
   title: React.ReactNode;
   editable: boolean;
-  children: React.ReactNode;
+  children: any;
   dataIndex: keyof Item;
   record: Item;
   handleSave: (record: Item) => void;
@@ -46,8 +47,10 @@ const EditableCell: React.FC<EditableCellProps> = ({
   ...restProps
 }) => {
   const [editing, setEditing] = useState(false);
-  const inputRef = useRef<InputRef>(null);
+  const inputRef = useRef<any>(null);
   const form = useContext(EditableContext)!;
+  const [cat, setCat] = useState<any>([]);
+  console.log(cat);
 
   useEffect(() => {
     if (editing) {
@@ -63,16 +66,33 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-
+      console.log(values);
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
-      console.log('Save failed:', errInfo);
+      console.log("Save failed:", errInfo);
     }
   };
 
   let childNode = children;
-
+  const inputNode =
+    dataIndex === "categories" ? (
+      <Select
+        onChange={(val) => {
+          setCat(val);
+        }}
+        showArrow={true}
+        mode="tags"
+        placeholder="categories"
+        onBlur={save}
+        ref={inputRef}
+      >
+        <Select.Option value={"one"}>one</Select.Option>
+        <Select.Option value={"two"}>two</Select.Option>
+      </Select>
+    ) : (
+      <InputNumber ref={inputRef} onPressEnter={save} onBlur={save} />
+    );
   if (editable) {
     childNode = editing ? (
       <Form.Item
@@ -85,11 +105,28 @@ const EditableCell: React.FC<EditableCellProps> = ({
           },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+        {inputNode}
       </Form.Item>
     ) : (
-      <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
-        {children}
+      <div
+        className="editable-cell-value-wrap"
+        style={{ paddingRight: 24 }}
+        onClick={toggleEdit}
+      >
+        {dataIndex === "categories" ? (
+          <Select
+            defaultValue={cat}
+            mode="tags"
+            placeholder="categories"
+            onBlur={save}
+            ref={inputRef}
+          >
+            <Select.Option value={"one"}>one</Select.Option>
+            <Select.Option value={"two"}>two</Select.Option>
+          </Select>
+        ) : (
+          children
+        )}
       </div>
     );
   }
@@ -101,28 +138,23 @@ type EditableTableProps = Parameters<typeof Table>[0];
 
 interface DataType {
   key: React.Key;
-  name: string;
-  age: string;
-  address: string;
+  categories: string[];
+  reach: number;
+  click: number;
 }
 
-type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
+type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
 const App: React.FC = () => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
-      key: '0',
-      name: 'Edward King 0',
-      age: '32',
-      address: 'London, Park Lane no. 0',
-    },
-    {
-      key: '1',
-      name: 'Edward King 1',
-      age: '32',
-      address: 'London, Park Lane no. 1',
+      key: "0",
+      categories: [],
+      reach: 0,
+      click: 0,
     },
   ]);
+  console.log(dataSource);
 
   const [count, setCount] = useState(2);
 
@@ -133,26 +165,35 @@ const App: React.FC = () => {
 
   const defaultColumns: any = [
     {
-      title: 'name',
-      dataIndex: 'name',
-      width: '30%',
+      title: "categories",
+      dataIndex: "categories",
+      width: "25%",
       editable: true,
     },
     {
-      title: 'age',
-      dataIndex: 'age',
+      title: "reach",
+      align: "center",
+      dataIndex: "reach",
+      editable: true,
+      width: "20%",
     },
     {
-      title: 'address',
-      dataIndex: 'address',
+      title: "click",
+      align: "center",
+      dataIndex: "click",
+      width: "20%",
+      editable: true,
     },
     {
-      title: 'operation',
-      dataIndex: 'operation',
-      render: (_:any, record: { key: React.Key }) =>
+      title: "Delete",
+      dataIndex: "",
+      render: (_: any, record: { key: React.Key }) =>
         dataSource.length >= 1 ? (
-          <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-            <a>Delete</a>
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <Button danger>Delete</Button>
           </Popconfirm>
         ) : null,
     },
@@ -161,9 +202,9 @@ const App: React.FC = () => {
   const handleAdd = () => {
     const newData: DataType = {
       key: count,
-      name: `Edward King ${count}`,
-      age: '32',
-      address: `London, Park Lane no. ${count}`,
+      categories: [],
+      reach: 0,
+      click: 0,
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
@@ -187,7 +228,7 @@ const App: React.FC = () => {
     },
   };
 
-  const columns = defaultColumns.map((col:any) => {
+  const columns = defaultColumns.map((col: any) => {
     if (!col.editable) {
       return col;
     }
@@ -205,16 +246,27 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16 }}>
-        Add a row
-      </Button>
+      <Typography style={{fontWeight: 600}}>
+        Category Wise Every Post, reach and click how many times
+      </Typography>
       <Table
+        pagination={false}
         components={components}
-        rowClassName={() => 'editable-row'}
+        rowClassName={() => "editable-row"}
         bordered
         dataSource={dataSource}
         columns={columns as ColumnTypes}
       />
+      <div className="w-full text-center">
+        <Button
+          onClick={handleAdd}
+          type="primary"
+          style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
+        >
+          Add Package
+        </Button>
+      </div>
+      <Divider/>
     </div>
   );
 };
