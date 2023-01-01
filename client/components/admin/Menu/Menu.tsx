@@ -44,7 +44,7 @@ const items: MenuItem[] = [
     getItem(<Link href="/admin/category">Categories</Link>, '8'),
     getItem(<Link href="/admin/locations">Location</Link>, '9'),
     getItem('Merchant/User', '10'),
-    getItem('Package', '11'),
+    getItem(<Link href="/admin/packages">Package</Link>, '11'),
     getItem('Discount code', '12'),
     getItem('Faq', '13'),
     getItem('Free Message', '14'),
