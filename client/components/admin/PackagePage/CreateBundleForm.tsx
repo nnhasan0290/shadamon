@@ -1,4 +1,13 @@
-import { Divider, Form, Input, Select, Table, Typography } from "antd";
+import { TextField } from "@mui/material";
+import {
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Table,
+  Typography,
+} from "antd";
 import { BiPlus } from "react-icons/bi";
 import EachPackageTable from "./EachPackageTable";
 const { Option } = Select;
@@ -20,25 +29,47 @@ export default function ({ record }: any) {
         <div className="  basis-1/2 ">
           <div className=" gap-1 justify-between flex">
             <Form.Item name={"name"}>
-              <Input placeholder="Name" />
+              <TextField id="outlined-basic" label="Name" variant="outlined" />
             </Form.Item>
             <Form.Item name={"oldPrice"}>
-              <Input placeholder="Old Price" />
+              <TextField
+                id="outlined-basic"
+                label="Old Price"
+                variant="outlined"
+              />
             </Form.Item>
             <Form.Item name={"newPrice"}>
-              <Input placeholder="New Price" />
+              <TextField
+                id="outlined-basic"
+                label="New Price"
+                variant="outlined"
+              />
             </Form.Item>
             <Form.Item name={"valid"}>
-              <Input placeholder="Valid" />
+              <TextField id="outlined-basic" label="Valid" variant="outlined" />
             </Form.Item>
-            <Form.Item name={"postAccess"}>
-              <Input placeholder="Post Access" />
+          </div>
+          <div className="flex">
+            <Form.Item name={"post"} className="w-[50px]">
+              <TextField size="small" id="outlined-basic" label="Sell" variant="outlined"/>
+            </Form.Item>
+            <Form.Item name={"post"} className="w-[50px]">
+              <TextField size="small" id="outlined-basic" label="bid" variant="outlined"/>
+            </Form.Item>
+            <Form.Item name={"post"} className="w-[50px]">
+              <TextField size="small" id="outlined-basic" label="Post" variant="outlined"/>
+            </Form.Item>
+            <Form.Item name={"post"} className="w-[50px]">
+              <TextField size="small" id="outlined-basic" label="Post" variant="outlined"/>
+            </Form.Item>
+            <Form.Item name={"post"} className="w-[50px]">
+              <TextField size="small" id="outlined-basic" label="Post" variant="outlined"/>
             </Form.Item>
           </div>
           <div>
-            <EachPackageTable/>
-            <EachPackageTable/>
-            <EachPackageTable/>
+            <EachPackageTable />
+            <EachPackageTable />
+            <EachPackageTable />
           </div>
         </div>
         <div className="basis-1/2"></div>
