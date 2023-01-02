@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Divider, InputNumber, InputRef, Select, Tag, Typography } from "antd";
 import { Button, Form, Input, Popconfirm, Table } from "antd";
 import type { FormInstance } from "antd/es/form";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { getAllCategories } from "../../../redux/actions/Admin/categoryAction";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -50,7 +52,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const inputRef = useRef<any>(null);
   const form = useContext(EditableContext)!;
   const [cat, setCat] = useState<any>([]);
-  console.log(cat);
+
+  // category api call...
+  const dispatch = useAppDispatch();
+  const { allCat } = useAppSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, []);
 
   useEffect(() => {
     if (editing) {
@@ -66,7 +75,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-      console.log(values);
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
@@ -87,8 +95,11 @@ const EditableCell: React.FC<EditableCellProps> = ({
         onBlur={save}
         ref={inputRef}
       >
-        <Select.Option value={"one"}>one</Select.Option>
-        <Select.Option value={"two"}>two</Select.Option>
+        {allCat?.res?.data?.map((cat: any, i: any) => (
+          <Select.Option key={cat.category._id} value={cat.category._id}>
+            {cat.category.categoryName}
+          </Select.Option>
+        ))}
       </Select>
     ) : (
       <InputNumber ref={inputRef} onPressEnter={save} onBlur={save} />
@@ -121,8 +132,11 @@ const EditableCell: React.FC<EditableCellProps> = ({
             onBlur={save}
             ref={inputRef}
           >
-            <Select.Option value={"one"}>one</Select.Option>
-            <Select.Option value={"two"}>two</Select.Option>
+            {allCat?.res?.data?.map((cat: any, i: any) => (
+              <Select.Option key={cat.category._id} value={cat._id}>
+                {cat?.category?.categoryName}
+              </Select.Option>
+            ))}
           </Select>
         ) : (
           children
@@ -145,16 +159,15 @@ interface DataType {
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-const App: React.FC = () => {
+const EachPackageTable = ({setState}:any) => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
-      key: "0",
+      key: 0,
       categories: [],
       reach: 0,
       click: 0,
     },
   ]);
-  console.log(dataSource);
 
   const [count, setCount] = useState(2);
 
@@ -167,7 +180,7 @@ const App: React.FC = () => {
     {
       title: "categories",
       dataIndex: "categories",
-      width: "25%",
+      width: "45%",
       editable: true,
     },
     {
@@ -218,6 +231,7 @@ const App: React.FC = () => {
       ...item,
       ...row,
     });
+    setState(newData);
     setDataSource(newData);
   };
 
@@ -246,7 +260,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Typography style={{fontWeight: 600}}>
+      <Typography style={{ fontWeight: 600 }}>
         Category Wise Every Post, reach and click how many times
       </Typography>
       <Table
@@ -266,9 +280,9 @@ const App: React.FC = () => {
           Add Package
         </Button>
       </div>
-      <Divider/>
+      <Divider />
     </div>
   );
 };
 
-export default App;
+export default EachPackageTable;
