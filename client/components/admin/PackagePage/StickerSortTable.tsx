@@ -189,13 +189,13 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
       width: "25%",
     },
     {
-      title: "Sorting",
+      title: "Coupons",
       dataIndex: "",
       width: "50%",
       render: (_: any) => (
         <>
           {["urgent", "cheap", "option3", "option4"].map((each) => (
-            <InputNumber placeholder={each} />
+            <InputNumber controls={false} placeholder={each} className="m-1 w-[80px]" />
           ))}
         </>
       ),
