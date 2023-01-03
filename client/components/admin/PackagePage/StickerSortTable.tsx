@@ -193,11 +193,17 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
       dataIndex: "",
       width: "50%",
       render: (_: any) => (
-        <>
+        <Form>
           {["urgent", "cheap", "option3", "option4"].map((each) => (
-            <InputNumber controls={false} placeholder={each} className="m-1 w-[80px]" />
+            <Form.Item name={each}>
+              <InputNumber
+                controls={false}
+                placeholder={each}
+                className="m-1 w-[80px]"
+              />
+            </Form.Item>
           ))}
-        </>
+        </Form>
       ),
     },
 
@@ -263,7 +269,9 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
 
   return (
     <div>
-      <Typography style={{ fontWeight: 600 }}>{title}</Typography>
+      <Typography style={{ fontWeight: 600 }}>
+        Category Wise Sort Itenm Access
+      </Typography>
       <Table
         pagination={false}
         components={components}
