@@ -224,11 +224,7 @@ export default function ({ record }: any) {
        <SinglePackageForm/>
         <Divider />
         <div>
-          <div className="flex gap-3 items-center">
-            <Typography>Bonus Amount Setting</Typography>
-            <Switch className="bg-gray-500" />
-          </div>
-          <EachPackageTable />
+        
           <Typography>Vat</Typography>
           <Form className="flex gap-2">
             <Form.Item name={"formINside"}>

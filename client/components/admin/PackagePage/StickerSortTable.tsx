@@ -11,8 +11,6 @@ const EditableContext = React.createContext<FormInstance<any> | null>(null);
 interface Item {
   key: string;
   subcategories: string[];
-  reach: number;
-  click: number;
 }
 
 interface EditableRowProps {
@@ -157,8 +155,6 @@ type EditableTableProps = Parameters<typeof Table>[0];
 interface DataType {
   key: React.Key;
   subcategories: string[];
-  reach: number;
-  click: number;
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
@@ -168,8 +164,6 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
     {
       key: 0,
       subcategories: [],
-      reach: 0,
-      click: 0,
     },
   ]);
 
@@ -187,20 +181,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       editable: true,
       width: "45%"
     },
-    {
-      title: tableTitle ? tableTitle.reach : "reach",
-      align: "center",
-      dataIndex: "reach",
-      editable: true,
-      width: "15%"
-    },
-    {
-      title: tableTitle ? tableTitle.click : "click",
-      align: "center",
-      dataIndex: "click",
-      editable: true,
-      width: "15%"
-    },
+    
     {
       title: "Delete",
       dataIndex: "",
@@ -220,8 +201,6 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
     const newData: DataType = {
       key: count,
       subcategories: [],
-      reach: 0,
-      click: 0,
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
