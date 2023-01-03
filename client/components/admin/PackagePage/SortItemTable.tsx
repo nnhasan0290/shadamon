@@ -13,6 +13,8 @@ interface Item {
   subcategories: string[];
   reach: number;
   click: number;
+  price: number;
+  sortName: string;
 }
 
 interface EditableRowProps {
@@ -84,28 +86,45 @@ const EditableCell: React.FC<EditableCellProps> = ({
   };
 
   let childNode = children;
-  const inputNode =
-    dataIndex === "subcategories" ? (
-      <Select
-        onChange={(val) => {
-          setCat(val);
-        }}
-        showArrow={true}
-        mode="tags"
-        placeholder="categories"
-        onBlur={save}
-        getPopupContainer={(trigger) => trigger.parentNode}
-        ref={inputRef}
-      >
-        {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
-          <Select.Option key={cat._id} value={cat._id}>
-            {cat?.subCategoryName}
-          </Select.Option>
-        ))}
-      </Select>
-    ) : (
-      <InputNumber controls={false} className="w-full" ref={inputRef} onPressEnter={save} onBlur={save} />
-    );
+  let inputNode;
+  switch (dataIndex) {
+    case "subcategories":
+      inputNode = (
+        <Select
+          onChange={(val) => {
+            setCat(val);
+          }}
+          showArrow={true}
+          mode="tags"
+          placeholder="categories"
+          onBlur={save}
+          getPopupContainer={(trigger) => trigger.parentNode}
+          ref={inputRef}
+        >
+          {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
+            <Select.Option key={cat._id} value={cat._id}>
+              {cat?.subCategoryName}
+            </Select.Option>
+          ))}
+        </Select>
+      );
+      break;
+
+    case "sortName":
+      inputNode = <Input ref={inputRef} onPressEnter={save} onBlur={save} />;
+      break;
+    default:
+      inputNode = (
+        <InputNumber
+          className="w-full"
+          controls={false}
+          ref={inputRef}
+          onPressEnter={save}
+          onBlur={save}
+        />
+      );
+      break;
+  }
   if (editable) {
     childNode = editing ? (
       <Form.Item
@@ -114,7 +133,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         rules={[
           {
             required: true,
-            message: `required.`,
+            message: `${title} is required.`,
           },
         ]}
       >
@@ -158,17 +177,21 @@ interface DataType {
   subcategories: string[];
   reach: number;
   click: number;
+  sortName: string;
+  price: number;
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-const EachPackageTable = ({ setState, tableTitle, title }: any) => {
+const SortItemPriceTable = ({ setState }: any) => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
       key: 0,
+      sortName: "sort",
       subcategories: [],
       reach: 0,
       click: 0,
+      price: 0,
     },
   ]);
 
@@ -184,24 +207,39 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       title: "Categories",
       dataIndex: "subcategories",
       editable: true,
-      width: "45%"
+      width: "20%",
     },
     {
-      title: tableTitle ? tableTitle.reach : "reach",
+      title: "S.Name",
+      align: "center",
+      dataIndex: "sortName",
+      editable: true,
+      width: "15%",
+    },
+    {
+      title: "reach",
       align: "center",
       dataIndex: "reach",
       editable: true,
-      width: "15%"
+      width: "15%",
     },
     {
-      title: tableTitle ? tableTitle.click : "click",
+      title: "click",
       align: "center",
       dataIndex: "click",
       editable: true,
-      width: "15%"
+      width: "15%",
+    },
+    {
+      title: "price",
+      align: "center",
+      dataIndex: "price",
+      editable: true,
+      width: "15%",
     },
     {
       title: "Delete",
+      width: "10%",
       dataIndex: "",
       render: (_: any, record: { key: React.Key }) =>
         dataSource.length >= 1 ? (
@@ -219,6 +257,8 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
     const newData: DataType = {
       key: count,
       subcategories: [],
+      sortName: "sort",
+      price: 0,
       reach: 0,
       click: 0,
     };
@@ -234,7 +274,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       ...item,
       ...row,
     });
-    setState(newData);
+    // setState(newData);
     setDataSource(newData);
   };
 
@@ -262,8 +302,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   });
 
   return (
-    <div>
-      <Typography style={{ fontWeight: 600 }}>{title}</Typography>
+    <div className="">
       <Table
         pagination={false}
         components={components}
@@ -286,4 +325,4 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   );
 };
 
-export default EachPackageTable;
+export default SortItemPriceTable;

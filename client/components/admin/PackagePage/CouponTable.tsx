@@ -1,18 +1,28 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Divider, InputNumber, InputRef, Select, Tag, Typography } from "antd";
+import {
+  Divider,
+  InputNumber,
+  InputRef,
+  Select,
+  Switch,
+  Tag,
+  Typography,
+} from "antd";
 import { Button, Form, Input, Popconfirm, Table } from "antd";
 import type { FormInstance } from "antd/es/form";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
-import { getAllCategories } from "../../../redux/actions/Admin/categoryAction";
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { getAllSubCatAction } from "../../../redux/actions/Admin/packageAction";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
 interface Item {
   key: string;
-  subcategories: string[];
-  reach: number;
-  click: number;
+  totalPost: number;
+  couponCode: string;
+  discAmount: number;
+  validDays: number;
+  status: string;
 }
 
 interface EditableRowProps {
@@ -52,7 +62,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<any>(null);
   const form = useContext(EditableContext)!;
-  const [cat, setCat] = useState<any>([]);
+  const [checked, setChecked] = useState<any>(true);
 
   // category api call...
   const dispatch = useAppDispatch();
@@ -76,6 +86,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
+      values.status = checked;
+      console.log(values);
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
@@ -84,37 +96,32 @@ const EditableCell: React.FC<EditableCellProps> = ({
   };
 
   let childNode = children;
-  const inputNode =
-    dataIndex === "subcategories" ? (
-      <Select
-        onChange={(val) => {
-          setCat(val);
-        }}
-        showArrow={true}
-        mode="tags"
-        placeholder="categories"
-        onBlur={save}
-        getPopupContainer={(trigger) => trigger.parentNode}
-        ref={inputRef}
-      >
-        {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
-          <Select.Option key={cat._id} value={cat._id}>
-            {cat?.subCategoryName}
-          </Select.Option>
-        ))}
-      </Select>
-    ) : (
-      <InputNumber controls={false} className="w-full" ref={inputRef} onPressEnter={save} onBlur={save} />
-    );
-  if (editable) {
+  let inputNode;
+  switch (dataIndex) {
+    case "couponCode":
+      inputNode = <Input ref={inputRef} onPressEnter={save} onBlur={save} />;
+      break;
+    default:
+      inputNode = (
+        <InputNumber
+          className="w-full"
+          controls={false}
+          ref={inputRef}
+          onPressEnter={save}
+          onBlur={save}
+        />
+      );
+      break;
+  }
+  if (editable && dataIndex !== "status") {
     childNode = editing ? (
       <Form.Item
-        style={{ margin: 0 }}
+        style={{ margin: 0, width: "100%" }}
         name={dataIndex}
         rules={[
           {
             required: true,
-            message: `required.`,
+            message: `${title} is required.`,
           },
         ]}
       >
@@ -126,25 +133,22 @@ const EditableCell: React.FC<EditableCellProps> = ({
         style={{ paddingRight: 24 }}
         onClick={toggleEdit}
       >
-        {dataIndex === "subcategories" ? (
-          <Select
-            getPopupContainer={(trigger) => trigger.parentNode}
-            defaultValue={cat}
-            mode="tags"
-            placeholder="categories"
-            onBlur={save}
-            ref={inputRef}
-          >
-            {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
-              <Select.Option key={cat._id} value={cat._id}>
-                {cat.subCategoryName}
-              </Select.Option>
-            ))}
-          </Select>
-        ) : (
-          children
-        )}
+        {children}
       </div>
+    );
+  } else if(dataIndex=== "status"){
+    childNode = (
+      <Switch
+        className="bg-gray-400"
+        defaultChecked={checked}
+        ref={inputRef}
+        onChange={(e: any) => {
+          setChecked(e);
+          save();
+        }}
+        checkedChildren={<CheckOutlined />}
+        unCheckedChildren={<CloseOutlined />}
+      />
     );
   }
 
@@ -155,20 +159,24 @@ type EditableTableProps = Parameters<typeof Table>[0];
 
 interface DataType {
   key: React.Key;
-  subcategories: string[];
-  reach: number;
-  click: number;
+  totalPost: number;
+  couponCode: string;
+  discAmount: number;
+  validDays: number;
+  status: boolean;
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-const EachPackageTable = ({ setState, tableTitle, title }: any) => {
+const CouponTable = ({ setState }: any) => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
       key: 0,
-      subcategories: [],
-      reach: 0,
-      click: 0,
+      totalPost: 0,
+      couponCode: "code",
+      discAmount: 0,
+      validDays: 0,
+      status: true,
     },
   ]);
 
@@ -181,27 +189,42 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
 
   const defaultColumns: any = [
     {
-      title: "Categories",
-      dataIndex: "subcategories",
+      title: "TotalPost",
+      dataIndex: "totalPost",
       editable: true,
-      width: "45%"
+      width: "20%",
     },
     {
-      title: tableTitle ? tableTitle.reach : "reach",
+      title: "Code",
       align: "center",
-      dataIndex: "reach",
+      dataIndex: "couponCode",
       editable: true,
-      width: "15%"
+      width: "15%",
     },
     {
-      title: tableTitle ? tableTitle.click : "click",
+      title: "Dis.Amnt",
       align: "center",
-      dataIndex: "click",
+      dataIndex: "discAmount",
       editable: true,
-      width: "15%"
+      width: "15%",
+    },
+    {
+      title: "Valid",
+      align: "center",
+      dataIndex: "validDays",
+      editable: true,
+      width: "15%",
+    },
+    {
+      title: "Status",
+      align: "center",
+      dataIndex: "status",
+      editable: true,
+      width: "100px",
     },
     {
       title: "Delete",
+      width: "10%",
       dataIndex: "",
       render: (_: any, record: { key: React.Key }) =>
         dataSource.length >= 1 ? (
@@ -218,9 +241,11 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   const handleAdd = () => {
     const newData: DataType = {
       key: count,
-      subcategories: [],
-      reach: 0,
-      click: 0,
+      totalPost: 0,
+      couponCode: "code",
+      discAmount: 0,
+      validDays: 0,
+      status: true,
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
@@ -234,7 +259,8 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       ...item,
       ...row,
     });
-    setState(newData);
+    // setState(newData);
+
     setDataSource(newData);
   };
 
@@ -262,8 +288,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   });
 
   return (
-    <div>
-      <Typography style={{ fontWeight: 600 }}>{title}</Typography>
+    <div className="">
       <Table
         pagination={false}
         components={components}
@@ -286,4 +311,4 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   );
 };
 
-export default EachPackageTable;
+export default CouponTable;

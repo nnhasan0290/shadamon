@@ -148,7 +148,10 @@ img {
 }
 
 .ant-select-selector {
-  min-width: 200px;
+  min-width: 150px;
+}
+.exception_Select{
+  width: 100px !important;
 }
 .ant-image-preview-img-wrapper {
   display: flex;

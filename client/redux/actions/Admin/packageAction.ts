@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import axios from "axios";
-import { CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE } from "../../consts/admin/packageConst";
+import { CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
 
 export const createPackageAction = (formdata: any) => async (dispatch: any) => {
     const id = toast.loading("Please wait...");
@@ -94,6 +94,20 @@ export const createPackageAction = (formdata: any) => async (dispatch: any) => {
         config
       );
       dispatch({ type: GET_ALL_PACKAGE, payload: data });
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+  export const getAllSubCatAction = () => async (dispatch: any) => {
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST}/api/admin/allsubcategory`,
+        config
+      );
+      dispatch({ type: GET_ALL_SUBCATEGORIES, payload: data });
     } catch (error: any) {
       console.log(error);
     }

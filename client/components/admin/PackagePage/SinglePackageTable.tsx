@@ -13,6 +13,8 @@ interface Item {
   subcategories: string[];
   reach: number;
   click: number;
+  price: number;
+  minAmount: number;
 }
 
 interface EditableRowProps {
@@ -104,7 +106,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         ))}
       </Select>
     ) : (
-      <InputNumber controls={false} className="w-full" ref={inputRef} onPressEnter={save} onBlur={save} />
+      <InputNumber className="w-full" controls={false}  ref={inputRef} onPressEnter={save} onBlur={save} />
     );
   if (editable) {
     childNode = editing ? (
@@ -114,7 +116,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         rules={[
           {
             required: true,
-            message: `required.`,
+            message: `${title} is required.`,
           },
         ]}
       >
@@ -158,17 +160,21 @@ interface DataType {
   subcategories: string[];
   reach: number;
   click: number;
+  minAmount: number;
+  price: number;
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-const EachPackageTable = ({ setState, tableTitle, title }: any) => {
+const SinglePackageTable = ({ setState}: any) => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
       key: 0,
+      minAmount: 0,
       subcategories: [],
       reach: 0,
       click: 0,
+      price: 0,
     },
   ]);
 
@@ -184,24 +190,39 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       title: "Categories",
       dataIndex: "subcategories",
       editable: true,
-      width: "45%"
+      width: "20%"
     },
     {
-      title: tableTitle ? tableTitle.reach : "reach",
+      title: "Amnt",
+      align: "center",
+      dataIndex: "price",
+      editable: true,
+      width: "15%"
+    },
+    {
+      title: "reach",
       align: "center",
       dataIndex: "reach",
       editable: true,
       width: "15%"
     },
     {
-      title: tableTitle ? tableTitle.click : "click",
+      title: "click",
       align: "center",
       dataIndex: "click",
       editable: true,
       width: "15%"
     },
     {
+      title: "minA",
+      align: "center",
+      dataIndex: "minAmount",
+      editable: true,
+      width: "15%"
+    },
+    {
       title: "Delete",
+      width: "10%",
       dataIndex: "",
       render: (_: any, record: { key: React.Key }) =>
         dataSource.length >= 1 ? (
@@ -219,6 +240,8 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
     const newData: DataType = {
       key: count,
       subcategories: [],
+      minAmount: 0,
+      price: 0,
       reach: 0,
       click: 0,
     };
@@ -234,7 +257,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       ...item,
       ...row,
     });
-    setState(newData);
+    // setState(newData);
     setDataSource(newData);
   };
 
@@ -262,8 +285,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   });
 
   return (
-    <div>
-      <Typography style={{ fontWeight: 600 }}>{title}</Typography>
+    <div className="">
       <Table
         pagination={false}
         components={components}
@@ -286,4 +308,4 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   );
 };
 
-export default EachPackageTable;
+export default SinglePackageTable;
