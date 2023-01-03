@@ -74,6 +74,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
+
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
@@ -102,7 +103,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
         ))}
       </Select>
     ) : (
-      <InputNumber controls={false} className="w-full" ref={inputRef} onPressEnter={save} onBlur={save} />
+      <InputNumber
+        controls={false}
+        className="w-full"
+        ref={inputRef}
+        onPressEnter={save}
+        onBlur={save}
+      />
     );
   if (editable) {
     childNode = editing ? (
@@ -126,7 +133,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
       >
         {dataIndex === "subcategories" ? (
           <Select
-           className="w-full"
+            className="w-full"
             getPopupContainer={(trigger) => trigger.parentNode}
             defaultValue={cat}
             mode="tags"
@@ -159,7 +166,7 @@ interface DataType {
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-const EachPackageTable = ({ setState, tableTitle, title }: any) => {
+const StickerSortTable = ({ setState, tableTitle, title }: any) => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
       key: 0,
@@ -179,9 +186,21 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       title: "Categories",
       dataIndex: "subcategories",
       editable: true,
-      width: "45%"
+      width: "25%",
     },
-    
+    {
+      title: "Sorting",
+      dataIndex: "",
+      width: "50%",
+      render: (_: any) => (
+        <>
+          {["urgent", "cheap", "option3", "option4"].map((each) => (
+            <InputNumber placeholder={each} />
+          ))}
+        </>
+      ),
+    },
+
     {
       title: "Delete",
       dataIndex: "",
@@ -214,6 +233,7 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
       ...item,
       ...row,
     });
+    console.log(newData);
     setState(newData);
     setDataSource(newData);
   };
@@ -266,4 +286,4 @@ const EachPackageTable = ({ setState, tableTitle, title }: any) => {
   );
 };
 
-export default EachPackageTable;
+export default StickerSortTable;

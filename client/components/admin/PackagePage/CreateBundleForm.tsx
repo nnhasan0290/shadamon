@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
 import SinglePackageTable from "./SinglePackageTable";
 import SinglePackageForm from "./SinglePackageForm";
+import StickerSortTable from "./StickerSortTable";
 const { Option } = Select;
 
 export default function ({ record }: any) {
@@ -128,11 +129,7 @@ export default function ({ record }: any) {
               "Category Wise Bid and offer and reach and click and how many"
             }
           />
-          <EachPackageTable
-            setState={setSortPackage}
-            tableTitle={{ reach: "urgent", click: "cheap" }}
-            title={"Category Wise Sort Item Access"}
-          />
+          <StickerSortTable/>
         </div>
         <Typography>Checked Feature Write-up</Typography>
         <div className="flex">
