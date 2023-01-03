@@ -193,13 +193,13 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
       dataIndex: "",
       width: "50%",
       render: (_: any) => (
-        <Form>
+        <Form className="flex flex-wrap">
           {["urgent", "cheap", "option3", "option4"].map((each) => (
-            <Form.Item name={each}>
+            <Form.Item name={each} noStyle>
               <InputNumber
                 controls={false}
                 placeholder={each}
-                className="m-1 w-[80px]"
+                className=" w-[80px] m-1"
               />
             </Form.Item>
           ))}
