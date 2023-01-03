@@ -4,13 +4,17 @@ import { Button, Form, Input, Popconfirm, Table } from "antd";
 import type { FormInstance } from "antd/es/form";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getAllCategories } from "../../../redux/actions/Admin/categoryAction";
-import { getAllSubCatAction } from "../../../redux/actions/Admin/packageAction";
+import {
+  getAllSortsAction,
+  getAllSubCatAction,
+} from "../../../redux/actions/Admin/packageAction";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
 interface Item {
   key: string;
   subcategories: string[];
+  coupons: [];
 }
 
 interface EditableRowProps {
@@ -54,10 +58,16 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
   // category api call...
   const dispatch = useAppDispatch();
-  const { getAllSubCat } = useAppSelector((state) => state);
+  const {
+    getAllSubCat,
+    allSorts: {
+      res: { data },
+    },
+  } = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(getAllSubCatAction());
+    dispatch(getAllSortsAction());
   }, []);
 
   useEffect(() => {
@@ -74,7 +84,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-
+       console.log(values);
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
@@ -83,35 +93,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   };
 
   let childNode = children;
-  const inputNode =
-    dataIndex === "subcategories" ? (
-      <Select
-        onChange={(val) => {
-          setCat(val);
-        }}
-        showArrow={true}
-        mode="tags"
-        placeholder="categories"
-        onBlur={save}
-        getPopupContainer={(trigger) => trigger.parentNode}
-        ref={inputRef}
-      >
-        {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
-          <Select.Option key={cat._id} value={cat._id}>
-            {cat?.subCategoryName}
-          </Select.Option>
-        ))}
-      </Select>
-    ) : (
-      <InputNumber
-        controls={false}
-        className="w-full"
-        ref={inputRef}
-        onPressEnter={save}
-        onBlur={save}
-      />
-    );
-  if (editable) {
+  if (editable && dataIndex === "subcategories") {
     childNode = editing ? (
       <Form.Item
         style={{ margin: 0 }}
@@ -123,7 +105,23 @@ const EditableCell: React.FC<EditableCellProps> = ({
           },
         ]}
       >
-        {inputNode}
+        <Select
+          onChange={(val) => {
+            setCat(val);
+          }}
+          showArrow={true}
+          mode="tags"
+          placeholder="categories"
+          onBlur={save}
+          getPopupContainer={(trigger) => trigger.parentNode}
+          ref={inputRef}
+        >
+          {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
+            <Select.Option key={cat._id} value={cat._id}>
+              {cat?.subCategoryName}
+            </Select.Option>
+          ))}
+        </Select>
       </Form.Item>
     ) : (
       <div
@@ -131,7 +129,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
         style={{ paddingRight: 24 }}
         onClick={toggleEdit}
       >
-        {dataIndex === "subcategories" ? (
           <Select
             className="w-full"
             getPopupContainer={(trigger) => trigger.parentNode}
@@ -147,10 +144,26 @@ const EditableCell: React.FC<EditableCellProps> = ({
               </Select.Option>
             ))}
           </Select>
-        ) : (
-          children
-        )}
       </div>
+    );
+  } else if (dataIndex === "coupons") {
+    return (
+      <td>
+        {data?.map((each: any, i: any) => (
+          <>
+            <Form.Item
+              hidden
+              initialValue={each._id}
+              name={["sorts", i, "sortsId"]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item noStyle name={["sorts", i, "access"]}>
+              <InputNumber placeholder={each.sortName} />
+            </Form.Item>
+          </>
+        ))}
+      </td>
     );
   }
 
@@ -162,6 +175,7 @@ type EditableTableProps = Parameters<typeof Table>[0];
 interface DataType {
   key: React.Key;
   subcategories: string[];
+  coupons: [];
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
@@ -171,6 +185,7 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
     {
       key: 0,
       subcategories: [],
+      coupons: [],
     },
   ]);
 
@@ -190,21 +205,9 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
     },
     {
       title: "Coupons",
-      dataIndex: "",
+      dataIndex: "coupons",
       width: "50%",
-      render: (_: any) => (
-        <Form className="flex flex-wrap">
-          {["urgent", "cheap", "option3", "option4"].map((each) => (
-            <Form.Item name={each} noStyle>
-              <InputNumber
-                controls={false}
-                placeholder={each}
-                className=" w-[80px] m-1"
-              />
-            </Form.Item>
-          ))}
-        </Form>
-      ),
+      editable: true,
     },
 
     {
@@ -226,6 +229,7 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
     const newData: DataType = {
       key: count,
       subcategories: [],
+      coupons: [],
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
@@ -240,7 +244,7 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
       ...row,
     });
     console.log(newData);
-    setState(newData);
+    // setState(newData);
     setDataSource(newData);
   };
 

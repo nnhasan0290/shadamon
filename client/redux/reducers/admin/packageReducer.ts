@@ -1,4 +1,4 @@
-import { CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
+import { CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
 
 export const createPackageReducer = (
     state = { success: false, res: {} },
@@ -47,6 +47,14 @@ export const createPackageReducer = (
   export const getAllSubCatReducer = (state = { success: false, res:{} }, action: any) => {
     switch (action.type) {
       case GET_ALL_SUBCATEGORIES:
+        return { ...state, success: true, res: action.payload };
+      default:
+        return state;
+    }
+  };
+  export const getAllSortsReducer = (state = { success: false, res:{} }, action: any) => {
+    switch (action.type) {
+      case GET_ALL_SORTS:
         return { ...state, success: true, res: action.payload };
       default:
         return state;
