@@ -19,6 +19,7 @@ import { getParentCategories } from "../../../redux/actions/Admin/categoryAction
 import SinglePackageTable from "./SinglePackageTable";
 import SinglePackageForm from "./SinglePackageForm";
 import StickerSortTable from "./StickerSortTable";
+import { createPackageAction } from "../../../redux/actions/Admin/packageAction";
 const { Option } = Select;
 
 export default function ({ record }: any) {
@@ -31,7 +32,6 @@ export default function ({ record }: any) {
   const [bidPackage, setBidPackage] = useState([]);
   const [sortPackage, setSortPackage] = useState([]);
 
-
   //muit select change
 
   useEffect(() => {
@@ -39,16 +39,7 @@ export default function ({ record }: any) {
   }, []);
 
   return (
-    <Form
-      onFinish={(values) => {
-        values.bundle.post = postPackage;
-        values.bundle.bidnOffer = bidPackage;
-        values.bundle.stickersSort = sortPackage;
-        console.log(values);
-      }}
-      form={form}
-      className="flex flex-wrap justify-between basis-full"
-    >
+    <div className="flex flex-wrap justify-between basis-full">
       <div className="flex gap-2 items-center font-bold">
         <span className="p-1 text-white bg-gray-700 rounded-full">
           <BiPlus />
@@ -58,14 +49,24 @@ export default function ({ record }: any) {
       <Divider className="my-2" />
 
       {/* inputs =============== */}
-      <div className="pr-3 border-r basis-1/2">
+      <Form
+        form={form}
+        onFinish={(values) => {
+          values.bundle.post = postPackage;
+          values.bundle.bidnOffer = bidPackage;
+          values.bundle.stickersSort = sortPackage;
+          console.log(values);
+          // dispatch(createPackageAction(values));
+        }}
+        className="pr-3 border-r basis-1/2"
+      >
         <div className="flex gap-1 justify-between">
           <Form.Item
             hidden
             name={"packageType"}
             initialValue={"bundle"}
           ></Form.Item>
-          <Form.Item hidden name={"name"}>
+          <Form.Item name={"name"}>
             <TextField id="outlined-basic" label="Name" variant="outlined" />
           </Form.Item>
           <Form.Item name={["bundle", "oldPrice"]}>
@@ -129,7 +130,7 @@ export default function ({ record }: any) {
               "Category Wise Bid and offer and reach and click and how many"
             }
           />
-          <StickerSortTable/>
+          <StickerSortTable setState={setSortPackage} />
         </div>
         <Typography>Checked Feature Write-up</Typography>
         <div className="flex">
@@ -215,13 +216,12 @@ export default function ({ record }: any) {
             Save
           </Button>
         </Form.Item>
-      </div>
+      </Form>
       <div className="pl-3 basis-1/2">
         {/* //Second Form ================== */}
-       <SinglePackageForm/>
+        <SinglePackageForm />
         <Divider />
         <div>
-        
           <Typography>Vat</Typography>
           <Form className="flex gap-2">
             <Form.Item name={"formINside"}>
@@ -260,6 +260,6 @@ export default function ({ record }: any) {
           </Form>
         </div>
       </div>
-    </Form>
+    </div>
   );
 }

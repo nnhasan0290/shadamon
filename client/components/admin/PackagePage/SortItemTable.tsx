@@ -253,6 +253,9 @@ const SortItemPriceTable = ({ setState }: any) => {
     },
   ];
 
+  //form State 
+  const [formValues, setFormValues]  = useState<any>([])
+
   const handleAdd = () => {
     const newData: DataType = {
       key: count,
@@ -274,7 +277,7 @@ const SortItemPriceTable = ({ setState }: any) => {
       ...item,
       ...row,
     });
-    // setState(newData);
+    setFormValues(newData);
     setDataSource(newData);
   };
 
@@ -302,26 +305,37 @@ const SortItemPriceTable = ({ setState }: any) => {
   });
 
   return (
-    <div className="">
-      <Table
-        pagination={false}
-        components={components}
-        rowClassName={() => "editable-row"}
-        bordered
-        dataSource={dataSource}
-        columns={columns as ColumnTypes}
-      />
-      <div className="w-full text-center">
-        <Button
-          onClick={handleAdd}
-          type="primary"
-          style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
-        >
-          Add Package
+    <Form
+      onFinish={(values: any) => console.log(formValues)}
+      className="overflow-hidden"
+    >
+      <div className="flex justify-between items-center">
+        <Typography>Category Wise Sort Item Price</Typography>
+        <Button type="primary" htmlType="submit">
+          Save
         </Button>
       </div>
-      <Divider />
-    </div>
+      <div className="">
+        <Table
+          pagination={false}
+          components={components}
+          rowClassName={() => "editable-row"}
+          bordered
+          dataSource={dataSource}
+          columns={columns as ColumnTypes}
+        />
+        <div className="w-full text-center">
+          <Button
+            onClick={handleAdd}
+            type="primary"
+            style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
+          >
+            Add Package
+          </Button>
+        </div>
+        <Divider />
+      </div>
+    </Form>
   );
 };
 

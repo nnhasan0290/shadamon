@@ -62,7 +62,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<any>(null);
   const form = useContext(EditableContext)!;
-  const [checked, setChecked] = useState<any>(true);
+
+  const [switchForm] = Form.useForm();
 
   // category api call...
   const dispatch = useAppDispatch();
@@ -86,8 +87,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-      values.status = checked;
-      console.log(values);
+      const switchFrm = await switchForm.validateFields();
+      values.status = switchFrm.status === undefined ? true : switchFrm.status;
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
@@ -136,19 +137,22 @@ const EditableCell: React.FC<EditableCellProps> = ({
         {children}
       </div>
     );
-  } else if(dataIndex=== "status"){
+  } else if (dataIndex === "status") {
     childNode = (
-      <Switch
-        className="bg-gray-400"
-        defaultChecked={checked}
-        ref={inputRef}
-        onChange={(e: any) => {
-          setChecked(e);
-          save();
-        }}
-        checkedChildren={<CheckOutlined />}
-        unCheckedChildren={<CloseOutlined />}
-      />
+      <Form form={switchForm}>
+        <Form.Item name={"status"} >
+          <Switch
+            ref={inputRef}
+            className="bg-gray-400"
+            defaultChecked
+            onChange={(e: any) => {
+              save();
+            }}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        </Form.Item>
+      </Form>
     );
   }
 
@@ -163,7 +167,6 @@ interface DataType {
   couponCode: string;
   discAmount: number;
   validDays: number;
-  status: boolean;
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
@@ -176,7 +179,6 @@ const CouponTable = ({ setState }: any) => {
       couponCode: "code",
       discAmount: 0,
       validDays: 0,
-      status: true,
     },
   ]);
 
@@ -193,6 +195,7 @@ const CouponTable = ({ setState }: any) => {
       dataIndex: "totalPost",
       editable: true,
       width: "20%",
+      align: "center"
     },
     {
       title: "Code",
@@ -237,6 +240,7 @@ const CouponTable = ({ setState }: any) => {
         ) : null,
     },
   ];
+  const [formValues, setFormValues] = useState<any>([]);
 
   const handleAdd = () => {
     const newData: DataType = {
@@ -245,7 +249,6 @@ const CouponTable = ({ setState }: any) => {
       couponCode: "code",
       discAmount: 0,
       validDays: 0,
-      status: true,
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
@@ -259,7 +262,7 @@ const CouponTable = ({ setState }: any) => {
       ...item,
       ...row,
     });
-    // setState(newData);
+    setFormValues(newData);
 
     setDataSource(newData);
   };
@@ -288,26 +291,37 @@ const CouponTable = ({ setState }: any) => {
   });
 
   return (
-    <div className="">
-      <Table
-        pagination={false}
-        components={components}
-        rowClassName={() => "editable-row"}
-        bordered
-        dataSource={dataSource}
-        columns={columns as ColumnTypes}
-      />
-      <div className="w-full text-center">
-        <Button
-          onClick={handleAdd}
-          type="primary"
-          style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
-        >
-          Add Package
+    <Form
+      onFinish={(values: any) => console.log(formValues)}
+      className="overflow-hidden"
+    >
+      <div className="flex justify-between items-center">
+        <Typography>Category Wise Sort Item Price</Typography>
+        <Button type="primary" htmlType="submit">
+          Save
         </Button>
       </div>
-      <Divider />
-    </div>
+      <div className="">
+        <Table
+          pagination={false}
+          components={components}
+          rowClassName={() => "editable-row"}
+          bordered
+          dataSource={dataSource}
+          columns={columns as ColumnTypes}
+        />
+        <div className="w-full text-center">
+          <Button
+            onClick={handleAdd}
+            type="primary"
+            style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
+          >
+            Add Package
+          </Button>
+        </div>
+        <Divider />
+      </div>
+    </Form>
   );
 };
 

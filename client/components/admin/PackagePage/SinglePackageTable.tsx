@@ -106,7 +106,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
         ))}
       </Select>
     ) : (
-      <InputNumber className="w-full" controls={false}  ref={inputRef} onPressEnter={save} onBlur={save} />
+      <InputNumber
+        className="w-full"
+        controls={false}
+        ref={inputRef}
+        onPressEnter={save}
+        onBlur={save}
+      />
     );
   if (editable) {
     childNode = editing ? (
@@ -166,7 +172,7 @@ interface DataType {
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-const SinglePackageTable = ({ setState}: any) => {
+const SinglePackageTable = ({ setState }: any) => {
   const [dataSource, setDataSource] = useState<DataType[]>([
     {
       key: 0,
@@ -190,35 +196,35 @@ const SinglePackageTable = ({ setState}: any) => {
       title: "Categories",
       dataIndex: "subcategories",
       editable: true,
-      width: "20%"
+      width: "20%",
     },
     {
       title: "Amnt",
       align: "center",
       dataIndex: "price",
       editable: true,
-      width: "15%"
+      width: "15%",
     },
     {
       title: "reach",
       align: "center",
       dataIndex: "reach",
       editable: true,
-      width: "15%"
+      width: "15%",
     },
     {
       title: "click",
       align: "center",
       dataIndex: "click",
       editable: true,
-      width: "15%"
+      width: "15%",
     },
     {
       title: "minA",
       align: "center",
       dataIndex: "minAmount",
       editable: true,
-      width: "15%"
+      width: "15%",
     },
     {
       title: "Delete",
@@ -249,6 +255,8 @@ const SinglePackageTable = ({ setState}: any) => {
     setCount(count + 1);
   };
 
+  const [formValues, setFormValues] = useState<any>([]);
+
   const handleSave = (row: DataType) => {
     const newData = [...dataSource];
     const index = newData.findIndex((item) => row.key === item.key);
@@ -257,7 +265,8 @@ const SinglePackageTable = ({ setState}: any) => {
       ...item,
       ...row,
     });
-    // setState(newData);
+    console.log(newData);
+     setFormValues(newData);
     setDataSource(newData);
   };
 
@@ -284,27 +293,42 @@ const SinglePackageTable = ({ setState}: any) => {
     };
   });
 
+  
+
   return (
-    <div className="">
-      <Table
-        pagination={false}
-        components={components}
-        rowClassName={() => "editable-row"}
-        bordered
-        dataSource={dataSource}
-        columns={columns as ColumnTypes}
-      />
-      <div className="w-full text-center">
-        <Button
-          onClick={handleAdd}
-          type="primary"
-          style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
-        >
-          Add Package
-        </Button>
+    <Form
+      onFinish={(values: any) => console.log(formValues)}
+      className="overflow-hidden"
+    >
+      <div className="flex justify-between items-center">
+        <Typography>Single Package</Typography>
+        <Form.Item noStyle>
+          <Button type="primary" htmlType="submit">
+            Save
+          </Button>
+        </Form.Item>
       </div>
-      <Divider />
-    </div>
+      <div className="">
+        <Table
+          pagination={false}
+          components={components}
+          rowClassName={() => "editable-row"}
+          bordered
+          dataSource={dataSource}
+          columns={columns as ColumnTypes}
+        />
+        <div className="w-full text-center">
+          <Button
+            onClick={handleAdd}
+            type="primary"
+            style={{ marginBottom: 16, marginTop: 5, marginLeft: "auto" }}
+          >
+            Add Package
+          </Button>
+        </div>
+        <Divider />
+      </div>
+    </Form>
   );
 };
 

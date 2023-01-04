@@ -14,7 +14,6 @@ const EditableContext = React.createContext<FormInstance<any> | null>(null);
 interface Item {
   key: string;
   subcategories: string[];
-  coupons: [];
 }
 
 interface EditableRowProps {
@@ -55,6 +54,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const inputRef = useRef<any>(null);
   const form = useContext(EditableContext)!;
   const [cat, setCat] = useState<any>([]);
+  const [access, setAccess] = useState<any>([]);
 
   // category api call...
   const dispatch = useAppDispatch();
@@ -84,7 +84,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-       console.log(values);
+      console.log(access);
+      console.log(values);
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
@@ -129,37 +130,47 @@ const EditableCell: React.FC<EditableCellProps> = ({
         style={{ paddingRight: 24 }}
         onClick={toggleEdit}
       >
-          <Select
-            className="w-full"
-            getPopupContainer={(trigger) => trigger.parentNode}
-            defaultValue={cat}
-            mode="tags"
-            placeholder="categories"
-            onBlur={save}
-            ref={inputRef}
-          >
-            {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
-              <Select.Option key={cat._id} value={cat._id}>
-                {cat.subCategoryName}
-              </Select.Option>
-            ))}
-          </Select>
+        <Select
+          className="w-full"
+          getPopupContainer={(trigger) => trigger.parentNode}
+          defaultValue={cat}
+          mode="tags"
+          placeholder="categories"
+          onBlur={save}
+          ref={inputRef}
+        >
+          {getAllSubCat?.res?.data?.map((cat: any, i: any) => (
+            <Select.Option key={cat._id} value={cat._id}>
+              {cat.subCategoryName}
+            </Select.Option>
+          ))}
+        </Select>
       </div>
     );
-  } else if (dataIndex === "coupons") {
+  } else if (title === "Coupons") {
     return (
       <td>
         {data?.map((each: any, i: any) => (
           <>
             <Form.Item
+              key={each._id}
               hidden
               initialValue={each._id}
               name={["sorts", i, "sortsId"]}
             >
               <Input />
             </Form.Item>
-            <Form.Item noStyle name={["sorts", i, "access"]}>
-              <InputNumber placeholder={each.sortName} />
+            <Form.Item
+            
+              name={["sorts", i, "access"]}
+              rules={[
+                {
+                  required: true,
+                  message: `required.`,
+                },
+              ]}
+            >
+              <InputNumber ref={inputRef} onChange={save} placeholder={each.sortName} />
             </Form.Item>
           </>
         ))}
@@ -175,7 +186,6 @@ type EditableTableProps = Parameters<typeof Table>[0];
 interface DataType {
   key: React.Key;
   subcategories: string[];
-  coupons: [];
 }
 
 type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
@@ -185,7 +195,6 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
     {
       key: 0,
       subcategories: [],
-      coupons: [],
     },
   ]);
 
@@ -205,14 +214,13 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
     },
     {
       title: "Coupons",
-      dataIndex: "coupons",
       width: "50%",
       editable: true,
     },
 
     {
       title: "Delete",
-      dataIndex: "",
+      dataIndex: "coupons",
       render: (_: any, record: { key: React.Key }) =>
         dataSource.length >= 1 ? (
           <Popconfirm
@@ -229,7 +237,6 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
     const newData: DataType = {
       key: count,
       subcategories: [],
-      coupons: [],
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
@@ -244,7 +251,7 @@ const StickerSortTable = ({ setState, tableTitle, title }: any) => {
       ...row,
     });
     console.log(newData);
-    // setState(newData);
+    setState(newData);
     setDataSource(newData);
   };
 
