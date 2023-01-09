@@ -4,22 +4,16 @@ import {
   Divider,
   Form,
   Input,
-  InputNumber,
   Select,
-  Switch,
-  Table,
   Typography,
 } from "antd";
-import { Select as MuiSelect } from "@mui/material";
 import { BiPlus } from "react-icons/bi";
 import EachPackageTable from "./EachPackageTable";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
-import SinglePackageTable from "./SinglePackageTable";
 import SinglePackageForm from "./SinglePackageForm";
 import { createPackageAction } from "../../../redux/actions/Admin/packageAction";
-const { Option } = Select;
 
 export default function ({ record }: any) {
   const [form] = Form.useForm();
@@ -55,7 +49,7 @@ export default function ({ record }: any) {
           values.bundle.bidnOffer = bidPackage;
           values.bundle.stickersSort = sortPackage;
           console.log(values);
-          // dispatch(createPackageAction(values));
+          dispatch(createPackageAction(values));
         }}
         className="pr-3 border-r basis-1/2"
       >
@@ -120,14 +114,17 @@ export default function ({ record }: any) {
         </div>
         <div>
           <EachPackageTable
+            setState={setPostPackage}
             title={"Category Wise Every Post reach and click and how many"}
             category={true} reach={true} click={true}
           />
           <EachPackageTable
+          setState={setBidPackage}
             title={"Category Wise Bid & Offer  reach & click and how many"}
             category={true} reach={true} click={true}
           />
           <EachPackageTable
+          setState={setSortPackage}
             title={"Category Wise Sort Item Access"}
             category={true} coupons={true}
           />
@@ -217,7 +214,7 @@ export default function ({ record }: any) {
           </Button>
         </Form.Item>
       </Form>
-      <div className="pl-3 basis-1/2">
+      <div className="overflow-hidden pl-3 basis-1/2">
         {/* //Second Form ================== */}
         <SinglePackageForm />
         <Divider />

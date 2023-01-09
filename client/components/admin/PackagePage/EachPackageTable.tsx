@@ -1,3 +1,4 @@
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import {
   Button,
   Divider,
@@ -7,6 +8,7 @@ import {
   message,
   Popconfirm,
   Select,
+  Switch,
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
@@ -17,10 +19,23 @@ import {
 } from "../../../redux/actions/Admin/packageAction";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 
-export default function ({ title, category, reach, click, coupons }: any) {
+export default function ({
+  title,
+  category,
+  reach,
+  click,
+  coupons,
+  price,
+  minA,
+  sName,
+  couponCreate,
+  setState,
+}: any) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const [dataSource, setDataSource] = useState<any>([{}]);
+  const [dataSource, setDataSource] = useState<any>([
+    { },
+  ]);
   const [messageApi, contextHolder] = message.useMessage();
   const {
     getAllSubCat: {
@@ -48,7 +63,7 @@ export default function ({ title, category, reach, click, coupons }: any) {
     }
   };
   return (
-    <>
+    <div className="">
       <Divider>{title}</Divider>
       <Form
         onFinish={(values) => {
@@ -57,11 +72,12 @@ export default function ({ title, category, reach, click, coupons }: any) {
             val.push(values[key]);
           }
           console.log(val);
+          setState(val);
         }}
         form={form}
       >
         {contextHolder}
-        <Table size="small" pagination={false} dataSource={dataSource}>
+        <Table size="small" pagination={false} dataSource={dataSource} bordered>
           {category && (
             <Table.Column
               title="Categories"
@@ -96,11 +112,30 @@ export default function ({ title, category, reach, click, coupons }: any) {
               )}
             />
           )}
+          {sName && (
+            <Table.Column
+              title="sortName"
+              dataIndex="sortName"
+              render={(_: any, record: any, index) => (
+                <Form.Item
+                  name={[index, "sortName"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: `required.`,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              )}
+            />
+          )}
           {reach && (
             <Table.Column
               title="Reach"
               dataIndex="reach"
-              render={(_: any, record: any, index) => (
+              render={(num: any, record: any, index) => (
                 <Form.Item
                   name={[index, "reach"]}
                   rules={[
@@ -109,6 +144,7 @@ export default function ({ title, category, reach, click, coupons }: any) {
                       message: `required.`,
                     },
                   ]}
+                  initialValue={num}
                 >
                   <InputNumber />
                 </Form.Item>
@@ -134,18 +170,13 @@ export default function ({ title, category, reach, click, coupons }: any) {
               )}
             />
           )}
-          {
-            coupons && allSorts?.res?.data?.map((coupon:any) => (
-              <Table.Column
-              title={coupon.sortName}
-              dataIndex={coupon.sortName}
+          {price && (
+            <Table.Column
+              title="Price"
+              dataIndex={"price"}
               render={(_: any, record: any, index) => (
-                <>
-                <Form.Item hidden name={[index, "sorts", "sortId"]} key={coupon._id} initialValue={coupon._id}>
-                  <Input/>
-                </Form.Item>
                 <Form.Item
-                  name={[index, "sorts", "access"]}
+                  name={[index, "price"]}
                   rules={[
                     {
                       required: true,
@@ -155,11 +186,135 @@ export default function ({ title, category, reach, click, coupons }: any) {
                 >
                   <InputNumber />
                 </Form.Item>
-                </>
               )}
             />
-            ))
-          }
+          )}
+          {minA && (
+            <Table.Column
+              title="MinA"
+              dataIndex={"minAmount"}
+              render={(_: any, record: any, index) => (
+                <Form.Item
+                  name={[index, "minAmount"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: `required.`,
+                    },
+                  ]}
+                >
+                  <InputNumber />
+                </Form.Item>
+              )}
+            />
+          )}
+          {coupons &&
+            allSorts?.res?.data?.map((coupon: any) => (
+              <Table.Column
+                title={coupon.sortName}
+                dataIndex={coupon.sortName}
+                render={(_: any, record: any, index) => (
+                  <>
+                    <Form.Item
+                      hidden
+                      name={[index, "sorts", "sortId"]}
+                      key={coupon._id}
+                      initialValue={coupon._id}
+                    >
+                      <Input />
+                    </Form.Item>
+                    <Form.Item
+                      name={[index, "sorts", "access"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: `required.`,
+                        },
+                      ]}
+                    >
+                      <InputNumber />
+                    </Form.Item>
+                  </>
+                )}
+              />
+            ))}
+          {couponCreate && (
+            <>
+              <Table.Column
+                title="Total Post"
+                dataIndex={"totalPost"}
+                render={(_: any, record: any, index) => (
+                  <Form.Item
+                    name={[index, "totalPost"]}
+                    rules={[
+                      {
+                        required: true,
+                        message: `required.`,
+                      },
+                    ]}
+                  >
+                    <InputNumber />
+                  </Form.Item>
+                )}
+              />
+              <Table.Column
+                title="Dis Amount"
+                dataIndex={"disAmount"}
+                render={(_: any, record: any, index) => (
+                  <Form.Item
+                    name={[index, "disAmount"]}
+                    rules={[
+                      {
+                        required: true,
+                        message: `required.`,
+                      },
+                    ]}
+                  >
+                    <InputNumber />
+                  </Form.Item>
+                )}
+              />
+              <Table.Column
+                title="Valid"
+                dataIndex={"valid"}
+                render={(_: any, record: any, index) => (
+                  <Form.Item
+                    name={[index, "valid"]}
+                    rules={[
+                      {
+                        required: true,
+                        message: `required.`,
+                      },
+                    ]}
+                  >
+                    <InputNumber />
+                  </Form.Item>
+                )}
+              />
+              <Table.Column
+                title="status"
+                dataIndex={"status"}
+                render={(_: any, record: any, index) => (
+                  <Form.Item
+                    name={[index, "status"]}
+                    rules={[
+                      {
+                        required: true,
+                        message: `required.`,
+                      },
+                    ]}
+                  >
+                    <Switch
+                      className="bg-gray-400"
+                      defaultChecked
+                      checkedChildren={<CheckOutlined />}
+                      unCheckedChildren={<CloseOutlined />}
+                    />
+                  </Form.Item>
+                )}
+              />
+            </>
+          )}
           <Table.Column
             title="Action"
             render={(_: any, record: any, index) => (
@@ -194,6 +349,6 @@ export default function ({ title, category, reach, click, coupons }: any) {
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 }
