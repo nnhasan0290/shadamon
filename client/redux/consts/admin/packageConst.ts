@@ -15,3 +15,8 @@ export const GET_ALL_SORTS = "GET_ALL_SORTS"
 
 export const CREATE_COUPON_REQ = "CREATE_COUPON_REQ"; 
 export const CREATE_COUPON = "CREATE_COUPON"; 
+
+
+export const ADD_VAT_REQ = "ADD_VAT_REQ"; 
+export const ADD_VAT = "ADD_VAT"; 
+

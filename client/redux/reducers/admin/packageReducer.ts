@@ -1,4 +1,4 @@
-import { CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
+import { ADD_VAT, ADD_VAT_REQ, CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
 
 export const createPackageReducer = (
     state = { success: false, res: {} },
@@ -77,6 +77,23 @@ export const createPackageReducer = (
       case CREATE_COUPON_REQ:
         return { ...state, success: false };
       case CREATE_COUPON:
+        return {
+          success:true,
+          res: action.payload,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  export const addVatReducer = (
+    state = { success: false, res: {} },
+    action: any
+  ) => {
+    switch (action.type) {
+      case ADD_VAT_REQ:
+        return { ...state, success: false };
+      case ADD_VAT:
         return {
           success:true,
           res: action.payload,

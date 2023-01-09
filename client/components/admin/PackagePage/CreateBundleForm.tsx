@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
 import SinglePackageForm from "./SinglePackageForm";
-import { createPackageAction } from "../../../redux/actions/Admin/packageAction";
+import { addVatAction, createPackageAction } from "../../../redux/actions/Admin/packageAction";
 
 export default function ({ record }: any) {
   const [form] = Form.useForm();
@@ -220,26 +220,30 @@ export default function ({ record }: any) {
         <Divider />
         <div>
           <Typography>Vat</Typography>
-          <Form className="flex gap-2">
-            <Form.Item name={"formINside"}>
-              <TextField
-                size="small"
-                id="outlined-basic"
-                label="Added How many percent %"
-                variant="outlined"
-              />
+          <Form className="flex gap-2" onFinish={(values:any) => {
+              values.addVat = parseInt(values.addVat);
+            dispatch(addVatAction(values))
+          }}>
+            <Form.Item name={"addVat"}>
+            <TextField
+            size="small"
+              type={"number"}
+              id="outlined-basic"
+              label="Vat Percentage"
+              variant="outlined"
+            />
             </Form.Item>
-            <Form.Item>
+            <Form.Item name={"status"}>
               <TextField
                 size="small"
                 className="w-[100px]"
                 select // tell TextField to render select
                 label="Status"
               >
-                <MenuItem key={1} value={"true"}>
+                <MenuItem key={1} value={"active"}>
                   Active
                 </MenuItem>
-                <MenuItem key={2} value={"false"}>
+                <MenuItem key={2} value={"inActive"}>
                   Inactive
                 </MenuItem>
               </TextField>

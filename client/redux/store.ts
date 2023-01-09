@@ -9,7 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { createCategoryReducer, createFeatureReducer, createSubCatReducer, deleteCategoryReducer, deleteFeatureReducer, deleteSubCategoryReducer, editCategoryReducer, editFeatureReducer, editSubCategoryReducer, getAllCategoryReducer, getButtonsReducer, getCatUnderParentReducer, getFeaturesReducer, getFeatureUnderSubReducer, getLocationReducer, GetParentCategoryReducer, getParentCatSubReducer, getSubCatReducer } from "./reducers/admin/catReducer";
 import { createLocationReducer, createParentLocationReducer, deleteParentLocationReducer, deleteSubLocationReducer, editParentLocationReducer, editSubLocationReducer } from "./reducers/admin/locationReducer";
-import { createCouponReducer, createPackageReducer, deletePackageReducer, editPackageReducer, getAllPackageReducer, getAllSortsReducer, getAllSubCatReducer } from "./reducers/admin/packageReducer";
+import { addVatReducer, createCouponReducer, createPackageReducer, deletePackageReducer, editPackageReducer, getAllPackageReducer, getAllSortsReducer, getAllSubCatReducer } from "./reducers/admin/packageReducer";
 import { approvePdImgReducer, createProductReducer, deletePdImgReducer, deleteProductReducer, editProductReducer, getAllProductReducer } from "./reducers/admin/productReducer";
 import { defaultReducer } from "./reducers/defaultReducer";
 import { loadReducer, loginReducer, signUpReducer } from "./reducers/userReducer";
@@ -57,6 +57,7 @@ const rootReducer = combineReducers({
   allSorts: getAllSortsReducer,
   allPackages: getAllPackageReducer,
   createCoupon: createCouponReducer,
+  addVat: addVatReducer,
 });
 
 const store = createStore(

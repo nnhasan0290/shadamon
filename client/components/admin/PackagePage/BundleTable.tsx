@@ -65,7 +65,7 @@ const BundleTable = () => {
   }, [createPg.success, deletePg.success]);
   return (
     <>
-      <Table bordered columns={columns} dataSource={data} />
+      <Table title={() => "Bundle Promote"} bordered columns={columns} dataSource={data} />
     </>
   );
 };
