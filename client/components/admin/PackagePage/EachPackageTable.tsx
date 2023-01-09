@@ -77,11 +77,11 @@ export default function ({
             setState(val);
           } else {
             if (couponCreate) {
-              console.log(val);
-              dispatch(createCouponAction(val))
+              console.log(val[0]);
+              dispatch(createCouponAction(val[0]));
             } else {
               const values = {
-                single: val,
+                single: val[0],
                 name: "single",
                 packageType: "single",
                 packageStatus: "active",
@@ -403,15 +403,17 @@ export default function ({
         </Table>
         <div className="flex gap-1 justify-end py-1">
           <Button onClick={save}>Save</Button>
-          <Button
-            onClick={() => {
-              setDataSource([...dataSource, {}]);
-            }}
-            className=""
-            type="primary"
-          >
-            Add
-          </Button>
+          {!single && (
+            <Button
+              onClick={() => {
+                setDataSource([...dataSource, {}]);
+              }}
+              className=""
+              type="primary"
+            >
+              Add
+            </Button>
+          )}
         </div>
       </Form>
     </div>
