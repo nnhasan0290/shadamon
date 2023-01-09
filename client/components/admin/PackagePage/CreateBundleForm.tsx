@@ -18,7 +18,6 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
 import SinglePackageTable from "./SinglePackageTable";
 import SinglePackageForm from "./SinglePackageForm";
-import StickerSortTable from "./StickerSortTable";
 import { createPackageAction } from "../../../redux/actions/Admin/packageAction";
 const { Option } = Select;
 
