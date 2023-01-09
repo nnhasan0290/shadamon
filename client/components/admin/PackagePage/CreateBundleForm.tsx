@@ -121,16 +121,17 @@ export default function ({ record }: any) {
         </div>
         <div>
           <EachPackageTable
-            setState={setPostPackage}
             title={"Category Wise Every Post reach and click and how many"}
+            category={true} reach={true} click={true}
           />
           <EachPackageTable
-            setState={setBidPackage}
-            title={
-              "Category Wise Bid and offer and reach and click and how many"
-            }
+            title={"Category Wise Bid & Offer  reach & click and how many"}
+            category={true} reach={true} click={true}
           />
-          <StickerSortTable setState={setSortPackage} />
+          <EachPackageTable
+            title={"Category Wise Sort Item Access"}
+            category={true} coupons={true}
+          />
         </div>
         <Typography>Checked Feature Write-up</Typography>
         <div className="flex">
