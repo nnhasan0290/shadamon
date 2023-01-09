@@ -199,10 +199,10 @@ export default function ({ record }: any) {
               select // tell TextField to render select
               label="Status"
             >
-              <MenuItem key={1} value={"true"}>
+              <MenuItem key={1} value={"active"}>
                 Active
               </MenuItem>
-              <MenuItem key={2} value={"false"}>
+              <MenuItem key={2} value={"inactive"}>
                 Inactive
               </MenuItem>
             </TextField>

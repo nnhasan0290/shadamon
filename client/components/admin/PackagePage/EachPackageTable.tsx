@@ -14,6 +14,8 @@ import {
 import { useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import {
+  createCouponAction,
+  createPackageAction,
   getAllSortsAction,
   getAllSubCatAction,
 } from "../../../redux/actions/Admin/packageAction";
@@ -30,12 +32,11 @@ export default function ({
   sName,
   couponCreate,
   setState,
+  single,
 }: any) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const [dataSource, setDataSource] = useState<any>([
-    { },
-  ]);
+  const [dataSource, setDataSource] = useState<any>([{}]);
   const [messageApi, contextHolder] = message.useMessage();
   const {
     getAllSubCat: {
@@ -54,7 +55,8 @@ export default function ({
   const save = async () => {
     try {
       const values = await form.validateFields();
-      if (values) {
+
+      if (!single && values) {
         messageApi.success("saved");
       }
       form.submit();
@@ -71,8 +73,23 @@ export default function ({
           for (let key in values) {
             val.push(values[key]);
           }
-          console.log(val);
-          setState(val);
+          if (!single) {
+            setState(val);
+          } else {
+            if (couponCreate) {
+              console.log(val);
+              dispatch(createCouponAction(val))
+            } else {
+              const values = {
+                single: val,
+                name: "single",
+                packageType: "single",
+                packageStatus: "active",
+              };
+              console.log(values);
+              dispatch(createPackageAction(values));
+            }
+          }
         }}
         form={form}
       >
@@ -118,7 +135,7 @@ export default function ({
               dataIndex="sortName"
               render={(_: any, record: any, index) => (
                 <Form.Item
-                  name={[index, "sortName"]}
+                  name={[index, "sortId"]}
                   rules={[
                     {
                       required: true,
@@ -126,7 +143,20 @@ export default function ({
                     },
                   ]}
                 >
-                  <Input />
+                  <Select
+                    showSearch={false}
+                    mode="tags"
+                    placeholder="sort Items"
+                    getPopupContainer={(trigger) => trigger.parentNode}
+                    showArrow={true}
+                  >
+                    {allSorts?.res?.data?.map((sort: any) => (
+                      <Select.Option value={sort._id}>
+                        {" "}
+                        {sort.sortName}
+                      </Select.Option>
+                    ))}
+                  </Select>
                 </Form.Item>
               )}
             />
@@ -258,11 +288,11 @@ export default function ({
                 )}
               />
               <Table.Column
-                title="Dis Amount"
-                dataIndex={"disAmount"}
+                title="InTime"
+                dataIndex={"inTime"}
                 render={(_: any, record: any, index) => (
                   <Form.Item
-                    name={[index, "disAmount"]}
+                    name={[index, "inTime"]}
                     rules={[
                       {
                         required: true,
@@ -275,11 +305,45 @@ export default function ({
                 )}
               />
               <Table.Column
-                title="Valid"
-                dataIndex={"valid"}
+                title="Code"
+                dataIndex={"couponCode"}
                 render={(_: any, record: any, index) => (
                   <Form.Item
-                    name={[index, "valid"]}
+                    name={[index, "couponCode"]}
+                    rules={[
+                      {
+                        required: true,
+                        message: `required.`,
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                )}
+              />
+              <Table.Column
+                title="Dis Amount"
+                dataIndex={"discAmount"}
+                render={(_: any, record: any, index) => (
+                  <Form.Item
+                    name={[index, "discAmount"]}
+                    rules={[
+                      {
+                        required: true,
+                        message: `required.`,
+                      },
+                    ]}
+                  >
+                    <InputNumber />
+                  </Form.Item>
+                )}
+              />
+              <Table.Column
+                title="validDays"
+                dataIndex={"validDays"}
+                render={(_: any, record: any, index) => (
+                  <Form.Item
+                    name={[index, "validDays"]}
                     rules={[
                       {
                         required: true,

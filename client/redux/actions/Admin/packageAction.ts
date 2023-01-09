@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import axios from "axios";
-import { CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
+import { CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
 
 export const createPackageAction = (formdata: any) => async (dispatch: any) => {
     const id = toast.loading("Please wait...");
@@ -128,4 +128,34 @@ export const createPackageAction = (formdata: any) => async (dispatch: any) => {
     }
   };
   
+
+  export const createCouponAction = (formdata: any) => async (dispatch: any) => {
+    const id = toast.loading("Please wait...");
+    dispatch({type: CREATE_COUPON_REQ})
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_HOST}/api/package/coupon`,
+        formdata,
+        config
+      );
+      dispatch({ type: CREATE_COUPON, payload: data });
+      toast.update(id, {
+        render: `${data.message}`,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast.update(id, {
+        render: `${error.response.data.message}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  };
   

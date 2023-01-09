@@ -1,77 +1,76 @@
-import React from 'react';
-import { Button, Popconfirm, Table, Tag } from 'antd';
-import type { ColumnsType, TableProps } from 'antd/es/table';
+import React, { useEffect } from "react";
+import { Button, Popconfirm, Table, Tag } from "antd";
+import type { ColumnsType, TableProps } from "antd/es/table";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { getAllPackageAction } from "../../../redux/actions/Admin/packageAction";
 
-
-
-const columns:any = [
+const columns: any = [
   {
-    title: '',
-    dataIndex: 'key',
+    title: "",
+    render: (_:any, record:any, index:any) => index+1
   },
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: "Name",
+    dataIndex: "name",
   },
   {
-    title: 'Priority',
-    dataIndex: 'priority'
+    title: "Priority",
+    dataIndex: "priority",
   },
   {
-    title: 'Active',
-    dataIndex: 'active',
-    render: (bool:any) => (
-        <Tag color={bool ? "success" : "error"}>{bool ? "Yes" : "No"}</Tag>
-    )
+    title: "Active",
+    dataIndex: "packageStatus",
+    render: (bool: any) => (
+      <Tag color={bool ? "success" : "error"}>{bool ? "Yes" : "No"}</Tag>
+    ),
   },
   {
-    title: 'Delete',
+    title: "Delete",
     align: "center",
-    render: (data:any, record:any) => (
-        <Popconfirm
+    render: (data: any, record: any) => (
+      <Popconfirm
         title="Delete the data?"
-        onConfirm={(e: any) => {
-        }}
+        onConfirm={(e: any) => {}}
         onCancel={(e: any) => console.log(e)}
         okText="Yes"
         cancelText="No"
       >
-        <Button danger >
-       Delete
-      </Button>
+        <Button danger>Delete</Button>
       </Popconfirm>
-    )
+    ),
   },
   {
-    title: 'Edit',
-    render:(_: any, record: any) => (
-         <Button type="primary" >
-         Edit
-       </Button>
-      )
+    title: "Edit",
+    render: (_: any, record: any) => <Button type="primary">Edit</Button>,
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    priority: "category Wise",
-    active: false,
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    priority: "Average",
-    active: true,
-  },
-  
-];
+// const data = [
+//   {
+//     key: "1",
+//     name: "John Brown",
+//     priority: "category Wise",
+//     active: false,
+//   },
+//   {
+//     key: "2",
+//     name: "Jim Green",
+//     priority: "Average",
+//     active: true,
+//   },
+// ];
 
-// const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
-//   console.log('params', pagination, filters, sorter, extra);
-// };
-
-const BundleTable = () => <Table bordered columns={columns} dataSource={data}  />;
+const BundleTable = () => {
+    const dispatch = useAppDispatch();
+    const {allPackages:{res:{data}},createPg} = useAppSelector((state) => state)
+    useEffect(() => {
+      dispatch(getAllPackageAction());
+    },[createPg.success])
+  return (
+    <>
+      <Table bordered columns={columns} dataSource={data} />
+    </>
+  );
+};
 
 export default BundleTable;
