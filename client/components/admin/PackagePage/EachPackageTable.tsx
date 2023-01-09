@@ -303,6 +303,7 @@ export default function ({
                         message: `required.`,
                       },
                     ]}
+                    initialValue={true}
                   >
                     <Switch
                       className="bg-gray-400"
