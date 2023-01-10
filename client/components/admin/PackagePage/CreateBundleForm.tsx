@@ -221,9 +221,9 @@ export default function ({ record }: any) {
       </Form>
       <div className="overflow-hidden pl-3 basis-1/2">
         {/* //Second Form ================== */}
-        <EachPackageTable initiialValue={[{}]} single={true} price={true} reach={true} click={true} minA={true} category={true} title="Single Package" />
-        <EachPackageTable initiialValue={[{}]} single={true} price={true} reach={true} click={true} sName={true} category={true} title="Category Wise Sort Item Price" />
-        <EachPackageTable initiialValue={[{}]} single={true}  setState={setCouponDetails}  couponCreate={true} title={"Create Coupon"}/>
+        <EachPackageTable initialValue={[{}]} single={true} price={true} reach={true} click={true} minA={true} category={true} title="Single Package" />
+        <EachPackageTable initialValue={[{}]} single={true} price={true} reach={true} click={true} sName={true} category={true} title="Category Wise Sort Item Price" />
+        <EachPackageTable initialValue={[{}]} single={true}  setState={setCouponDetails}  couponCreate={true} title={"Create Coupon"}/>
         <Divider />
         <div>
           <Typography>Vat</Typography>

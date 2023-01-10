@@ -244,7 +244,7 @@ export default function ({
               )}
             />
           )}
-          {coupons &&
+          {/* {coupons &&
             initialValue &&
             dataSource.sorts.map((coupon: any) => (
               <Table.Column
@@ -279,9 +279,8 @@ export default function ({
                   );
                 }}
               />
-            ))}
+            ))} */}
           {coupons &&
-            !initialValue &&
             allSorts?.res?.data?.map((coupon: any) => (
               <Table.Column
                 title={coupon.sortName}
@@ -305,7 +304,6 @@ export default function ({
                           message: `required.`,
                         },
                       ]}
-                      initialValue={copn.access}
                     >
                       <InputNumber />
                     </Form.Item>
