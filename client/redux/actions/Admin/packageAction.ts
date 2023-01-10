@@ -90,7 +90,7 @@ export const createPackageAction = (formdata: any) => async (dispatch: any) => {
         withCredentials: true,
       };
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_HOST}/api/package/getallpackage`,
+        `${process.env.NEXT_PUBLIC_HOST}/api/package/packages`,
         config
       );
       dispatch({ type: GET_ALL_PACKAGE, payload: data });

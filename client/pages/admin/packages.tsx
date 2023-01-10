@@ -26,12 +26,8 @@ export default function Admin() {
         <SmallModal />
         <div className="mr-4 w-full">
           <TopAvatarArea />
-          <div className="flex">
-            <div className="basis-1/2">
-              <PackageBtnArea />
-              <BundleTable />
-            </div>
-          </div>
+          <PackageBtnArea />
+          <BundleTable />
         </div>
       </div>
     </>

@@ -33,11 +33,13 @@ export default function ({
   couponCreate,
   setState,
   single,
+  initialValue,
 }: any) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const [dataSource, setDataSource] = useState<any>([{}]);
+  const [dataSource, setDataSource] = useState<any>(initialValue);
   const [messageApi, contextHolder] = message.useMessage();
+  console.log(dataSource, "datasource");
   const {
     getAllSubCat: {
       res: { data },
@@ -50,6 +52,7 @@ export default function ({
     dispatch(getAllSubCatAction());
     dispatch(getAllSortsAction());
   }, []);
+
 
   //methods -------------------------------------------
   const save = async () => {
@@ -99,34 +102,37 @@ export default function ({
             <Table.Column
               title="Categories"
               dataIndex={"subcategories"}
-              render={(_: any, record: any, index) => (
-                <>
-                  <Form.Item
-                    name={[index, "subcategories"]}
-                    rules={[
-                      {
-                        required: true,
-                        message: `required.`,
-                      },
-                    ]}
-                  >
-                    <Select
-                      showSearch={false}
-                      mode="tags"
-                      placeholder="categories"
-                      getPopupContainer={(trigger) => trigger.parentNode}
-                      showArrow={true}
+              render={(selected: any, record: any, index) => {
+                return (
+                  <>
+                    <Form.Item
+                      name={[index, "subcategories"]}
+                      rules={[
+                        {
+                          required: true,
+                          message: `required.`,
+                        },
+                      ]}
+                      initialValue={ selected}
                     >
-                      {data?.map((cat: any) => (
-                        <Select.Option value={cat._id}>
-                          {" "}
-                          {cat.subCategoryName}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                </>
-              )}
+                      <Select
+                        showSearch={false}
+                        mode="tags"
+                        placeholder="categories"
+                        getPopupContainer={(trigger) => trigger.parentNode}
+                        showArrow={true}
+                      >
+                        {data?.map((cat: any) => (
+                          <Select.Option value={cat._id}>
+                            {" "}
+                            {cat.subCategoryName}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </>
+                );
+              }}
             />
           )}
           {sName && (
@@ -176,7 +182,7 @@ export default function ({
                   ]}
                   initialValue={num}
                 >
-                  <InputNumber />
+                  <InputNumber defaultValue={num} />
                 </Form.Item>
               )}
             />
@@ -185,7 +191,7 @@ export default function ({
             <Table.Column
               title="Click"
               dataIndex={"click"}
-              render={(_: any, record: any, index) => (
+              render={(click: any, record: any, index) => (
                 <Form.Item
                   name={[index, "click"]}
                   rules={[
@@ -194,6 +200,7 @@ export default function ({
                       message: `required.`,
                     },
                   ]}
+                  initialValue={click}
                 >
                   <InputNumber />
                 </Form.Item>
@@ -242,9 +249,20 @@ export default function ({
             allSorts?.res?.data?.map((coupon: any) => (
               <Table.Column
                 title={coupon.sortName}
-                dataIndex={coupon.sortName}
-                render={(_: any, record: any, index) => (
+                dataIndex={"sorts"}
+                render={(copn: any, record: any, index) => (
                   <>
+                  {
+                    copn ? (
+                      <Form.Item
+                      hidden
+                      name={[index, "sorts", "sortId"]}
+                      key={copn._id}
+                      initialValue={copn._id}
+                    >
+                      <Input />
+                    </Form.Item>
+                    ) : (
                     <Form.Item
                       hidden
                       name={[index, "sorts", "sortId"]}
@@ -253,6 +271,9 @@ export default function ({
                     >
                       <Input />
                     </Form.Item>
+                      
+                    )
+                  }
                     <Form.Item
                       name={[index, "sorts", "access"]}
                       rules={[
@@ -380,30 +401,42 @@ export default function ({
               />
             </>
           )}
-          <Table.Column
-            title="Action"
-            render={(_: any, record: any, index) => (
-              <Popconfirm
-                title="Sure to delete?"
-                onConfirm={() => {
-                  const prev = [...dataSource];
-                  const index = prev.findIndex(
-                    (item) => item.key === record.key
-                  );
-                  prev.splice(index, 1);
-                  setDataSource(prev);
-                }}
-              >
-                <Button danger className="mb-[24px]">
-                  <BiTrash />
-                </Button>
-              </Popconfirm>
-            )}
-          />
-        </Table>
-        <div className="flex gap-1 justify-end py-1">
-          <Button onClick={save}>Save</Button>
           {!single && (
+            <Table.Column
+              title="Action"
+              render={(_: any, record: any, index) => (
+                <Popconfirm
+                  title="Sure to delete?"
+                  onConfirm={() => {
+                    const prev = [...dataSource];
+                    const index = prev.findIndex(
+                      (item) => item.key === record.key
+                    );
+                    prev.splice(index, 1);
+                    setDataSource(prev);
+                  }}
+                >
+                  <Button danger className="mb-[24px]">
+                    <BiTrash />
+                  </Button>
+                </Popconfirm>
+              )}
+            />
+          )}
+          {single && (
+            <Table.Column
+              title={"Save"}
+              render={() => (
+                <Button className="mb-[24px]" type="primary" onClick={save}>
+                  Save
+                </Button>
+              )}
+            />
+          )}
+        </Table>
+        {!single && (
+          <div className="flex gap-1 justify-end py-1">
+            <Button onClick={save}>Save</Button>
             <Button
               onClick={() => {
                 setDataSource([...dataSource, {}]);
@@ -413,8 +446,8 @@ export default function ({
             >
               Add
             </Button>
-          )}
-        </div>
+          </div>
+        )}
       </Form>
     </div>
   );

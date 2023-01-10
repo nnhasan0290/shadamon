@@ -12,10 +12,10 @@ import EachPackageTable from "./EachPackageTable";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
-import SinglePackageForm from "./SinglePackageForm";
 import { addVatAction, createPackageAction } from "../../../redux/actions/Admin/packageAction";
 
 export default function ({ record }: any) {
+  console.log(record);
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
   const { adminCat } = useAppSelector((state) => state);
@@ -24,6 +24,7 @@ export default function ({ record }: any) {
   const [postPackage, setPostPackage] = useState([]);
   const [bidPackage, setBidPackage] = useState([]);
   const [sortPackage, setSortPackage] = useState([]);
+  const [couponDetails, setCouponDetails] = useState([]);
 
   //muit select change
 
@@ -51,6 +52,7 @@ export default function ({ record }: any) {
           console.log(values);
           dispatch(createPackageAction(values));
         }}
+        initialValues={record}
         className="pr-3 border-r basis-1/2"
       >
         <div className="flex gap-1 justify-between">
@@ -114,16 +116,19 @@ export default function ({ record }: any) {
         </div>
         <div>
           <EachPackageTable
+            initialValue={record ? record?.bundle?.post : [{}]}
             setState={setPostPackage}
             title={"Category Wise Every Post reach and click and how many"}
             category={true} reach={true} click={true}
           />
           <EachPackageTable
+          initialValue={record ? record?.bundle?.bidnOffer : [{}]}
           setState={setBidPackage}
             title={"Category Wise Bid & Offer  reach & click and how many"}
             category={true} reach={true} click={true}
           />
           <EachPackageTable
+           initialValue={record ? record?.bundle?.stickersSort : [{}]}
           setState={setSortPackage}
             title={"Category Wise Sort Item Access"}
             category={true} coupons={true}
@@ -216,8 +221,10 @@ export default function ({ record }: any) {
       </Form>
       <div className="overflow-hidden pl-3 basis-1/2">
         {/* //Second Form ================== */}
-        <SinglePackageForm />
-        <Divider />
+        {/* <EachPackageTable single={true} price={true} reach={true} click={true} minA={true} category={true} title="Single Package" />
+        <EachPackageTable single={true} price={true} reach={true} click={true} sName={true} category={true} title="Category Wise Sort Item Price" />
+        <EachPackageTable single={true}  setState={setCouponDetails}  couponCreate={true} title={"Create Coupon"}/>
+        <Divider /> */}
         <div>
           <Typography>Vat</Typography>
           <Form className="flex gap-2" onFinish={(values:any) => {
@@ -233,7 +240,7 @@ export default function ({ record }: any) {
               variant="outlined"
             />
             </Form.Item>
-            <Form.Item name={"status"}>
+            {/* <Form.Item name={"status"}>
               <TextField
                 size="small"
                 className="w-[100px]"
@@ -247,7 +254,8 @@ export default function ({ record }: any) {
                   Inactive
                 </MenuItem>
               </TextField>
-            </Form.Item>
+            </Form.Item> */}
+            
             <Form.Item className="flex justify-center items-center self-stretch rounded-md">
               <Button
                 htmlType="submit"
