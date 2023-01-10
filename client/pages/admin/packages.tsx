@@ -6,8 +6,8 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import SmallModal from "../../components/admin/AllModal/SmallModal";
-import PackageBtnArea from "../../components/admin/PackagePage/PackageBtnArea";
 import BundleTable from "../../components/admin/PackagePage/BundleTable";
+import MiddleModal from "../../components/admin/AllModal/MidModal";
 
 export default function Admin() {
   return (
@@ -23,10 +23,10 @@ export default function Admin() {
           <SideMenu activeItem="11" />
         </div>
         <AdminModal />
+        <MiddleModal/>
         <SmallModal />
         <div className="mr-4 w-full">
           <TopAvatarArea />
-          <PackageBtnArea />
           <BundleTable />
         </div>
       </div>

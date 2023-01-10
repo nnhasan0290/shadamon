@@ -33,7 +33,7 @@ export default function ({ record }: any) {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-between basis-full">
+    <div className="max-w-[900px]">
       <div className="flex gap-2 items-center font-bold">
         <span className="p-1 text-white bg-gray-700 rounded-full">
           <BiPlus />
@@ -44,6 +44,7 @@ export default function ({ record }: any) {
 
       {/* inputs =============== */}
       <Form
+      className=""
         form={form}
         onFinish={(values) => {
           values.bundle.post = postPackage;
@@ -53,7 +54,6 @@ export default function ({ record }: any) {
           dispatch(createPackageAction(values));
         }}
         initialValues={record}
-        className="pr-3 border-r basis-1/2"
       >
         <div className="flex gap-1 justify-between">
           <Form.Item
@@ -119,12 +119,6 @@ export default function ({ record }: any) {
             initialValue={record ? record?.bundle?.post : [{}]}
             setState={setPostPackage}
             title={"Category Wise Every Post reach and click and how many"}
-            category={true} reach={true} click={true}
-          />
-          <EachPackageTable
-          initialValue={record ? record?.bundle?.bidnOffer : [{}]}
-          setState={setBidPackage}
-            title={"Category Wise Bid & Offer  reach & click and how many"}
             category={true} reach={true} click={true}
           />
           <EachPackageTable
@@ -219,8 +213,7 @@ export default function ({ record }: any) {
           </Button>
         </Form.Item>
       </Form>
-      <div className="overflow-hidden pl-3 basis-1/2">
-        {/* //Second Form ================== */}
+      {/* <div className="overflow-hidden pl-3 basis-1/2">
         <EachPackageTable initialValue={[{}]} single={true} price={true} reach={true} click={true} minA={true} category={true} title="Single Package" />
         <EachPackageTable initialValue={[{}]} single={true} price={true} reach={true} click={true} sName={true} category={true} title="Category Wise Sort Item Price" />
         <EachPackageTable initialValue={[{}]} single={true}  setState={setCouponDetails}  couponCreate={true} title={"Create Coupon"}/>
@@ -268,7 +261,7 @@ export default function ({ record }: any) {
             </Form.Item>
           </Form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
