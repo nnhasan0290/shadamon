@@ -53,7 +53,6 @@ export default function ({
     dispatch(getAllSortsAction());
   }, []);
 
-
   //methods -------------------------------------------
   const save = async () => {
     try {
@@ -113,7 +112,7 @@ export default function ({
                           message: `required.`,
                         },
                       ]}
-                      initialValue={ selected}
+                      initialValue={selected}
                     >
                       <Select
                         showSearch={false}
@@ -246,23 +245,49 @@ export default function ({
             />
           )}
           {coupons &&
+            initialValue &&
+            dataSource.sorts.map((coupon: any) => (
+              <Table.Column
+                title={coupon.sortName}
+                dataIndex={"sorts"}
+                render={(copn: any, record: any, index) => {
+                  console.log(copn);
+                  return (
+                    <>
+                      <Form.Item
+                        hidden
+                        name={[index, "sorts", "sortId"]}
+                        key={coupon._id}
+                        initialValue={coupon._id}
+                      >
+                        <Input />
+                      </Form.Item>
+
+                      <Form.Item
+                        name={[index, "sorts", "access"]}
+                        rules={[
+                          {
+                            required: true,
+                            message: `required.`,
+                          },
+                        ]}
+                        initialValue={copn.access}
+                      >
+                        <InputNumber />
+                      </Form.Item>
+                    </>
+                  );
+                }}
+              />
+            ))}
+          {coupons &&
+            !initialValue &&
             allSorts?.res?.data?.map((coupon: any) => (
               <Table.Column
                 title={coupon.sortName}
                 dataIndex={"sorts"}
                 render={(copn: any, record: any, index) => (
                   <>
-                  {
-                    copn ? (
-                      <Form.Item
-                      hidden
-                      name={[index, "sorts", "sortId"]}
-                      key={copn._id}
-                      initialValue={copn._id}
-                    >
-                      <Input />
-                    </Form.Item>
-                    ) : (
                     <Form.Item
                       hidden
                       name={[index, "sorts", "sortId"]}
@@ -271,9 +296,7 @@ export default function ({
                     >
                       <Input />
                     </Form.Item>
-                      
-                    )
-                  }
+
                     <Form.Item
                       name={[index, "sorts", "access"]}
                       rules={[
@@ -282,6 +305,7 @@ export default function ({
                           message: `required.`,
                         },
                       ]}
+                      initialValue={copn.access}
                     >
                       <InputNumber />
                     </Form.Item>

@@ -10,7 +10,7 @@ export default function({data,delAction,title}:any){
     const {modalDispatch} = GlobalStates()
     return(
         <Table
-        className="pr-2 basis-1/2"
+        className="pr-2 my-2 basis-1/2"
         title={() => <Tag >{title}</Tag>}
         bordered
         dataSource={data}

@@ -221,10 +221,10 @@ export default function ({ record }: any) {
       </Form>
       <div className="overflow-hidden pl-3 basis-1/2">
         {/* //Second Form ================== */}
-        {/* <EachPackageTable single={true} price={true} reach={true} click={true} minA={true} category={true} title="Single Package" />
-        <EachPackageTable single={true} price={true} reach={true} click={true} sName={true} category={true} title="Category Wise Sort Item Price" />
-        <EachPackageTable single={true}  setState={setCouponDetails}  couponCreate={true} title={"Create Coupon"}/>
-        <Divider /> */}
+        <EachPackageTable initiialValue={[{}]} single={true} price={true} reach={true} click={true} minA={true} category={true} title="Single Package" />
+        <EachPackageTable initiialValue={[{}]} single={true} price={true} reach={true} click={true} sName={true} category={true} title="Category Wise Sort Item Price" />
+        <EachPackageTable initiialValue={[{}]} single={true}  setState={setCouponDetails}  couponCreate={true} title={"Create Coupon"}/>
+        <Divider />
         <div>
           <Typography>Vat</Typography>
           <Form className="flex gap-2" onFinish={(values:any) => {
@@ -240,7 +240,7 @@ export default function ({ record }: any) {
               variant="outlined"
             />
             </Form.Item>
-            {/* <Form.Item name={"status"}>
+            <Form.Item name={"status"}>
               <TextField
                 size="small"
                 className="w-[100px]"
@@ -254,7 +254,7 @@ export default function ({ record }: any) {
                   Inactive
                 </MenuItem>
               </TextField>
-            </Form.Item> */}
+            </Form.Item>
             
             <Form.Item className="flex justify-center items-center self-stretch rounded-md">
               <Button
