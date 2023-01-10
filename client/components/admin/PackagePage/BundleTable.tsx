@@ -8,6 +8,7 @@ import {
 import ShowingTable from "./ShowingTable";
 import { Tabs } from "antd";
 import CreateBundleForm from "./CreateBundleForm";
+import SingleTable from "./SingleTable";
 
 const BundleTable = () => {
   const dispatch = useAppDispatch();
@@ -39,10 +40,7 @@ const BundleTable = () => {
       key: "2",
       label: `Single`,
       children: (
-        <ShowingTable
-          title={"Single Promote"}
-          data={allPackages?.res?.data?.Single}
-        />
+        <SingleTable/>
       ),
     },
     {
