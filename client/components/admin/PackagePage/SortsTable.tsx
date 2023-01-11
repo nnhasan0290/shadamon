@@ -1,6 +1,7 @@
 import {
   Button,
   Form,
+  Input,
   InputNumber,
   message,
   Popconfirm,
@@ -43,10 +44,7 @@ export default function ({ initialVal }: any) {
 
   return (
     <div>
-      <Form
-        initialValues={dataSource}
-        form={form}
-      >
+      <Form initialValues={dataSource} form={form}>
         <Table
           title={() => (
             <Button
@@ -93,73 +91,38 @@ export default function ({ initialVal }: any) {
             }}
           />
           <Table.Column
-            colSpan={2}
-            title="Reach"
-            dataIndex={"reach"}
+            title="sorts"
+            dataIndex={"sorts"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "reach"]}>
-                <InputNumber placeholder="In" />
+              <Form.Item name={[index, "sorts"]}>
+                <Input />
               </Form.Item>
             )}
           />
           <Table.Column
-            colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "reach"]}>
-                <InputNumber placeholder="out" />
+            title="Reach"
+            dataIndex={"reach"}
+            render={(num: any, record: any, index) => (
+              <Form.Item name={[index, "reach"]}>
+                <InputNumber />
               </Form.Item>
             )}
           />
 
           <Table.Column
-            colSpan={2}
             title="click"
             dataIndex={"click"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "click"]}>
-                <InputNumber placeholder="In" />
+              <Form.Item name={[index, "click"]}>
+                <InputNumber />
               </Form.Item>
             )}
           />
           <Table.Column
-            colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "click"]}>
-                <InputNumber placeholder="out" />
-              </Form.Item>
-            )}
-          />
-          <Table.Column
-            colSpan={2}
             title={"Price"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "price"]}>
-                <InputNumber placeholder="In" />
-              </Form.Item>
-            )}
-          />
-          <Table.Column
-            colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "price"]} >
-                <InputNumber placeholder="out" />
-              </Form.Item>
-            )}
-          />
-          <Table.Column
-            colSpan={2}
-            title={"Min Amount"}
-            render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "minAmount"]}>
-                <InputNumber placeholder="In" />
-              </Form.Item>
-            )}
-          />
-          <Table.Column
-            colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "minAmount"]} >
-                <InputNumber placeholder="out" />
+              <Form.Item name={[index, "price"]}>
+                <InputNumber />
               </Form.Item>
             )}
           />

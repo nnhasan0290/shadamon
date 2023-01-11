@@ -220,46 +220,7 @@ export default function ({ record }: any) {
         <Divider />
         <div>
           <Typography>Vat</Typography>
-          <Form className="flex gap-2" onFinish={(values:any) => {
-              values.addVat = parseInt(values.addVat);
-            dispatch(addVatAction(values))
-          }}>
-            <Form.Item name={"addVat"}>
-            <TextField
-            size="small"
-              type={"number"}
-              id="outlined-basic"
-              label="Vat Percentage"
-              variant="outlined"
-            />
-            </Form.Item>
-            <Form.Item name={"status"}>
-              <TextField
-                size="small"
-                className="w-[100px]"
-                select // tell TextField to render select
-                label="Status"
-              >
-                <MenuItem key={1} value={"active"}>
-                  Active
-                </MenuItem>
-                <MenuItem key={2} value={"inActive"}>
-                  Inactive
-                </MenuItem>
-              </TextField>
-            </Form.Item>
-            
-            <Form.Item className="flex justify-center items-center self-stretch rounded-md">
-              <Button
-                htmlType="submit"
-                size="large"
-                type="primary"
-                className=""
-              >
-                Save
-              </Button>
-            </Form.Item>
-          </Form>
+          
         </div>
       </div> */}
     </div>
