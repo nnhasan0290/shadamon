@@ -10,6 +10,8 @@ import {
 import { useEffect, useState } from "react";
 import { BiPlus, BiTrash } from "react-icons/bi";
 import {
+  createPackageAction,
+  deletePackageAction,
   getAllSortsAction,
   getAllSubCatAction,
 } from "../../../redux/actions/Admin/packageAction";
@@ -18,9 +20,9 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 export default function ({ initialVal }: any) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const [dataSource, setDataSource] = useState<any>([{ reach: 5 }]);
+  const [dataSource, setDataSource] = useState<any>(initialVal);
   const [messageApi, contextHolder] = message.useMessage();
-
+  console.log(dataSource, "dataSource");
   //redux ------------------------------------
   const {
     getAllSubCat: {
@@ -32,21 +34,25 @@ export default function ({ initialVal }: any) {
   //useEffects -------------------------------------
   useEffect(() => {
     dispatch(getAllSubCatAction());
-    setDataSource([{ reach: 5, click: 3 }]);
   }, []);
 
   const save = async (record: any, index: any) => {
     const val = await form.validateFields();
     console.log(index, val);
     form.submit();
+    const values = {
+      single: val[0],
+      name: "single",
+      packageType: "single",
+      packageStatus: "active",
+    };
+    console.log(values);
+    dispatch(createPackageAction(values));
   };
 
   return (
     <div>
-      <Form
-        initialValues={dataSource}
-        form={form}
-      >
+      <Form initialValues={dataSource} form={form}>
         <Table
           title={() => (
             <Button
@@ -62,7 +68,7 @@ export default function ({ initialVal }: any) {
         >
           <Table.Column
             title="Categories"
-            dataIndex={"subcategories"}
+            dataIndex={"single"}
             render={(selected: any, record: any, index) => {
               return (
                 <Form.Item
@@ -73,6 +79,7 @@ export default function ({ initialVal }: any) {
                       message: `required.`,
                     },
                   ]}
+                  initialValue={selected?.subcategories}
                 >
                   <Select
                     showSearch={false}
@@ -95,17 +102,24 @@ export default function ({ initialVal }: any) {
           <Table.Column
             colSpan={2}
             title="Reach"
-            dataIndex={"reach"}
+            dataIndex={"single"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "reach"]}>
+              <Form.Item
+                name={[index, "promote", "reach"]}
+                initialValue={num?.promote?.reach}
+              >
                 <InputNumber placeholder="In" />
               </Form.Item>
             )}
           />
           <Table.Column
             colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "reach"]}>
+            dataIndex={"single"}
+            render={(num: any, record: any, index) => (
+              <Form.Item
+                name={[index, "traffic", "reach"]}
+                initialValue={num?.traffic?.reach}
+              >
                 <InputNumber placeholder="out" />
               </Form.Item>
             )}
@@ -114,17 +128,24 @@ export default function ({ initialVal }: any) {
           <Table.Column
             colSpan={2}
             title="click"
-            dataIndex={"click"}
+            dataIndex={"single"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "click"]}>
+              <Form.Item
+                name={[index, "promote", "click"]}
+                initialValue={num?.promote?.click}
+              >
                 <InputNumber placeholder="In" />
               </Form.Item>
             )}
           />
           <Table.Column
             colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "click"]}>
+            dataIndex={"single"}
+            render={(num: any, record: any, index) => (
+              <Form.Item
+                name={[index, "traffic", "click"]}
+                initialValue={num?.traffic?.click}
+              >
                 <InputNumber placeholder="out" />
               </Form.Item>
             )}
@@ -132,16 +153,24 @@ export default function ({ initialVal }: any) {
           <Table.Column
             colSpan={2}
             title={"Price"}
+            dataIndex={"single"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "price"]}>
+              <Form.Item
+                name={[index, "promote", "price"]}
+                initialValue={num?.promote?.price}
+              >
                 <InputNumber placeholder="In" />
               </Form.Item>
             )}
           />
           <Table.Column
             colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "price"]} >
+            dataIndex={"single"}
+            render={(num: any, record: any, index) => (
+              <Form.Item
+                name={[index, "traffic", "price"]}
+                initialValue={num?.traffic?.price}
+              >
                 <InputNumber placeholder="out" />
               </Form.Item>
             )}
@@ -149,16 +178,24 @@ export default function ({ initialVal }: any) {
           <Table.Column
             colSpan={2}
             title={"Min Amount"}
+            dataIndex={"single"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "promote", "minAmount"]}>
+              <Form.Item
+                name={[index, "promote", "minAmount"]}
+                initialValue={num?.promote?.minAmount}
+              >
                 <InputNumber placeholder="In" />
               </Form.Item>
             )}
           />
           <Table.Column
             colSpan={0}
-            render={(_: any, record: any, index) => (
-              <Form.Item name={[index, "traffic", "minAmount"]} >
+            dataIndex={"single"}
+            render={(num: any, record: any, index) => (
+              <Form.Item
+                name={[index, "traffic", "minAmount"]}
+                initialValue={num?.promote?.minAmount}
+              >
                 <InputNumber placeholder="out" />
               </Form.Item>
             )}
@@ -183,10 +220,11 @@ export default function ({ initialVal }: any) {
                 onConfirm={() => {
                   const prev = [...dataSource];
                   const index = prev.findIndex(
-                    (item) => item.key === record.key
+                    (item) => item._id === record._id
                   );
                   prev.splice(index, 1);
-                  //   setDataSource(prev);
+                  setDataSource(prev);
+                  dispatch(deletePackageAction(record._id));
                 }}
               >
                 <Button danger className="mb-[24px]">
