@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import axios from "axios";
-import { ADD_VAT, ADD_VAT_REQ, CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
+import { ADD_VAT, ADD_VAT_REQ, CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_COUPON, DELETE_COUPON_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_COUPON, EDIT_COUPON_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES, GET_VAT_DETAILS } from "../../consts/admin/packageConst";
 
 export const createPackageAction = (formdata: any) => async (dispatch: any) => {
     const id = toast.loading("Please wait...");
@@ -188,4 +188,68 @@ export const createPackageAction = (formdata: any) => async (dispatch: any) => {
       });
     }
   };
+
+  export const editCouponAction = (formdata: any) => async (dispatch: any) => {
+    const id = toast.loading("Please wait...");
+    dispatch({ type: EDIT_COUPON_REQ });
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_HOST}/api/package/editcoupone`,
+        formdata,
+        config
+      );
+      dispatch({ type: EDIT_COUPON, payload: data });
+      toast.update(id, {
+        render: `${data.message}`,
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast.update(id, {
+        render: `${error.response.data.message}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  };
+
+  export const deleteCouponAction = (id: any) => async (dispatch: any) => {
+    console.log("data");
+    dispatch({ type: DELETE_COUPON_REQ });
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.delete(
+        `${process.env.NEXT_PUBLIC_HOST}/api/package/deletecoupon/${id}`,
+        config
+      );
+      dispatch({ type: DELETE_COUPON, payload: data });
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Something Wrong");
+    }
+  };
+
+  export const getVatDetailsAction = () => async (dispatch: any) => {
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST}/api/package/vat`,
+        config
+      );
+      dispatch({ type: GET_VAT_DETAILS, payload: data });
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
   

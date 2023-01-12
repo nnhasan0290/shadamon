@@ -16,7 +16,15 @@ export const GET_ALL_SORTS = "GET_ALL_SORTS"
 export const CREATE_COUPON_REQ = "CREATE_COUPON_REQ"; 
 export const CREATE_COUPON = "CREATE_COUPON"; 
 
+export const EDIT_COUPON_REQ = "EDIT_COUPON_REQ"; 
+export const EDIT_COUPON = "EDIT_COUPON"; 
+
+export const DELETE_COUPON_REQ = "DELETE_COUPON_REQ"; 
+export const DELETE_COUPON = "DELETE_COUPON"; 
+
 
 export const ADD_VAT_REQ = "ADD_VAT_REQ"; 
 export const ADD_VAT = "ADD_VAT"; 
+
+export const GET_VAT_DETAILS = "GET_VAL_DETAILS"
 

@@ -11,6 +11,9 @@ import {
 import { useEffect, useState } from "react";
 import { BiPlus, BiTrash } from "react-icons/bi";
 import {
+  createPackageAction,
+  deletePackageAction,
+  editPackageAction,
   getAllSortsAction,
   getAllSubCatAction,
 } from "../../../redux/actions/Admin/packageAction";
@@ -19,7 +22,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 export default function ({ initialVal }: any) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const [dataSource, setDataSource] = useState<any>([{ reach: 5 }]);
+  const [dataSource, setDataSource] = useState<any>(initialVal);
   const [messageApi, contextHolder] = message.useMessage();
 
   //redux ------------------------------------
@@ -33,12 +36,32 @@ export default function ({ initialVal }: any) {
   //useEffects -------------------------------------
   useEffect(() => {
     dispatch(getAllSubCatAction());
-    setDataSource([{ reach: 5, click: 3 }]);
+    dispatch(getAllSortsAction());
   }, []);
 
   const save = async (record: any, index: any) => {
     const val = await form.validateFields();
-    console.log(index, val);
+    console.log(dataSource[index]);
+    if (dataSource[index]._id) {
+      const values = {
+        _id: dataSource[index]._id,
+        sort: val[index],
+        name: "sort",
+        packageType: "sort",
+        packageStatus: "active",
+      };
+      console.log(values, "id")
+       dispatch(editPackageAction(values));
+    } else {
+      const values = {
+        sort: val[index],
+        name: "sort",
+        packageType: "sort",
+        packageStatus: "active",
+      };
+      console.log(values, "not id")
+       dispatch(createPackageAction(values));
+    }
     form.submit();
   };
 
@@ -60,7 +83,7 @@ export default function ({ initialVal }: any) {
         >
           <Table.Column
             title="Categories"
-            dataIndex={"subcategories"}
+            dataIndex={"sort"}
             render={(selected: any, record: any, index) => {
               return (
                 <Form.Item
@@ -71,6 +94,7 @@ export default function ({ initialVal }: any) {
                       message: `required.`,
                     },
                   ]}
+                  initialValue={selected && selected?.subcategories}
                 >
                   <Select
                     showSearch={false}
@@ -92,18 +116,31 @@ export default function ({ initialVal }: any) {
           />
           <Table.Column
             title="sorts"
-            dataIndex={"sorts"}
+            dataIndex={"sort"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "sorts"]}>
-                <Input />
+              <Form.Item name={[index, "sortId"]} initialValue={num?.sortId}>
+                 <Select
+                    showSearch={false}
+                    mode="tags"
+                    placeholder="Sorts"
+                    getPopupContainer={(trigger) => trigger.parentNode}
+                    showArrow={true}
+                  >
+                    {allSorts?.res?.data?.map((sort: any) => (
+                      <Select.Option value={sort._id}>
+                        {" "}
+                        {sort.sortName}
+                      </Select.Option>
+                    ))}
+                  </Select>
               </Form.Item>
             )}
           />
-          <Table.Column
+          {/* <Table.Column
             title="Reach"
-            dataIndex={"reach"}
+            dataIndex={"sort"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "reach"]}>
+              <Form.Item name={[index, "reach"]} initialValue={num?.reach}>
                 <InputNumber />
               </Form.Item>
             )}
@@ -111,17 +148,18 @@ export default function ({ initialVal }: any) {
 
           <Table.Column
             title="click"
-            dataIndex={"click"}
+            dataIndex={"sort"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "click"]}>
+              <Form.Item name={[index, "click"]} initialValue={num?.click}>
                 <InputNumber />
               </Form.Item>
             )}
-          />
+          /> */}
           <Table.Column
-            title={"Price"}
+            title={"Per Day Price"}
+            dataIndex={"sort"}
             render={(num: any, record: any, index) => (
-              <Form.Item name={[index, "price"]}>
+              <Form.Item name={[index, "price"]} initialValue={num?.price}>
                 <InputNumber />
               </Form.Item>
             )}
@@ -146,10 +184,13 @@ export default function ({ initialVal }: any) {
                 onConfirm={() => {
                   const prev = [...dataSource];
                   const index = prev.findIndex(
-                    (item) => item.key === record.key
+                    (item) => item._id === record._id
                   );
                   prev.splice(index, 1);
-                  //   setDataSource(prev);
+                  setDataSource(prev);
+                  if (dataSource[index]._id) {
+                    dispatch(deletePackageAction(record._id));
+                  }
                 }}
               >
                 <Button danger className="mb-[24px]">

@@ -5,6 +5,7 @@ import {
   deletePackageAction,
   editPackageAction,
   getAllPackageAction,
+  getVatDetailsAction,
 } from "../../../redux/actions/Admin/packageAction";
 import ShowingTable from "./ShowingTable";
 import { Button, Form, Tabs } from "antd";
@@ -16,11 +17,12 @@ import CouponTable from "./CouponTable";
 
 const BundleTable = () => {
   const dispatch = useAppDispatch();
-  const { allPackages, createPg, deletePg, createCoupon, addVat } =
+  const { allPackages, createPg, deletePg, createCoupon, addVat, vatDetails } =
     useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(getAllPackageAction());
+    dispatch(getVatDetailsAction());
   }, [
     createPg.success,
     deletePg.success,
@@ -51,21 +53,21 @@ const BundleTable = () => {
       key: "3",
       label: `Sorts`,
       children: (
-        <SortsTable/>
+        <SortsTable initialVal={allPackages?.res?.data?.Sort}/>
       ),
     },
     {
       key: "4",
       label: `Coupon`,
       children: (
-        <CouponTable/>
+        <CouponTable initialVal={allPackages?.res?.data?.Coupone}/>
       ),
     },
     {
       key: "5",
       label: `Vat`,
       children: (
-        <Form className="flex gap-2" onFinish={(values:any) => {
+        <Form initialValues={vatDetails?.res?.data?.[0]} className="flex gap-2" onFinish={(values:any) => {
           values.addVat = parseInt(values.addVat);
         dispatch(addVatAction(values))
       }}>

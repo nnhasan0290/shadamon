@@ -12,6 +12,7 @@ import { BiPlus, BiTrash } from "react-icons/bi";
 import {
   createPackageAction,
   deletePackageAction,
+  editPackageAction,
   getAllSortsAction,
   getAllSubCatAction,
 } from "../../../redux/actions/Admin/packageAction";
@@ -38,16 +39,26 @@ export default function ({ initialVal }: any) {
 
   const save = async (record: any, index: any) => {
     const val = await form.validateFields();
-    console.log(index, val);
+    console.log(val[index]);
+    if (dataSource[index]._id) {
+      const values = {
+        _id: dataSource[index]._id,
+        single: val[index],
+        name: "single",
+        packageType: "single",
+        packageStatus: "active",
+      };
+      // dispatch(editPackageAction(values));
+    } else {
+      const values = {
+        single: val[index],
+        name: "single",
+        packageType: "single",
+        packageStatus: "active",
+      };
+      // dispatch(createPackageAction(values));
+    }
     form.submit();
-    const values = {
-      single: val[0],
-      name: "single",
-      packageType: "single",
-      packageStatus: "active",
-    };
-    console.log(values);
-    dispatch(createPackageAction(values));
   };
 
   return (
@@ -79,7 +90,7 @@ export default function ({ initialVal }: any) {
                       message: `required.`,
                     },
                   ]}
-                  initialValue={selected?.subcategories}
+                  initialValue={selected && selected?.subcategories}
                 >
                   <Select
                     showSearch={false}
@@ -224,7 +235,9 @@ export default function ({ initialVal }: any) {
                   );
                   prev.splice(index, 1);
                   setDataSource(prev);
-                  dispatch(deletePackageAction(record._id));
+                  if (dataSource[index]._id) {
+                    dispatch(deletePackageAction(record._id));
+                  }
                 }}
               >
                 <Button danger className="mb-[24px]">

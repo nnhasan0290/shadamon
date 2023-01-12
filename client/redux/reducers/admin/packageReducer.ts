@@ -1,4 +1,4 @@
-import { ADD_VAT, ADD_VAT_REQ, CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES } from "../../consts/admin/packageConst";
+import { ADD_VAT, ADD_VAT_REQ, CREATE_COUPON, CREATE_COUPON_REQ, CREATE_PACKAGE, CREATE_PACKAGE_REQ, DELETE_COUPON, DELETE_COUPON_REQ, DELETE_PACKAGE, DELETE_PACKAGE_REQ, EDIT_COUPON, EDIT_COUPON_REQ, EDIT_PACKAGE, EDIT_PACKAGE_REQ, GET_ALL_PACKAGE, GET_ALL_SORTS, GET_ALL_SUBCATEGORIES, GET_VAT_DETAILS } from "../../consts/admin/packageConst";
 
 export const createPackageReducer = (
     state = { success: false, res: {} },
@@ -99,6 +99,40 @@ export const createPackageReducer = (
           res: action.payload,
         };
   
+      default:
+        return state;
+    }
+  };
+
+  export const editCouponReducer = (state = { success: false }, action: any) => {
+    switch (action.type) {
+      case EDIT_COUPON_REQ:
+        return { ...state, success: false };
+      case EDIT_COUPON:
+        return { ...state, success: true, res: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  export const deleteCouponReducer = (
+    state = { success: false },
+    action: any
+  ) => {
+    switch (action.type) {
+      case DELETE_COUPON_REQ:
+        return { ...state, success: false };
+      case DELETE_COUPON:
+        return { ...state, success: true, res: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  export const getVatDetailsReducer = (state = { success: false, res:{} }, action: any) => {
+    switch (action.type) {
+      case GET_VAT_DETAILS:
+        return { ...state, success: true, res: action.payload };
       default:
         return state;
     }
