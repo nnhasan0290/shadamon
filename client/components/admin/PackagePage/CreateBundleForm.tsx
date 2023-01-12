@@ -1,34 +1,32 @@
 import { InputLabel, MenuItem, TextField } from "@mui/material";
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  Select,
-  Typography,
-} from "antd";
+import { Button, Divider, Form, Input, Select, Typography } from "antd";
 import { BiPlus } from "react-icons/bi";
 import EachPackageTable from "./EachPackageTable";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getParentCategories } from "../../../redux/actions/Admin/categoryAction";
-import { addVatAction, createPackageAction } from "../../../redux/actions/Admin/packageAction";
+import {
+  addVatAction,
+  createPackageAction,
+  editPackageAction,
+} from "../../../redux/actions/Admin/packageAction";
 
 export default function ({ record }: any) {
-  console.log(record);
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
   const { adminCat } = useAppSelector((state) => state);
 
   //get packages
   const [postPackage, setPostPackage] = useState([]);
-  const [bidPackage, setBidPackage] = useState([]);
   const [sortPackage, setSortPackage] = useState([]);
-  const [couponDetails, setCouponDetails] = useState([]);
 
   //muit select change
 
   useEffect(() => {
+    if (record) {
+      setPostPackage(record?.bundle?.post);
+      setSortPackage(record?.bundle?.stickersSort);
+    }
     dispatch(getParentCategories());
   }, []);
 
@@ -44,14 +42,17 @@ export default function ({ record }: any) {
 
       {/* inputs =============== */}
       <Form
-      className=""
+        className=""
         form={form}
         onFinish={(values) => {
           values.bundle.post = postPackage;
-          values.bundle.bidnOffer = bidPackage;
           values.bundle.stickersSort = sortPackage;
-          console.log(values);
-          dispatch(createPackageAction(values));
+          if (record) {
+            console.log(values);
+           dispatch(editPackageAction(values));
+          } else {
+            dispatch(createPackageAction(values));
+          }
         }}
         initialValues={record}
       >
@@ -119,13 +120,16 @@ export default function ({ record }: any) {
             initialValue={record ? record?.bundle?.post : [{}]}
             setState={setPostPackage}
             title={"Category Wise Every Post reach and click and how many"}
-            category={true} reach={true} click={true}
+            category={true}
+            reach={true}
+            click={true}
           />
           <EachPackageTable
-           initialValue={record ? record?.bundle?.stickersSort : [{}]}
-          setState={setSortPackage}
+            initialValue={record ? record?.bundle?.stickersSort : [{}]}
+            setState={setSortPackage}
             title={"Category Wise Sort Item Access"}
-            category={true} coupons={true}
+            category={true}
+            coupons={true}
           />
         </div>
         <Typography>Checked Feature Write-up</Typography>

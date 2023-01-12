@@ -48,7 +48,7 @@ export default function ({ initialVal }: any) {
         packageType: "single",
         packageStatus: "active",
       };
-      // dispatch(editPackageAction(values));
+       dispatch(editPackageAction(values));
     } else {
       const values = {
         single: val[index],
@@ -56,7 +56,7 @@ export default function ({ initialVal }: any) {
         packageType: "single",
         packageStatus: "active",
       };
-      // dispatch(createPackageAction(values));
+       dispatch(createPackageAction(values));
     }
     form.submit();
   };
