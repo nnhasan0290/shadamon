@@ -48,6 +48,7 @@ export default function ({ record }: any) {
           values.bundle.post = postPackage;
           values.bundle.stickersSort = sortPackage;
           if (record) {
+            values._id = record._id;
             console.log(values);
            dispatch(editPackageAction(values));
           } else {
